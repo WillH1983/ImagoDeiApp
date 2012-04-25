@@ -1,0 +1,266 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BEDF1E5B154791C4009FCA21 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDF1E5A154791C4009FCA21 /* UIKit.framework */; };
+		BEDF1E5D154791C4009FCA21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDF1E5C154791C4009FCA21 /* Foundation.framework */; };
+		BEDF1E5F154791C4009FCA21 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDF1E5E154791C4009FCA21 /* CoreGraphics.framework */; };
+		BEDF1E65154791C4009FCA21 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1E63154791C4009FCA21 /* InfoPlist.strings */; };
+		BEDF1E67154791C4009FCA21 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDF1E66154791C4009FCA21 /* main.m */; };
+		BEDF1E6B154791C4009FCA21 /* ImagoDeiAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDF1E6A154791C4009FCA21 /* ImagoDeiAppDelegate.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BEDF1E56154791C4009FCA21 /* ImagoDei.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImagoDei.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEDF1E5A154791C4009FCA21 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		BEDF1E5C154791C4009FCA21 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BEDF1E5E154791C4009FCA21 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		BEDF1E62154791C4009FCA21 /* ImagoDei-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ImagoDei-Info.plist"; sourceTree = "<group>"; };
+		BEDF1E64154791C4009FCA21 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BEDF1E66154791C4009FCA21 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BEDF1E68154791C4009FCA21 /* ImagoDei-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ImagoDei-Prefix.pch"; sourceTree = "<group>"; };
+		BEDF1E69154791C4009FCA21 /* ImagoDeiAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImagoDeiAppDelegate.h; sourceTree = "<group>"; };
+		BEDF1E6A154791C4009FCA21 /* ImagoDeiAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImagoDeiAppDelegate.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BEDF1E53154791C4009FCA21 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEDF1E5B154791C4009FCA21 /* UIKit.framework in Frameworks */,
+				BEDF1E5D154791C4009FCA21 /* Foundation.framework in Frameworks */,
+				BEDF1E5F154791C4009FCA21 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BEDF1E4B154791C4009FCA21 = {
+			isa = PBXGroup;
+			children = (
+				BEDF1E60154791C4009FCA21 /* ImagoDei */,
+				BEDF1E59154791C4009FCA21 /* Frameworks */,
+				BEDF1E57154791C4009FCA21 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BEDF1E57154791C4009FCA21 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BEDF1E56154791C4009FCA21 /* ImagoDei.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BEDF1E59154791C4009FCA21 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BEDF1E5A154791C4009FCA21 /* UIKit.framework */,
+				BEDF1E5C154791C4009FCA21 /* Foundation.framework */,
+				BEDF1E5E154791C4009FCA21 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BEDF1E60154791C4009FCA21 /* ImagoDei */ = {
+			isa = PBXGroup;
+			children = (
+				BEDF1E69154791C4009FCA21 /* ImagoDeiAppDelegate.h */,
+				BEDF1E6A154791C4009FCA21 /* ImagoDeiAppDelegate.m */,
+				BEDF1E61154791C4009FCA21 /* Supporting Files */,
+			);
+			path = ImagoDei;
+			sourceTree = "<group>";
+		};
+		BEDF1E61154791C4009FCA21 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BEDF1E62154791C4009FCA21 /* ImagoDei-Info.plist */,
+				BEDF1E63154791C4009FCA21 /* InfoPlist.strings */,
+				BEDF1E66154791C4009FCA21 /* main.m */,
+				BEDF1E68154791C4009FCA21 /* ImagoDei-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BEDF1E55154791C4009FCA21 /* ImagoDei */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BEDF1E6E154791C4009FCA21 /* Build configuration list for PBXNativeTarget "ImagoDei" */;
+			buildPhases = (
+				BEDF1E52154791C4009FCA21 /* Sources */,
+				BEDF1E53154791C4009FCA21 /* Frameworks */,
+				BEDF1E54154791C4009FCA21 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ImagoDei;
+			productName = ImagoDei;
+			productReference = BEDF1E56154791C4009FCA21 /* ImagoDei.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BEDF1E4D154791C4009FCA21 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = ImagoDei;
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = BEDF1E50154791C4009FCA21 /* Build configuration list for PBXProject "ImagoDei" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BEDF1E4B154791C4009FCA21;
+			productRefGroup = BEDF1E57154791C4009FCA21 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BEDF1E55154791C4009FCA21 /* ImagoDei */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BEDF1E54154791C4009FCA21 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEDF1E65154791C4009FCA21 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BEDF1E52154791C4009FCA21 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEDF1E67154791C4009FCA21 /* main.m in Sources */,
+				BEDF1E6B154791C4009FCA21 /* ImagoDeiAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BEDF1E63154791C4009FCA21 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BEDF1E64154791C4009FCA21 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BEDF1E6C154791C4009FCA21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BEDF1E6D154791C4009FCA21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BEDF1E6F154791C4009FCA21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ImagoDei/ImagoDei-Prefix.pch";
+				INFOPLIST_FILE = "ImagoDei/ImagoDei-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		BEDF1E70154791C4009FCA21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ImagoDei/ImagoDei-Prefix.pch";
+				INFOPLIST_FILE = "ImagoDei/ImagoDei-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BEDF1E50154791C4009FCA21 /* Build configuration list for PBXProject "ImagoDei" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEDF1E6C154791C4009FCA21 /* Debug */,
+				BEDF1E6D154791C4009FCA21 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BEDF1E6E154791C4009FCA21 /* Build configuration list for PBXNativeTarget "ImagoDei" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEDF1E6F154791C4009FCA21 /* Debug */,
+				BEDF1E70154791C4009FCA21 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BEDF1E4D154791C4009FCA21 /* Project object */;
+}
