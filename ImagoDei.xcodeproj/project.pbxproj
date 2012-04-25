@@ -174,6 +174,7 @@
 		BEDF1E60154791C4009FCA21 /* ImagoDei */ = {
 			isa = PBXGroup;
 			children = (
+				BEDF1E8B15479545009FCA21 /* FBDialog.bundle */,
 				BEDF1EBB1547961C009FCA21 /* SocialMediaDetailViewController.h */,
 				BEDF1EBC1547961C009FCA21 /* SocialMediaDetailViewController.m */,
 				BEDF1EBD1547961C009FCA21 /* SocialMediaDetailViewController.xib */,
@@ -223,7 +224,6 @@
 				BEDF1EB41547960A009FCA21 /* NSObject+SBJSON.h */,
 				BEDF1EB51547960A009FCA21 /* NSString+SBJSON.h */,
 				BEDF1EA2154795CE009FCA21 /* libfacebook_ios_sdk.a */,
-				BEDF1E8B15479545009FCA21 /* FBDialog.bundle */,
 				BEDF1E8C15479545009FCA21 /* FBDialog.h */,
 				BEDF1E8D15479545009FCA21 /* FBFrictionlessRequestSettings.h */,
 				BEDF1E8E15479545009FCA21 /* fbicon.png */,

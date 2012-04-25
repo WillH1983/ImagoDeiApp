@@ -31,7 +31,7 @@
     if (self) {
         self.tableView.delegate = self;
         UIImage *logoImage = [UIImage imageNamed:@"logo.png"];
-        UIImage *smallTwitterBird = [UIImage imageNamed:@"twitter_newbird_blue small.png"];
+        //UIImage *smallTwitterBird = [UIImage imageNamed:@"twitter_newbird_blue small.png"];
         UIImage *smallFacebookIcon = [UIImage imageNamed:@"f_logo small.png"];
         
         UIImageView *logoImageView = [[UIImageView alloc] initWithImage:logoImage];
