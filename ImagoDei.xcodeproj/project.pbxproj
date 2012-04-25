@@ -178,7 +178,6 @@
 				BEDF1EBC1547961C009FCA21 /* SocialMediaDetailViewController.m */,
 				BEDF1EBD1547961C009FCA21 /* SocialMediaDetailViewController.xib */,
 				BEDF1EBE1547961C009FCA21 /* SocialMediaViewController.xib */,
-				BEDF1EC21547961C009FCA21 /* twitter_newbird_blue.png */,
 				BEDF1EC31547961C009FCA21 /* TwitterSocialMediaViewController.h */,
 				BEDF1EC41547961C009FCA21 /* TwitterSocialMediaViewController.m */,
 				BEDF1EC51547961C009FCA21 /* TwitterSocialMediaViewController.xib */,
@@ -242,6 +241,7 @@
 		BEDF1EDB1547971D009FCA21 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BEDF1EC21547961C009FCA21 /* twitter_newbird_blue.png */,
 				BEDF1EBF1547961C009FCA21 /* Story-of-the-Church-iPhone.png */,
 				BEDF1EC01547961C009FCA21 /* topbar-bg.jpg */,
 				BEDF1EC11547961C009FCA21 /* twitter_newbird_blue small.png */,
