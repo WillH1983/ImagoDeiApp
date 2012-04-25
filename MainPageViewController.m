@@ -34,8 +34,6 @@
 
         UIImageView *logoImageView = [[UIImageView alloc] initWithImage:logoImage];
         
-        UIBarButtonItem *twitterButton = [[UIBarButtonItem alloc] initWithImage:smallTwitterBird style:UIBarButtonItemStylePlain target:self action:@selector(twitterButtonPressed:)];
-      
         self.navigationItem.titleView = logoImageView;
         
         //Get the tab bar item
