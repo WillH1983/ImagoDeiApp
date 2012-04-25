@@ -358,10 +358,8 @@
     [defaults setObject:[self.facebook expirationDate] forKey:@"FBExpirationDateKey"];
     [defaults synchronize];
     
-    //Retrieve the last object in toolbar items array to retrieve a pointer the LogIn/Out button
-    //and set the title of the button to Log Out, since facebook successfully logged in
-    UIBarButtonItem *barButtonItem = [self.toolbarItems lastObject];
-    barButtonItem.title = @"Log Out";
+    //Retrieve the left bar button item, and change the text to "Log Out"
+    self.navigationItem.leftBarButtonItem.title = @"Log Out";
     
     //This method will request the full comments array from the delegate and
     //the facebook class will call request:request didLoad:result when complete
