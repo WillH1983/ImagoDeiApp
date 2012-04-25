@@ -34,23 +34,27 @@
 
 - (void)parseXMLFileAtURL:(NSString *)URL
 {
-    self.stories = [[NSMutableArray alloc] init];
-    
-    //you must then convert the path to a proper NSURL or it won't work
-    NSURL *xmlURL = [NSURL URLWithString:URL];
-    
-    // here, for some reason you have to use NSClassFromString when trying to alloc NSXMLParser, otherwise you will get an object not found error
-    // this may be necessary only for the toolchain
-    self.rssParser = [[NSXMLParser alloc] initWithContentsOfURL:xmlURL];
-    
-    // Set self as the delegate of the parser so that it will receive the parser delegate methods callbacks.
-    [self.rssParser setDelegate:self];
-    
-    // Depending on the XML document you're parsing, you may want to enable these features of NSXMLParser.
-    [self.rssParser setShouldProcessNamespaces:NO];
-    [self.rssParser setShouldReportNamespacePrefixes:NO];
-    [self.rssParser setShouldResolveExternalEntities:NO];
-    [self.rssParser parse];
+    //Run XML parser in secondary thread
+    dispatch_queue_t downloadQueue2 = dispatch_queue_create("downloader", NULL);
+    dispatch_async(downloadQueue2, ^{
+        self.stories = [[NSMutableArray alloc] init];
+        
+        //you must then convert the path to a proper NSURL or it won't work
+        NSURL *xmlURL = [NSURL URLWithString:URL];
+        
+        // here, for some reason you have to use NSClassFromString when trying to alloc NSXMLParser, otherwise you will get an object not found error
+        // this may be necessary only for the toolchain
+        self.rssParser = [[NSXMLParser alloc] initWithContentsOfURL:xmlURL];
+        
+        // Set self as the delegate of the parser so that it will receive the parser delegate methods callbacks.
+        [self.rssParser setDelegate:self];
+        
+        // Depending on the XML document you're parsing, you may want to enable these features of NSXMLParser.
+        [self.rssParser setShouldProcessNamespaces:NO];
+        [self.rssParser setShouldReportNamespacePrefixes:NO];
+        [self.rssParser setShouldResolveExternalEntities:NO];
+        [self.rssParser parse];
+    });
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
