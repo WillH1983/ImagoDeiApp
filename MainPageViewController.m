@@ -36,11 +36,11 @@
         
         UIImageView *logoImageView = [[UIImageView alloc] initWithImage:logoImage];
         
-        UIBarButtonItem *twitterButton = [[UIBarButtonItem alloc] initWithImage:smallTwitterBird style:UIBarButtonItemStylePlain target:self action:@selector(twitterButtonPressed:)];
+        //UIBarButtonItem *twitterButton = [[UIBarButtonItem alloc] initWithImage:smallTwitterBird style:UIBarButtonItemStylePlain target:self action:@selector(twitterButtonPressed:)];
         UIBarButtonItem *facebookButton = [[UIBarButtonItem alloc] initWithImage:smallFacebookIcon style:UIBarButtonItemStylePlain target:self action:@selector(facebookButtonPressed:)];
         
         self.navigationItem.titleView = logoImageView;
-        self.navigationItem.leftBarButtonItem = twitterButton;
+        //self.navigationItem.leftBarButtonItem = twitterButton;
         self.navigationItem.rightBarButtonItem = facebookButton;
         //Get the tab bar item
         UITabBarItem *tbi = [self tabBarItem];
