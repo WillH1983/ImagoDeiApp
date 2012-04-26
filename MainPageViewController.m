@@ -15,7 +15,7 @@
 
 @interface MainPageViewController ()
 
-@property (nonatomic, strong)NSArray *tableContents;
+@property (nonatomic, strong) NSArray *tableContents;
 
 @end
 
@@ -24,6 +24,14 @@
 @synthesize model = _model;
 @synthesize tableContents = _tableContents;
 @synthesize imageName = _imageName;
+
+- (void)setTableContents:(NSArray *)tableContents
+{
+    _tableContents = tableContents;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
+}
 
 - (id)init
 {
@@ -75,9 +83,11 @@
     [self presentViewController:navController animated:YES completion:nil];
 }
 
-- (id)initWithModel:(NSArray *)model
+- (id)initWithModel:(NSURL *)model
 {
     self.model = model;
+    RSSParser *parser = [[RSSParser alloc] init];
+    [parser XMLFileToParseAtURL:self.model withDelegate:self];
     self = [self init];
     return self;
 }
@@ -117,6 +127,11 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)RSSParser:(RSSParser *)sender RSSParsingCompleteWithArray:(NSArray *)RSSArray
+{
+    self.tableContents = RSSArray;
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -128,7 +143,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.model count];
+    return [self.tableContents count];
 }
 
 
@@ -149,8 +164,8 @@
 
     cell.textLabel.textColor = [UIColor colorWithRed:0.29803 green:0.1529 blue:0.0039 alpha:1];
     cell.detailTextLabel.textColor = [UIColor colorWithRed:0.2666 green:0.2666 blue:0.2666 alpha:1];
-    cell.textLabel.text = [[self.model objectAtIndex:[indexPath row]] valueForKey:CONTENT_TITLE];
-    cell.detailTextLabel.text = [[self.model objectAtIndex:[indexPath row]] valueForKey:CONTENT_DESCRIPTION];
+    cell.textLabel.text = [[self.tableContents objectAtIndex:[indexPath row]] valueForKey:CONTENT_TITLE];
+    cell.detailTextLabel.text = [[self.tableContents objectAtIndex:[indexPath row]] valueForKey:CONTENT_DESCRIPTION];
     
     return cell;
 }
@@ -159,14 +174,22 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSURL *url = [NSURL URLWithString:[[self.tableContents objectAtIndex:[indexPath row]] valueForKeyPath:CONTENT_URL_LINK]];
+    NSURL *url = [[NSURL alloc] initWithString:[[self.tableContents objectAtIndex:indexPath.row] valueForKey:@"link"]];
     if (url != nil)
     {
-        WebViewController *wvc = [[WebViewController alloc] initWithToolbar:NO];
-        [wvc setUrlToLoad:url];
-        [wvc setTitleForWebView:[[self.tableContents objectAtIndex:[indexPath row]] valueForKeyPath:CONTENT_TITLE]];
-        [[self navigationController] pushViewController:wvc animated:YES];
-        
+        if ([[url pathExtension] isEqualToString:@"rss"])
+        {
+            MainPageViewController *mpvc = [[MainPageViewController alloc] initWithModel:url];
+            mpvc.title = @"Planning Center";
+            [self.navigationController pushViewController:mpvc animated:YES];
+        }
+        else 
+        {
+            WebViewController *wvc = [[WebViewController alloc] initWithToolbar:NO];
+            [wvc setUrlToLoad:url];
+            [wvc setTitleForWebView:[[self.tableContents objectAtIndex:[indexPath row]] valueForKeyPath:CONTENT_TITLE]];
+            [[self navigationController] pushViewController:wvc animated:YES];
+        }
     }
 }
 

@@ -25,37 +25,26 @@
 
     facebook = [[Facebook alloc] initWithAppId:@"207547516014316" andDelegate:nil];
     
-    NSDictionary *imagoDeiData = [ImagoDeiDataFetcher DictionaryForImagoDeiLayout];
-    NSArray *tabBarContents = [imagoDeiData valueForKeyPath:@"imagodeitabbar"];
-
-    
     NSMutableArray *listOfNavigationControllers = [[NSMutableArray alloc] init];
     
-    for (id items in tabBarContents)
-    {
-        if ([[items valueForKey:CONTENT_TITLE] isEqualToString:@"Facebook"])
-        {
-            FacebookSocialMediaViewController *fbsmvc = [[FacebookSocialMediaViewController alloc] init];
-            fbsmvc.title = @"Facebook";
-            UINavigationController *mainPageNavController = [[UINavigationController alloc] initWithRootViewController:fbsmvc];
-            [listOfNavigationControllers addObject:mainPageNavController];
-        }
-        else 
-        {
-            NSString *referenceData = [items valueForKey:@"referencedata"];
-            NSArray *dataArray = [imagoDeiData valueForKey:referenceData];
-            if ([dataArray isKindOfClass:[NSArray class]] || dataArray == nil)
-            {
-                MainPageViewController *mpvc = [[MainPageViewController alloc] initWithModel:[imagoDeiData valueForKeyPath:referenceData]];
-                mpvc.title = [items valueForKeyPath:@"title"];
-                UINavigationController *mainPageNavController = [[UINavigationController alloc] initWithRootViewController:mpvc];
-                [listOfNavigationControllers addObject:mainPageNavController];
-            }
-        }
-    }
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"MainTabiPhone" ofType:@"rss"];
+    NSURL *urlFilePath = [[NSURL alloc] initFileURLWithPath:filePath];
+    NSLog(@"%@", filePath);
     
-    //UINavigationController *mainPageController = [listOfNavigationControllers objectAtIndex:0];
-    //[[[mainPageController viewControllers] lastObject] setImageName:@"who-we-are.jpg"];
+    MainPageViewController *mpvc = [[MainPageViewController alloc] initWithModel:urlFilePath];
+    mpvc.title = @"Home";
+    UINavigationController *mainPageNavController = [[UINavigationController alloc] initWithRootViewController:mpvc];
+    [listOfNavigationControllers addObject:mainPageNavController];
+    
+    FacebookSocialMediaViewController *fbsmvc = [[FacebookSocialMediaViewController alloc] init];
+    fbsmvc.title = @"Facebook";
+    UINavigationController *facebookNavController = [[UINavigationController alloc] initWithRootViewController:fbsmvc];
+    [listOfNavigationControllers addObject:facebookNavController];
+    
+    MainPageViewController *pco = [[MainPageViewController alloc] init];
+    pco.title = @"Planning Center";
+    UINavigationController *pcoNavController = [[UINavigationController alloc] initWithRootViewController:pco];
+    [listOfNavigationControllers addObject:pcoNavController];
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     [tabBarController setViewControllers:listOfNavigationControllers];

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BE62954A1547A8AA00CE719E /* RSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6295491547A8AA00CE719E /* RSSParser.m */; };
+		BED0A5AA1548DAC4007094A5 /* MainTabiPhone.rss in Resources */ = {isa = PBXBuildFile; fileRef = BED0A5A91548DAC4007094A5 /* MainTabiPhone.rss */; };
 		BEDF1E5B154791C4009FCA21 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDF1E5A154791C4009FCA21 /* UIKit.framework */; };
 		BEDF1E5D154791C4009FCA21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDF1E5C154791C4009FCA21 /* Foundation.framework */; };
 		BEDF1E5F154791C4009FCA21 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDF1E5E154791C4009FCA21 /* CoreGraphics.framework */; };
@@ -56,6 +57,7 @@
 /* Begin PBXFileReference section */
 		BE6295481547A8AA00CE719E /* RSSParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSParser.h; sourceTree = "<group>"; };
 		BE6295491547A8AA00CE719E /* RSSParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSParser.m; sourceTree = "<group>"; };
+		BED0A5A91548DAC4007094A5 /* MainTabiPhone.rss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MainTabiPhone.rss; sourceTree = "<group>"; };
 		BEDF1E56154791C4009FCA21 /* ImagoDei.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImagoDei.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEDF1E5A154791C4009FCA21 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BEDF1E5C154791C4009FCA21 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -212,6 +214,7 @@
 		BEDF1E61154791C4009FCA21 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BED0A5A91548DAC4007094A5 /* MainTabiPhone.rss */,
 				BEDF1EA1154795CE009FCA21 /* JSONImagoDei.txt */,
 				BEDF1EDC1547977F009FCA21 /* Build Settings */,
 				BEDF1EDB1547971D009FCA21 /* Images */,
@@ -353,6 +356,7 @@
 				BEDF1EE2154797D0009FCA21 /* logo retina.png in Resources */,
 				BEDF1EE3154797D0009FCA21 /* logoIcon ipad.png in Resources */,
 				BEDF1EE4154797D0009FCA21 /* logoIcon nonretina.png in Resources */,
+				BED0A5AA1548DAC4007094A5 /* MainTabiPhone.rss in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -24,15 +24,13 @@
 @synthesize currentTitle = _currentTitle, currentDate = _currentDate, currentSummary = _currentSummary, currentLink = _currentLink;
 @synthesize rssParserDelegate = _rssParserDelegate;
 
-- (id)initWithXMLFileToParseAtURL:(NSString *)URL withDelegate:(id<RSSParserDelegate>)delegate
+- (void)XMLFileToParseAtURL:(NSString *)URL withDelegate:(id<RSSParserDelegate>)delegate
 {
-    self = [self init];
     self.rssParserDelegate = delegate;
     [self parseXMLFileAtURL:URL];
-    return self;
 }
 
-- (void)parseXMLFileAtURL:(NSString *)URL
+- (void)parseXMLFileAtURL:(NSURL *)URL
 {
     //Run XML parser in secondary thread
     dispatch_queue_t downloadQueue2 = dispatch_queue_create("downloader", NULL);
@@ -40,11 +38,11 @@
         self.stories = [[NSMutableArray alloc] init];
         
         //you must then convert the path to a proper NSURL or it won't work
-        NSURL *xmlURL = [NSURL URLWithString:URL];
+        //NSURL *xmlURL = [NSURL fileURLWithPath:URL];
         
         // here, for some reason you have to use NSClassFromString when trying to alloc NSXMLParser, otherwise you will get an object not found error
         // this may be necessary only for the toolchain
-        self.rssParser = [[NSXMLParser alloc] initWithContentsOfURL:xmlURL];
+        self.rssParser = [[NSXMLParser alloc] initWithContentsOfURL:URL];
         
         // Set self as the delegate of the parser so that it will receive the parser delegate methods callbacks.
         [self.rssParser setDelegate:self];
@@ -81,12 +79,19 @@
     //NSLog(@"ended element: %@", elementName);
     if ([elementName isEqualToString:@"item"]) {
         // save values to an item, then store that item into the array...
+        self.currentTitle = [[self.currentTitle stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] mutableCopy];
         [self.item setObject:self.currentTitle forKey:@"title"];
+        
+        self.currentLink = [[self.currentLink stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] mutableCopy];
         [self.item setObject:self.currentLink forKey:@"link"];
+        
+        self.currentSummary = [[self.currentSummary stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] mutableCopy];
         [self.item setObject:self.currentSummary forKey:@"summary"];
+        
+        self.currentDate = [[self.currentDate stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] mutableCopy];
         [self.item setObject:self.currentDate forKey:@"date"];
+        
         [self.stories addObject:[self.item copy]];
-        NSLog(@"adding story: %@", self.currentTitle);
     }
 }
 
@@ -95,8 +100,10 @@
     // save the characters for the current item...
     if ([self.currentElement isEqualToString:@"title"]) {
         [self.currentTitle appendString:string];
-    } else if ([self.currentElement isEqualToString:@"link"]) {
+    } else if ([self.currentElement isEqualToString:@"link"]) 
+    {
         [self.currentLink appendString:string];
+        NSLog(@"%@", string);
     } else if ([self.currentElement isEqualToString:@"description"]) {
         [self.currentSummary appendString:string];
     } else if ([self.currentElement isEqualToString:@"pubDate"]) {
@@ -107,6 +114,7 @@
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
     NSLog(@"all done!");
     NSLog(@"stories array has %d items", [self.stories count]);
+    NSLog(@"%@", self.stories);
     [self.rssParserDelegate RSSParser:self RSSParsingCompleteWithArray:self.stories];
     
 }

@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "FBConnect.h"
+#import "RSSParser.h"
 
-@interface MainPageViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface MainPageViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, RSSParserDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSArray *model;
+@property (strong, nonatomic) NSURL *model;
 @property (strong, nonatomic) NSString *imageName;
 
-- (id)initWithModel:(NSArray *)model;
+- (id)initWithModel:(NSURL *)model;
 
 @end

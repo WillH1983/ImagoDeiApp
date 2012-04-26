@@ -20,7 +20,7 @@
 @property (nonatomic, retain) Facebook *facebook;
 @property (nonatomic, strong) UITabBarController *tabBarController;
 
-- (BOOL)openURL:(NSURL*)url;
+- (BOOL)openURL:(NSURL *)url;
 
 
 @end

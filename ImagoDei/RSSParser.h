@@ -16,6 +16,6 @@
 
 @interface RSSParser : NSObject
 
-- (id)initWithXMLFileToParseAtURL:(NSString *)URL withDelegate:(id<RSSParserDelegate>)delegate;
+- (void)XMLFileToParseAtURL:(NSURL *)URL withDelegate:(id<RSSParserDelegate>)delegate;
 
 @end
