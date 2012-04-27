@@ -115,7 +115,10 @@
     NSLog(@"all done!");
     NSLog(@"stories array has %d items", [self.stories count]);
     NSLog(@"%@", self.stories);
-    [self.rssParserDelegate RSSParser:self RSSParsingCompleteWithArray:self.stories];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.rssParserDelegate RSSParser:self RSSParsingCompleteWithArray:self.stories];
+    });
+    
     
 }
 @end

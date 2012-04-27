@@ -24,6 +24,7 @@
 @synthesize model = _model;
 @synthesize tableContents = _tableContents;
 @synthesize imageName = _imageName;
+@synthesize activityIndicator = _activityIndicator;
 
 - (void)setTableContents:(NSArray *)tableContents
 {
@@ -103,6 +104,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.activityIndicator startAnimating];
     
 }
 
@@ -117,6 +119,7 @@
 - (void)viewDidUnload
 {
     [self setTableView:nil];
+    [self setActivityIndicator:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -130,6 +133,7 @@
 - (void)RSSParser:(RSSParser *)sender RSSParsingCompleteWithArray:(NSArray *)RSSArray
 {
     self.tableContents = RSSArray;
+    [self.activityIndicator stopAnimating];
 }
 
 #pragma mark - Table view data source

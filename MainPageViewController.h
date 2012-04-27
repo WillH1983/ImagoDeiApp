@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSURL *model;
 @property (strong, nonatomic) NSString *imageName;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 - (id)initWithModel:(NSURL *)model;
 
