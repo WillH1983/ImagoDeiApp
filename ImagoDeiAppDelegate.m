@@ -17,6 +17,7 @@
 @synthesize window = _window;
 @synthesize facebook;
 @synthesize tabBarController = _tabBarController;
+@synthesize audioSession = audioSession;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -50,6 +51,9 @@
     [tabBarController setViewControllers:listOfNavigationControllers];
     self.tabBarController = tabBarController;
     [[self window] setRootViewController:tabBarController];
+    
+    audioSession = [AVAudioSession sharedInstance];
+    [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
     
     self.window.backgroundColor = [UIColor whiteColor];
     application.statusBarStyle = UIStatusBarStyleBlackTranslucent;

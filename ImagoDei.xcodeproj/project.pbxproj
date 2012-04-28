@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE1C3FB4154B7F7100775B14 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1C3FB3154B7F7100775B14 /* AVFoundation.framework */; };
+		BE1C3FBD154B9C6000775B14 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1C3FBC154B9C6000775B14 /* CoreMedia.framework */; };
+		BE1C3FBF154BA71400775B14 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1C3FBE154BA71400775B14 /* MediaPlayer.framework */; };
 		BE62954A1547A8AA00CE719E /* RSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6295491547A8AA00CE719E /* RSSParser.m */; };
 		BED0A5AA1548DAC4007094A5 /* MainTabiPhone.rss in Resources */ = {isa = PBXBuildFile; fileRef = BED0A5A91548DAC4007094A5 /* MainTabiPhone.rss */; };
 		BEDF1E5B154791C4009FCA21 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDF1E5A154791C4009FCA21 /* UIKit.framework */; };
@@ -55,6 +58,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BE1C3FB3154B7F7100775B14 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		BE1C3FBC154B9C6000775B14 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		BE1C3FBE154BA71400775B14 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		BE6295481547A8AA00CE719E /* RSSParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSParser.h; sourceTree = "<group>"; };
 		BE6295491547A8AA00CE719E /* RSSParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSParser.m; sourceTree = "<group>"; };
 		BED0A5A91548DAC4007094A5 /* MainTabiPhone.rss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MainTabiPhone.rss; sourceTree = "<group>"; };
@@ -133,6 +139,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE1C3FBF154BA71400775B14 /* MediaPlayer.framework in Frameworks */,
+				BE1C3FBD154B9C6000775B14 /* CoreMedia.framework in Frameworks */,
+				BE1C3FB4154B7F7100775B14 /* AVFoundation.framework in Frameworks */,
 				BEDF1ED51547963F009FCA21 /* Twitter.framework in Frameworks */,
 				BEDF1E5B154791C4009FCA21 /* UIKit.framework in Frameworks */,
 				BEDF1E5D154791C4009FCA21 /* Foundation.framework in Frameworks */,
@@ -168,6 +177,9 @@
 		BEDF1E59154791C4009FCA21 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE1C3FBE154BA71400775B14 /* MediaPlayer.framework */,
+				BE1C3FBC154B9C6000775B14 /* CoreMedia.framework */,
+				BE1C3FB3154B7F7100775B14 /* AVFoundation.framework */,
 				BEDF1ED41547963F009FCA21 /* Twitter.framework */,
 				BEDF1E5A154791C4009FCA21 /* UIKit.framework */,
 				BEDF1E5C154791C4009FCA21 /* Foundation.framework */,

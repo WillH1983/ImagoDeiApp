@@ -7,6 +7,7 @@
 //
 
 #import "RSSParser.h"
+#import "ImagoDeiDataFetcher.h"
 
 @interface RSSParser () <NSXMLParserDelegate>
 - (void)parseXMLFileAtURL:(NSString *)URL;
@@ -89,7 +90,15 @@
         [self.item setObject:self.currentSummary forKey:@"summary"];
         
         self.currentDate = [[self.currentDate stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] mutableCopy];
-        [self.item setObject:self.currentDate forKey:@"date"];
+        
+        NSString *tmpString = [[NSString alloc] init];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"EEE, dd MM yyyy h:mm:ss z"];
+        NSDate *date = [dateFormatter dateFromString:self.currentDate];
+        [dateFormatter setDateStyle:NSDateFormatterFullStyle];
+        tmpString = [dateFormatter stringFromDate:date];
+        if (tmpString) self.currentDate = [tmpString mutableCopy];
+        [self.item setObject:self.currentDate forKey:CONTENT_DESCRIPTION];
         
         [self.stories addObject:[self.item copy]];
     }

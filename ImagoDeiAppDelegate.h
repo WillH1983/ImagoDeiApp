@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 #import "FBConnect.h"
 
 #define FACEBOOK_APP_ID @"207547516014316"
@@ -14,10 +15,12 @@
 @interface ImagoDeiAppDelegate : UIResponder <UIApplicationDelegate>
 {
     Facebook *facebook;
+    AVAudioSession *audioSession;
 }
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, retain) Facebook *facebook;
+@property (nonatomic, retain) AVAudioSession *audioSession;
 @property (nonatomic, strong) UITabBarController *tabBarController;
 
 - (BOOL)openURL:(NSURL *)url;

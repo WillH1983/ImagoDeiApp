@@ -179,19 +179,26 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSURL *url = [[NSURL alloc] initWithString:[[self.tableContents objectAtIndex:indexPath.row] valueForKey:@"link"]];
+    NSString *title = [[self.tableContents objectAtIndex:indexPath.row] valueForKey:@"title"];
     if (url != nil)
     {
         if ([[url pathExtension] isEqualToString:@"rss"])
         {
             MainPageViewController *mpvc = [[MainPageViewController alloc] initWithModel:url];
-            mpvc.title = @"Planning Center";
+            mpvc.title = title;
             [self.navigationController pushViewController:mpvc animated:YES];
+        }
+        else if ([[url pathExtension] isEqualToString:@"mp3"])
+        {
+            MPMoviePlayerViewController *controller = [[MPMoviePlayerViewController alloc] initWithContentURL:url];
+            controller.title = title;
+            [self.navigationController pushViewController:controller animated:YES];
         }
         else 
         {
             WebViewController *wvc = [[WebViewController alloc] initWithToolbar:NO];
             [wvc setUrlToLoad:url];
-            [wvc setTitleForWebView:[[self.tableContents objectAtIndex:[indexPath row]] valueForKeyPath:CONTENT_TITLE]];
+            [wvc setTitleForWebView:title];
             [[self navigationController] pushViewController:wvc animated:YES];
         }
     }
