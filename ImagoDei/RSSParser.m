@@ -112,7 +112,6 @@
     } else if ([self.currentElement isEqualToString:@"link"]) 
     {
         [self.currentLink appendString:string];
-        NSLog(@"%@", string);
     } else if ([self.currentElement isEqualToString:@"description"]) {
         [self.currentSummary appendString:string];
     } else if ([self.currentElement isEqualToString:@"pubDate"]) {
@@ -123,7 +122,6 @@
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
     NSLog(@"all done!");
     NSLog(@"stories array has %d items", [self.stories count]);
-    NSLog(@"%@", self.stories);
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.rssParserDelegate RSSParser:self RSSParsingCompleteWithArray:self.stories];
     });

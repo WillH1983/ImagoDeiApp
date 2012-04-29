@@ -55,6 +55,8 @@
 		BEDF1EE2154797D0009FCA21 /* logo retina.png in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1EDE154797D0009FCA21 /* logo retina.png */; };
 		BEDF1EE3154797D0009FCA21 /* logoIcon ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1EDF154797D0009FCA21 /* logoIcon ipad.png */; };
 		BEDF1EE4154797D0009FCA21 /* logoIcon nonretina.png in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1EE0154797D0009FCA21 /* logoIcon nonretina.png */; };
+		BEF4A439154DCA080015E00D /* ImagoDeiMediaController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF4A437154DCA080015E00D /* ImagoDeiMediaController.m */; };
+		BEF4A43A154DCA080015E00D /* ImagoDeiMediaController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF4A438154DCA080015E00D /* ImagoDeiMediaController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -132,6 +134,9 @@
 		BEDF1EDE154797D0009FCA21 /* logo retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo retina.png"; sourceTree = "<group>"; };
 		BEDF1EDF154797D0009FCA21 /* logoIcon ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logoIcon ipad.png"; sourceTree = "<group>"; };
 		BEDF1EE0154797D0009FCA21 /* logoIcon nonretina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logoIcon nonretina.png"; sourceTree = "<group>"; };
+		BEF4A436154DCA080015E00D /* ImagoDeiMediaController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagoDeiMediaController.h; sourceTree = "<group>"; };
+		BEF4A437154DCA080015E00D /* ImagoDeiMediaController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagoDeiMediaController.m; sourceTree = "<group>"; };
+		BEF4A438154DCA080015E00D /* ImagoDeiMediaController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagoDeiMediaController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +210,9 @@
 				BEDF1EAB154795FB009FCA21 /* main.m */,
 				BEDF1EAC154795FB009FCA21 /* MainPageViewController.h */,
 				BEDF1EAD154795FB009FCA21 /* MainPageViewController.m */,
+				BEF4A436154DCA080015E00D /* ImagoDeiMediaController.h */,
+				BEF4A437154DCA080015E00D /* ImagoDeiMediaController.m */,
+				BEF4A438154DCA080015E00D /* ImagoDeiMediaController.xib */,
 				BE6295481547A8AA00CE719E /* RSSParser.h */,
 				BE6295491547A8AA00CE719E /* RSSParser.m */,
 				BEDF1E951547955C009FCA21 /* ImageViewController.h */,
@@ -369,6 +377,7 @@
 				BEDF1EE3154797D0009FCA21 /* logoIcon ipad.png in Resources */,
 				BEDF1EE4154797D0009FCA21 /* logoIcon nonretina.png in Resources */,
 				BED0A5AA1548DAC4007094A5 /* MainTabiPhone.rss in Resources */,
+				BEF4A43A154DCA080015E00D /* ImagoDeiMediaController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +399,7 @@
 				BEDF1ED01547961C009FCA21 /* TwitterSocialMediaViewController.m in Sources */,
 				BEDF1ED21547961C009FCA21 /* WebViewController.m in Sources */,
 				BE62954A1547A8AA00CE719E /* RSSParser.m in Sources */,
+				BEF4A439154DCA080015E00D /* ImagoDeiMediaController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

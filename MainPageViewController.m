@@ -12,6 +12,7 @@
 #import "Facebook.h"
 #import "FacebookSocialMediaViewController.h"
 #import "TwitterSocialMediaViewController.h"
+#import "ImagoDeiMediaController.h"
 
 @interface MainPageViewController ()
 
@@ -190,7 +191,8 @@
         }
         else if ([[url pathExtension] isEqualToString:@"mp3"])
         {
-            MPMoviePlayerViewController *controller = [[MPMoviePlayerViewController alloc] initWithContentURL:url];
+            //MPMoviePlayerViewController *controller = [[MPMoviePlayerViewController alloc] initWithContentURL:url];
+            ImagoDeiMediaController *controller = [[ImagoDeiMediaController alloc] initImageoDeiMediaControllerWithURL:url];
             controller.title = title;
             [self.navigationController pushViewController:controller animated:YES];
         }
