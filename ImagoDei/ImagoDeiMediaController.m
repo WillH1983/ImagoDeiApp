@@ -50,9 +50,8 @@
     NSLog(@"%@", self.modelURL);
     self.moviePlayer = [[MPMoviePlayerController alloc] init];
     self.moviePlayer.movieSourceType = MPMovieSourceTypeStreaming;
-    [self.moviePlayer.view setFrame:[self.view bounds]];  // player's frame must match parent's
+    self.moviePlayer.view.frame = self.view.bounds;  // player's frame must match parent's
     self.moviePlayer.controlStyle = MPMovieControlStyleEmbedded;
-   
 }
 
 - (id)initImageoDeiMediaControllerWithURL:(NSURL *)url
