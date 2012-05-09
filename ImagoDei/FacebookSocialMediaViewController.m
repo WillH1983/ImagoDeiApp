@@ -21,6 +21,7 @@
 
 @implementation FacebookSocialMediaViewController
 @synthesize facebook = _facebook;
+@synthesize tableView = _tableView;
 @synthesize facebookActivityIndicator = _facebookActivityIndicator;
 @synthesize imagoDeiFacebookPostsArray = _imagoDeiFacebookPostsArray;
 @synthesize facebookRequest = _facebookRequest;
@@ -110,10 +111,6 @@
     //Set the toolbar at the bottom of the screen to the application standard color
     self.navigationController.navigationBar.tintColor = standardColor;
     
-    //Set background color to image, and make table view see through to show image
-    self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"body-bg.jpg"]]; 
-    self.tableView.backgroundColor = [UIColor clearColor];
-    
     //Make ImagoDei Logo graphic the title for the navigation controller
     UIImage *logoImage = [UIImage imageNamed:@"imago-logo.png"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:logoImage];
@@ -156,7 +153,7 @@
     //Help to verify small data requirement
     NSLog(@"Loading Web Data - Social Media View Controller");
     
-    //Begin the facebook request, the data that come back form this method will be used
+    //Begin the facebook request, the data that comes back form this method will be used
     //to populate the UITableView
     [self.facebook requestWithGraphPath:@"ImagoDeiChurch/posts" andDelegate:self];
 }
@@ -398,4 +395,8 @@
     //Do nothing here for now, stubbed out to get rid of compiler warning
 }
 
+- (void)viewDidUnload {
+    [self setTableView:nil];
+    [super viewDidUnload];
+}
 @end

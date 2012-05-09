@@ -10,8 +10,9 @@
 #import "Facebook.h"
 #import "SocialMediaDetailViewController.h"
 
-@interface FacebookSocialMediaViewController : UITableViewController <FBSessionDelegate,FBRequestDelegate, FBDialogDelegate, SocialMediaDetailViewControllerDelegate>
+@interface FacebookSocialMediaViewController : UIViewController <FBSessionDelegate,FBRequestDelegate, FBDialogDelegate, SocialMediaDetailViewControllerDelegate>
 
 @property (nonatomic, retain) Facebook *facebook;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
