@@ -207,5 +207,31 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *primaryTextLabel = [[NSString alloc] init];
+    primaryTextLabel = [[self.tableContents objectAtIndex:[indexPath row]] valueForKey:CONTENT_TITLE];
+    
+    if ([primaryTextLabel isEqualToString:@"NEWS"])
+    {
+        cell.imageView.image = [UIImage imageNamed:@"news-icon.png"];
+    }
+    else if ([primaryTextLabel isEqualToString:@"EVENTS"])
+    {
+        cell.imageView.image = [UIImage imageNamed:@"events-icon.png"];
+    }
+    else if ([primaryTextLabel isEqualToString:@"TEACHINGS"])
+    {
+        cell.imageView.image = [UIImage imageNamed:@"teachings-icon.png"];
+    }
+    else if ([primaryTextLabel isEqualToString:@"CONNECT"])
+    {
+        cell.imageView.image = [UIImage imageNamed:@"connect-icon.png"];
+    }
+    else if ([primaryTextLabel isEqualToString:@"WHO WE ARE"])
+    {
+        cell.imageView.image = [UIImage imageNamed:@"whoweare-icon.png"];
+    }
+}
 
 @end
