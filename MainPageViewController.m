@@ -46,18 +46,6 @@
         logoImageView.contentMode = UIViewContentModeScaleAspectFit;
         
         self.navigationItem.titleView = logoImageView;
-        
-        //Get the tab bar item
-        UITabBarItem *tbi = [self tabBarItem];
-        
-        //Give it a label
-        //[tbi setTitle:[self.model valueForKeyPath:CONTENT_TITLE]];
-        
-        //Create a UIImage from a file
-        UIImage *i = [UIImage imageNamed:@"Hypno.png"];
-        
-        //Put the image on the tab bart item
-        [tbi setImage:i];
     }
     return self;
 }
@@ -101,6 +89,9 @@
     
     UIColor *standardColor = [UIColor colorWithRed:.7529 green:0.7372 blue:0.7019 alpha:1.0];
     [[[self navigationController] navigationBar] setTintColor:standardColor];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+    self.tableView.tableFooterView = view;
+    
 }
 
 - (void)viewDidLoad

@@ -85,7 +85,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    //When the view disappear the code in this fucnction removes all delegation to this class
+    //When the view disappears the code in this fucnction removes all delegation to this class
     
     //This is required incase a connection request is in progress when the view disappears
     [self.facebookRequest setDelegate:nil];
@@ -98,9 +98,9 @@
     [super viewWillDisappear:animated];
 }
 
-- (void)viewDidLoad
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidLoad];
+    [super viewWillAppear:animated];
     
     //Init the facebook session
     [self facebookInit];

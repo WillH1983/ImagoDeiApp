@@ -48,7 +48,6 @@
 		BEDF1E8915479537009FCA21 /* FacebookSocialMediaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1E8115479537009FCA21 /* FacebookSocialMediaViewController.xib */; };
 		BEDF1E9215479545009FCA21 /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1E8B15479545009FCA21 /* FBDialog.bundle */; };
 		BEDF1E9315479545009FCA21 /* fbicon.png in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1E8E15479545009FCA21 /* fbicon.png */; };
-		BEDF1E9415479545009FCA21 /* Hypno.png in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1E9115479545009FCA21 /* Hypno.png */; };
 		BEDF1E981547955C009FCA21 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDF1E961547955C009FCA21 /* ImageViewController.m */; };
 		BEDF1E991547955C009FCA21 /* ImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1E971547955C009FCA21 /* ImageViewController.xib */; };
 		BEDF1E9C15479598009FCA21 /* ImagoDeiAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDF1E9B15479598009FCA21 /* ImagoDeiAppDelegate.m */; };
@@ -125,7 +124,6 @@
 		BEDF1E8E15479545009FCA21 /* fbicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fbicon.png; sourceTree = "<group>"; };
 		BEDF1E8F15479545009FCA21 /* FBLoginDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoginDialog.h; sourceTree = "<group>"; };
 		BEDF1E9015479545009FCA21 /* FBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRequest.h; sourceTree = "<group>"; };
-		BEDF1E9115479545009FCA21 /* Hypno.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hypno.png; sourceTree = "<group>"; };
 		BEDF1E951547955C009FCA21 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		BEDF1E961547955C009FCA21 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
 		BEDF1E971547955C009FCA21 /* ImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageViewController.xib; sourceTree = "<group>"; };
@@ -201,7 +199,6 @@
 		BEDF1E4B154791C4009FCA21 = {
 			isa = PBXGroup;
 			children = (
-				BED23D0F155A0C8B00DB2D00 /* CoreImage.framework */,
 				BED7881C1559F00C003CDEA1 /* Icon-72.png */,
 				BED7881A1559F007003CDEA1 /* Icon-72@2x.png */,
 				BED788181559EFEB003CDEA1 /* Icon.png */,
@@ -223,6 +220,7 @@
 		BEDF1E59154791C4009FCA21 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BED23D0F155A0C8B00DB2D00 /* CoreImage.framework */,
 				BE1C3FBE154BA71400775B14 /* MediaPlayer.framework */,
 				BE1C3FBC154B9C6000775B14 /* CoreMedia.framework */,
 				BE1C3FB3154B7F7100775B14 /* AVFoundation.framework */,
@@ -329,7 +327,6 @@
 				BED787F01559EF78003CDEA1 /* imago-logo.png */,
 				BEDF1EC21547961C009FCA21 /* twitter_newbird_blue.png */,
 				BEDF1EC11547961C009FCA21 /* twitter_newbird_blue small.png */,
-				BEDF1E9115479545009FCA21 /* Hypno.png */,
 				BEDF1E7D15479537009FCA21 /* f_logo.png */,
 			);
 			name = Images;
@@ -401,7 +398,6 @@
 				BEDF1E8915479537009FCA21 /* FacebookSocialMediaViewController.xib in Resources */,
 				BEDF1E9215479545009FCA21 /* FBDialog.bundle in Resources */,
 				BEDF1E9315479545009FCA21 /* fbicon.png in Resources */,
-				BEDF1E9415479545009FCA21 /* Hypno.png in Resources */,
 				BEDF1E991547955C009FCA21 /* ImageViewController.xib in Resources */,
 				BEDF1EA3154795CE009FCA21 /* JSONImagoDei.txt in Resources */,
 				BEDF1EB1154795FB009FCA21 /* MainPageViewController.xib in Resources */,
