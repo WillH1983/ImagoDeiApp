@@ -14,10 +14,10 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
-				<string>logo retina.png</string>
-				<string>logoIcon nonretina.png</string>
-				<string>ipad retina.png</string>
-				<string>logoIcon ipad.png</string>
+				<string>Icon@2x.png</string>
+				<string>Icon.png</string>
+				<string>Icon-72@2x.png</string>
+				<string>Icon-72.png</string>
 			</array>
 		</dict>
 	</dict>
@@ -33,10 +33,25 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string></string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb207547516014316</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -53,21 +68,6 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLName</key>
-			<string></string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb207547516014316</string>
-			</array>
-		</dict>
-	</array>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>audio</string>
 	</array>
 </dict>
 </plist>

@@ -115,8 +115,10 @@
     self.tableView.backgroundColor = [UIColor clearColor];
     
     //Make ImagoDei Logo graphic the title for the navigation controller
-    UIImage *logoImage = [UIImage imageNamed:@"logo.png"];
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:logoImage];;
+    UIImage *logoImage = [UIImage imageNamed:@"imago-logo.png"];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:logoImage];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.navigationItem.titleView = imageView;
     
     
     //By default the "Log In/Out" button will say "Log In"

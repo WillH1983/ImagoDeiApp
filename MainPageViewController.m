@@ -40,9 +40,10 @@
     self = [super init];
     if (self) {
         self.tableView.delegate = self;
-        UIImage *logoImage = [UIImage imageNamed:@"logo.png"];
+        UIImage *logoImage = [UIImage imageNamed:@"imago-logo.png"];
 
         UIImageView *logoImageView = [[UIImageView alloc] initWithImage:logoImage];
+        logoImageView.contentMode = UIViewContentModeScaleAspectFit;
         
         self.navigationItem.titleView = logoImageView;
         
