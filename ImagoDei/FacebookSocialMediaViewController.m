@@ -100,7 +100,13 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    if ([self.imagoDeiFacebookPostsArray count] > 0) return;
+    
     [super viewWillAppear:animated];
+    
+    //Set the footer to a blank view so table rows will not show up if no content
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+    self.tableView.tableFooterView = view;
     
     //Init the facebook session
     [self facebookInit];
@@ -156,6 +162,13 @@
     //Begin the facebook request, the data that comes back form this method will be used
     //to populate the UITableView
     [self.facebook requestWithGraphPath:@"ImagoDeiChurch/posts" andDelegate:self];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    NSIndexPath *selection = [self.tableView indexPathForSelectedRow];
+	if (selection) [self.tableView deselectRowAtIndexPath:selection animated:YES];
 }
 
 #pragma mark - Table view data source

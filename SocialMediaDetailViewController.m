@@ -77,7 +77,15 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+    self.commentsTableView.tableFooterView = view;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    NSIndexPath *selection = [self.commentsTableView indexPathForSelectedRow];
+	if (selection) [self.commentsTableView deselectRowAtIndexPath:selection animated:YES];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -195,7 +203,6 @@
         
         if ([self.commentsArray count] == 0)
         {
-            self.commentsTableView.frame = CGRectNull;
             self.textView.frame = CGRectMake(textViewCurrentFrame.origin.x, textViewCurrentFrame.origin.y, textViewCurrentFrame.size.width, 350);
         }
         else 
