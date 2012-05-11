@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSArray *commentsArray;
 @property (nonatomic, strong) UIImage *postImage;
 @property (nonatomic, strong) UIButton *buttonImage;
+@property (nonatomic, strong) FBRequest *facebookRequest;
 @end
 
 @implementation SocialMediaDetailViewController
@@ -26,6 +27,7 @@
 @synthesize buttonImage = _buttonImage;
 @synthesize fullCommentsDictionaryModel = _fullCommentsDictionaryModel;
 @synthesize postImage = _postImage;
+@synthesize facebookRequest = _facebookRequest;
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 200.0f
@@ -86,6 +88,15 @@
     [super viewDidAppear:animated];
     NSIndexPath *selection = [self.commentsTableView indexPathForSelectedRow];
 	if (selection) [self.commentsTableView deselectRowAtIndexPath:selection animated:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    //When the view disappears the code in this fucnction removes all delegation to this class
+    //This is required incase a connection request is in progress when the view disappears
+    [self.facebookRequest setDelegate:nil];
+    
+    [super viewWillDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -251,6 +262,13 @@
         self.fullCommentsDictionaryModel = result;
         [self loadSocialMediaView];
     }
+}
+
+- (void)requestLoading:(FBRequest *)request
+{
+    //When a facebook request starts, save the request
+    //so the delegate can be set to nill when the view disappears
+    self.facebookRequest = request;
 }
 
 - (void) presentWebView:(NSNotification *) notification
