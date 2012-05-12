@@ -45,7 +45,6 @@
 		BEDF1E65154791C4009FCA21 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1E63154791C4009FCA21 /* InfoPlist.strings */; };
 		BEDF1E8715479537009FCA21 /* f_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1E7D15479537009FCA21 /* f_logo.png */; };
 		BEDF1E8815479537009FCA21 /* FacebookSocialMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDF1E8015479537009FCA21 /* FacebookSocialMediaViewController.m */; };
-		BEDF1E8915479537009FCA21 /* FacebookSocialMediaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1E8115479537009FCA21 /* FacebookSocialMediaViewController.xib */; };
 		BEDF1E9215479545009FCA21 /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1E8B15479545009FCA21 /* FBDialog.bundle */; };
 		BEDF1E9315479545009FCA21 /* fbicon.png in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1E8E15479545009FCA21 /* fbicon.png */; };
 		BEDF1E981547955C009FCA21 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDF1E961547955C009FCA21 /* ImageViewController.m */; };
@@ -56,17 +55,14 @@
 		BEDF1EA4154795CE009FCA21 /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDF1EA2154795CE009FCA21 /* libfacebook_ios_sdk.a */; };
 		BEDF1EAF154795FB009FCA21 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDF1EAB154795FB009FCA21 /* main.m */; };
 		BEDF1EB0154795FB009FCA21 /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDF1EAD154795FB009FCA21 /* MainPageViewController.m */; };
-		BEDF1EB1154795FB009FCA21 /* MainPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1EAE154795FB009FCA21 /* MainPageViewController.xib */; };
 		BEDF1EBA1547960A009FCA21 /* MyApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDF1EB31547960A009FCA21 /* MyApplication.m */; };
 		BEDF1EC91547961C009FCA21 /* SocialMediaDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDF1EBC1547961C009FCA21 /* SocialMediaDetailViewController.m */; };
-		BEDF1ECA1547961C009FCA21 /* SocialMediaDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1EBD1547961C009FCA21 /* SocialMediaDetailViewController.xib */; };
-		BEDF1ECB1547961C009FCA21 /* SocialMediaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1EBE1547961C009FCA21 /* SocialMediaViewController.xib */; };
 		BEDF1ECE1547961C009FCA21 /* twitter_newbird_blue small.png in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1EC11547961C009FCA21 /* twitter_newbird_blue small.png */; };
 		BEDF1ECF1547961C009FCA21 /* twitter_newbird_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1EC21547961C009FCA21 /* twitter_newbird_blue.png */; };
-		BEDF1ED01547961C009FCA21 /* TwitterSocialMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDF1EC41547961C009FCA21 /* TwitterSocialMediaViewController.m */; };
-		BEDF1ED11547961C009FCA21 /* TwitterSocialMediaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1EC51547961C009FCA21 /* TwitterSocialMediaViewController.xib */; };
 		BEDF1ED21547961C009FCA21 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDF1EC71547961C009FCA21 /* WebViewController.m */; };
 		BEDF1ED51547963F009FCA21 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDF1ED41547963F009FCA21 /* Twitter.framework */; };
+		BEE22936155E175D00504B5D /* iPhone_Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEE22935155E175D00504B5D /* iPhone_Storyboard.storyboard */; };
+		BEE2293A155E2C6A00504B5D /* PlanningCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE22939155E2C6A00504B5D /* PlanningCenterViewController.m */; };
 		BEF4A439154DCA080015E00D /* ImagoDeiMediaController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF4A437154DCA080015E00D /* ImagoDeiMediaController.m */; };
 		BEF4A43A154DCA080015E00D /* ImagoDeiMediaController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF4A438154DCA080015E00D /* ImagoDeiMediaController.xib */; };
 /* End PBXBuildFile section */
@@ -116,7 +112,6 @@
 		BEDF1E7E15479537009FCA21 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
 		BEDF1E7F15479537009FCA21 /* FacebookSocialMediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookSocialMediaViewController.h; sourceTree = "<group>"; };
 		BEDF1E8015479537009FCA21 /* FacebookSocialMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookSocialMediaViewController.m; sourceTree = "<group>"; };
-		BEDF1E8115479537009FCA21 /* FacebookSocialMediaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FacebookSocialMediaViewController.xib; sourceTree = "<group>"; };
 		BEDF1E8215479537009FCA21 /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBConnect.h; sourceTree = "<group>"; };
 		BEDF1E8B15479545009FCA21 /* FBDialog.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FBDialog.bundle; sourceTree = "<group>"; };
 		BEDF1E8C15479545009FCA21 /* FBDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBDialog.h; sourceTree = "<group>"; };
@@ -137,7 +132,6 @@
 		BEDF1EAB154795FB009FCA21 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../main.m; sourceTree = "<group>"; };
 		BEDF1EAC154795FB009FCA21 /* MainPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainPageViewController.h; path = ../MainPageViewController.h; sourceTree = "<group>"; };
 		BEDF1EAD154795FB009FCA21 /* MainPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainPageViewController.m; path = ../MainPageViewController.m; sourceTree = "<group>"; };
-		BEDF1EAE154795FB009FCA21 /* MainPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainPageViewController.xib; path = ../MainPageViewController.xib; sourceTree = "<group>"; };
 		BEDF1EB21547960A009FCA21 /* MyApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyApplication.h; path = ../MyApplication.h; sourceTree = "<group>"; };
 		BEDF1EB31547960A009FCA21 /* MyApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyApplication.m; path = ../MyApplication.m; sourceTree = "<group>"; };
 		BEDF1EB41547960A009FCA21 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+SBJSON.h"; path = "../NSObject+SBJSON.h"; sourceTree = "<group>"; };
@@ -148,16 +142,14 @@
 		BEDF1EB91547960A009FCA21 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBJsonWriter.h; path = ../SBJsonWriter.h; sourceTree = "<group>"; };
 		BEDF1EBB1547961C009FCA21 /* SocialMediaDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SocialMediaDetailViewController.h; path = ../SocialMediaDetailViewController.h; sourceTree = "<group>"; };
 		BEDF1EBC1547961C009FCA21 /* SocialMediaDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SocialMediaDetailViewController.m; path = ../SocialMediaDetailViewController.m; sourceTree = "<group>"; };
-		BEDF1EBD1547961C009FCA21 /* SocialMediaDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SocialMediaDetailViewController.xib; path = ../SocialMediaDetailViewController.xib; sourceTree = "<group>"; };
-		BEDF1EBE1547961C009FCA21 /* SocialMediaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SocialMediaViewController.xib; path = ../SocialMediaViewController.xib; sourceTree = "<group>"; };
 		BEDF1EC11547961C009FCA21 /* twitter_newbird_blue small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter_newbird_blue small.png"; path = "../twitter_newbird_blue small.png"; sourceTree = "<group>"; };
 		BEDF1EC21547961C009FCA21 /* twitter_newbird_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = twitter_newbird_blue.png; path = ../twitter_newbird_blue.png; sourceTree = "<group>"; };
-		BEDF1EC31547961C009FCA21 /* TwitterSocialMediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwitterSocialMediaViewController.h; path = ../TwitterSocialMediaViewController.h; sourceTree = "<group>"; };
-		BEDF1EC41547961C009FCA21 /* TwitterSocialMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwitterSocialMediaViewController.m; path = ../TwitterSocialMediaViewController.m; sourceTree = "<group>"; };
-		BEDF1EC51547961C009FCA21 /* TwitterSocialMediaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TwitterSocialMediaViewController.xib; path = ../TwitterSocialMediaViewController.xib; sourceTree = "<group>"; };
 		BEDF1EC61547961C009FCA21 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebViewController.h; path = ../WebViewController.h; sourceTree = "<group>"; };
 		BEDF1EC71547961C009FCA21 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebViewController.m; path = ../WebViewController.m; sourceTree = "<group>"; };
 		BEDF1ED41547963F009FCA21 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		BEE22935155E175D00504B5D /* iPhone_Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone_Storyboard.storyboard; sourceTree = "<group>"; };
+		BEE22938155E2C6A00504B5D /* PlanningCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanningCenterViewController.h; sourceTree = "<group>"; };
+		BEE22939155E2C6A00504B5D /* PlanningCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanningCenterViewController.m; sourceTree = "<group>"; };
 		BEF4A436154DCA080015E00D /* ImagoDeiMediaController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagoDeiMediaController.h; sourceTree = "<group>"; };
 		BEF4A437154DCA080015E00D /* ImagoDeiMediaController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagoDeiMediaController.m; sourceTree = "<group>"; };
 		BEF4A438154DCA080015E00D /* ImagoDeiMediaController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagoDeiMediaController.xib; sourceTree = "<group>"; };
@@ -237,11 +229,9 @@
 			children = (
 				BEDF1EBB1547961C009FCA21 /* SocialMediaDetailViewController.h */,
 				BEDF1EBC1547961C009FCA21 /* SocialMediaDetailViewController.m */,
-				BEDF1EBD1547961C009FCA21 /* SocialMediaDetailViewController.xib */,
-				BEDF1EBE1547961C009FCA21 /* SocialMediaViewController.xib */,
-				BEDF1EC31547961C009FCA21 /* TwitterSocialMediaViewController.h */,
-				BEDF1EC41547961C009FCA21 /* TwitterSocialMediaViewController.m */,
-				BEDF1EC51547961C009FCA21 /* TwitterSocialMediaViewController.xib */,
+				BEE22935155E175D00504B5D /* iPhone_Storyboard.storyboard */,
+				BEE22938155E2C6A00504B5D /* PlanningCenterViewController.h */,
+				BEE22939155E2C6A00504B5D /* PlanningCenterViewController.m */,
 				BEDF1EC61547961C009FCA21 /* WebViewController.h */,
 				BEDF1EC71547961C009FCA21 /* WebViewController.m */,
 				BEDF1EB21547960A009FCA21 /* MyApplication.h */,
@@ -259,8 +249,6 @@
 				BEDF1E971547955C009FCA21 /* ImageViewController.xib */,
 				BEDF1E7F15479537009FCA21 /* FacebookSocialMediaViewController.h */,
 				BEDF1E8015479537009FCA21 /* FacebookSocialMediaViewController.m */,
-				BEDF1E8115479537009FCA21 /* FacebookSocialMediaViewController.xib */,
-				BEDF1EAE154795FB009FCA21 /* MainPageViewController.xib */,
 				BEDF1E9D154795BD009FCA21 /* ImagoDeiDataFetcher.h */,
 				BEDF1E9E154795BD009FCA21 /* ImagoDeiDataFetcher.m */,
 				BEDF1E9A15479598009FCA21 /* ImagoDeiAppDelegate.h */,
@@ -395,17 +383,12 @@
 			files = (
 				BEDF1E65154791C4009FCA21 /* InfoPlist.strings in Resources */,
 				BEDF1E8715479537009FCA21 /* f_logo.png in Resources */,
-				BEDF1E8915479537009FCA21 /* FacebookSocialMediaViewController.xib in Resources */,
 				BEDF1E9215479545009FCA21 /* FBDialog.bundle in Resources */,
 				BEDF1E9315479545009FCA21 /* fbicon.png in Resources */,
 				BEDF1E991547955C009FCA21 /* ImageViewController.xib in Resources */,
 				BEDF1EA3154795CE009FCA21 /* JSONImagoDei.txt in Resources */,
-				BEDF1EB1154795FB009FCA21 /* MainPageViewController.xib in Resources */,
-				BEDF1ECA1547961C009FCA21 /* SocialMediaDetailViewController.xib in Resources */,
-				BEDF1ECB1547961C009FCA21 /* SocialMediaViewController.xib in Resources */,
 				BEDF1ECE1547961C009FCA21 /* twitter_newbird_blue small.png in Resources */,
 				BEDF1ECF1547961C009FCA21 /* twitter_newbird_blue.png in Resources */,
-				BEDF1ED11547961C009FCA21 /* TwitterSocialMediaViewController.xib in Resources */,
 				BED0A5AA1548DAC4007094A5 /* MainTabiPhone.rss in Resources */,
 				BEF4A43A154DCA080015E00D /* ImagoDeiMediaController.xib in Resources */,
 				BED787F11559EF78003CDEA1 /* Imago-App-comp.jpg in Resources */,
@@ -434,6 +417,7 @@
 				BED23D2D155A13BD00DB2D00 /* whoweare-icon.png in Resources */,
 				BED23D2E155A13BD00DB2D00 /* connect-icon.png in Resources */,
 				BED23D2F155A13BD00DB2D00 /* news-icon.png in Resources */,
+				BEE22936155E175D00504B5D /* iPhone_Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,10 +436,10 @@
 				BEDF1EB0154795FB009FCA21 /* MainPageViewController.m in Sources */,
 				BEDF1EBA1547960A009FCA21 /* MyApplication.m in Sources */,
 				BEDF1EC91547961C009FCA21 /* SocialMediaDetailViewController.m in Sources */,
-				BEDF1ED01547961C009FCA21 /* TwitterSocialMediaViewController.m in Sources */,
 				BEDF1ED21547961C009FCA21 /* WebViewController.m in Sources */,
 				BE62954A1547A8AA00CE719E /* RSSParser.m in Sources */,
 				BEF4A439154DCA080015E00D /* ImagoDeiMediaController.m in Sources */,
+				BEE2293A155E2C6A00504B5D /* PlanningCenterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

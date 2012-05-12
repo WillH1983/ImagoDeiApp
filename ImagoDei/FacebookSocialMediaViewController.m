@@ -44,7 +44,7 @@
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)LogOutInButtonClicked:(id)sender 
+- (IBAction)LogOutInButtonClicked:(id)sender 
 {
     UIBarButtonItem *barButton = nil;
     
@@ -56,7 +56,7 @@
     }
     //If not return without any action
     else return;
-
+    
     //If the barbutton says Log Out, tell the facebook app to logout
     //and set the title of the button to Log In
     if ([barButton.title isEqualToString: @"Log Out"])
@@ -82,6 +82,12 @@
 }
 
 #pragma mark - View Lifecycle
+
+- (void)awakeFromNib
+{
+    [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"fb-logo-active.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"fb-logo-inactive.png"]];
+    self.tabBarItem.title = @"Facebook";
+}
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -123,30 +129,11 @@
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     self.navigationItem.titleView = imageView;
     
-    
-    //By default the "Log In/Out" button will say "Log In"
-    UIBarButtonItem *barButtonItem = barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Log In" 
-                                                                                      style:UIBarButtonItemStyleBordered target:self
-                                                                                     action:@selector(LogOutInButtonClicked:)];
-    
     //If the facebook session is already valid, the barButtonItem will be change to say "Log Out"
     if ([self.facebook isSessionValid]) 
     {
-        barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Log Out"
-                                                         style:UIBarButtonItemStyleBordered
-                                                        target:self
-                                                        action:@selector(LogOutInButtonClicked:)];
+        self.navigationItem.leftBarButtonItem.title = @"Log Out";
     }
-    
-    //Assign the LogOutIn button to the left bar button item
-    self.navigationItem.leftBarButtonItem = barButtonItem;
-
-    //Assign the post button to the right barbutton item
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Post"
-                                                                              style:UIBarButtonItemStyleBordered
-                                                                             target:self
-                                                                             action:@selector(postToWall:)];
-    
     
     //Save the previous rightBarButtonItem so it can be put back on once the View is done loading
     self.oldBarButtonItem = self.navigationItem.rightBarButtonItem;
@@ -187,7 +174,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"Facebook Cell";
     
     //Dequeue a cell if one is avaliable
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -228,22 +215,25 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    //If the sender for the seque is not a Cell, return
+    if (![sender isKindOfClass:[UITableViewCell class]]) return;
+    
+    //Set the sender to a UITableViewCell
+    UITableViewCell *cell = sender;
+    
+    //Retrieve index path for cell
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    
     //Retrieve the corresponding dictionary to the index row selected
     NSDictionary *tmpDictionary = [[NSDictionary alloc] initWithDictionary:[self.imagoDeiFacebookPostsArray objectAtIndex:[indexPath row]]];
     
-    //Initiate the Social Detail controller
-    SocialMediaDetailViewController *smdvc = [[SocialMediaDetailViewController alloc] init];
-    
     //Set the model for the MVC we are about to push onto the stack
-    [smdvc setShortCommentsDictionaryModel:tmpDictionary];
+    [segue.destinationViewController setShortCommentsDictionaryModel:tmpDictionary];
     
     //Set the delegate of the social media detail controller to this class
-    [smdvc setSocialMediaDelegate:self];
-    
-    //Push the created view controller onto the stack
-    [[self navigationController] pushViewController:smdvc animated:YES];
+    [segue.destinationViewController setSocialMediaDelegate:self];
 }
 
 #pragma mark - SocialMediaDetailView datasource
@@ -285,7 +275,7 @@
 
 #pragma mark - Facebook Dialog Methods
 
-- (void)postToWall:(id)sender
+- (IBAction)postToWall:(id)sender 
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                    FACEBOOK_APP_ID, @"app_id",

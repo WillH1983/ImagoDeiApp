@@ -21,57 +21,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-
     facebook = [[Facebook alloc] initWithAppId:@"207547516014316" andDelegate:nil];
-    
-    NSMutableArray *listOfNavigationControllers = [[NSMutableArray alloc] init];
-    
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"MainTabiPhone" ofType:@"rss"];
-    NSURL *urlFilePath = [[NSURL alloc] initFileURLWithPath:filePath];
-    NSLog(@"%@", filePath);
-    
-    MainPageViewController *mpvc = [[MainPageViewController alloc] initWithModel:urlFilePath];
-    UINavigationController *mainPageNavController = [[UINavigationController alloc] initWithRootViewController:mpvc];
-    [listOfNavigationControllers addObject:mainPageNavController];
-    
-    FacebookSocialMediaViewController *fbsmvc = [[FacebookSocialMediaViewController alloc] init];
-    UINavigationController *facebookNavController = [[UINavigationController alloc] initWithRootViewController:fbsmvc];
-    [listOfNavigationControllers addObject:facebookNavController];
-    
-    MainPageViewController *pco = [[MainPageViewController alloc] init];
-    UINavigationController *pcoNavController = [[UINavigationController alloc] initWithRootViewController:pco];
-    [listOfNavigationControllers addObject:pcoNavController];
-    
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    [tabBarController setViewControllers:listOfNavigationControllers];
-    self.tabBarController = tabBarController;
-    
-    UITabBarItem *homeTabBarItem = [[[self.tabBarController viewControllers] objectAtIndex:0] tabBarItem];
-    [homeTabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"home-active.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"home-inactive.png"]];
-    homeTabBarItem.title = @"Home";
-    
-    UITabBarItem *facebookTabBarItem = [[[self.tabBarController viewControllers] objectAtIndex:1] tabBarItem];
-    [facebookTabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"fb-logo-active.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"fb-logo-inactive.png"]];
-    facebookTabBarItem.title = @"Facebook";
-    
-    UITabBarItem *pcoTabBarItem = [[[self.tabBarController viewControllers] objectAtIndex:2] tabBarItem];
-    [pcoTabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"pco-logo-active.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"pco-logo-inactive.png"]];
-    pcoTabBarItem.title = @"Planning Center";
-    
-    UITabBar *tabBar = [tabBarController tabBar];
-    tabBar.backgroundImage = [UIImage imageNamed:@"tabbar-bg.png"];
-    tabBar.selectionIndicatorImage = [UIImage imageNamed:@"tabbar-active-bg.png"];
-    
-    [[self window] setRootViewController:tabBarController];
-    
     audioSession = [AVAudioSession sharedInstance];
     [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
     
-    self.window.backgroundColor = [UIColor whiteColor];
     application.statusBarStyle = UIStatusBarStyleBlackOpaque;
-    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

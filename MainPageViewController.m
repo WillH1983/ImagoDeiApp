@@ -11,7 +11,6 @@
 #import "WebViewController.h"
 #import "Facebook.h"
 #import "FacebookSocialMediaViewController.h"
-#import "TwitterSocialMediaViewController.h"
 #import "ImagoDeiMediaController.h"
 
 @interface MainPageViewController ()
@@ -35,19 +34,31 @@
     });
 }
 
-- (id)init
+- (void)awakeFromNib
 {
-    self = [super init];
-    if (self) {
+    if (self)
+    {
         self.tableView.delegate = self;
+        self.tabBarController.tabBar.backgroundImage = [UIImage imageNamed:@"tabbar-bg.png"];
+        self.tabBarController.tabBar.selectionIndicatorImage = [UIImage imageNamed:@"tabbar-active-bg.png"];
+        
+        [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"home-active.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"home-inactive.png"]];
+        self.tabBarItem.title = @"Home";
+        
         UIImage *logoImage = [UIImage imageNamed:@"imago-logo.png"];
-
+        
         UIImageView *logoImageView = [[UIImageView alloc] initWithImage:logoImage];
         logoImageView.contentMode = UIViewContentModeScaleAspectFit;
         
         self.navigationItem.titleView = logoImageView;
+        
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"MainTabiPhone" ofType:@"rss"];
+        NSURL *urlFilePath = [[NSURL alloc] initFileURLWithPath:filePath];
+        NSLog(@"%@", filePath);
+        self.model = urlFilePath;
+        RSSParser *parser = [[RSSParser alloc] init];
+        [parser XMLFileToParseAtURL:self.model withDelegate:self];
     }
-    return self;
 }
 
 - (void)facebookButtonPressed:(id)sender
@@ -58,18 +69,6 @@
     [fbsmvc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:fbsmvc];
-    
-    [self presentViewController:navController animated:YES completion:nil];
-}
-
-- (void)twitterButtonPressed:(id)sender
-{
-    TwitterSocialMediaViewController *tsmvc = [[TwitterSocialMediaViewController alloc] init];
-    
-    [tsmvc setModalPresentationStyle:UIModalPresentationFormSheet];
-    [tsmvc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-    
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tsmvc];
     
     [self presentViewController:navController animated:YES completion:nil];
 }

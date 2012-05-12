@@ -52,6 +52,17 @@
     return self;
 }
 
+- (void)awakeFromNib
+{
+    if (self)
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(presentWebView:) 
+                                                     name:@"urlSelected"
+                                                   object:nil];
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
