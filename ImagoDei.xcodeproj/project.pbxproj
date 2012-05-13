@@ -11,13 +11,13 @@
 		BE1C3FBD154B9C6000775B14 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1C3FBC154B9C6000775B14 /* CoreMedia.framework */; };
 		BE1C3FBF154BA71400775B14 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1C3FBE154BA71400775B14 /* MediaPlayer.framework */; };
 		BE62954A1547A8AA00CE719E /* RSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6295491547A8AA00CE719E /* RSSParser.m */; };
+		BE9056AC15604D4300D79563 /* news-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9056AB15604D4300D79563 /* news-icon.png */; };
 		BED0A5AA1548DAC4007094A5 /* MainTabiPhone.rss in Resources */ = {isa = PBXBuildFile; fileRef = BED0A5A91548DAC4007094A5 /* MainTabiPhone.rss */; };
 		BED23D10155A0C8B00DB2D00 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED23D0F155A0C8B00DB2D00 /* CoreImage.framework */; };
 		BED23D2B155A13BD00DB2D00 /* events-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BED23D26155A13BD00DB2D00 /* events-icon.png */; };
 		BED23D2C155A13BD00DB2D00 /* teachings-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BED23D27155A13BD00DB2D00 /* teachings-icon.png */; };
 		BED23D2D155A13BD00DB2D00 /* whoweare-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BED23D28155A13BD00DB2D00 /* whoweare-icon.png */; };
 		BED23D2E155A13BD00DB2D00 /* connect-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BED23D29155A13BD00DB2D00 /* connect-icon.png */; };
-		BED23D2F155A13BD00DB2D00 /* news-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BED23D2A155A13BD00DB2D00 /* news-icon.png */; };
 		BED787F11559EF78003CDEA1 /* Imago-App-comp.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BED787E11559EF78003CDEA1 /* Imago-App-comp.jpg */; };
 		BED787F21559EF78003CDEA1 /* home-inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = BED787E21559EF78003CDEA1 /* home-inactive.png */; };
 		BED787F31559EF78003CDEA1 /* home-active.png in Resources */ = {isa = PBXBuildFile; fileRef = BED787E31559EF78003CDEA1 /* home-active.png */; };
@@ -73,13 +73,13 @@
 		BE1C3FBE154BA71400775B14 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		BE6295481547A8AA00CE719E /* RSSParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSParser.h; sourceTree = "<group>"; };
 		BE6295491547A8AA00CE719E /* RSSParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSParser.m; sourceTree = "<group>"; };
+		BE9056AB15604D4300D79563 /* news-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news-icon.png"; sourceTree = "<group>"; };
 		BED0A5A91548DAC4007094A5 /* MainTabiPhone.rss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MainTabiPhone.rss; sourceTree = "<group>"; };
 		BED23D0F155A0C8B00DB2D00 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		BED23D26155A13BD00DB2D00 /* events-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "events-icon.png"; sourceTree = "<group>"; };
 		BED23D27155A13BD00DB2D00 /* teachings-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "teachings-icon.png"; sourceTree = "<group>"; };
 		BED23D28155A13BD00DB2D00 /* whoweare-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whoweare-icon.png"; sourceTree = "<group>"; };
 		BED23D29155A13BD00DB2D00 /* connect-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "connect-icon.png"; sourceTree = "<group>"; };
-		BED23D2A155A13BD00DB2D00 /* news-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news-icon.png"; sourceTree = "<group>"; };
 		BED787E11559EF78003CDEA1 /* Imago-App-comp.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Imago-App-comp.jpg"; sourceTree = "<group>"; };
 		BED787E21559EF78003CDEA1 /* home-inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-inactive.png"; sourceTree = "<group>"; };
 		BED787E31559EF78003CDEA1 /* home-active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-active.png"; sourceTree = "<group>"; };
@@ -298,11 +298,11 @@
 			children = (
 				BED788011559EF88003CDEA1 /* Icons */,
 				BED787E11559EF78003CDEA1 /* Imago-App-comp.jpg */,
+				BE9056AB15604D4300D79563 /* news-icon.png */,
 				BED23D26155A13BD00DB2D00 /* events-icon.png */,
 				BED23D27155A13BD00DB2D00 /* teachings-icon.png */,
 				BED23D28155A13BD00DB2D00 /* whoweare-icon.png */,
 				BED23D29155A13BD00DB2D00 /* connect-icon.png */,
-				BED23D2A155A13BD00DB2D00 /* news-icon.png */,
 				BED787E21559EF78003CDEA1 /* home-inactive.png */,
 				BED787E31559EF78003CDEA1 /* home-active.png */,
 				BED787E41559EF78003CDEA1 /* fb-logo-active.png */,
@@ -416,8 +416,8 @@
 				BED23D2C155A13BD00DB2D00 /* teachings-icon.png in Resources */,
 				BED23D2D155A13BD00DB2D00 /* whoweare-icon.png in Resources */,
 				BED23D2E155A13BD00DB2D00 /* connect-icon.png in Resources */,
-				BED23D2F155A13BD00DB2D00 /* news-icon.png in Resources */,
 				BEE22936155E175D00504B5D /* iPhone_Storyboard.storyboard in Resources */,
+				BE9056AC15604D4300D79563 /* news-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
