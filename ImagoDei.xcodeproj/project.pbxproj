@@ -102,8 +102,8 @@
 		BED788051559EF9B003CDEA1 /* Icon-Small-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50@2x.png"; sourceTree = "<group>"; };
 		BED788061559EF9B003CDEA1 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
 		BED788071559EF9B003CDEA1 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
-		BED788091559EF9B003CDEA1 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
-		BED7880B1559EF9B003CDEA1 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
+		BED788091559EF9B003CDEA1 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = ImagoDei/iTunesArtwork; sourceTree = "<group>"; };
+		BED7880B1559EF9B003CDEA1 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; name = "iTunesArtwork@2x"; path = "ImagoDei/iTunesArtwork@2x"; sourceTree = "<group>"; };
 		BED788161559EFD3003CDEA1 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		BED788181559EFEB003CDEA1 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		BED7881A1559F007003CDEA1 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
@@ -190,8 +190,6 @@
 				BED788051559EF9B003CDEA1 /* Icon-Small-50@2x.png */,
 				BED788061559EF9B003CDEA1 /* Icon-Small.png */,
 				BED788071559EF9B003CDEA1 /* Icon-Small@2x.png */,
-				BED788091559EF9B003CDEA1 /* iTunesArtwork */,
-				BED7880B1559EF9B003CDEA1 /* iTunesArtwork@2x */,
 			);
 			name = Icons;
 			sourceTree = "<group>";
@@ -199,6 +197,8 @@
 		BEDF1E4B154791C4009FCA21 = {
 			isa = PBXGroup;
 			children = (
+				BED788091559EF9B003CDEA1 /* iTunesArtwork */,
+				BED7880B1559EF9B003CDEA1 /* iTunesArtwork@2x */,
 				BED7881C1559F00C003CDEA1 /* Icon-72.png */,
 				BED7881A1559F007003CDEA1 /* Icon-72@2x.png */,
 				BED788181559EFEB003CDEA1 /* Icon.png */,
