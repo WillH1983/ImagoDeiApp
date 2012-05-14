@@ -101,7 +101,7 @@
 	if (selection) [self.commentsTableView deselectRowAtIndexPath:selection animated:YES];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+- (void)viewDidDisappear:(BOOL)animated
 {
     //When the view disappears the code in this fucnction removes all delegation to this class
     //This is required incase a connection request is in progress when the view disappears

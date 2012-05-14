@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Facebook.h"
 #import "SocialMediaDetailViewController.h"
+#import "PullRefreshTableViewController.h"
 
-@interface FacebookSocialMediaViewController : UITableViewController <FBSessionDelegate,FBRequestDelegate, FBDialogDelegate, SocialMediaDetailViewControllerDelegate>
+@interface FacebookSocialMediaViewController : PullRefreshTableViewController <FBSessionDelegate,FBRequestDelegate, FBDialogDelegate, SocialMediaDetailViewControllerDelegate>
 
 @property (nonatomic, retain) Facebook *facebook;
 

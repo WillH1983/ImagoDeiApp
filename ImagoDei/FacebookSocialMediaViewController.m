@@ -90,9 +90,10 @@
     self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+- (void)viewDidDisappear:(BOOL)animated
 {
     //When the view disappears the code in this fucnction removes all delegation to this class
+    //and it stops the loading
     
     //This is required incase a connection request is in progress when the view disappears
     [self.facebookRequest setDelegate:nil];
@@ -100,6 +101,9 @@
     //This is required incase a facebook method completes after the view has disappered
     ImagoDeiAppDelegate *appDelegate = (ImagoDeiAppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.facebook.sessionDelegate = nil;
+    
+    //View is about to disappear, so the view should stop loading
+    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
     
     //Super method
     [super viewWillDisappear:animated];
@@ -336,12 +340,15 @@
         self.imagoDeiFacebookPostsArray = arrayOfDictionaries;
     }
     
-    //Since the request has been recieved, and parsed, stop the Activity Indicator
-    [self.facebookActivityIndicator stopAnimating];
-    
-    //If an oldbutton was removed from the right bar button spot, put it back
-    self.navigationItem.rightBarButtonItem = self.oldBarButtonItem;
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //Since the request has been recieved, and parsed, stop the Activity Indicator
+        [self.facebookActivityIndicator stopAnimating];
+        
+        //If an oldbutton was removed from the right bar button spot, put it back
+        self.navigationItem.rightBarButtonItem = self.oldBarButtonItem;
+        
+        [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
+    });
 }
 
 
@@ -402,5 +409,11 @@
 - (void)viewDidUnload {
     [self setTableView:nil];
     [super viewDidUnload];
+}
+
+- (void)refresh {
+    //This method will request the full comments array from the delegate and
+    //the facebook class will call request:request didLoad:result when complete
+    [self.facebook requestWithGraphPath:@"ImagoDeiChurch/posts" andDelegate:self];
 }
 @end
