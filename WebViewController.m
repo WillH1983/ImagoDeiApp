@@ -35,7 +35,7 @@
         [navigationBar setTintColor:standardColor];
         UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(donePressed:)];
         self.navItem = [[UINavigationItem alloc] init];
-        self.navItem.rightBarButtonItem = barButtonItem;
+        self.navItem.leftBarButtonItem = barButtonItem;
         navigationBar.items = [[NSArray alloc] initWithObjects:self.navItem, nil];
         [self.view addSubview:navigationBar];
         CGRect tmpRect = CGRectMake(0, 44, 320, 416);
@@ -80,14 +80,14 @@
 {
     [self.activityIndicator startAnimating];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
-    self.navItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
+    self.navItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
     
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     self.navigationItem.rightBarButtonItem = nil;
-    self.navItem.leftBarButtonItem = nil;
+    self.navItem.rightBarButtonItem = nil;
 }
 
 - (void)donePressed:(id)sender
