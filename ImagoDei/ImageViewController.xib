@@ -83,7 +83,7 @@
 							<object class="IBUINavigationItem" id="360651225">
 								<reference key="IBUINavigationBar" ref="667083854"/>
 								<string key="IBUITitle">Photo</string>
-								<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="456779423">
+								<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="456779423">
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 									<int key="IBUIStyle">1</int>
 									<reference key="IBUINavigationItem" ref="360651225"/>

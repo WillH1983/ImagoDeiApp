@@ -44,7 +44,7 @@
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [spinner startAnimating];
     UIBarButtonItem *spinnerButton = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-    self.navigationBar.topItem.leftBarButtonItem = spinnerButton;
+    self.navigationBar.topItem.rightBarButtonItem = spinnerButton;
 
     
     dispatch_queue_t downloadQueue2 = dispatch_queue_create("downloader", NULL);
