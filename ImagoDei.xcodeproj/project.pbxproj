@@ -36,8 +36,8 @@
 		BED7880F1559EF9B003CDEA1 /* Icon-Small-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED788051559EF9B003CDEA1 /* Icon-Small-50@2x.png */; };
 		BED788101559EF9B003CDEA1 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = BED788061559EF9B003CDEA1 /* Icon-Small.png */; };
 		BED788111559EF9B003CDEA1 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED788071559EF9B003CDEA1 /* Icon-Small@2x.png */; };
-		BED788131559EF9B003CDEA1 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = BED788091559EF9B003CDEA1 /* iTunesArtwork.png */; };
-		BED788151559EF9B003CDEA1 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED7880B1559EF9B003CDEA1 /* iTunesArtwork@2x.png */; };
+		BED788131559EF9B003CDEA1 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = BED788091559EF9B003CDEA1 /* iTunesArtwork */; };
+		BED788151559EF9B003CDEA1 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = BED7880B1559EF9B003CDEA1 /* iTunesArtwork@2x */; };
 		BED788171559EFD3003CDEA1 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED788161559EFD3003CDEA1 /* Icon@2x.png */; };
 		BED788191559EFEB003CDEA1 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BED788181559EFEB003CDEA1 /* Icon.png */; };
 		BED7881B1559F008003CDEA1 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED7881A1559F007003CDEA1 /* Icon-72@2x.png */; };
@@ -102,8 +102,8 @@
 		BED788051559EF9B003CDEA1 /* Icon-Small-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50@2x.png"; sourceTree = "<group>"; };
 		BED788061559EF9B003CDEA1 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
 		BED788071559EF9B003CDEA1 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
-		BED788091559EF9B003CDEA1 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
-		BED7880B1559EF9B003CDEA1 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
+		BED788091559EF9B003CDEA1 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		BED7880B1559EF9B003CDEA1 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		BED788161559EFD3003CDEA1 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		BED788181559EFEB003CDEA1 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		BED7881A1559F007003CDEA1 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
@@ -190,8 +190,8 @@
 				BED788051559EF9B003CDEA1 /* Icon-Small-50@2x.png */,
 				BED788061559EF9B003CDEA1 /* Icon-Small.png */,
 				BED788071559EF9B003CDEA1 /* Icon-Small@2x.png */,
-				BED788091559EF9B003CDEA1 /* iTunesArtwork.png */,
-				BED7880B1559EF9B003CDEA1 /* iTunesArtwork@2x.png */,
+				BED788091559EF9B003CDEA1 /* iTunesArtwork */,
+				BED7880B1559EF9B003CDEA1 /* iTunesArtwork@2x */,
 			);
 			name = Icons;
 			sourceTree = "<group>";
@@ -418,8 +418,8 @@
 				BED7880F1559EF9B003CDEA1 /* Icon-Small-50@2x.png in Resources */,
 				BED788101559EF9B003CDEA1 /* Icon-Small.png in Resources */,
 				BED788111559EF9B003CDEA1 /* Icon-Small@2x.png in Resources */,
-				BED788131559EF9B003CDEA1 /* iTunesArtwork.png in Resources */,
-				BED788151559EF9B003CDEA1 /* iTunesArtwork@2x.png in Resources */,
+				BED788131559EF9B003CDEA1 /* iTunesArtwork in Resources */,
+				BED788151559EF9B003CDEA1 /* iTunesArtwork@2x in Resources */,
 				BED788171559EFD3003CDEA1 /* Icon@2x.png in Resources */,
 				BED788191559EFEB003CDEA1 /* Icon.png in Resources */,
 				BED7881B1559F008003CDEA1 /* Icon-72@2x.png in Resources */,
