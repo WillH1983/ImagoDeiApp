@@ -17,66 +17,49 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="aVp-2Y-D38" kind="relationship" relationship="rootViewController" id="KHK-xT-IeK"/>
+                        <segue destination="pFU-Su-04Y" kind="relationship" relationship="rootViewController" id="nix-rP-heG"/>
                     </connections>
                 </navigationController>
             </objects>
             <point key="canvasLocation" x="493" y="-145"/>
         </scene>
         <!--Main Page View Controller-->
-        <scene sceneID="oVj-Kd-zKz">
+        <scene sceneID="qfL-Xl-J5s">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iPK-ZB-hjI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="aVp-2Y-D38" customClass="MainPageViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Nw5-3c-cnc">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cBx-fO-DcD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="pFU-Su-04Y" customClass="MainPageViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" id="Cjh-MM-zx4">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="background.png" id="TuS-Tc-mnX">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" id="9uu-Ea-Xsu">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Main Page Cell" textLabel="p48-Sd-3AP" imageView="PGb-Ek-J99" rowHeight="50" style="IBUITableViewCellStyleDefault" id="Iqy-Qm-ufd">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="49"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Main Page Cell" textLabel="18w-TB-2Tg" rowHeight="50" style="IBUITableViewCellStyleDefault" id="dEt-ea-2ja">
+                                <rect key="frame" x="0.0" y="22" width="320" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="49"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="18w-TB-2Tg">
+                                            <rect key="frame" x="10" y="0.0" width="280" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="p48-Sd-3AP">
-                                                    <rect key="frame" x="54" y="0.0" width="236" height="49"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="news-icon.png" id="PGb-Ek-J99">
-                                                    <rect key="frame" x="4" y="4" width="40" height="40"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="aVp-2Y-D38" id="JSi-FT-Q0o"/>
-                                    <outlet property="delegate" destination="aVp-2Y-D38" id="oJz-ub-UMK"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="lVf-PC-KLx"/>
-                    <connections>
-                        <outlet property="tableView" destination="9uu-Ea-Xsu" id="KX7-yx-nMW"/>
-                    </connections>
-                </viewController>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="pFU-Su-04Y" id="4MI-1Z-wlm"/>
+                            <outlet property="delegate" destination="pFU-Su-04Y" id="Y4F-ZF-ppp"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="aUh-jT-MGo"/>
+                </tableViewController>
             </objects>
             <point key="canvasLocation" x="977" y="-145"/>
         </scene>
@@ -127,83 +110,69 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Z9c-Ss-ETt" kind="relationship" relationship="rootViewController" id="Lmv-C1-fbQ"/>
+                        <segue destination="r4a-hm-qfw" kind="relationship" relationship="rootViewController" id="amF-et-y4r"/>
                     </connections>
                 </navigationController>
             </objects>
             <point key="canvasLocation" x="496" y="480"/>
         </scene>
         <!--Facebook Social Media View Controller-->
-        <scene sceneID="SMz-IB-XYw">
+        <scene sceneID="Tm7-fn-aQd">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ydN-Aq-T9t" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="Z9c-Ss-ETt" customClass="FacebookSocialMediaViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="IHs-NC-ba0">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tAw-SV-XDc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="r4a-hm-qfw" customClass="FacebookSocialMediaViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="gnG-jl-sD8">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="background.png" id="Cac-e6-ye4">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6QI-O0-gbD">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Facebook Cell" textLabel="luD-48-hUw" detailTextLabel="KLe-IS-Okr" style="IBUITableViewCellStyleSubtitle" id="6QE-Et-3bx">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Facebook Cell" textLabel="G4J-d2-gvc" detailTextLabel="RqE-9k-lQe" style="IBUITableViewCellStyleSubtitle" id="Voe-70-uTW">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="G4J-d2-gvc">
+                                            <rect key="frame" x="10" y="2" width="38" height="22"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="luD-48-hUw">
-                                                    <rect key="frame" x="10" y="2" width="38" height="22"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KLe-IS-Okr">
-                                                    <rect key="frame" x="10" y="24" width="47" height="18"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <connections>
-                                            <segue destination="74j-p7-tn5" kind="push" identifier="Cell Push" id="NWn-7R-UOw"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RqE-9k-lQe">
+                                            <rect key="frame" x="10" y="24" width="47" height="18"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
                                 <connections>
-                                    <outlet property="dataSource" destination="Z9c-Ss-ETt" id="VtO-Cl-kOg"/>
-                                    <outlet property="delegate" destination="Z9c-Ss-ETt" id="Iiy-qM-hd1"/>
+                                    <segue destination="74j-p7-tn5" kind="push" id="o2s-60-zZi"/>
                                 </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Emz-9Y-Bfv">
-                        <barButtonItem key="leftBarButtonItem" title="Log In" id="vob-0Q-gPS">
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="r4a-hm-qfw" id="nPM-v9-2Gm"/>
+                            <outlet property="delegate" destination="r4a-hm-qfw" id="0OO-ZY-RI3"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="s2j-Y2-r6R">
+                        <barButtonItem key="leftBarButtonItem" title="Log In" id="HL6-id-9Do">
                             <connections>
-                                <action selector="LogOutInButtonClicked:" destination="Z9c-Ss-ETt" id="koQ-dH-lJM"/>
+                                <action selector="LogOutInButtonClicked:" destination="r4a-hm-qfw" id="dVW-YV-cmb"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Post" id="b5f-6a-YFY">
+                        <barButtonItem key="rightBarButtonItem" title="Post" id="lAo-UT-IPZ">
                             <connections>
-                                <action selector="postToWall:" destination="Z9c-Ss-ETt" id="FNs-yb-sWl"/>
+                                <action selector="postToWall:" destination="r4a-hm-qfw" id="BG6-yn-dXJ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="tableView" destination="6QI-O0-gbD" id="yiS-VK-7g4"/>
-                    </connections>
-                </viewController>
+                </tableViewController>
             </objects>
             <point key="canvasLocation" x="977" y="480"/>
         </scene>
@@ -277,34 +246,7 @@
     </scenes>
     <resources>
         <image name="background.png" width="640" height="732"/>
-        <image name="news-icon.png" width="40" height="40"/>
     </resources>
-    <classes>
-        <class className="FacebookSocialMediaViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FacebookSocialMediaViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="MainPageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainPageViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="PlanningCenterViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlanningCenterViewController.h"/>
-        </class>
-        <class className="SocialMediaDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SocialMediaDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="commentsTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="profilePictureImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

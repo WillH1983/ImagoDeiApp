@@ -11,11 +11,10 @@
 #import "FBConnect.h"
 #import "RSSParser.h"
 
-@interface MainPageViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, RSSParserDelegate>
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@interface MainPageViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, RSSParserDelegate>
 @property (strong, nonatomic) NSURL *model;
 @property (strong, nonatomic) NSString *imageName;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 
 - (id)initWithModel:(NSURL *)model;
 

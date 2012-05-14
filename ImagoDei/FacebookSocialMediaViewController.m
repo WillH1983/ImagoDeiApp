@@ -21,7 +21,6 @@
 
 @implementation FacebookSocialMediaViewController
 @synthesize facebook = _facebook;
-@synthesize tableView = _tableView;
 @synthesize facebookActivityIndicator = _facebookActivityIndicator;
 @synthesize imagoDeiFacebookPostsArray = _imagoDeiFacebookPostsArray;
 @synthesize facebookRequest = _facebookRequest;
@@ -87,6 +86,8 @@
 {
     [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"fb-logo-active.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"fb-logo-inactive.png"]];
     self.tabBarItem.title = @"Facebook";
+    
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
