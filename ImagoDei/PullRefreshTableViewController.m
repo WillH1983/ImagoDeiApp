@@ -35,7 +35,7 @@
 
 @implementation PullRefreshTableViewController
 
-@synthesize textPull, textRelease, textLoading, refreshHeaderView, refreshLabel, refreshArrow, refreshSpinner;
+@synthesize textPull, textRelease, textLoading, textDate, refreshHeaderView, refreshLabel, refreshDate, refreshArrow, refreshSpinner, date;
 
 - (id)initWithStyle:(UITableViewStyle)style {
   self = [super initWithStyle:style];
@@ -67,19 +67,30 @@
 }
 
 - (void)setupStrings{
-  textPull = [[NSString alloc] initWithString:@"Pull down to refresh..."];
-  textRelease = [[NSString alloc] initWithString:@"Release to refresh..."];
-  textLoading = [[NSString alloc] initWithString:@"Loading..."];
+    textPull = [[NSString alloc] initWithString:@"Pull down to refresh..."];
+    textRelease = [[NSString alloc] initWithString:@"Release to refresh..."];
+    textLoading = [[NSString alloc] initWithString:@"Loading..."];
+    self.date = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    textDate = [[NSString alloc] initWithFormat:@"Last updated: %@", [dateFormatter stringFromDate:self.date]];
 }
 
 - (void)addPullToRefreshHeader {
     refreshHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 - REFRESH_HEADER_HEIGHT, 320, REFRESH_HEADER_HEIGHT)];
     refreshHeaderView.backgroundColor = [UIColor clearColor];
 
-    refreshLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, REFRESH_HEADER_HEIGHT)];
+    refreshLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, REFRESH_HEADER_HEIGHT/2)];
     refreshLabel.backgroundColor = [UIColor clearColor];
-    refreshLabel.font = [UIFont boldSystemFontOfSize:12.0];
+    refreshLabel.font = [UIFont boldSystemFontOfSize:14.0];
     refreshLabel.textAlignment = UITextAlignmentCenter;
+    
+    refreshDate = [[UILabel alloc] initWithFrame:CGRectMake(0, REFRESH_HEADER_HEIGHT/2, 320, REFRESH_HEADER_HEIGHT/2)];
+    refreshDate.backgroundColor = [UIColor clearColor];
+    refreshDate.font = [UIFont systemFontOfSize:12.0];
+    refreshDate.textAlignment = UITextAlignmentCenter;
 
     refreshArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow.png"]];
     refreshArrow.frame = CGRectMake(floorf((REFRESH_HEADER_HEIGHT - 27) / 2),
@@ -91,6 +102,7 @@
     refreshSpinner.hidesWhenStopped = YES;
 
     [refreshHeaderView addSubview:refreshLabel];
+    [refreshHeaderView addSubview:refreshDate];
     [refreshHeaderView addSubview:refreshArrow];
     [refreshHeaderView addSubview:refreshSpinner];
     [self.tableView addSubview:refreshHeaderView];
@@ -114,6 +126,7 @@
         if (scrollView.contentOffset.y < -REFRESH_HEADER_HEIGHT) {
             // User is scrolling above the header
             refreshLabel.text = self.textRelease;
+            refreshDate.text = self.textDate;
             [refreshArrow layer].transform = CATransform3DMakeRotation(M_PI, 0, 0, 1);
         } else { // User is scrolling somewhere within the header
             refreshLabel.text = self.textPull;
@@ -140,6 +153,7 @@
     [UIView setAnimationDuration:0.3];
     self.tableView.contentInset = UIEdgeInsetsMake(REFRESH_HEADER_HEIGHT, 0, 0, 0);
     refreshLabel.text = self.textLoading;
+    
     refreshArrow.hidden = YES;
     [refreshSpinner startAnimating];
     [UIView commitAnimations];
@@ -167,6 +181,14 @@
 - (void)stopLoadingComplete:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
     // Reset the header
     refreshLabel.text = self.textPull;
+    self.date = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    self.textDate = [[NSString alloc] initWithFormat:@"Last updated: %@", [dateFormatter stringFromDate:self.date]];
+    self.refreshDate.text = self.textDate;
+    
     refreshArrow.hidden = NO;
     [refreshSpinner stopAnimating];
 }
