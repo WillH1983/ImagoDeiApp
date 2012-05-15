@@ -42,6 +42,7 @@
 		BED788191559EFEB003CDEA1 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BED788181559EFEB003CDEA1 /* Icon.png */; };
 		BED7881B1559F008003CDEA1 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED7881A1559F007003CDEA1 /* Icon-72@2x.png */; };
 		BED7881D1559F00C003CDEA1 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = BED7881C1559F00C003CDEA1 /* Icon-72.png */; };
+		BED87DE41562D6BD00141114 /* ImagoDeiStandardTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BED87DE31562D6BD00141114 /* ImagoDeiStandardTableViewController.m */; };
 		BEDF1E5B154791C4009FCA21 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDF1E5A154791C4009FCA21 /* UIKit.framework */; };
 		BEDF1E5D154791C4009FCA21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDF1E5C154791C4009FCA21 /* Foundation.framework */; };
 		BEDF1E5F154791C4009FCA21 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDF1E5E154791C4009FCA21 /* CoreGraphics.framework */; };
@@ -108,6 +109,8 @@
 		BED788181559EFEB003CDEA1 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		BED7881A1559F007003CDEA1 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		BED7881C1559F00C003CDEA1 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		BED87DE21562D6BD00141114 /* ImagoDeiStandardTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagoDeiStandardTableViewController.h; sourceTree = "<group>"; };
+		BED87DE31562D6BD00141114 /* ImagoDeiStandardTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagoDeiStandardTableViewController.m; sourceTree = "<group>"; };
 		BEDF1E56154791C4009FCA21 /* ImagoDei.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImagoDei.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEDF1E5A154791C4009FCA21 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BEDF1E5C154791C4009FCA21 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -260,6 +263,8 @@
 				BEDF1E8015479537009FCA21 /* FacebookSocialMediaViewController.m */,
 				BE54BC211560A4B400F85DD9 /* PullRefreshTableViewController.h */,
 				BE54BC221560A4B500F85DD9 /* PullRefreshTableViewController.m */,
+				BED87DE21562D6BD00141114 /* ImagoDeiStandardTableViewController.h */,
+				BED87DE31562D6BD00141114 /* ImagoDeiStandardTableViewController.m */,
 				BEDF1E9D154795BD009FCA21 /* ImagoDeiDataFetcher.h */,
 				BEDF1E9E154795BD009FCA21 /* ImagoDeiDataFetcher.m */,
 				BEDF1E9A15479598009FCA21 /* ImagoDeiAppDelegate.h */,
@@ -454,6 +459,7 @@
 				BEF4A439154DCA080015E00D /* ImagoDeiMediaController.m in Sources */,
 				BEE2293A155E2C6A00504B5D /* PlanningCenterViewController.m in Sources */,
 				BE54BC231560A4B500F85DD9 /* PullRefreshTableViewController.m in Sources */,
+				BED87DE41562D6BD00141114 /* ImagoDeiStandardTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

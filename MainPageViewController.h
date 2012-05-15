@@ -10,12 +10,8 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "FBConnect.h"
 #import "RSSParser.h"
+#import "ImagoDeiStandardTableViewController.h"
 
-@interface MainPageViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, RSSParserDelegate>
-@property (strong, nonatomic) NSURL *model;
-@property (strong, nonatomic) NSString *imageName;
-@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
-
-- (id)initWithModel:(NSURL *)model;
+@interface MainPageViewController : ImagoDeiStandardTableViewController
 
 @end
