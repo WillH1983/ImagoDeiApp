@@ -136,6 +136,9 @@
     
     //If there is a right bar button item, put it back
     self.navigationItem.rightBarButtonItem = self.oldBarButtonItem;
+    
+    //If the RSS was reloaded using the pull to refresh, close the refresh view
+    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -225,6 +228,12 @@
             [[self navigationController] pushViewController:wvc animated:YES];
         }
     }
+}
+
+- (void)refresh {
+    //This method will re-request the data from the provided url
+    RSSParser *parser = [[RSSParser alloc] init];
+    [parser XMLFileToParseAtURL:self.urlForTableData withDelegate:self];
 }
 
 @end

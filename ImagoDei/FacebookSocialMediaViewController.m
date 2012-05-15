@@ -147,7 +147,7 @@
     cell.imageView.image = [UIImage imageNamed:@"f_logo.png"];
     
     //Check if the main text label is equal to NSNULL, if it is replace the text
-    if ([mainTextLabel isEqual:[NSNull null]]) mainTextLabel = @"Error";
+    if ([mainTextLabel isEqual:[NSNull null]]) mainTextLabel = @"Imago Dei Church";
     
     //Set the cell properties to the corresponding text strings
     cell.textLabel.text = mainTextLabel;
