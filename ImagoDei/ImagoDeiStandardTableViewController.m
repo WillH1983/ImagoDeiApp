@@ -11,13 +11,13 @@
 #import "WebViewController.h"
 
 @interface ImagoDeiStandardTableViewController ()
-@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @end
 
 @implementation ImagoDeiStandardTableViewController
 @synthesize activityIndicator = _activityIndicator;
 @synthesize urlForTableData = _urlForTableData;
 @synthesize arrayOfTableData = _arrayOfTableData;
+@synthesize oldBarButtonItem = _oldBarButtonItem;
 
 #define CONTENT_TITLE @"title"
 #define CONTENT_DESCRIPTION @"description"
@@ -56,22 +56,6 @@
     
     //Set the model equal to the URL based to the function
     self.urlForTableData = url;
-    
-    //Set the Imago Dei logo to the title view of the navigation controler
-    //With the content mode set to AspectFit
-    UIImage *logoImage = [UIImage imageNamed:@"imago-logo.png"];
-    UIImageView *logoImageView = [[UIImageView alloc] initWithImage:logoImage];
-    logoImageView.contentMode = UIViewContentModeScaleAspectFit;
-    self.navigationItem.titleView = logoImageView;
-    
-    //Set the background of the ImagoDei app to the background image
-    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
-    
-    //initialize the activity indicator, set it to the center top of the view, and
-    //start it animating
-    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-	self.activityIndicator.hidesWhenStopped = YES;
-    [self.activityIndicator startAnimating];
 }
 
 - (id)initWithModel:(NSURL *)model
@@ -88,11 +72,19 @@
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    //initialize the activity indicator, set it to the center top of the view, and
+    //start it animating
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+	self.activityIndicator.hidesWhenStopped = YES;
+    [self.activityIndicator startAnimating];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    //View is about to disappear, so the view should stop loading
+    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
+    
+    [super viewDidDisappear:animated];
 }
 
 - (void)viewDidUnload
@@ -107,6 +99,16 @@
     //Call the super classes view will appear method
     [super viewWillAppear:animated];
     
+    //Set the Imago Dei logo to the title view of the navigation controler
+    //With the content mode set to AspectFit
+    UIImage *logoImage = [UIImage imageNamed:@"imago-logo.png"];
+    UIImageView *logoImageView = [[UIImageView alloc] initWithImage:logoImage];
+    logoImageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.navigationItem.titleView = logoImageView;
+    
+    //Set the background of the ImagoDei app to the background image
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
+    
     //Set the navigation bar color to the standard color
     UIColor *standardColor = [UIColor colorWithRed:.7529 green:0.7372 blue:0.7019 alpha:1.0];
     [[[self navigationController] navigationBar] setTintColor:standardColor];
@@ -115,6 +117,9 @@
     //in blank cells
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
     self.tableView.tableFooterView = view;
+    
+    //Save the previous rightBarButtonItem so it can be put back on once the View is done loading
+    self.oldBarButtonItem = self.navigationItem.rightBarButtonItem;
     
     //Set the right navigation bar button item to the activity indicator
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
@@ -128,6 +133,9 @@
     
     //Since the RSS file has been loaded, stop animating the activity indicator
     [self.activityIndicator stopAnimating];
+    
+    //If there is a right bar button item, put it back
+    self.navigationItem.rightBarButtonItem = self.oldBarButtonItem;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

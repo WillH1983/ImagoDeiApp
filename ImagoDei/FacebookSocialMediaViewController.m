@@ -11,37 +11,14 @@
 #import "Facebook.h"
 
 @interface FacebookSocialMediaViewController ()
-@property (nonatomic, strong) UIActivityIndicatorView *facebookActivityIndicator;
-@property (nonatomic, strong) NSArray *imagoDeiFacebookPostsArray;
 @property (nonatomic, strong) FBRequest *facebookRequest;
-@property (nonatomic, strong) UIBarButtonItem *oldBarButtonItem;
 
 - (void)facebookInit;
 @end
 
 @implementation FacebookSocialMediaViewController
 @synthesize facebook = _facebook;
-@synthesize facebookActivityIndicator = _facebookActivityIndicator;
-@synthesize imagoDeiFacebookPostsArray = _imagoDeiFacebookPostsArray;
 @synthesize facebookRequest = _facebookRequest;
-@synthesize oldBarButtonItem = _oldBarButtonItem;
-
-- (void)setImagoDeiFacebookPostsArray:(NSArray *)imagoDeiFacebookPostsArray
-{
-    //Set the incoming variable equal to the variable
-    _imagoDeiFacebookPostsArray = imagoDeiFacebookPostsArray;
-    
-    //Reload the table view on the main thread when the data changes
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadData];
-    });
-}
-
-- (void)donePressed:(id)sender
-{
-    //dismiss the popover when the done button is pressed
-    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-}
 
 - (IBAction)LogOutInButtonClicked:(id)sender 
 {
@@ -102,51 +79,24 @@
     ImagoDeiAppDelegate *appDelegate = (ImagoDeiAppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.facebook.sessionDelegate = nil;
     
-    //View is about to disappear, so the view should stop loading
-    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
-    
     //Super method
     [super viewWillDisappear:animated];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    if ([self.imagoDeiFacebookPostsArray count] > 0) return;
+    if ([self.arrayOfTableData count] > 0) return;
     
     [super viewWillAppear:animated];
     
-    //Set the footer to a blank view so table rows will not show up if no content
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
-    self.tableView.tableFooterView = view;
-    
     //Init the facebook session
     [self facebookInit];
-    
-    //Set the Main Navigation Bar to the application standard color
-    UIColor *standardColor = [UIColor colorWithRed:0.7529 green:0.7372 blue:0.7019 alpha:1.0];
-    
-    //Set the toolbar at the bottom of the screen to the application standard color
-    self.navigationController.navigationBar.tintColor = standardColor;
-    
-    //Make ImagoDei Logo graphic the title for the navigation controller
-    UIImage *logoImage = [UIImage imageNamed:@"imago-logo.png"];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:logoImage];
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
-    self.navigationItem.titleView = imageView;
     
     //If the facebook session is already valid, the barButtonItem will be change to say "Log Out"
     if ([self.facebook isSessionValid]) 
     {
         self.navigationItem.leftBarButtonItem.title = @"Log Out";
     }
-    
-    //Save the previous rightBarButtonItem so it can be put back on once the View is done loading
-    self.oldBarButtonItem = self.navigationItem.rightBarButtonItem;
-    
-    //Create an IndicatorView, start it animating, and place it in the rightBarButtonItem spot
-    self.facebookActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [self.facebookActivityIndicator startAnimating];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.facebookActivityIndicator];
     
     //Help to verify small data requirement
     NSLog(@"Loading Web Data - Social Media View Controller");
@@ -164,18 +114,6 @@
 }
 
 #pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    return [self.imagoDeiFacebookPostsArray count];
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -199,7 +137,7 @@
     cell.detailTextLabel.textColor = [UIColor colorWithRed:0.2666 green:0.2666 blue:0.2666 alpha:1];
     
     //Retrieve the corresponding dictionary to the index row requested
-    NSDictionary *dictionaryForCell = [self.imagoDeiFacebookPostsArray objectAtIndex:[indexPath row]];
+    NSDictionary *dictionaryForCell = [self.arrayOfTableData objectAtIndex:[indexPath row]];
     
     //Pull the main and detail text label out of the corresponding dictionary
     NSString *mainTextLabel = [dictionaryForCell objectForKey:@"message"];
@@ -220,6 +158,11 @@
 
 #pragma mark - Table view delegate
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"Cell Push" sender:[tableView cellForRowAtIndexPath:indexPath]];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     //If the sender for the seque is not a Cell, return
@@ -232,7 +175,7 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     
     //Retrieve the corresponding dictionary to the index row selected
-    NSDictionary *tmpDictionary = [[NSDictionary alloc] initWithDictionary:[self.imagoDeiFacebookPostsArray objectAtIndex:[indexPath row]]];
+    NSDictionary *tmpDictionary = [[NSDictionary alloc] initWithDictionary:[self.arrayOfTableData objectAtIndex:[indexPath row]]];
     
     //Set the model for the MVC we are about to push onto the stack
     [segue.destinationViewController setShortCommentsDictionaryModel:tmpDictionary];
@@ -307,7 +250,7 @@
 {
     NSLog(@"%@", error);
     //If the facebook request failed, stop the activityindicator
-    [self.facebookActivityIndicator stopAnimating];
+    [self.activityIndicator stopAnimating];
     
 }
 
@@ -337,12 +280,12 @@
             [arrayOfDictionaries insertObject:tmpDictionary atIndex:i];
         }
         //Set the property equal to the new comments array, which will then trigger a table reload
-        self.imagoDeiFacebookPostsArray = arrayOfDictionaries;
+        self.arrayOfTableData = arrayOfDictionaries;
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
         //Since the request has been recieved, and parsed, stop the Activity Indicator
-        [self.facebookActivityIndicator stopAnimating];
+        [self.activityIndicator stopAnimating];
         
         //If an oldbutton was removed from the right bar button spot, put it back
         self.navigationItem.rightBarButtonItem = self.oldBarButtonItem;
@@ -357,7 +300,7 @@
 - (void)fbDidLogin 
 {
     //Since facebook had to log in, data will need to be requested, start the activity indicator
-    [self.facebookActivityIndicator startAnimating];
+    [self.activityIndicator startAnimating];
     
     //Retireve the User Defaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

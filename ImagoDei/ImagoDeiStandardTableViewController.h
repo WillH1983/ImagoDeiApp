@@ -14,6 +14,8 @@
 
 @property (strong, nonatomic) NSURL *urlForTableData;
 @property (strong, nonatomic) NSArray *arrayOfTableData;
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) UIBarButtonItem *oldBarButtonItem;
 
 - (id)initWithModel:(NSURL *)model;
 - (void)standardInitWithURL:(NSURL *)url;
