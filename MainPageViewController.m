@@ -24,6 +24,8 @@
 {
     //This function is called when an xib is loaded from a storyboard
     
+    [super awakeFromNib];
+    
     //Set the tableview delegate to this class
     self.tableView.delegate = self;
     

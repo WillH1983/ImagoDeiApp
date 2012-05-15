@@ -54,6 +54,8 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
+    
     if (self)
     {
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -90,6 +92,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
     self.commentsTableView.tableFooterView = view;
 }
@@ -107,7 +110,7 @@
     //This is required incase a connection request is in progress when the view disappears
     [self.facebookRequest setDelegate:nil];
     
-    [super viewWillDisappear:animated];
+    [super viewDidDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

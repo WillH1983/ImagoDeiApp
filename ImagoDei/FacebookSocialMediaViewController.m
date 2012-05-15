@@ -61,6 +61,7 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
     [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"fb-logo-active.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"fb-logo-inactive.png"]];
     self.tabBarItem.title = @"Facebook";
     
@@ -85,10 +86,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    if ([self.arrayOfTableData count] > 0) return;
-    
     [super viewWillAppear:animated];
-    
+    if ([self.arrayOfTableData count] > 0) return;
     //Init the facebook session
     [self facebookInit];
     
@@ -104,13 +103,6 @@
     //Begin the facebook request, the data that comes back form this method will be used
     //to populate the UITableView
     [self.facebook requestWithGraphPath:@"ImagoDeiChurch/posts" andDelegate:self];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    NSIndexPath *selection = [self.tableView indexPathForSelectedRow];
-	if (selection) [self.tableView deselectRowAtIndexPath:selection animated:YES];
 }
 
 #pragma mark - Table view data source
