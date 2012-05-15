@@ -20,6 +20,9 @@
 @synthesize facebook = _facebook;
 @synthesize facebookRequest = _facebookRequest;
 
+#define FACEBOOK_CONTENT_TITLE @"message"
+#define FACEBOOK_CONTENT_DESCRIPTION @"postedBy"
+
 - (IBAction)LogOutInButtonClicked:(id)sender 
 {
     UIBarButtonItem *barButton = nil;
@@ -51,12 +54,6 @@
     }
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    //return (interfaceOrientation == UIInterfaceOrientationPortrait);
-    return YES;
-}
-
 #pragma mark - View Lifecycle
 
 - (void)awakeFromNib
@@ -81,7 +78,7 @@
     appDelegate.facebook.sessionDelegate = nil;
     
     //Super method
-    [super viewWillDisappear:animated];
+    [super viewDidDisappear:animated];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -107,43 +104,23 @@
 
 #pragma mark - Table view data source
 
+- (NSString *)keyForMainCellLabelText
+{
+    return FACEBOOK_CONTENT_TITLE;
+}
+
+- (NSString *)keyForDetailCellLabelText
+{
+    return FACEBOOK_CONTENT_DESCRIPTION;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Facebook Cell";
-    
-    //Dequeue a cell if one is avaliable
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    
-    //If there is no reusable cell of this type, create a new one
-    if (!cell)
-    {
-        //Create standard cells
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
-    
-    //Create cells with the standard app text
-    cell.textLabel.textColor = [UIColor colorWithRed:0.29803 green:0.1529 blue:0.0039 alpha:1];
-    cell.detailTextLabel.textColor = [UIColor colorWithRed:0.2666 green:0.2666 blue:0.2666 alpha:1];
-    
-    //Retrieve the corresponding dictionary to the index row requested
-    NSDictionary *dictionaryForCell = [self.arrayOfTableData objectAtIndex:[indexPath row]];
-    
-    //Pull the main and detail text label out of the corresponding dictionary
-    NSString *mainTextLabel = [dictionaryForCell objectForKey:@"message"];
-    NSString *detailTextLabel = [dictionaryForCell objectForKey:@"postedBy"];
+    //Call the superclass to retrieve a formatted and correctly formatted cell
+    UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
     
     //Set the imageview on the left side of the see to the facebook logo
     cell.imageView.image = [UIImage imageNamed:@"f_logo.png"];
-    
-    //Check if the main text label is equal to NSNULL, if it is replace the text
-    if ([mainTextLabel isEqual:[NSNull null]]) mainTextLabel = @"Imago Dei Church";
-    
-    //Set the cell properties to the corresponding text strings
-    cell.textLabel.text = mainTextLabel;
-    cell.detailTextLabel.text = detailTextLabel;
     
     return cell;
 }

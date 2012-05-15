@@ -77,6 +77,11 @@
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 	self.activityIndicator.hidesWhenStopped = YES;
     [self.activityIndicator startAnimating];
+    //Save the previous rightBarButtonItem so it can be put back on once the View is done loading
+    self.oldBarButtonItem = self.navigationItem.rightBarButtonItem;
+    
+    //Set the right navigation bar button item to the activity indicator
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -117,12 +122,6 @@
     //in blank cells
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
     self.tableView.tableFooterView = view;
-    
-    //Save the previous rightBarButtonItem so it can be put back on once the View is done loading
-    self.oldBarButtonItem = self.navigationItem.rightBarButtonItem;
-    
-    //Set the right navigation bar button item to the activity indicator
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
 }
 
 - (void)RSSParser:(RSSParser *)sender RSSParsingCompleteWithArray:(NSArray *)RSSArray
@@ -160,6 +159,16 @@
     return [self.arrayOfTableData count];
 }
 
+- (NSString *)keyForMainCellLabelText
+{
+    return CONTENT_TITLE;
+}
+
+- (NSString *)keyForDetailCellLabelText
+{
+    return CONTENT_DESCRIPTION;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //Set the cell identifier to the same as the prototype cell in the story board
@@ -179,9 +188,19 @@
         cell.detailTextLabel.textColor = [UIColor colorWithRed:0.2666 green:0.2666 blue:0.2666 alpha:1];
     }
     
+    //Retrieve the corresponding dictionary to the index row requested
+    NSDictionary *dictionaryForCell = [self.arrayOfTableData objectAtIndex:[indexPath row]];
+    
+    //Pull the main and detail text label out of the corresponding dictionary
+    NSString *mainTextLabel = [dictionaryForCell valueForKey:[self keyForMainCellLabelText]];
+    NSString *detailTextLabel = [dictionaryForCell valueForKey:[self keyForDetailCellLabelText]];
+    
+    //Check if the main text label is equal to NSNULL, if it is replace the text
+    if ([mainTextLabel isEqual:[NSNull null]]) mainTextLabel = @"Imago Dei Church";
+    
     //Set the cell text label's based upon the table contents array location
-    cell.textLabel.text = [[self.arrayOfTableData objectAtIndex:[indexPath row]] valueForKey:CONTENT_TITLE];
-    cell.detailTextLabel.text = [[self.arrayOfTableData objectAtIndex:[indexPath row]] valueForKey:CONTENT_DESCRIPTION];
+    cell.textLabel.text = mainTextLabel;
+    cell.detailTextLabel.text = detailTextLabel;
     
     //Make sure that the imageview is set to nil when the cell is reused
     //this makes sure that the old image does not show up
