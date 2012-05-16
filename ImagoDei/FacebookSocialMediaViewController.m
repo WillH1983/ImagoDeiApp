@@ -217,9 +217,13 @@
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error
 {
-    NSLog(@"%@", error);
-    //If the facebook request failed, stop the activityindicator
-    [self.activityIndicator stopAnimating];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //Since the request has been recieved, and parsed, stop the Activity Indicator
+        [self.activityIndicator stopAnimating];
+        self.arrayOfTableData = nil;
+        [self.tableView reloadData];
+        [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
+    });
     
 }
 

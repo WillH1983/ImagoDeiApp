@@ -14,6 +14,4 @@
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 
-- (id)initWithToolbar:(BOOL)toolbar;
-
 @end

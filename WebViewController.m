@@ -24,14 +24,14 @@
 @synthesize programmedWebView = _programmedWebView;
 
 
-- (id)initWithToolbar:(BOOL)toolbar
+- (id)init
 {
-    self.programmedWebView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+    self = [super init];
     
+    self.programmedWebView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.programmedWebView];
     self.programmedWebView.delegate = self;
-    
-    self = [self init];
+
     return self;
 }
 
@@ -45,12 +45,6 @@
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:self.urlToLoad];
     [self.webView loadRequest:urlRequest];
     [self.programmedWebView loadRequest:urlRequest];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
 }
 
 - (void)viewDidUnload
