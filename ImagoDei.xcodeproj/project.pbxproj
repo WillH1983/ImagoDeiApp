@@ -244,9 +244,6 @@
 				BEE22939155E2C6A00504B5D /* PlanningCenterViewController.m */,
 				BEDF1EC61547961C009FCA21 /* WebViewController.h */,
 				BEDF1EC71547961C009FCA21 /* WebViewController.m */,
-				BEDF1EB21547960A009FCA21 /* MyApplication.h */,
-				BEDF1EB31547960A009FCA21 /* MyApplication.m */,
-				BEDF1EAB154795FB009FCA21 /* main.m */,
 				BEDF1EAC154795FB009FCA21 /* MainPageViewController.h */,
 				BEDF1EAD154795FB009FCA21 /* MainPageViewController.m */,
 				BEF4A436154DCA080015E00D /* ImagoDeiMediaController.h */,
@@ -274,6 +271,9 @@
 		BEDF1E61154791C4009FCA21 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BEDF1EB21547960A009FCA21 /* MyApplication.h */,
+				BEDF1EB31547960A009FCA21 /* MyApplication.m */,
+				BEDF1EAB154795FB009FCA21 /* main.m */,
 				BED0A5A91548DAC4007094A5 /* MainTabiPhone.rss */,
 				BEDF1EA1154795CE009FCA21 /* JSONImagoDei.txt */,
 				BEDF1EDC1547977F009FCA21 /* Build Settings */,

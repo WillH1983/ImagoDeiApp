@@ -21,7 +21,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    facebook = [[Facebook alloc] initWithAppId:@"207547516014316" andDelegate:nil];
+    facebook = [[Facebook alloc] initWithAppId:FACEBOOK_APP_ID andDelegate:nil];
     audioSession = [AVAudioSession sharedInstance];
     [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
     
