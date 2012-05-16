@@ -59,6 +59,7 @@
             CGRect tmpRect = CGRectMake(0, 0, self.imageForImageView.size.width, self.imageForImageView.size.height);
             [self.scrollView zoomToRect:tmpRect animated:NO];
             self.navigationBar.topItem.leftBarButtonItem = oldBarButtonItem;
+            [spinner stopAnimating];
         });
     });
     dispatch_release(downloadQueue2);
