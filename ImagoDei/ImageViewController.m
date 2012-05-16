@@ -13,9 +13,9 @@
 @end
 
 @implementation ImageViewController
-@synthesize scrollView;
+@synthesize scrollView = _scrollView;
 @synthesize navigationBar = _navigationBar;
-@synthesize imageView;
+@synthesize imageView = _imageView;
 @synthesize imageForImageView = _imageForImageView;
 @synthesize facebookPhotoObjectID = _facebookPhotoObjectID;
 
@@ -68,7 +68,6 @@
 - (void)viewDidUnload
 {
     [self setImageView:nil];
-    [self setScrollView:nil];
     [self setScrollView:nil];
     [self setNavigationBar:nil];
     [super viewDidUnload];

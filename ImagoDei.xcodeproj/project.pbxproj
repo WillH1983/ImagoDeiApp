@@ -52,7 +52,6 @@
 		BEDF1E9215479545009FCA21 /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1E8B15479545009FCA21 /* FBDialog.bundle */; };
 		BEDF1E9315479545009FCA21 /* fbicon.png in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1E8E15479545009FCA21 /* fbicon.png */; };
 		BEDF1E981547955C009FCA21 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDF1E961547955C009FCA21 /* ImageViewController.m */; };
-		BEDF1E991547955C009FCA21 /* ImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1E971547955C009FCA21 /* ImageViewController.xib */; };
 		BEDF1E9C15479598009FCA21 /* ImagoDeiAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDF1E9B15479598009FCA21 /* ImagoDeiAppDelegate.m */; };
 		BEDF1E9F154795BD009FCA21 /* ImagoDeiDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDF1E9E154795BD009FCA21 /* ImagoDeiDataFetcher.m */; };
 		BEDF1EA3154795CE009FCA21 /* JSONImagoDei.txt in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1EA1154795CE009FCA21 /* JSONImagoDei.txt */; };
@@ -131,7 +130,6 @@
 		BEDF1E9015479545009FCA21 /* FBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRequest.h; sourceTree = "<group>"; };
 		BEDF1E951547955C009FCA21 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		BEDF1E961547955C009FCA21 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
-		BEDF1E971547955C009FCA21 /* ImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageViewController.xib; sourceTree = "<group>"; };
 		BEDF1E9A15479598009FCA21 /* ImagoDeiAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagoDeiAppDelegate.h; sourceTree = SOURCE_ROOT; };
 		BEDF1E9B15479598009FCA21 /* ImagoDeiAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagoDeiAppDelegate.m; sourceTree = SOURCE_ROOT; };
 		BEDF1E9D154795BD009FCA21 /* ImagoDeiDataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagoDeiDataFetcher.h; sourceTree = SOURCE_ROOT; };
@@ -258,7 +256,6 @@
 				BE6295491547A8AA00CE719E /* RSSParser.m */,
 				BEDF1E951547955C009FCA21 /* ImageViewController.h */,
 				BEDF1E961547955C009FCA21 /* ImageViewController.m */,
-				BEDF1E971547955C009FCA21 /* ImageViewController.xib */,
 				BEDF1E7F15479537009FCA21 /* FacebookSocialMediaViewController.h */,
 				BEDF1E8015479537009FCA21 /* FacebookSocialMediaViewController.m */,
 				BE54BC211560A4B400F85DD9 /* PullRefreshTableViewController.h */,
@@ -402,7 +399,6 @@
 				BEDF1E8715479537009FCA21 /* f_logo.png in Resources */,
 				BEDF1E9215479545009FCA21 /* FBDialog.bundle in Resources */,
 				BEDF1E9315479545009FCA21 /* fbicon.png in Resources */,
-				BEDF1E991547955C009FCA21 /* ImageViewController.xib in Resources */,
 				BEDF1EA3154795CE009FCA21 /* JSONImagoDei.txt in Resources */,
 				BEDF1ECE1547961C009FCA21 /* twitter_newbird_blue small.png in Resources */,
 				BEDF1ECF1547961C009FCA21 /* twitter_newbird_blue.png in Resources */,

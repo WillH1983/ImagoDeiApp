@@ -259,14 +259,7 @@
 {
     NSDictionary *imageViewModel = [self.fullCommentsDictionaryModel valueForKeyPath:@"object_id"];
     if (imageViewModel == nil) return;
-    
-    ImageViewController *imageViewController = [[ImageViewController alloc] init];
-    
-    [imageViewController setModalPresentationStyle:UIModalPresentationFormSheet];
-    [imageViewController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-    [imageViewController setFacebookPhotoObjectID:[self.fullCommentsDictionaryModel valueForKeyPath:@"object_id"]];
-    
-    [self presentViewController:imageViewController animated:YES completion:nil];
+    [self performSegueWithIdentifier:@"Photo" sender:self];
 }
 
 - (void)request:(FBRequest *)request didLoad:(id)result
@@ -290,12 +283,19 @@
     
     if ([[notification name] isEqualToString:@"urlSelected"])
     {
-        WebViewController *wvc = [[WebViewController alloc] initWithToolbar:YES];
-        [wvc setUrlToLoad:[notification object]];
-        [wvc setModalPresentationStyle:UIModalPresentationFormSheet];
-        [wvc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-        
-        [self presentViewController:wvc animated:YES completion:nil];
+        [self performSegueWithIdentifier:@"Web" sender:[notification object]];
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"Photo"])
+    {
+        [segue.destinationViewController setFacebookPhotoObjectID:[self.fullCommentsDictionaryModel valueForKeyPath:@"object_id"]];
+    }
+    else if ([segue.identifier isEqualToString:@"Web"] & [sender isKindOfClass:[NSURL class]])
+    {
+        [segue.destinationViewController setUrlToLoad:sender];
     }
 }
 

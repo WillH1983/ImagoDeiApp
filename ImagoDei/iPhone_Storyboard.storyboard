@@ -220,10 +220,99 @@
                         <outlet property="commentsTableView" destination="AwV-wP-Tdv" id="2kn-xE-4dm"/>
                         <outlet property="profilePictureImageView" destination="ucI-ED-3xm" id="1gO-ya-h9T"/>
                         <outlet property="textView" destination="ZXg-qP-d6g" id="doJ-AN-lBs"/>
+                        <segue destination="SUf-jH-6MA" kind="modal" identifier="Photo" id="vsJ-8F-Vzc"/>
+                        <segue destination="BTS-Sc-wzZ" kind="modal" identifier="Web" id="hbM-fJ-pT7"/>
                     </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="1453" y="480"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="Alq-N6-L4Q">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IkR-oo-0RQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="BTS-Sc-wzZ" customClass="WebViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CiT-UE-ep1">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" id="N2x-WU-EjD">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.74901960779999999" green="0.73333333329999995" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <navigationItem id="VdS-vV-7wL">
+                                        <barButtonItem key="leftBarButtonItem" title="Done" id="4Hi-PR-5cu">
+                                            <connections>
+                                                <action selector="donePressed:" destination="BTS-Sc-wzZ" id="HTc-xP-bJZ"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <webView contentMode="scaleToFill" id="rrh-Wu-u2F">
+                                <rect key="frame" x="0.0" y="44" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BTS-Sc-wzZ" id="mld-ko-2U2"/>
+                                </connections>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="navigationBar" destination="N2x-WU-EjD" id="d1O-Xl-ruf"/>
+                        <outlet property="webView" destination="rrh-Wu-u2F" id="NwS-U0-0mM"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2070" y="829"/>
+        </scene>
+        <!--Image View Controller-->
+        <scene sceneID="H0F-nv-bSU">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QmD-MR-tuC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="SUf-jH-6MA" customClass="ImageViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Fmd-nr-OQV">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.20000000000000001" maximumZoomScale="5" id="2iz-aT-UPx">
+                                <rect key="frame" x="0.0" y="44" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="e3e-OP-Shl">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                </subviews>
+                            </scrollView>
+                            <navigationBar contentMode="scaleToFill" id="m54-0s-h59">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.74901960779999999" green="0.73333333329999995" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <navigationItem title="Photo" id="3TA-sJ-gdr">
+                                        <barButtonItem key="leftBarButtonItem" title="Done" id="qyz-J2-wKM">
+                                            <connections>
+                                                <action selector="doneButtonPressed:" destination="SUf-jH-6MA" id="FiF-kB-0eU"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="e3e-OP-Shl" id="Yff-te-tqP"/>
+                        <outlet property="navigationBar" destination="m54-0s-h59" id="WMt-Bh-Dr5"/>
+                        <outlet property="scrollView" destination="2iz-aT-UPx" id="zDM-Jz-zSm"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2070" y="174"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="915-nv-Xcq">
@@ -253,6 +342,14 @@
         <class className="FacebookSocialMediaViewController" superclassName="ImagoDeiStandardTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FacebookSocialMediaViewController.h"/>
         </class>
+        <class className="ImageViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ImageViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="navigationBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
         <class className="ImagoDeiStandardTableViewController" superclassName="PullRefreshTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ImagoDeiStandardTableViewController.h"/>
         </class>
@@ -271,6 +368,13 @@
                 <relationship kind="outlet" name="commentsTableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="profilePictureImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="WebViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/WebViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="navigationBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
             </relationships>
         </class>
     </classes>
