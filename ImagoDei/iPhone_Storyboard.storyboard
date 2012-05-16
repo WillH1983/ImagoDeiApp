@@ -73,32 +73,41 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="adi-yK-kY7" kind="relationship" relationship="rootViewController" id="ieh-OF-T9z"/>
+                        <segue destination="d66-0u-oMM" kind="relationship" relationship="rootViewController" id="PnF-c8-OwE"/>
                     </connections>
                 </navigationController>
             </objects>
             <point key="canvasLocation" x="496" y="1093"/>
         </scene>
         <!--Planning Center View Controller-->
-        <scene sceneID="kHA-Pk-bZd">
+        <scene sceneID="i79-dC-OKV">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="j7G-my-Wf0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="adi-yK-kY7" customClass="PlanningCenterViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="2ad-8Q-rJs">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gzd-wa-Rng" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="d66-0u-oMM" customClass="PlanningCenterViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fIh-aW-uCD">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="background.png" id="XGN-Gp-uer">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="L0S-rP-vvA"/>
-                </viewController>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Qnv-rv-NH1">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="d66-0u-oMM" id="C2Y-cc-kx4"/>
+                            <outlet property="delegate" destination="d66-0u-oMM" id="mqT-BK-wuH"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="QLh-yK-M0J"/>
+                </tableViewController>
             </objects>
-            <point key="canvasLocation" x="977" y="1093"/>
+            <point key="canvasLocation" x="958" y="1085"/>
         </scene>
         <!--Navigation Controller - Facebook-->
         <scene sceneID="5p5-gh-JhN">
@@ -261,7 +270,7 @@
         <class className="MainPageViewController" superclassName="ImagoDeiStandardTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MainPageViewController.h"/>
         </class>
-        <class className="PlanningCenterViewController" superclassName="UIViewController">
+        <class className="PlanningCenterViewController" superclassName="ImagoDeiStandardTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PlanningCenterViewController.h"/>
         </class>
         <class className="PullRefreshTableViewController" superclassName="UITableViewController">

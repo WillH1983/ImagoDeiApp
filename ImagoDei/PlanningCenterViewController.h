@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ImagoDeiStandardTableViewController.h"
 
-@interface PlanningCenterViewController : UIViewController
+@interface PlanningCenterViewController : ImagoDeiStandardTableViewController
 
 @end

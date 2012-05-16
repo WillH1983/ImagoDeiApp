@@ -99,8 +99,12 @@
     logoImageView.contentMode = UIViewContentModeScaleAspectFit;
     self.navigationItem.titleView = logoImageView;
     
+    //Create a UIImageView and set the content mode to be placed in the background
+    UIImageView *backgroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
+    backgroundImageView.contentMode = UIViewContentModeScaleToFill;
+    
     //Set the background of the ImagoDei app to the background image
-    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
+    self.tableView.backgroundView = backgroundImageView;
     
     //Set the navigation bar color to the standard color
     UIColor *standardColor = [UIColor colorWithRed:.7529 green:0.7372 blue:0.7019 alpha:1.0];
@@ -130,7 +134,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;// (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - Table view data source
