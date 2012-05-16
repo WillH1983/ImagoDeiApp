@@ -18,6 +18,11 @@
 @property (nonatomic, strong) UIBarButtonItem *oldBarButtonItem;
 
 - (id)initWithModel:(NSURL *)model;
-- (void)standardInitWithURL:(NSURL *)url;
+
+#define CONTENT_TITLE @"title"
+#define CONTENT_DESCRIPTION @"description"
+#define CONTENT_SMALL_PHOTO_URL @"smallphotourl"
+#define CONTENT_UNIQUE_ID @"id"
+#define CONTENT_URL_LINK @"link"
 
 @end

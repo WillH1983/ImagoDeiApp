@@ -7,12 +7,6 @@
 //
 
 #import "MainPageViewController.h"
-#import "ImagoDeiDataFetcher.h"
-#import "WebViewController.h"
-#import "Facebook.h"
-#import "FacebookSocialMediaViewController.h"
-#import "ImagoDeiMediaController.h"
-#import "ImagoDeiStandardTableViewController.h"
 
 @interface MainPageViewController ()
 
@@ -42,8 +36,7 @@
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"MainTabiPhone" ofType:@"rss"];
     
     //initialize the class with the URL file path
-    NSURL *urlFilePath = [[NSURL alloc] initFileURLWithPath:filePath];
-    [self standardInitWithURL:urlFilePath];
+    self.urlForTableData = [[NSURL alloc] initFileURLWithPath:filePath];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

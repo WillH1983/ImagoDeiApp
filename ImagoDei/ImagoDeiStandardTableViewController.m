@@ -19,11 +19,6 @@
 @synthesize arrayOfTableData = _arrayOfTableData;
 @synthesize oldBarButtonItem = _oldBarButtonItem;
 
-#define CONTENT_TITLE @"title"
-#define CONTENT_DESCRIPTION @"description"
-#define CONTENT_SMALL_PHOTO_URL @"smallphotourl"
-#define CONTENT_UNIQUE_ID @"id"
-#define CONTENT_URL_LINK @"link"
 
 - (void)setUrlForTableData:(NSURL *)urlForTableData
 {
@@ -49,22 +44,15 @@
     });
 }
 
-- (void)standardInitWithURL:(NSURL *)url
-{
-    //This class is a common function to initialize the class
-    //from both a xib and non xib
-    
-    //Set the model equal to the URL based to the function
-    self.urlForTableData = url;
-}
-
 - (id)initWithModel:(NSURL *)model
 {
     //Call the super classes initialization
     self = [super init];
     
-    //Call the standard initialization
-    [self standardInitWithURL:model];
+    //Set the URL to start downloading of the file
+    //and updating of the tableview
+    self.urlForTableData = model;
+    
     return self;
 }
 
