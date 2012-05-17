@@ -23,7 +23,7 @@
 - (void)setUrlForTableData:(NSURL *)urlForTableData
 {
     //If the URL is not a link to an RSS file do not load the data
-    if (![[urlForTableData pathExtension] isEqualToString:@"rss"]) return;
+    //if (![[urlForTableData pathExtension] isEqualToString:@"rss"]) return;
     
     if (!_urlForTableData)
     {
@@ -210,13 +210,12 @@
     
     //Get the title for the next view from the selected tablecell, which is composed from the RSS file
     NSString *title = [[self.arrayOfTableData objectAtIndex:indexPath.row] valueForKey:@"title"];
-    
     //Only perform actions on url if it is a valid URL
     if (url)
     {
         //If the URL is for an RSS file, initialize a mainpageviewcontroller with the URL
         //and set the title
-        if ([[url pathExtension] isEqualToString:@"rss"])
+        if ([[url pathExtension] isEqualToString:@"rss"]|| [[url lastPathComponent] isEqualToString:@"feed"])
         {
             ImagoDeiStandardTableViewController *idstvc = [[ImagoDeiStandardTableViewController alloc] initWithModel:url];
             idstvc.title = title;

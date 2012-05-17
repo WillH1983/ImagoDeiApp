@@ -24,11 +24,11 @@
     self.tableView.delegate = self;
     
     //Setup the tabbar with the background image, selected image
-    self.tabBarController.tabBar.backgroundImage = [UIImage imageNamed:@"tabbar-bg.png"];
-    self.tabBarController.tabBar.selectionIndicatorImage = [UIImage imageNamed:@"tabbar-active-bg.png"];
+    self.tabBarController.tabBar.backgroundImage = [UIImage imageNamed:@"tabbar-bg"];
+    self.tabBarController.tabBar.selectionIndicatorImage = [UIImage imageNamed:@"tabbar-active-bg"];
     
     //Setup the "home" tabbar item with the correct image and name
-    [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"home-active.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"home-inactive.png"]];
+    [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"home-active.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"home-inactive"]];
     self.tabBarItem.title = @"Home";
     
     //For now create a filepath string with the MainTabiPhone file that is bundled

@@ -114,17 +114,6 @@
     return FACEBOOK_CONTENT_DESCRIPTION;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //Call the superclass to retrieve a formatted and correctly formatted cell
-    UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
-    
-    //Set the imageview on the left side of the see to the facebook logo
-    cell.imageView.image = [UIImage imageNamed:@"f_logo.png"];
-    
-    return cell;
-}
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
