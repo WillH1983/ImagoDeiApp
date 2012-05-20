@@ -73,7 +73,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="0o3-dY-0bb" kind="relationship" relationship="rootViewController" id="TOi-ZI-5fm"/>
+                        <segue destination="d66-0u-oMM" kind="relationship" relationship="rootViewController" id="zRg-zc-Rdr"/>
                     </connections>
                 </navigationController>
             </objects>
@@ -85,7 +85,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gzd-wa-Rng" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="d66-0u-oMM" customClass="PlanningCenterViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fIh-aW-uCD">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
@@ -124,7 +124,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WF5-ak-Eq8" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="0o3-dY-0bb" customClass="FacebookViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="INm-JK-YdC">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
