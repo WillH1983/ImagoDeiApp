@@ -172,7 +172,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="74j-p7-tn5" kind="push" identifier="Cell Push" id="EpR-bv-1wz"/>
+                        <segue destination="BTS-Sc-wzZ" kind="push" identifier="Web" id="C28-Oz-Im4"/>
                     </connections>
                 </tableViewController>
             </objects>
@@ -184,11 +184,11 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LkF-P0-cBE" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="74j-p7-tn5" customClass="SocialMediaDetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rJl-AY-Hag">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="background.png" id="4vg-P4-SKK">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" id="ZXg-qP-d6g">
@@ -204,7 +204,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="AwV-wP-Tdv">
-                                <rect key="frame" x="0.0" y="201" width="320" height="166"/>
+                                <rect key="frame" x="0.0" y="201" width="320" height="259"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -225,7 +225,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1453" y="480"/>
+            <point key="canvasLocation" x="1600" y="323"/>
         </scene>
         <!--Web View Controller-->
         <scene sceneID="Alq-N6-L4Q">
@@ -233,25 +233,11 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IkR-oo-0RQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="BTS-Sc-wzZ" customClass="WebViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CiT-UE-ep1">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" id="N2x-WU-EjD">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.74901960779999999" green="0.73333333329999995" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
-                                <items>
-                                    <navigationItem id="VdS-vV-7wL">
-                                        <barButtonItem key="leftBarButtonItem" title="Done" id="4Hi-PR-5cu">
-                                            <connections>
-                                                <action selector="donePressed:" destination="BTS-Sc-wzZ" id="HTc-xP-bJZ"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <webView contentMode="scaleToFill" id="rrh-Wu-u2F">
-                                <rect key="frame" x="0.0" y="44" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
@@ -261,8 +247,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="ALm-N1-wOT"/>
                     <connections>
-                        <outlet property="navigationBar" destination="N2x-WU-EjD" id="d1O-Xl-ruf"/>
                         <outlet property="webView" destination="rrh-Wu-u2F" id="NwS-U0-0mM"/>
                     </connections>
                 </viewController>
@@ -336,7 +322,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="background.png" width="640" height="732"/>
+        <image name="background.png" width="320" height="366"/>
     </resources>
     <classes>
         <class className="FacebookSocialMediaViewController" superclassName="ImagoDeiStandardTableViewController">
@@ -383,4 +369,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="C28-Oz-Im4"/>
+    </inferredMetricsTieBreakers>
 </document>

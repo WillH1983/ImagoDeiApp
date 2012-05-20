@@ -9,6 +9,7 @@
 #import "FacebookSocialMediaViewController.h"
 #import "ImagoDeiAppDelegate.h"
 #import "Facebook.h"
+#import "WebViewController.h"
 
 @interface FacebookSocialMediaViewController ()
 @property (nonatomic, strong) FBRequest *facebookRequest;
@@ -64,6 +65,11 @@
     self.tabBarItem.title = @"Facebook";
     
     self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(presentWebView:) 
+                                                 name:@"urlSelected"
+                                               object:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -196,23 +202,10 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    //If the sender for the seque is not a Cell, return
-    if (![sender isKindOfClass:[UITableViewCell class]]) return;
-    
-    //Set the sender to a UITableViewCell
-    UITableViewCell *cell = sender;
-    
-    //Retrieve index path for cell
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    
-    //Retrieve the corresponding dictionary to the index row selected
-    NSDictionary *tmpDictionary = [[NSDictionary alloc] initWithDictionary:[self.arrayOfTableData objectAtIndex:[indexPath row]]];
-    
-    //Set the model for the MVC we are about to push onto the stack
-    [segue.destinationViewController setShortCommentsDictionaryModel:tmpDictionary];
-    
-    //Set the delegate of the social media detail controller to this class
-    [segue.destinationViewController setSocialMediaDelegate:self];
+    if ([segue.identifier isEqualToString:@"Web"] & [sender isKindOfClass:[NSURL class]])
+    {
+        [segue.destinationViewController setUrlToLoad:sender];
+    }
 }
 
 #pragma mark - SocialMediaDetailView datasource
@@ -393,4 +386,15 @@
     //the facebook class will call request:request didLoad:result when complete
     [self.facebook requestWithGraphPath:@"ImagoDeiChurch/posts" andDelegate:self];
 }
+
+- (void) presentWebView:(NSNotification *) notification
+{
+    
+    if ([[notification name] isEqualToString:@"urlSelected"])
+    {
+        NSLog(@"%@", [notification object]);
+        [self performSegueWithIdentifier:@"Web" sender:[notification object]];
+    }
+}
+
 @end
