@@ -23,7 +23,7 @@
 
 #define FACEBOOK_CONTENT_TITLE @"message"
 #define FACEBOOK_CONTENT_DESCRIPTION @"from.name"
-#define FACEBOOK_FONT_SIZE 18.0
+#define FACEBOOK_FONT_SIZE 16.0
 
 - (IBAction)LogOutInButtonClicked:(id)sender 
 {

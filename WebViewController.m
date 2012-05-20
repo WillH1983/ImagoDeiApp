@@ -62,6 +62,7 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
+    self.title = @"Loading...";
     [self.activityIndicator startAnimating];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
     self.navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
@@ -72,6 +73,13 @@
 {
     self.navigationItem.rightBarButtonItem = nil;
     self.navigationBar.topItem.rightBarButtonItem = nil;
+    self.title = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    
+    if (!self.title)
+    {
+        self.title = [self.programmedWebView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    }
+    
 }
 - (IBAction)donePressed:(id)sender 
 {
