@@ -232,9 +232,8 @@
         //Catch all is to load a webview with the contents of the URL
         else 
         {
-            WebViewController *wvc = [[WebViewController alloc] init];
-            [wvc setUrlToLoad:url];
-            [wvc setTitleForWebView:title];
+            TTWebController *wvc = [[WebViewController alloc] init];
+            [wvc openURL:url];
             [[self navigationController] pushViewController:wvc animated:YES];
         }
     }

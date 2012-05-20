@@ -295,7 +295,7 @@
     }
     else if ([segue.identifier isEqualToString:@"Web"] & [sender isKindOfClass:[NSURL class]])
     {
-        [segue.destinationViewController setUrlToLoad:sender];
+        
     }
 }
 

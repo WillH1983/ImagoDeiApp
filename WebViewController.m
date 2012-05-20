@@ -8,74 +8,21 @@
 
 #import "WebViewController.h"
 
-@interface WebViewController () <UIWebViewDelegate>
-@property (nonatomic, strong) UIBarButtonItem *oldBarButtonItem;
-@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
-@property (nonatomic, strong) UIWebView *programmedWebView;
+@interface WebViewController ()
+
 @end
 
 @implementation WebViewController
-@synthesize urlToLoad = _urlToLoad;
-@synthesize webView = _webView;
-@synthesize navigationBar = _navigationBar;
-@synthesize titleForWebView = _titleForWebView;
-@synthesize oldBarButtonItem = _oldBarButtonItem;
-@synthesize activityIndicator = _activityIndicator;
-@synthesize programmedWebView = _programmedWebView;
-
-
-- (id)init
-{
-    self = [super init];
-    
-    self.programmedWebView = [[UIWebView alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:self.programmedWebView];
-    self.programmedWebView.delegate = self;
-
-    return self;
-}
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    
-    NSLog(@"%@", self.urlToLoad);
-    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:self.urlToLoad];
-    [self.webView loadRequest:urlRequest];
-    [self.programmedWebView loadRequest:urlRequest];
+    //Set the navigation bar color to the standard color
+    UIColor *standardColor = [UIColor colorWithRed:.7529 green:0.7372 blue:0.7019 alpha:1.0];
+    self.navigationController.navigationBar.tintColor = standardColor;
+    _toolbar.tintColor = standardColor;
 }
 
-- (void)viewDidUnload
-{
-    [self setWebView:nil];
-    [self setNavigationBar:nil];
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return YES;
-}
-
-- (void)webViewDidStartLoad:(UIWebView *)webView
-{
-    [self.activityIndicator startAnimating];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
-    self.navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
-    
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    self.navigationItem.rightBarButtonItem = nil;
-    self.navigationBar.topItem.rightBarButtonItem = nil;
-}
-- (IBAction)donePressed:(id)sender 
-{
-    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-}
 
 @end
