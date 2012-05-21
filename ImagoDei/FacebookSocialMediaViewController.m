@@ -24,6 +24,10 @@
 #define FACEBOOK_CONTENT_TITLE @"message"
 #define FACEBOOK_CONTENT_DESCRIPTION @"from.name"
 #define FACEBOOK_FONT_SIZE 16.0
+#define FACEBOOK_COMMENTS_BUTTON_FONT_SIZE 10.0
+#define FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS 8.0
+#define FACEBOOK_COMMENTS_BUTTON_WIDTH 80.0
+#define FACEBOOK_COMMENTS_BUTTON_HEIGHT 20.0
 
 - (IBAction)LogOutInButtonClicked:(id)sender 
 {
@@ -70,6 +74,7 @@
                                              selector:@selector(presentWebView:) 
                                                  name:@"urlSelected"
                                                object:nil];
+    self.tableView.allowsSelection = NO;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -121,23 +126,28 @@
     return FACEBOOK_CONTENT_DESCRIPTION;
 }
 
+- (void)commentsButtonPushed:(id)sender
+{
+    UIView *contentView = [sender superview];
+    UITableViewCell *cell = (UITableViewCell *)[contentView superview];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NSDictionary *dictionaryData = [self.arrayOfTableData objectAtIndex:indexPath.row];
+    [self performSegueWithIdentifier:@"detailView" sender:dictionaryData];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //Set the cell identifier to the same as the prototype cell in the story board
     static NSString *CellIdentifier = @"Main Page Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     UITextView *textView = nil;
+    UIButton *commentsButton = nil;
     
     //If there is no reusable cell of this type, create a new one
     if (!cell)
     {
         //Set the atributes of the main page cell
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.backgroundColor = [UIColor clearColor];
-        cell.textLabel.textColor = [UIColor colorWithRed:0.29803 green:0.1529 blue:0.0039 alpha:1];
-        cell.detailTextLabel.textColor = [UIColor colorWithRed:0.2666 green:0.2666 blue:0.2666 alpha:1];
         textView = [[UITextView alloc] initWithFrame:CGRectZero];
         textView.font = [UIFont systemFontOfSize:FACEBOOK_FONT_SIZE];
         textView.scrollEnabled = NO;
@@ -146,15 +156,24 @@
         textView.dataDetectorTypes = UIDataDetectorTypeLink;
         textView.backgroundColor = [UIColor clearColor];
         [cell.contentView addSubview:textView];
+        
+        commentsButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        commentsButton.titleLabel.font = [UIFont systemFontOfSize:FACEBOOK_COMMENTS_BUTTON_FONT_SIZE];
+        commentsButton.tag = 2;
+        
+        [commentsButton addTarget:self action:@selector(commentsButtonPushed:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.contentView addSubview:commentsButton];
+        
     }
     else 
     {
         textView = (UITextView *)[cell.contentView viewWithTag:1];
+        commentsButton = (UIButton *)[cell.contentView viewWithTag:2];
     }
     
     //Retrieve the corresponding dictionary to the index row requested
     NSDictionary *dictionaryForCell = [self.arrayOfTableData objectAtIndex:[indexPath row]];
-    
+
     //Pull the main and detail text label out of the corresponding dictionary
     NSString *mainTextLabel = [dictionaryForCell valueForKeyPath:[self keyForMainCellLabelText]];
     
@@ -168,8 +187,11 @@
     
     CGSize maxSize = CGSizeMake(320 - FACEBOOK_FONT_SIZE, CGFLOAT_MAX);
     CGSize size = [mainTextLabel sizeWithFont:[UIFont systemFontOfSize:FACEBOOK_FONT_SIZE]  constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];
-    textView.frame = CGRectMake(0, 0, 320, size.height + (FACEBOOK_FONT_SIZE));    
-    
+    size.height += FACEBOOK_FONT_SIZE;
+    textView.frame = CGRectMake(0, 0, 320, size.height);    
+    commentsButton.frame = CGRectMake(310 - FACEBOOK_COMMENTS_BUTTON_WIDTH, size.height + FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS, FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_COMMENTS_BUTTON_HEIGHT);
+    NSString *commentsString = [[NSString alloc] initWithFormat:@"%@ Comments", [dictionaryForCell valueForKeyPath:@"comments.count"]];
+    [commentsButton setTitle:commentsString forState:UIControlStateNormal];
     return cell;
 }
 
@@ -192,7 +214,7 @@
     CGSize maxSize = CGSizeMake(320 - FACEBOOK_FONT_SIZE, CGFLOAT_MAX);
     CGSize size = [mainTextLabel sizeWithFont:[UIFont systemFontOfSize:FACEBOOK_FONT_SIZE]  constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];
     
-    return size.height + FACEBOOK_FONT_SIZE;
+    return size.height + (FACEBOOK_FONT_SIZE * 2) + FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS + FACEBOOK_COMMENTS_BUTTON_HEIGHT;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -205,6 +227,17 @@
     if ([segue.identifier isEqualToString:@"Web"] & [sender isKindOfClass:[NSURL class]])
     {
         [segue.destinationViewController setUrlToLoad:sender];
+    }
+    if ([segue.identifier isEqualToString:@"detailView"])
+    {
+        if ([sender isKindOfClass:[NSDictionary class]])
+        {
+            //Set the model for the MVC we are about to push onto the stack
+            [segue.destinationViewController setShortCommentsDictionaryModel:sender];
+            
+            //Set the delegate of the social media detail controller to this class
+            [segue.destinationViewController setSocialMediaDelegate:self];
+        }
     }
 }
 

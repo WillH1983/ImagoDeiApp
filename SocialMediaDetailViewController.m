@@ -202,6 +202,7 @@
 
 - (void)loadSocialMediaView
 {
+    NSLog(@"%@", self.fullCommentsDictionaryModel);
     self.textView.text = [self.fullCommentsDictionaryModel objectForKey:@"message"];
     self.commentsArray = [self.fullCommentsDictionaryModel valueForKeyPath:@"comments.data"];
     
