@@ -258,10 +258,10 @@
             NSURL *url = [[NSURL alloc] initWithString:urlStringForPostPicture];
             self.postImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.buttonImage = [[UIButton alloc] initWithFrame:CGRectMake(83, 124, 94, 76)];
-                [self.buttonImage addTarget:self action:@selector(postImageButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-                [self.buttonImage setImage:self.postImage forState:UIControlStateNormal];
-                [self.view addSubview:self.buttonImage];
+                //self.buttonImage = [[UIButton alloc] initWithFrame:CGRectMake(83, 124, 94, 76)];
+                //[self.buttonImage addTarget:self action:@selector(postImageButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+                //[self.buttonImage setImage:self.postImage forState:UIControlStateNormal];
+                //[self.view addSubview:self.buttonImage];
             });
         });
         dispatch_release(downloadQueue);
