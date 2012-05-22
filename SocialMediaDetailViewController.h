@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "FBRequest.h"
+#import "ImagoDeiStandardTableViewController.h"
 
 @class SocialMediaDetailViewController;
 
@@ -16,8 +17,7 @@
 
 @end
 
-@interface SocialMediaDetailViewController : UIViewController <FBRequestDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *commentsTableView;
+@interface SocialMediaDetailViewController : ImagoDeiStandardTableViewController <FBRequestDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *profilePictureImageView;
 @property (nonatomic, strong) NSDictionary *shortCommentsDictionaryModel;
 @property (nonatomic, strong) NSDictionary *fullCommentsDictionaryModel;

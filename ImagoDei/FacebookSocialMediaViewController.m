@@ -158,6 +158,7 @@
         [cell.contentView addSubview:textView];
         
         commentsButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        commentsButton.backgroundColor = [UIColor clearColor];
         commentsButton.titleLabel.font = [UIFont systemFontOfSize:FACEBOOK_COMMENTS_BUTTON_FONT_SIZE];
         commentsButton.tag = 2;
         
@@ -188,10 +189,21 @@
     CGSize maxSize = CGSizeMake(320 - FACEBOOK_FONT_SIZE, CGFLOAT_MAX);
     CGSize size = [mainTextLabel sizeWithFont:[UIFont systemFontOfSize:FACEBOOK_FONT_SIZE]  constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];
     size.height += FACEBOOK_FONT_SIZE;
-    textView.frame = CGRectMake(0, 0, 320, size.height);    
-    commentsButton.frame = CGRectMake(310 - FACEBOOK_COMMENTS_BUTTON_WIDTH, size.height + FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS, FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_COMMENTS_BUTTON_HEIGHT);
-    NSString *commentsString = [[NSString alloc] initWithFormat:@"%@ Comments", [dictionaryForCell valueForKeyPath:@"comments.count"]];
-    [commentsButton setTitle:commentsString forState:UIControlStateNormal];
+    textView.frame = CGRectMake(0, 0, 320, size.height);
+    
+    NSNumber *count = [dictionaryForCell valueForKeyPath:@"comments.count"];
+    if ([count intValue] > 0)
+    {
+        commentsButton.frame = CGRectMake(310 - FACEBOOK_COMMENTS_BUTTON_WIDTH, size.height + FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS, FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_COMMENTS_BUTTON_HEIGHT);
+        NSString *commentsString = [[NSString alloc] initWithFormat:@"%@ Comments", count];
+        [commentsButton setTitle:commentsString forState:UIControlStateNormal];
+    }
+    else 
+    {
+        commentsButton.frame = CGRectZero;
+    }
+    
+    
     return cell;
 }
 
@@ -214,7 +226,17 @@
     CGSize maxSize = CGSizeMake(320 - FACEBOOK_FONT_SIZE, CGFLOAT_MAX);
     CGSize size = [mainTextLabel sizeWithFont:[UIFont systemFontOfSize:FACEBOOK_FONT_SIZE]  constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];
     
-    return size.height + (FACEBOOK_FONT_SIZE * 2) + FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS + FACEBOOK_COMMENTS_BUTTON_HEIGHT;
+    NSNumber *count = [dictionaryForCell valueForKeyPath:@"comments.count"];
+
+    if ([count intValue] > 0)
+    {
+        return size.height + (FACEBOOK_FONT_SIZE * 2) + FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS + FACEBOOK_COMMENTS_BUTTON_HEIGHT;
+    }
+    else 
+    {
+        return size.height + (FACEBOOK_FONT_SIZE);
+    }
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

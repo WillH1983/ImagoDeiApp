@@ -18,7 +18,6 @@
 @end
 
 @implementation SocialMediaDetailViewController
-@synthesize commentsTableView;
 @synthesize profilePictureImageView;
 @synthesize shortCommentsDictionaryModel = _shortCommentsDictionaryModel;
 @synthesize commentsArray = _commentsArray;
@@ -32,11 +31,12 @@
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 200.0f
 #define CELL_CONTENT_MARGIN 16.0f
+#define FACEBOOK_DETAIL_FONT_SIZE 16.0f
 
 - (void)setCommentsArray:(NSArray *)commentsArray
 {
     _commentsArray = commentsArray;
-    [self.commentsTableView reloadData];
+    [self.tableView reloadData];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -69,7 +69,7 @@
 {
     [super viewDidLoad];
     
-    [self.commentsTableView setAllowsSelection:NO];
+    [self.tableView setAllowsSelection:NO];
     self.navigationItem.title = @"Facebook Feed";
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [spinner startAnimating];
@@ -81,7 +81,6 @@
 
 - (void)viewDidUnload
 {
-    [self setCommentsTableView:nil];
     [self setProfilePictureImageView:nil];
     [self setTextView:nil];
     [self setButtonImage:nil];
@@ -94,14 +93,13 @@
 {
     [super viewWillAppear:animated];
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
-    self.commentsTableView.tableFooterView = view;
+    self.tableView.tableFooterView = view;
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    NSIndexPath *selection = [self.commentsTableView indexPathForSelectedRow];
-	if (selection) [self.commentsTableView deselectRowAtIndexPath:selection animated:YES];
+    [self.tableView reloadData];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -147,6 +145,7 @@
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:17.0];
         cell.imageView.image = [UIImage imageNamed:@"f_logo.png"];
+        cell.backgroundColor = [UIColor clearColor];
     }
     
     cell.textLabel.textColor = [UIColor colorWithRed:0.29803 green:0.1529 blue:0.0039 alpha:1];
@@ -176,7 +175,7 @@
         UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
         NSLog(@"Loading Web Data");
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSArray *tmpArray = [self.commentsTableView indexPathsForVisibleRows];
+            NSArray *tmpArray = [self.tableView indexPathsForVisibleRows];
             if ([tmpArray containsObject:indexPath]) [cell.imageView setImage:image];
         });
     });
@@ -200,9 +199,53 @@
 
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    
+    //Pull the main and detail text label out of the corresponding dictionary
+    NSString *mainTextLabel = [self.fullCommentsDictionaryModel valueForKeyPath:@"message"];
+    
+    CGSize maxSize = CGSizeMake(320 - FACEBOOK_DETAIL_FONT_SIZE, CGFLOAT_MAX);
+    CGSize size = [mainTextLabel sizeWithFont:[UIFont systemFontOfSize:FACEBOOK_DETAIL_FONT_SIZE]  constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];
+    size.height += FACEBOOK_DETAIL_FONT_SIZE; 
+    
+    
+    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectZero];
+    textView.font = [UIFont systemFontOfSize:FACEBOOK_DETAIL_FONT_SIZE];
+    textView.scrollEnabled = NO;
+    textView.editable = NO;
+    textView.tag = 1;
+    textView.dataDetectorTypes = UIDataDetectorTypeLink;
+    textView.backgroundColor = [UIColor clearColor];
+    textView.frame = CGRectMake(0, 0, 320, size.height);
+    
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, 320, size.height)];
+    [cell.contentView addSubview:textView];
+    
+    
+    
+    //Set the cell text label's based upon the table contents array location
+    textView.text = mainTextLabel;
+    cell.backgroundColor = [UIColor clearColor];
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    //Pull the main and detail text label out of the corresponding dictionary
+    NSString *mainTextLabel = [self.fullCommentsDictionaryModel valueForKeyPath:@"message"];
+    
+    CGSize maxSize = CGSizeMake(320 - FACEBOOK_DETAIL_FONT_SIZE, CGFLOAT_MAX);
+    CGSize size = [mainTextLabel sizeWithFont:[UIFont systemFontOfSize:FACEBOOK_DETAIL_FONT_SIZE]  constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];
+    
+    tableView.tableHeaderView.backgroundColor = [UIColor redColor];
+    
+    return size.height + FACEBOOK_DETAIL_FONT_SIZE;
+}
+
 - (void)loadSocialMediaView
 {
-    NSLog(@"%@", self.fullCommentsDictionaryModel);
     self.textView.text = [self.fullCommentsDictionaryModel objectForKey:@"message"];
     self.commentsArray = [self.fullCommentsDictionaryModel valueForKeyPath:@"comments.data"];
     
