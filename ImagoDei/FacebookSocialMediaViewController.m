@@ -28,6 +28,8 @@
 #define FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS 8.0
 #define FACEBOOK_COMMENTS_BUTTON_WIDTH 80.0
 #define FACEBOOK_COMMENTS_BUTTON_HEIGHT 20.0
+#define FACEBOOK_PHOTO_WIDTH 300.0
+#define FACEBOOK_PHOTO_HEIGHT 200.0
 
 - (IBAction)LogOutInButtonClicked:(id)sender 
 {
@@ -135,6 +137,11 @@
     [self performSegueWithIdentifier:@"detailView" sender:dictionaryData];
 }
 
+- (void)postImageButtonPressed:(id)sender
+{
+    
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //Set the cell identifier to the same as the prototype cell in the story board
@@ -142,6 +149,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     UITextView *textView = nil;
     UIButton *commentsButton = nil;
+    UIButton *buttonImage = nil;
     
     //If there is no reusable cell of this type, create a new one
     if (!cell)
@@ -161,19 +169,29 @@
         commentsButton.backgroundColor = [UIColor clearColor];
         commentsButton.titleLabel.font = [UIFont systemFontOfSize:FACEBOOK_COMMENTS_BUTTON_FONT_SIZE];
         commentsButton.tag = 2;
-        
         [commentsButton addTarget:self action:@selector(commentsButtonPushed:) forControlEvents:UIControlEventTouchUpInside];
         [cell.contentView addSubview:commentsButton];
         
+        buttonImage = [[UIButton alloc] initWithFrame:CGRectZero];
+        [buttonImage addTarget:self action:@selector(postImageButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        buttonImage.tag = 3;
+        [cell.contentView addSubview:buttonImage];
     }
     else 
     {
         textView = (UITextView *)[cell.contentView viewWithTag:1];
         commentsButton = (UIButton *)[cell.contentView viewWithTag:2];
+        buttonImage = (UIButton *)[cell.contentView viewWithTag:3];
     }
+    
+    commentsButton.frame = CGRectZero;
+    buttonImage.frame = CGRectZero;
+    [buttonImage setBackgroundImage:nil forState:UIControlStateNormal];
     
     //Retrieve the corresponding dictionary to the index row requested
     NSDictionary *dictionaryForCell = [self.arrayOfTableData objectAtIndex:[indexPath row]];
+    
+    NSString *typeOfPost = [dictionaryForCell valueForKeyPath:@"type"];
 
     //Pull the main and detail text label out of the corresponding dictionary
     NSString *mainTextLabel = [dictionaryForCell valueForKeyPath:[self keyForMainCellLabelText]];
@@ -192,23 +210,61 @@
     textView.frame = CGRectMake(0, 0, 320, size.height);
     
     NSNumber *count = [dictionaryForCell valueForKeyPath:@"comments.count"];
-    if ([count intValue] > 0)
+    if ([typeOfPost isEqualToString:@"status"])
     {
-        commentsButton.frame = CGRectMake(310 - FACEBOOK_COMMENTS_BUTTON_WIDTH, size.height + FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS, FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_COMMENTS_BUTTON_HEIGHT);
-        NSString *commentsString = [[NSString alloc] initWithFormat:@"%@ Comments", count];
-        [commentsButton setTitle:commentsString forState:UIControlStateNormal];
+        buttonImage.frame = CGRectZero;
+        if ([count intValue] > 0)
+        {
+            commentsButton.frame = CGRectMake(310 - FACEBOOK_COMMENTS_BUTTON_WIDTH, size.height + FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS, FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_COMMENTS_BUTTON_HEIGHT);
+            NSString *commentsString = [[NSString alloc] initWithFormat:@"%@ Comments", count];
+            [commentsButton setTitle:commentsString forState:UIControlStateNormal];
+        }
     }
-    else 
+    else if ([typeOfPost isEqualToString:@"photo"])
     {
-        commentsButton.frame = CGRectZero;
+        buttonImage.frame = CGRectMake(10, size.height + FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS, FACEBOOK_PHOTO_WIDTH, FACEBOOK_PHOTO_HEIGHT);
+        [buttonImage setImage:[UIImage imageWithCIImage:[CIImage emptyImage]] forState:UIControlStateNormal];
+        
+        if ([count intValue] > 0)
+        {
+            commentsButton.frame = CGRectMake(310 - FACEBOOK_COMMENTS_BUTTON_WIDTH, size.height + (FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS * 2) + FACEBOOK_PHOTO_HEIGHT, FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_COMMENTS_BUTTON_HEIGHT);
+            NSString *commentsString = [[NSString alloc] initWithFormat:@"%@ Comments", count];
+            [commentsButton setTitle:commentsString forState:UIControlStateNormal];
+        }
     }
-    
-    
+
     return cell;
 }
 
 
 #pragma mark - Table view delegate
+- (void)tableView:(UITableView *)tableview willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *tmpDictionary = [self.arrayOfTableData objectAtIndex:[indexPath row]];
+    NSString *type = [tmpDictionary valueForKeyPath:@"type"];
+
+    if (![type isEqualToString:@"photo"]) return;
+    
+    NSString *pictureID = [tmpDictionary valueForKeyPath:@"object_id"];
+    NSString *urlStringForPicture = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture", pictureID];
+    NSLog(@"%@", urlStringForPicture);
+    
+    dispatch_queue_t downloadQueue = dispatch_queue_create("Profile Image Downloader", NULL);
+    dispatch_async(downloadQueue, ^{
+        NSURL *url = [[NSURL alloc] initWithString:urlStringForPicture];
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+        NSLog(@"Loading Web Data");
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSArray *tmpArray = [self.tableView indexPathsForVisibleRows];
+            if ([tmpArray containsObject:indexPath])
+            {
+                UIButton *buttonImage = (UIButton *)[cell.contentView viewWithTag:3];
+                [buttonImage setBackgroundImage:image forState:UIControlStateNormal];
+            }
+        });
+    });
+    dispatch_release(downloadQueue);
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -227,16 +283,28 @@
     CGSize size = [mainTextLabel sizeWithFont:[UIFont systemFontOfSize:FACEBOOK_FONT_SIZE]  constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];
     
     NSNumber *count = [dictionaryForCell valueForKeyPath:@"comments.count"];
-
-    if ([count intValue] > 0)
-    {
-        return size.height + (FACEBOOK_FONT_SIZE * 2) + FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS + FACEBOOK_COMMENTS_BUTTON_HEIGHT;
-    }
-    else 
-    {
-        return size.height + (FACEBOOK_FONT_SIZE);
-    }
+    NSString *typeOfPost = [dictionaryForCell valueForKeyPath:@"type"];
     
+    if ([typeOfPost isEqualToString:@"status"])
+    {
+        size.height += FACEBOOK_FONT_SIZE;
+        
+        if ([count intValue] > 0)
+        {
+            size.height += FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS + FACEBOOK_COMMENTS_BUTTON_HEIGHT;
+        }
+    }
+    else if ([typeOfPost isEqualToString:@"photo"])
+    {
+        size.height += FACEBOOK_FONT_SIZE;
+        size.height += FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS + FACEBOOK_PHOTO_HEIGHT;
+        
+        if ([count intValue] > 0)
+        {
+            size.height += FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS + FACEBOOK_COMMENTS_BUTTON_HEIGHT;
+        }
+    }
+    return size.height + FACEBOOK_FONT_SIZE/2;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
