@@ -313,6 +313,7 @@
         self.fullCommentsDictionaryModel = result;
         [self loadSocialMediaView];
     }
+    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
 }
 
 - (void)requestLoading:(FBRequest *)request
@@ -341,6 +342,13 @@
     {
         [segue.destinationViewController setUrlToLoad:sender];
     }
+}
+
+- (void)refresh 
+{
+    //This method will request the full comments array from the delegate and
+    //the facebook class will call request:request didLoad:result when complete
+    [self.socialMediaDelegate SocialMediaDetailViewController:self dictionaryForFacebookGraphAPIString:[self.shortCommentsDictionaryModel objectForKey:@"id"]];
 }
 
 

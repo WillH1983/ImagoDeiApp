@@ -14,6 +14,7 @@
 
 @interface FacebookSocialMediaViewController ()
 @property (nonatomic, strong) FBRequest *facebookRequest;
+@property (nonatomic, strong) NSMutableDictionary *photoDictionary;
 
 - (void)facebookInit;
 @end
@@ -21,6 +22,7 @@
 @implementation FacebookSocialMediaViewController
 @synthesize facebook = _facebook;
 @synthesize facebookRequest = _facebookRequest;
+@synthesize photoDictionary = _photoDictionary;
 
 #define FACEBOOK_CONTENT_TITLE @"message"
 #define FACEBOOK_CONTENT_DESCRIPTION @"from.name"
@@ -32,6 +34,12 @@
 #define FACEBOOK_COMMENTS_BUTTON_HEIGHT 20.0
 #define FACEBOOK_PHOTO_WIDTH 300.0
 #define FACEBOOK_PHOTO_HEIGHT 200.0
+
+- (NSMutableDictionary *)photoDictionary
+{
+    if (_photoDictionary == nil) _photoDictionary = [[NSMutableDictionary alloc] init];
+    return _photoDictionary;
+}
 
 - (IBAction)LogOutInButtonClicked:(id)sender 
 {
@@ -251,15 +259,25 @@
 
     if (![type isEqualToString:@"photo"]) return;
     
+    NSData *picture = [self.photoDictionary objectForKey:indexPath];
+    
+    if (picture)
+    {
+        UIButton *buttonImage = (UIButton *)[cell.contentView viewWithTag:3];
+        [buttonImage setBackgroundImage:[UIImage imageWithData:picture] forState:UIControlStateNormal];
+        return;
+    }
+    
     NSString *pictureID = [tmpDictionary valueForKeyPath:@"object_id"];
     NSString *urlStringForPicture = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture", pictureID];
-    NSLog(@"%@", urlStringForPicture);
     
     dispatch_queue_t downloadQueue = dispatch_queue_create("Profile Image Downloader", NULL);
     dispatch_async(downloadQueue, ^{
+        NSLog(@"Picture Downloaded");
         NSURL *url = [[NSURL alloc] initWithString:urlStringForPicture];
-        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
-        NSLog(@"Loading Web Data");
+        NSData *picture = [NSData dataWithContentsOfURL:url];
+        [self.photoDictionary setObject:picture forKey:indexPath];
+        UIImage *image = [UIImage imageWithData:picture];
         dispatch_async(dispatch_get_main_queue(), ^{
             NSArray *tmpArray = [self.tableView indexPathsForVisibleRows];
             if ([tmpArray containsObject:indexPath])
