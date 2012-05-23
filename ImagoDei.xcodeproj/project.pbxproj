@@ -25,6 +25,7 @@
 		BE1C3FBD154B9C6000775B14 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1C3FBC154B9C6000775B14 /* CoreMedia.framework */; };
 		BE1C3FBF154BA71400775B14 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1C3FBE154BA71400775B14 /* MediaPlayer.framework */; };
 		BE2F9B08156C9D54008C434A /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2F9B07156C9D54008C434A /* WebViewController.m */; };
+		BE2F9B18156CA0AF008C434A /* MyApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2F9B16156CA0AF008C434A /* MyApplication.m */; };
 		BE54BC141560A12200F85DD9 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = BE54BC131560A12200F85DD9 /* arrow.png */; };
 		BE54BC191560A18500F85DD9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE54BC181560A18500F85DD9 /* QuartzCore.framework */; };
 		BE54BC231560A4B500F85DD9 /* PullRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE54BC221560A4B500F85DD9 /* PullRefreshTableViewController.m */; };
@@ -104,6 +105,8 @@
 		BE1C3FBE154BA71400775B14 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		BE2F9B07156C9D54008C434A /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		BE2F9B09156C9D5D008C434A /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		BE2F9B16156CA0AF008C434A /* MyApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyApplication.m; sourceTree = "<group>"; };
+		BE2F9B17156CA0AF008C434A /* MyApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyApplication.h; sourceTree = "<group>"; };
 		BE54BC131560A12200F85DD9 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		BE54BC181560A18500F85DD9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BE54BC211560A4B400F85DD9 /* PullRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullRefreshTableViewController.h; sourceTree = "<group>"; };
@@ -326,6 +329,8 @@
 				BE54BC221560A4B500F85DD9 /* PullRefreshTableViewController.m */,
 				BED87DE21562D6BD00141114 /* ImagoDeiStandardTableViewController.h */,
 				BED87DE31562D6BD00141114 /* ImagoDeiStandardTableViewController.m */,
+				BE2F9B16156CA0AF008C434A /* MyApplication.m */,
+				BE2F9B17156CA0AF008C434A /* MyApplication.h */,
 				BEDF1E9D154795BD009FCA21 /* ImagoDeiDataFetcher.h */,
 				BEDF1E9E154795BD009FCA21 /* ImagoDeiDataFetcher.m */,
 				BEDF1E9A15479598009FCA21 /* ImagoDeiAppDelegate.h */,
@@ -526,6 +531,7 @@
 				BED87DE41562D6BD00141114 /* ImagoDeiStandardTableViewController.m in Sources */,
 				BEB2928C15698EA2008086A3 /* FacebookSocialMediaViewController.m in Sources */,
 				BE2F9B08156C9D54008C434A /* WebViewController.m in Sources */,
+				BE2F9B18156CA0AF008C434A /* MyApplication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
