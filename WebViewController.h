@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Three20/Three20.h"
 
-@interface WebViewController : TTWebController
+@interface WebViewController : UIViewController
+
+@property (nonatomic, strong) NSURL *urlToLoad;
+@property (nonatomic, strong) NSString *titleForWebView;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 
 @end

@@ -26,7 +26,20 @@
 
 #define FACEBOOK_CONTENT_TITLE @"message"
 #define FACEBOOK_CONTENT_DESCRIPTION @"from.name"
-#define FACEBOOK_FONT_SIZE 18.0
+#define FACEBOOK_FONT_SIZE 16.0
+#define FACEBOOK_TEXTVIEW_TOP_MARGIN 12.0
+#define FACEBOOK_COMMENTS_BUTTON_FONT_SIZE 10.0
+#define FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS 8.0
+#define FACEBOOK_COMMENTS_BUTTON_WIDTH 80.0
+#define FACEBOOK_COMMENTS_BUTTON_HEIGHT 20.0
+#define FACEBOOK_PHOTO_WIDTH 300.0
+#define FACEBOOK_PHOTO_HEIGHT 200.0
+
+- (NSMutableDictionary *)photoDictionary
+{
+    if (_photoDictionary == nil) _photoDictionary = [[NSMutableDictionary alloc] init];
+    return _photoDictionary;
+}
 
 - (IBAction)LogOutInButtonClicked:(id)sender 
 {
@@ -125,81 +138,16 @@
     return FACEBOOK_CONTENT_DESCRIPTION;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)commentsButtonPushed:(id)sender
 {
-    //Set the cell identifier to the same as the prototype cell in the story board
-    static NSString *CellIdentifier = @"Main Page Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    UITextView *textView = nil;
-    
-    //If there is no reusable cell of this type, create a new one
-    if (!cell)
-    {
-        //Set the atributes of the main page cell
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.backgroundColor = [UIColor clearColor];
-        cell.textLabel.textColor = [UIColor colorWithRed:0.29803 green:0.1529 blue:0.0039 alpha:1];
-        cell.detailTextLabel.textColor = [UIColor colorWithRed:0.2666 green:0.2666 blue:0.2666 alpha:1];
-        textView = [[UITextView alloc] initWithFrame:CGRectZero];
-        textView.font = [UIFont systemFontOfSize:FACEBOOK_FONT_SIZE];
-        textView.scrollEnabled = NO;
-        textView.editable = NO;
-        textView.tag = 1;
-        textView.dataDetectorTypes = UIDataDetectorTypeLink;
-        textView.backgroundColor = [UIColor clearColor];
-        [cell.contentView addSubview:textView];
-    }
-    else 
-    {
-        textView = (UITextView *)[cell.contentView viewWithTag:1];
-    }
-    
-    //Retrieve the corresponding dictionary to the index row requested
-    NSDictionary *dictionaryForCell = [self.arrayOfTableData objectAtIndex:[indexPath row]];
-    
-    //Pull the main and detail text label out of the corresponding dictionary
-    NSString *mainTextLabel = [dictionaryForCell valueForKeyPath:[self keyForMainCellLabelText]];
-    
-    if (mainTextLabel == nil)
-    {
-        mainTextLabel = [dictionaryForCell valueForKeyPath:[self keyForDetailCellLabelText]];
-    }
-    
-    //Set the cell text label's based upon the table contents array location
-    textView.text = mainTextLabel;
-    
-    CGSize maxSize = CGSizeMake(320 - FACEBOOK_FONT_SIZE, CGFLOAT_MAX);
-    CGSize size = [mainTextLabel sizeWithFont:[UIFont systemFontOfSize:FACEBOOK_FONT_SIZE]  constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];
-    textView.frame = CGRectMake(0, 0, 320, size.height + (FACEBOOK_FONT_SIZE));    
-    
-    return cell;
+    UIView *contentView = [sender superview];
+    UITableViewCell *cell = (UITableViewCell *)[contentView superview];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NSDictionary *dictionaryData = [self.arrayOfTableData objectAtIndex:indexPath.row];
+    [self performSegueWithIdentifier:@"detailView" sender:dictionaryData];
 }
 
-
-#pragma mark - Table view delegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //Retrieve the corresponding dictionary to the index row requested
-    NSDictionary *dictionaryForCell = [self.arrayOfTableData objectAtIndex:[indexPath row]];
-    
-    //Pull the main and detail text label out of the corresponding dictionary
-    NSString *mainTextLabel = [dictionaryForCell valueForKey:[self keyForMainCellLabelText]];
-    
-    if (mainTextLabel == nil)
-    {
-        mainTextLabel = [dictionaryForCell valueForKeyPath:[self keyForDetailCellLabelText]];
-    }
-    
-    CGSize maxSize = CGSizeMake(320 - FACEBOOK_FONT_SIZE, CGFLOAT_MAX);
-    CGSize size = [mainTextLabel sizeWithFont:[UIFont systemFontOfSize:FACEBOOK_FONT_SIZE]  constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];
-    
-    return size.height + FACEBOOK_FONT_SIZE;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)postImageButtonPressed:(id)sender
 {
     UIView *contentView = [sender superview];
     UITableViewCell *cell = (UITableViewCell *)[contentView superview];

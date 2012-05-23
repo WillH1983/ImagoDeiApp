@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "FBRequest.h"
-#import "Three20/Three20.h"
+#import "ImagoDeiStandardTableViewController.h"
 
 @class SocialMediaDetailViewController;
 
