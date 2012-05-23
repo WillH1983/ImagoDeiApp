@@ -10,6 +10,7 @@
 #import "ImagoDeiAppDelegate.h"
 #import "Facebook.h"
 #import "WebViewController.h"
+#import "ImageViewController.h"
 
 @interface FacebookSocialMediaViewController ()
 @property (nonatomic, strong) FBRequest *facebookRequest;
@@ -24,6 +25,7 @@
 #define FACEBOOK_CONTENT_TITLE @"message"
 #define FACEBOOK_CONTENT_DESCRIPTION @"from.name"
 #define FACEBOOK_FONT_SIZE 16.0
+#define FACEBOOK_TEXTVIEW_TOP_MARGIN 12.0
 #define FACEBOOK_COMMENTS_BUTTON_FONT_SIZE 10.0
 #define FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS 8.0
 #define FACEBOOK_COMMENTS_BUTTON_WIDTH 80.0
@@ -139,7 +141,11 @@
 
 - (void)postImageButtonPressed:(id)sender
 {
-    
+    UIView *contentView = [sender superview];
+    UITableViewCell *cell = (UITableViewCell *)[contentView superview];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NSDictionary *dictionaryData = [self.arrayOfTableData objectAtIndex:indexPath.row];
+    [self performSegueWithIdentifier:@"photo" sender:[dictionaryData valueForKeyPath:@"object_id"]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -206,7 +212,7 @@
     
     CGSize maxSize = CGSizeMake(320 - FACEBOOK_FONT_SIZE, CGFLOAT_MAX);
     CGSize size = [mainTextLabel sizeWithFont:[UIFont systemFontOfSize:FACEBOOK_FONT_SIZE]  constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];
-    size.height += FACEBOOK_FONT_SIZE;
+    size.height += FACEBOOK_TEXTVIEW_TOP_MARGIN;
     textView.frame = CGRectMake(0, 0, 320, size.height);
     
     NSNumber *count = [dictionaryForCell valueForKeyPath:@"comments.count"];
@@ -287,7 +293,7 @@
     
     if ([typeOfPost isEqualToString:@"status"])
     {
-        size.height += FACEBOOK_FONT_SIZE;
+        size.height += FACEBOOK_TEXTVIEW_TOP_MARGIN;
         
         if ([count intValue] > 0)
         {
@@ -296,7 +302,7 @@
     }
     else if ([typeOfPost isEqualToString:@"photo"])
     {
-        size.height += FACEBOOK_FONT_SIZE;
+        size.height += FACEBOOK_TEXTVIEW_TOP_MARGIN;
         size.height += FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS + FACEBOOK_PHOTO_HEIGHT;
         
         if ([count intValue] > 0)
@@ -304,7 +310,7 @@
             size.height += FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS + FACEBOOK_COMMENTS_BUTTON_HEIGHT;
         }
     }
-    return size.height + FACEBOOK_FONT_SIZE/2;
+    return size.height + FACEBOOK_TEXTVIEW_TOP_MARGIN;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -318,7 +324,7 @@
     {
         [segue.destinationViewController setUrlToLoad:sender];
     }
-    if ([segue.identifier isEqualToString:@"detailView"])
+    else if ([segue.identifier isEqualToString:@"detailView"])
     {
         if ([sender isKindOfClass:[NSDictionary class]])
         {
@@ -327,6 +333,13 @@
             
             //Set the delegate of the social media detail controller to this class
             [segue.destinationViewController setSocialMediaDelegate:self];
+        }
+    }
+    else if ([segue.identifier isEqualToString:@"photo"])
+    {
+        if ([sender isKindOfClass:[NSString class]])
+        {
+            [segue.destinationViewController setFacebookPhotoObjectID:sender];
         }
     }
 }

@@ -96,7 +96,7 @@
                     <navigationItem key="navigationItem" id="QLh-yK-M0J"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="999" y="1093"/>
+            <point key="canvasLocation" x="977" y="1093"/>
         </scene>
         <!--Navigation Controller - Facebook-->
         <scene sceneID="5p5-gh-JhN">
@@ -174,6 +174,7 @@
                     <connections>
                         <segue destination="BTS-Sc-wzZ" kind="push" identifier="Web" id="C28-Oz-Im4"/>
                         <segue destination="3pi-2Q-ePR" kind="push" identifier="detailView" id="ab3-cG-6Sb"/>
+                        <segue destination="SUf-jH-6MA" kind="modal" identifier="photo" id="ukI-ct-f8Y"/>
                     </connections>
                 </tableViewController>
             </objects>
@@ -196,50 +197,7 @@
                     <navigationItem key="navigationItem" id="XDO-SJ-bgM"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1605" y="480"/>
-        </scene>
-        <!--Social Media Detail View Controller-->
-        <scene sceneID="wbc-tU-XUU">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vjR-1A-Pjm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="lhY-we-Rpx" customClass="SocialMediaDetailViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="G4G-3i-p8R">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="16H-Kv-rzU">
-                                <rect key="frame" x="0.0" y="223" width="320" height="237"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="lhY-we-Rpx" id="hWz-4O-SXO"/>
-                                    <outlet property="delegate" destination="lhY-we-Rpx" id="vZ8-Ml-hsK"/>
-                                </connections>
-                            </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="Gaw-JE-jfA">
-                                <rect key="frame" x="20" y="20" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" id="Sz8-bw-hwK">
-                                <rect key="frame" x="78" y="20" width="222" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="xEg-4H-4Hg"/>
-                    <connections>
-                        <outlet property="commentsTableView" destination="16H-Kv-rzU" id="i9q-aS-2aM"/>
-                        <outlet property="profilePictureImageView" destination="Gaw-JE-jfA" id="uXs-EH-lQC"/>
-                        <outlet property="textView" destination="Sz8-bw-hwK" id="so7-nm-hZI"/>
-                    </connections>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="2046" y="406"/>
+            <point key="canvasLocation" x="1580" y="480"/>
         </scene>
         <!--Web View Controller-->
         <scene sceneID="Alq-N6-L4Q">
@@ -267,7 +225,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1665" y="1059"/>
+            <point key="canvasLocation" x="1580" y="1059"/>
         </scene>
         <!--Image View Controller-->
         <scene sceneID="H0F-nv-bSU">
@@ -313,7 +271,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1780" y="-265"/>
+            <point key="canvasLocation" x="1580" y="-103"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="915-nv-Xcq">
