@@ -14,6 +14,6 @@
 
 @interface FacebookSocialMediaViewController : ImagoDeiStandardTableViewController <FBSessionDelegate,FBRequestDelegate, FBDialogDelegate, SocialMediaDetailViewControllerDelegate>
 
-@property (nonatomic, retain) Facebook *facebook;
+@property (nonatomic, strong) Facebook *facebook;
 
 @end

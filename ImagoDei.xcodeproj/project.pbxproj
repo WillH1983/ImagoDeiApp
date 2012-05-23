@@ -38,6 +38,7 @@
 		BE54BC231560A4B500F85DD9 /* PullRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE54BC221560A4B500F85DD9 /* PullRefreshTableViewController.m */; };
 		BE62954A1547A8AA00CE719E /* RSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6295491547A8AA00CE719E /* RSSParser.m */; };
 		BE9056AC15604D4300D79563 /* news-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9056AB15604D4300D79563 /* news-icon.png */; };
+		BEB2928C15698EA2008086A3 /* FacebookSocialMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB2928A15698EA2008086A3 /* FacebookSocialMediaViewController.m */; };
 		BED0A5AA1548DAC4007094A5 /* MainTabiPhone.rss in Resources */ = {isa = PBXBuildFile; fileRef = BED0A5A91548DAC4007094A5 /* MainTabiPhone.rss */; };
 		BED1D7D81564498200FB8E5B /* tabbar-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED1D7D71564498200FB8E5B /* tabbar-bg@2x.png */; };
 		BED1D7DA1564498D00FB8E5B /* tabbar-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BED1D7D91564498D00FB8E5B /* tabbar-bg.png */; };
@@ -72,7 +73,6 @@
 		BEDF1E5F154791C4009FCA21 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDF1E5E154791C4009FCA21 /* CoreGraphics.framework */; };
 		BEDF1E65154791C4009FCA21 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1E63154791C4009FCA21 /* InfoPlist.strings */; };
 		BEDF1E8715479537009FCA21 /* f_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1E7D15479537009FCA21 /* f_logo.png */; };
-		BEDF1E8815479537009FCA21 /* FacebookSocialMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDF1E8015479537009FCA21 /* FacebookSocialMediaViewController.m */; };
 		BEDF1E9215479545009FCA21 /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1E8B15479545009FCA21 /* FBDialog.bundle */; };
 		BEDF1E9315479545009FCA21 /* fbicon.png in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1E8E15479545009FCA21 /* fbicon.png */; };
 		BEDF1E981547955C009FCA21 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDF1E961547955C009FCA21 /* ImageViewController.m */; };
@@ -376,6 +376,8 @@
 		BE6295481547A8AA00CE719E /* RSSParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSParser.h; sourceTree = "<group>"; };
 		BE6295491547A8AA00CE719E /* RSSParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSParser.m; sourceTree = "<group>"; };
 		BE9056AB15604D4300D79563 /* news-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news-icon.png"; sourceTree = "<group>"; };
+		BEB2928A15698EA2008086A3 /* FacebookSocialMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookSocialMediaViewController.m; sourceTree = "<group>"; };
+		BEB2928B15698EA2008086A3 /* FacebookSocialMediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookSocialMediaViewController.h; sourceTree = "<group>"; };
 		BED0A5A91548DAC4007094A5 /* MainTabiPhone.rss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MainTabiPhone.rss; sourceTree = "<group>"; };
 		BED1D7D71564498200FB8E5B /* tabbar-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-bg@2x.png"; sourceTree = "<group>"; };
 		BED1D7D91564498D00FB8E5B /* tabbar-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-bg.png"; sourceTree = "<group>"; };
@@ -415,8 +417,6 @@
 		BEDF1E68154791C4009FCA21 /* ImagoDei-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ImagoDei-Prefix.pch"; sourceTree = "<group>"; };
 		BEDF1E7D15479537009FCA21 /* f_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = f_logo.png; sourceTree = "<group>"; };
 		BEDF1E7E15479537009FCA21 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
-		BEDF1E7F15479537009FCA21 /* FacebookSocialMediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookSocialMediaViewController.h; sourceTree = "<group>"; };
-		BEDF1E8015479537009FCA21 /* FacebookSocialMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookSocialMediaViewController.m; sourceTree = "<group>"; };
 		BEDF1E8215479537009FCA21 /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBConnect.h; sourceTree = "<group>"; };
 		BEDF1E8B15479545009FCA21 /* FBDialog.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FBDialog.bundle; sourceTree = "<group>"; };
 		BEDF1E8C15479545009FCA21 /* FBDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBDialog.h; sourceTree = "<group>"; };
@@ -687,6 +687,8 @@
 				BEE7E1981568AC1800FB4F96 /* FacebookViewController.h */,
 				BEE7E1991568AC1800FB4F96 /* FacebookViewController.m */,
 				BE54BC211560A4B400F85DD9 /* PullRefreshTableViewController.h */,
+				BEB2928B15698EA2008086A3 /* FacebookSocialMediaViewController.h */,
+				BEB2928A15698EA2008086A3 /* FacebookSocialMediaViewController.m */,
 				BE54BC221560A4B500F85DD9 /* PullRefreshTableViewController.m */,
 				BED87DE21562D6BD00141114 /* ImagoDeiStandardTableViewController.h */,
 				BED87DE31562D6BD00141114 /* ImagoDeiStandardTableViewController.m */,
@@ -1206,7 +1208,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BEDF1E8815479537009FCA21 /* FacebookSocialMediaViewController.m in Sources */,
 				BEDF1E981547955C009FCA21 /* ImageViewController.m in Sources */,
 				BEDF1E9C15479598009FCA21 /* ImagoDeiAppDelegate.m in Sources */,
 				BEDF1E9F154795BD009FCA21 /* ImagoDeiDataFetcher.m in Sources */,

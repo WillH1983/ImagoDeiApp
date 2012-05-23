@@ -191,51 +191,21 @@
             <point key="canvasLocation" x="977" y="480"/>
         </scene>
         <!--Social Media Detail View Controller-->
-        <scene sceneID="g8k-9z-q99">
+        <scene sceneID="2S5-oY-jy4">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LkF-P0-cBE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="74j-p7-tn5" customClass="SocialMediaDetailViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="rJl-AY-Hag">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FgR-za-juG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="3pi-2Q-ePR" customClass="SocialMediaDetailViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="vHW-L9-oBl">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="background.png" id="4vg-P4-SKK">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" id="ZXg-qP-d6g">
-                                <rect key="frame" x="83" y="10" width="217" height="104"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="ucI-ED-3xm">
-                                <rect key="frame" x="10" y="10" width="65" height="56"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="AwV-wP-Tdv">
-                                <rect key="frame" x="0.0" y="201" width="320" height="166"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="74j-p7-tn5" id="Krm-N7-AA0"/>
-                                    <outlet property="delegate" destination="74j-p7-tn5" id="rRJ-zN-dF7"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="XIs-Jp-UCA"/>
-                    <connections>
-                        <outlet property="commentsTableView" destination="AwV-wP-Tdv" id="2kn-xE-4dm"/>
-                        <outlet property="profilePictureImageView" destination="ucI-ED-3xm" id="1gO-ya-h9T"/>
-                        <outlet property="textView" destination="ZXg-qP-d6g" id="doJ-AN-lBs"/>
-                        <segue destination="SUf-jH-6MA" kind="modal" identifier="Photo" id="vsJ-8F-Vzc"/>
-                        <segue destination="BTS-Sc-wzZ" kind="modal" identifier="Web" id="hbM-fJ-pT7"/>
-                    </connections>
-                </viewController>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="3pi-2Q-ePR" id="VDS-sq-u09"/>
+                            <outlet property="delegate" destination="3pi-2Q-ePR" id="Hyp-xD-mdY"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="XDO-SJ-bgM"/>
+                </tableViewController>
             </objects>
             <point key="canvasLocation" x="1530" y="480"/>
         </scene>
@@ -245,25 +215,11 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IkR-oo-0RQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="BTS-Sc-wzZ" customClass="WebViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CiT-UE-ep1">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" id="N2x-WU-EjD">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.74901960779999999" green="0.73333333329999995" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
-                                <items>
-                                    <navigationItem id="VdS-vV-7wL">
-                                        <barButtonItem key="leftBarButtonItem" title="Done" id="4Hi-PR-5cu">
-                                            <connections>
-                                                <action selector="donePressed:" destination="BTS-Sc-wzZ" id="HTc-xP-bJZ"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <webView contentMode="scaleToFill" id="rrh-Wu-u2F">
-                                <rect key="frame" x="0.0" y="44" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
@@ -273,13 +229,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="ALm-N1-wOT"/>
                     <connections>
-                        <outlet property="navigationBar" destination="N2x-WU-EjD" id="d1O-Xl-ruf"/>
                         <outlet property="webView" destination="rrh-Wu-u2F" id="NwS-U0-0mM"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2070" y="829"/>
+            <point key="canvasLocation" x="1580" y="1059"/>
         </scene>
         <!--Image View Controller-->
         <scene sceneID="H0F-nv-bSU">
@@ -317,6 +273,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="l8J-vh-TDk"/>
                     <connections>
                         <outlet property="imageView" destination="e3e-OP-Shl" id="Yff-te-tqP"/>
                         <outlet property="navigationBar" destination="m54-0s-h59" id="WMt-Bh-Dr5"/>
@@ -377,10 +334,9 @@
         <class className="PullRefreshTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PullRefreshTableViewController.h"/>
         </class>
-        <class className="SocialMediaDetailViewController" superclassName="UIViewController">
+        <class className="SocialMediaDetailViewController" superclassName="ImagoDeiStandardTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SocialMediaDetailViewController.h"/>
             <relationships>
-                <relationship kind="outlet" name="commentsTableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="profilePictureImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
             </relationships>

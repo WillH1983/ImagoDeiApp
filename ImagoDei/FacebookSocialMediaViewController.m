@@ -9,9 +9,12 @@
 #import "FacebookSocialMediaViewController.h"
 #import "ImagoDeiAppDelegate.h"
 #import "Facebook.h"
+#import "WebViewController.h"
+#import "ImageViewController.h"
 
 @interface FacebookSocialMediaViewController ()
 @property (nonatomic, strong) FBRequest *facebookRequest;
+@property (nonatomic, strong) NSMutableDictionary *photoDictionary;
 
 - (void)facebookInit;
 @end
@@ -19,6 +22,7 @@
 @implementation FacebookSocialMediaViewController
 @synthesize facebook = _facebook;
 @synthesize facebookRequest = _facebookRequest;
+@synthesize photoDictionary = _photoDictionary;
 
 #define FACEBOOK_CONTENT_TITLE @"message"
 #define FACEBOOK_CONTENT_DESCRIPTION @"from.name"
@@ -64,6 +68,12 @@
     self.tabBarItem.title = @"Facebook";
     
     self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(presentWebView:) 
+                                                 name:@"urlSelected"
+                                               object:nil];
+    self.tableView.allowsSelection = NO;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -191,28 +201,217 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UIView *contentView = [sender superview];
+    UITableViewCell *cell = (UITableViewCell *)[contentView superview];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NSDictionary *dictionaryData = [self.arrayOfTableData objectAtIndex:indexPath.row];
+    [self performSegueWithIdentifier:@"photo" sender:[dictionaryData valueForKeyPath:@"object_id"]];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //Set the cell identifier to the same as the prototype cell in the story board
+    static NSString *CellIdentifier = @"Main Page Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITextView *textView = nil;
+    UIButton *commentsButton = nil;
+    UIButton *buttonImage = nil;
+    
+    //If there is no reusable cell of this type, create a new one
+    if (!cell)
+    {
+        //Set the atributes of the main page cell
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        textView = [[UITextView alloc] initWithFrame:CGRectZero];
+        textView.font = [UIFont systemFontOfSize:FACEBOOK_FONT_SIZE];
+        textView.scrollEnabled = NO;
+        textView.editable = NO;
+        textView.tag = 1;
+        textView.dataDetectorTypes = UIDataDetectorTypeLink;
+        textView.backgroundColor = [UIColor clearColor];
+        [cell.contentView addSubview:textView];
+        
+        commentsButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        commentsButton.backgroundColor = [UIColor clearColor];
+        commentsButton.titleLabel.font = [UIFont systemFontOfSize:FACEBOOK_COMMENTS_BUTTON_FONT_SIZE];
+        commentsButton.tag = 2;
+        [commentsButton addTarget:self action:@selector(commentsButtonPushed:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.contentView addSubview:commentsButton];
+        
+        buttonImage = [[UIButton alloc] initWithFrame:CGRectZero];
+        [buttonImage addTarget:self action:@selector(postImageButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        buttonImage.tag = 3;
+        [cell.contentView addSubview:buttonImage];
+    }
+    else 
+    {
+        textView = (UITextView *)[cell.contentView viewWithTag:1];
+        commentsButton = (UIButton *)[cell.contentView viewWithTag:2];
+        buttonImage = (UIButton *)[cell.contentView viewWithTag:3];
+    }
+    
+    commentsButton.frame = CGRectZero;
+    buttonImage.frame = CGRectZero;
+    [buttonImage setBackgroundImage:nil forState:UIControlStateNormal];
+    
+    //Retrieve the corresponding dictionary to the index row requested
+    NSDictionary *dictionaryForCell = [self.arrayOfTableData objectAtIndex:[indexPath row]];
+    
+    NSString *typeOfPost = [dictionaryForCell valueForKeyPath:@"type"];
+
+    //Pull the main and detail text label out of the corresponding dictionary
+    NSString *mainTextLabel = [dictionaryForCell valueForKeyPath:[self keyForMainCellLabelText]];
+    
+    if (mainTextLabel == nil)
+    {
+        mainTextLabel = [dictionaryForCell valueForKeyPath:[self keyForDetailCellLabelText]];
+    }
+    
+    //Set the cell text label's based upon the table contents array location
+    textView.text = mainTextLabel;
+    
+    CGSize maxSize = CGSizeMake(320 - FACEBOOK_FONT_SIZE, CGFLOAT_MAX);
+    CGSize size = [mainTextLabel sizeWithFont:[UIFont systemFontOfSize:FACEBOOK_FONT_SIZE]  constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];
+    size.height += FACEBOOK_TEXTVIEW_TOP_MARGIN;
+    textView.frame = CGRectMake(0, 0, 320, size.height);
+    
+    NSNumber *count = [dictionaryForCell valueForKeyPath:@"comments.count"];
+    if ([typeOfPost isEqualToString:@"status"])
+    {
+        buttonImage.frame = CGRectZero;
+        if ([count intValue] > 0)
+        {
+            commentsButton.frame = CGRectMake(310 - FACEBOOK_COMMENTS_BUTTON_WIDTH, size.height + FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS, FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_COMMENTS_BUTTON_HEIGHT);
+            NSString *commentsString = [[NSString alloc] initWithFormat:@"%@ Comments", count];
+            [commentsButton setTitle:commentsString forState:UIControlStateNormal];
+        }
+    }
+    else if ([typeOfPost isEqualToString:@"photo"])
+    {
+        buttonImage.frame = CGRectMake(10, size.height + FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS, FACEBOOK_PHOTO_WIDTH, FACEBOOK_PHOTO_HEIGHT);
+        [buttonImage setImage:[UIImage imageWithCIImage:[CIImage emptyImage]] forState:UIControlStateNormal];
+        
+        if ([count intValue] > 0)
+        {
+            commentsButton.frame = CGRectMake(310 - FACEBOOK_COMMENTS_BUTTON_WIDTH, size.height + (FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS * 2) + FACEBOOK_PHOTO_HEIGHT, FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_COMMENTS_BUTTON_HEIGHT);
+            NSString *commentsString = [[NSString alloc] initWithFormat:@"%@ Comments", count];
+            [commentsButton setTitle:commentsString forState:UIControlStateNormal];
+        }
+    }
+
+    return cell;
+}
+
+
+#pragma mark - Table view delegate
+- (void)tableView:(UITableView *)tableview willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *tmpDictionary = [self.arrayOfTableData objectAtIndex:[indexPath row]];
+    NSString *type = [tmpDictionary valueForKeyPath:@"type"];
+
+    if (![type isEqualToString:@"photo"]) return;
+    
+    NSData *picture = [self.photoDictionary objectForKey:indexPath];
+    
+    if (picture)
+    {
+        UIButton *buttonImage = (UIButton *)[cell.contentView viewWithTag:3];
+        [buttonImage setBackgroundImage:[UIImage imageWithData:picture] forState:UIControlStateNormal];
+        return;
+    }
+    
+    NSString *pictureID = [tmpDictionary valueForKeyPath:@"object_id"];
+    NSString *urlStringForPicture = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture", pictureID];
+    
+    dispatch_queue_t downloadQueue = dispatch_queue_create("Profile Image Downloader", NULL);
+    dispatch_async(downloadQueue, ^{
+        NSLog(@"Picture Downloaded");
+        NSURL *url = [[NSURL alloc] initWithString:urlStringForPicture];
+        NSData *picture = [NSData dataWithContentsOfURL:url];
+        [self.photoDictionary setObject:picture forKey:indexPath];
+        UIImage *image = [UIImage imageWithData:picture];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSArray *tmpArray = [self.tableView indexPathsForVisibleRows];
+            if ([tmpArray containsObject:indexPath])
+            {
+                UIButton *buttonImage = (UIButton *)[cell.contentView viewWithTag:3];
+                [buttonImage setBackgroundImage:image forState:UIControlStateNormal];
+            }
+        });
+    });
+    dispatch_release(downloadQueue);
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //Retrieve the corresponding dictionary to the index row requested
+    NSDictionary *dictionaryForCell = [self.arrayOfTableData objectAtIndex:[indexPath row]];
+    
+    //Pull the main and detail text label out of the corresponding dictionary
+    NSString *mainTextLabel = [dictionaryForCell valueForKey:[self keyForMainCellLabelText]];
+    
+    if (mainTextLabel == nil)
+    {
+        mainTextLabel = [dictionaryForCell valueForKeyPath:[self keyForDetailCellLabelText]];
+    }
+    
+    CGSize maxSize = CGSizeMake(320 - FACEBOOK_FONT_SIZE, CGFLOAT_MAX);
+    CGSize size = [mainTextLabel sizeWithFont:[UIFont systemFontOfSize:FACEBOOK_FONT_SIZE]  constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];
+    
+    NSNumber *count = [dictionaryForCell valueForKeyPath:@"comments.count"];
+    NSString *typeOfPost = [dictionaryForCell valueForKeyPath:@"type"];
+    
+    if ([typeOfPost isEqualToString:@"status"])
+    {
+        size.height += FACEBOOK_TEXTVIEW_TOP_MARGIN;
+        
+        if ([count intValue] > 0)
+        {
+            size.height += FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS + FACEBOOK_COMMENTS_BUTTON_HEIGHT;
+        }
+    }
+    else if ([typeOfPost isEqualToString:@"photo"])
+    {
+        size.height += FACEBOOK_TEXTVIEW_TOP_MARGIN;
+        size.height += FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS + FACEBOOK_PHOTO_HEIGHT;
+        
+        if ([count intValue] > 0)
+        {
+            size.height += FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS + FACEBOOK_COMMENTS_BUTTON_HEIGHT;
+        }
+    }
+    return size.height + FACEBOOK_TEXTVIEW_TOP_MARGIN;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     [self performSegueWithIdentifier:@"Cell Push" sender:[tableView cellForRowAtIndexPath:indexPath]];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    //If the sender for the seque is not a Cell, return
-    if (![sender isKindOfClass:[UITableViewCell class]]) return;
-    
-    //Set the sender to a UITableViewCell
-    UITableViewCell *cell = sender;
-    
-    //Retrieve index path for cell
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    
-    //Retrieve the corresponding dictionary to the index row selected
-    NSDictionary *tmpDictionary = [[NSDictionary alloc] initWithDictionary:[self.arrayOfTableData objectAtIndex:[indexPath row]]];
-    
-    //Set the model for the MVC we are about to push onto the stack
-    [segue.destinationViewController setShortCommentsDictionaryModel:tmpDictionary];
-    
-    //Set the delegate of the social media detail controller to this class
-    [segue.destinationViewController setSocialMediaDelegate:self];
+    if ([segue.identifier isEqualToString:@"Web"] & [sender isKindOfClass:[NSURL class]])
+    {
+        [segue.destinationViewController setUrlToLoad:sender];
+    }
+    else if ([segue.identifier isEqualToString:@"detailView"])
+    {
+        if ([sender isKindOfClass:[NSDictionary class]])
+        {
+            //Set the model for the MVC we are about to push onto the stack
+            [segue.destinationViewController setShortCommentsDictionaryModel:sender];
+            
+            //Set the delegate of the social media detail controller to this class
+            [segue.destinationViewController setSocialMediaDelegate:self];
+        }
+    }
+    else if ([segue.identifier isEqualToString:@"photo"])
+    {
+        if ([sender isKindOfClass:[NSString class]])
+        {
+            [segue.destinationViewController setFacebookPhotoObjectID:sender];
+        }
+    }
 }
 
 #pragma mark - SocialMediaDetailView datasource
@@ -393,4 +592,15 @@
     //the facebook class will call request:request didLoad:result when complete
     [self.facebook requestWithGraphPath:@"ImagoDeiChurch/posts" andDelegate:self];
 }
+
+- (void) presentWebView:(NSNotification *) notification
+{
+    
+    if ([[notification name] isEqualToString:@"urlSelected"])
+    {
+        NSLog(@"%@", [notification object]);
+        [self performSegueWithIdentifier:@"Web" sender:[notification object]];
+    }
+}
+
 @end
