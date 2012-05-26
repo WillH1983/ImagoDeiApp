@@ -127,7 +127,31 @@ static NSString *const CONSUMER_SECRECT = @"NkutqYLfideVKX2nqHRV9UIIGYe8rA4qVtu2
     {
         self.navigationItem.leftBarButtonItem.title = @"Log Out";
         [self.activityIndicator stopAnimating];
+        NSMutableURLRequest *xmlURLRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString: @"https://www.planningcenteronline.com/organization.xml"]];
+        [self.authentication authorizeRequest:xmlURLRequest];
+        
+        [NSURLConnection sendAsynchronousRequest:xmlURLRequest queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) 
+        {
+            if (data)
+            {
+                NSDictionary *dictionary = [XMLReader dictionaryForXMLData:data error:nil];
+                self.arrayOfTableData = [dictionary mutableArrayValueForKeyPath:@"organization.service-types.service-type"];
+                NSLog(@"%@", self.arrayOfTableData);
+            }
+        }];
+
+        
     }
+}
+
+- (NSString *)keyForMainCellLabelText
+{
+    return @"name.text";
+}
+
+- (NSString *)keyForDetailCellLabelText
+{
+    return @"container.text";
 }
 
 - (void)viewController:(GTMOAuthViewControllerTouch *)viewController

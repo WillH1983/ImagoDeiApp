@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ImagoDeiStandardTableViewController.h"
+#import "XMLReader.h"
 
 @interface PlanningCenterViewController : ImagoDeiStandardTableViewController
 

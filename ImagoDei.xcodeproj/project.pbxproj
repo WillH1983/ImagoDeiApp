@@ -42,6 +42,7 @@
 		BED23D2C155A13BD00DB2D00 /* teachings-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BED23D27155A13BD00DB2D00 /* teachings-icon.png */; };
 		BED23D2D155A13BD00DB2D00 /* whoweare-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BED23D28155A13BD00DB2D00 /* whoweare-icon.png */; };
 		BED23D2E155A13BD00DB2D00 /* connect-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BED23D29155A13BD00DB2D00 /* connect-icon.png */; };
+		BED65F4D157180E600C55083 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = BED65F4C157180E600C55083 /* XMLReader.m */; };
 		BED787F11559EF78003CDEA1 /* Imago-App-comp.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BED787E11559EF78003CDEA1 /* Imago-App-comp.jpg */; };
 		BED787F21559EF78003CDEA1 /* home-inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = BED787E21559EF78003CDEA1 /* home-inactive.png */; };
 		BED787F31559EF78003CDEA1 /* home-active.png in Resources */ = {isa = PBXBuildFile; fileRef = BED787E31559EF78003CDEA1 /* home-active.png */; };
@@ -133,6 +134,8 @@
 		BED23D27155A13BD00DB2D00 /* teachings-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "teachings-icon.png"; sourceTree = "<group>"; };
 		BED23D28155A13BD00DB2D00 /* whoweare-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whoweare-icon.png"; sourceTree = "<group>"; };
 		BED23D29155A13BD00DB2D00 /* connect-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "connect-icon.png"; sourceTree = "<group>"; };
+		BED65F4B157180E600C55083 /* XMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLReader.h; sourceTree = "<group>"; };
+		BED65F4C157180E600C55083 /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
 		BED787E11559EF78003CDEA1 /* Imago-App-comp.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Imago-App-comp.jpg"; sourceTree = "<group>"; };
 		BED787E21559EF78003CDEA1 /* home-inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-inactive.png"; sourceTree = "<group>"; };
 		BED787E31559EF78003CDEA1 /* home-active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-active.png"; sourceTree = "<group>"; };
@@ -360,6 +363,8 @@
 				BE54BC221560A4B500F85DD9 /* PullRefreshTableViewController.m */,
 				BED87DE21562D6BD00141114 /* ImagoDeiStandardTableViewController.h */,
 				BED87DE31562D6BD00141114 /* ImagoDeiStandardTableViewController.m */,
+				BED65F4B157180E600C55083 /* XMLReader.h */,
+				BED65F4C157180E600C55083 /* XMLReader.m */,
 				BE2F9B16156CA0AF008C434A /* MyApplication.m */,
 				BE2F9B17156CA0AF008C434A /* MyApplication.h */,
 				BEDF1E9D154795BD009FCA21 /* ImagoDeiDataFetcher.h */,
@@ -568,6 +573,7 @@
 				BEE79318156FE54000F2EC23 /* GTMOAuthSignIn.m in Sources */,
 				BEE7931C156FE55000F2EC23 /* GTMOAuthViewControllerTouch.m in Sources */,
 				BEE79320156FE57E00F2EC23 /* GTMHTTPFetcher.m in Sources */,
+				BED65F4D157180E600C55083 /* XMLReader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

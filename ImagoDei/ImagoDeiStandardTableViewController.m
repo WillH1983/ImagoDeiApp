@@ -184,8 +184,8 @@
     NSDictionary *dictionaryForCell = [self.arrayOfTableData objectAtIndex:[indexPath row]];
     
     //Pull the main and detail text label out of the corresponding dictionary
-    NSString *mainTextLabel = [dictionaryForCell valueForKey:[self keyForMainCellLabelText]];
-    NSString *detailTextLabel = [dictionaryForCell valueForKey:[self keyForDetailCellLabelText]];
+    NSString *mainTextLabel = [dictionaryForCell valueForKeyPath:[self keyForMainCellLabelText]];
+    NSString *detailTextLabel = [dictionaryForCell valueForKeyPath:[self keyForDetailCellLabelText]];
     
     //Check if the main text label is equal to NSNULL, if it is replace the text
     if ([mainTextLabel isEqual:[NSNull null]]) mainTextLabel = @"Imago Dei Church";
