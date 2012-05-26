@@ -10,8 +10,11 @@
 #import "GTMOAuthAuthentication.h"
 #import "GTMOAuthViewControllerTouch.h"
 
-#define CONSUMER_KEY @"VmHJumSJqVS80j5TejhH"
-#define CONSUMER_SECRECT @"NkutqYLfideVKX2nqHRV9UIIGYe8rA4qVtu29hu1"
+static NSString *const kPCOKeychainItemName = @"Imago Dei: Planning Center";
+static NSString *const kPCOServiceName = @"Planning Center";
+static NSString *const CONSUMER_KEY = @"VmHJumSJqVS80j5TejhH";
+static NSString *const CONSUMER_SECRECT = @"NkutqYLfideVKX2nqHRV9UIIGYe8rA4qVtu29hu1";
+
 
 @interface PlanningCenterViewController ()
 @property (nonatomic, strong)GTMOAuthAuthentication *authentication;
@@ -21,52 +24,69 @@
 @implementation PlanningCenterViewController
 @synthesize authentication = _authentication;
 
-- (GTMOAuthAuthentication *)myCustomAuth {
-    NSString *myConsumerKey = CONSUMER_KEY;    // pre-registered with service
-    NSString *myConsumerSecret = CONSUMER_SECRECT; // pre-assigned by service
+- (void)signOut {
     
-    GTMOAuthAuthentication *auth;
-    auth = [[GTMOAuthAuthentication alloc] initWithSignatureMethod:kGTMOAuthSignatureMethodHMAC_SHA1
-                                                        consumerKey:myConsumerKey
-                                                         privateKey:myConsumerSecret];
+    // remove the stored Twitter authentication from the keychain, if any
+    [GTMOAuthViewControllerTouch removeParamsFromKeychainForName:kPCOKeychainItemName];
     
-    // setting the service name lets us inspect the auth object later to know
-    // what service it is for
-    auth.serviceProvider = @"Planning Center";
-    
-    return auth;
+    // Discard our retained authentication object.
+    [self setAuthentication:nil];
 }
 
-- (void)signInToCustomService
-{
+- (void)signInToPCO {
+    
+    [self signOut];
+    
     NSURL *requestURL = [NSURL URLWithString:@"https://www.planningcenteronline.com/oauth/request_token"];
     NSURL *accessURL = [NSURL URLWithString:@"https://www.planningcenteronline.com/oauth/access_token"];
     NSURL *authorizeURL = [NSURL URLWithString:@"https://www.planningcenteronline.com/oauth/authorize"];
     NSString *scope = @"https://www.planningcenteronline.com/oauth/";
     
-    GTMOAuthAuthentication *auth = [self myCustomAuth];
+    GTMOAuthAuthentication *auth = [self authForPCO];
     
     // set the callback URL to which the site should redirect, and for which
     // the OAuth controller should look to determine when sign-in has
     // finished or been canceled
     //
-    // This URL does not need to be for an actual web page
+    // This URL does not need to be for an actual web page; it will not be
+    // loaded
     [auth setCallback:@"http://www.example.com/OAuthCallback"];
     
-    // Display the autentication view
+    
+    // Display the autentication view.
     GTMOAuthViewControllerTouch *viewController;
     viewController = [[GTMOAuthViewControllerTouch alloc] initWithScope:scope
-                                                               language:nil
-                                                        requestTokenURL:requestURL
-                                                      authorizeTokenURL:authorizeURL
-                                                         accessTokenURL:accessURL
-                                                         authentication:auth
-                                                         appServiceName:@"Planning Center: Custom Service"
-                                                               delegate:self
-                                                       finishedSelector:@selector(viewController:finishedWithAuth:error:)];
+                                                                language:nil
+                                                         requestTokenURL:requestURL
+                                                       authorizeTokenURL:authorizeURL
+                                                          accessTokenURL:accessURL
+                                                          authentication:auth
+                                                          appServiceName:kPCOKeychainItemName
+                                                                delegate:self
+                                                        finishedSelector:@selector(viewController:finishedWithAuth:error:)];
     
-    [[self navigationController] pushViewController:viewController
-                                           animated:YES];
+    // We can set a URL for deleting the cookies after sign-in so the next time
+    // the user signs in, the browser does not assume the user is already signed
+    // in
+    [viewController setBrowserCookiesURL:[NSURL URLWithString:@"https://www.planningcenteronline.com/oauth"]];
+    
+    // You can set the title of the navigationItem of the controller here, if you want.
+    
+    [[self navigationController] pushViewController:viewController animated:YES];
+}
+
+- (GTMOAuthAuthentication *)authForPCO {
+    
+    GTMOAuthAuthentication *auth;
+    auth = [[GTMOAuthAuthentication alloc] initWithSignatureMethod:kGTMOAuthSignatureMethodHMAC_SHA1
+                                                        consumerKey:CONSUMER_KEY
+                                                         privateKey:CONSUMER_SECRECT];
+    
+    // setting the service name lets us inspect the auth object later to know
+    // what service it is for
+    [auth setServiceProvider:kPCOServiceName];
+    
+    return auth;
 }
 
 - (void)awakeFromNib
@@ -75,34 +95,39 @@
     
     [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"pco-logo-active.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"pco-logo-inactive.png"]];
     self.tabBarItem.title = @"Planning Center";
-    [self.activityIndicator stopAnimating];
-    [GTMOAuthViewControllerTouch removeParamsFromKeychainForName:@"Planning Center: Custom Service"];
     
-
-}
-
-- (void)viewDidLoad
-{
-    // Get the saved authentication, if any, from the keychain.
+    /*NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(incrementNetworkActivity:) name:kGTMOAuthFetchStarted object:nil];
+    [nc addObserver:self selector:@selector(decrementNetworkActivity:) name:kGTMOAuthFetchStopped object:nil];
+    [nc addObserver:self selector:@selector(signInNetworkLostOrFound:) name:kGTMOAuthNetworkLost  object:nil];
+    [nc addObserver:self selector:@selector(signInNetworkLostOrFound:) name:kGTMOAuthNetworkFound object:nil];*/
     
-    //self.authentication = [self myCustomAuth];
-    [self signInToCustomService];
-    
-    /*if (self.authentication) 
-    {
-        BOOL didAuth = [GTMOAuthViewControllerTouch authorizeFromKeychainForName:@"Planning Center: Custom Service"
-                                                                  authentication:self.authentication];
-        if (didAuth)
-        {
-            NSLog(@"Data Saved");
+    GTMOAuthAuthentication *auth;
+    auth = [self authForPCO];
+    if (auth) {
+        BOOL didAuth = [GTMOAuthViewControllerTouch authorizeFromKeychainForName:kPCOKeychainItemName
+                                                                  authentication:auth];
+        if (didAuth) {
+            // Select the Twitter index
+            //[mServiceSegments setSelectedSegmentIndex:1];
         }
     }
     
-    // retain the authentication object, which holds the auth tokens
-    //
-    // we can determine later if the auth object contains an access token
-    // by calling its -canAuthorize method
-    //[self setAuthentication:auth];*/
+    // save the authentication object, which holds the auth tokens
+    [self setAuthentication:auth];
+
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.activityIndicator stopAnimating];
+    
+    if ([self.authentication canAuthorize]) 
+    {
+        self.navigationItem.leftBarButtonItem.title = @"Log Out";
+        [self.activityIndicator stopAnimating];
+    }
 }
 
 - (void)viewController:(GTMOAuthViewControllerTouch *)viewController
@@ -112,8 +137,42 @@
     if (error != nil) {
         NSLog(@"Error Signing In");
     } else {
-        NSLog(@"Signed In");
+        self.navigationItem.leftBarButtonItem.title = @"Log Out";
+        self.authentication = auth;
+        [self.activityIndicator stopAnimating];
     }
+}
+- (IBAction)logInOutButtonPressed:(id)sender 
+{
+    UIBarButtonItem *barButton = nil;
+    
+    //Verify that object that was clicked was a UIBarButtonItem
+    if ([sender isKindOfClass:[UIBarButtonItem class]])
+    {
+        //If it was, then assign barButton to sender
+        barButton = sender;
+    }
+    //If not return without any action
+    else return;
+    
+    //If the barbutton says Log Out, tell the facebook app to logout
+    //and set the title of the button to Log In
+    if ([barButton.title isEqualToString: @"Log Out"])
+    {
+        [self signOut];
+        barButton.title = @"Log In";
+    }
+    //If the barbutton says Log In, check if the facebook session is still valid
+    else if ([barButton.title isEqualToString: @"Log In"])
+    {
+        //If it is not valid, reauthorize the app for single sign on
+        if (![self.authentication canAuthorize]) 
+        {
+            [self.activityIndicator startAnimating];
+            [self signInToPCO];
+        }
+    }
+    
 }
 
 @end

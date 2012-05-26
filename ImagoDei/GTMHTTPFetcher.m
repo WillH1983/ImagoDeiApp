@@ -1008,7 +1008,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
 - (NSInteger)statusAfterHandlingNotModifiedError {
 
   NSInteger status = [self statusCode];
-  /*if (status == kGTMHTTPFetcherStatusNotModified
+  if (status == kGTMHTTPFetcherStatusNotModified
       && [fetchHistory_ shouldCacheETaggedData]) {
 
     NSData *cachedData = [fetchHistory_ cachedDataForRequest:request_];
@@ -1036,7 +1036,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
         downloadedLength_ = [cachedData length];
       }
     }
-  }*/
+  }
   return status;
 }
 
