@@ -14,15 +14,19 @@ static NSString *const kPCOKeychainItemName = @"Imago Dei: Planning Center";
 static NSString *const kPCOServiceName = @"Planning Center";
 static NSString *const CONSUMER_KEY = @"VmHJumSJqVS80j5TejhH";
 static NSString *const CONSUMER_SECRECT = @"NkutqYLfideVKX2nqHRV9UIIGYe8rA4qVtu29hu1";
+static NSString *const PCOServiceIDsPath = @"id";
+static NSString *const PCOServiceTypes = @"organization.service-types.service-type";
 
 
 @interface PlanningCenterViewController ()
 @property (nonatomic, strong)GTMOAuthAuthentication *authentication;
+@property (nonatomic, strong)NSArray *serviceTypes;
 
 @end
 
 @implementation PlanningCenterViewController
 @synthesize authentication = _authentication;
+@synthesize serviceTypes = _serviceTypes;
 
 - (void)signOut {
     
@@ -115,7 +119,8 @@ static NSString *const CONSUMER_SECRECT = @"NkutqYLfideVKX2nqHRV9UIIGYe8rA4qVtu2
     
     // save the authentication object, which holds the auth tokens
     [self setAuthentication:auth];
-
+    
+    self.tableView.allowsSelection = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -126,21 +131,59 @@ static NSString *const CONSUMER_SECRECT = @"NkutqYLfideVKX2nqHRV9UIIGYe8rA4qVtu2
     if ([self.authentication canAuthorize]) 
     {
         self.navigationItem.leftBarButtonItem.title = @"Log Out";
-        [self.activityIndicator stopAnimating];
+        [self.activityIndicator startAnimating];
         NSMutableURLRequest *xmlURLRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString: @"https://www.planningcenteronline.com/organization.xml"]];
         [self.authentication authorizeRequest:xmlURLRequest];
         
-        [NSURLConnection sendAsynchronousRequest:xmlURLRequest queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) 
-        {
-            if (data)
+        dispatch_queue_t downloadQueue2 = dispatch_queue_create("downloader", NULL);
+        dispatch_async(downloadQueue2, ^{
+            NSHTTPURLResponse *response;
+            NSData *xmlData = [NSURLConnection sendSynchronousRequest:xmlURLRequest returningResponse:&response error:nil];
+            
+            if (xmlData)
             {
-                NSDictionary *dictionary = [XMLReader dictionaryForXMLData:data error:nil];
-                self.arrayOfTableData = [dictionary mutableArrayValueForKeyPath:@"organization.service-types.service-type"];
-                NSLog(@"%@", self.arrayOfTableData);
+                id tmpServiceTypes = [[XMLReader dictionaryForXMLData:xmlData error:nil] valueForKeyPath:PCOServiceTypes];
+                if ([tmpServiceTypes isKindOfClass:[NSArray class]])
+                {
+                    self.serviceTypes = tmpServiceTypes;
+                }
+                NSArray *serviceTypeIDs = [self.serviceTypes valueForKeyPath:PCOServiceIDsPath];
+                NSDictionary *dictionaryForServiceTypeIDs = nil;
+                NSData *planningData = nil;
+                NSDictionary *planningDictionary = nil;
+                NSString *planDate = nil;
+                NSMutableArray *tmpUpcomingVolunteerDates = [[NSMutableArray alloc] init];
+                
+                for (int i = 0; i < [serviceTypeIDs count]; i++)
+                {
+                    dictionaryForServiceTypeIDs = [serviceTypeIDs objectAtIndex:i];
+                    NSString *urlString = [NSString stringWithFormat:@"https://www.planningcenteronline.com/service_types/%@/plans.xml", [dictionaryForServiceTypeIDs valueForKeyPath:@"text"]];
+                    NSLog(@"%@", serviceTypeIDs);
+                    [xmlURLRequest setURL:[NSURL URLWithString:urlString]];
+                    [self.authentication authorizeRequest:xmlURLRequest];
+                    NSHTTPURLResponse *response;
+                    planningData = [NSURLConnection sendSynchronousRequest:xmlURLRequest returningResponse:&response error:nil];
+                    planningDictionary = [XMLReader dictionaryForXMLData:planningData error:nil];
+                    planDate = [planningDictionary valueForKeyPath:@"plans.plan.dates.text"];
+                    if (planDate) 
+                    {
+                        id planData = [planningDictionary valueForKeyPath:@"plans.plan"];
+                        if ([planData isKindOfClass:[NSDictionary class]])
+                        {
+                            [tmpUpcomingVolunteerDates addObject:planData];
+                        }
+                        else if ([planData isKindOfClass:[NSArray class]])
+                        {
+                            [tmpUpcomingVolunteerDates addObjectsFromArray:planData];
+                        }
+                    }
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.arrayOfTableData = tmpUpcomingVolunteerDates;
+                    [self.activityIndicator stopAnimating];
+                });
             }
-        }];
-
-        
+        });
     }
 }
 
@@ -151,7 +194,62 @@ static NSString *const CONSUMER_SECRECT = @"NkutqYLfideVKX2nqHRV9UIIGYe8rA4qVtu2
 
 - (NSString *)keyForDetailCellLabelText
 {
-    return @"container.text";
+    return @"dates.text";
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //Set the cell identifier to the same as the prototype cell in the story board
+    static NSString *CellIdentifier = @"Main Page Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    
+    //If there is no reusable cell of this type, create a new one
+    if (!cell)
+    {
+        //Set the atributes of the main page cell
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.backgroundColor = [UIColor clearColor];
+        cell.textLabel.textColor = [UIColor colorWithRed:0.29803 green:0.1529 blue:0.0039 alpha:1];
+        cell.detailTextLabel.textColor = [UIColor colorWithRed:0.2666 green:0.2666 blue:0.2666 alpha:1];
+    }
+    
+    //Retrieve the corresponding dictionary to the index row requested
+    NSDictionary *dictionaryForCell = [self.arrayOfTableData objectAtIndex:[indexPath row]];
+    
+    //Pull the main and detail text label out of the corresponding dictionary
+    NSString *mainTextLabel = nil;
+    NSString *mainTextLabelPlanID = [dictionaryForCell valueForKeyPath:@"service-type-id.text"];
+    
+    NSString *planID = nil;
+    for (id items in self.serviceTypes)
+    {
+        if ([items isKindOfClass:[NSDictionary class]])
+        {
+            planID = [items valueForKeyPath:@"id.text"];
+            if ([mainTextLabelPlanID isEqualToString:planID])
+            {
+                mainTextLabel = [items valueForKeyPath:@"name.text"];
+            }
+        }
+    }
+    
+    NSString *detailTextLabel = [dictionaryForCell valueForKeyPath:[self keyForDetailCellLabelText]];
+    
+    //Check if the main text label is equal to NSNULL, if it is replace the text
+    if ([mainTextLabel isEqual:[NSNull null]]) mainTextLabel = @"Imago Dei Church";
+    
+    //Set the cell text label's based upon the table contents array location
+    cell.textLabel.text = mainTextLabel;
+    cell.detailTextLabel.text = detailTextLabel;
+    
+    //Make sure that the imageview is set to nil when the cell is reused
+    //this makes sure that the old image does not show up
+    cell.imageView.image = nil;
+    
+    return cell;
 }
 
 - (void)viewController:(GTMOAuthViewControllerTouch *)viewController
