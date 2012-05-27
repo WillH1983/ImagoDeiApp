@@ -297,4 +297,10 @@ static NSString *const PCOServiceTypes = @"organization.service-types.service-ty
     
 }
 
+- (void)refresh {
+    // This is just a demo. Override this method with your custom reload action.
+    // Don't forget to call stopLoading at the end.
+    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:2.0];
+}
+
 @end
