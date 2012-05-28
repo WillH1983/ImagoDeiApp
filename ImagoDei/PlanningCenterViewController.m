@@ -161,8 +161,8 @@ static NSString *const DanaPeopleID = @"1240047";
                 NSDictionary *dictionaryForServiceTypeIDs = nil;
                 NSDictionary *planningDictionary = nil;
                 NSString *planDate = nil;
-                NSString *tmpURLString = nil;
-                NSDictionary *tmpDictionary = nil;
+                __block NSString *tmpURLString = nil;
+                __block NSDictionary *tmpDictionary = nil;
                 
                 NSMutableArray *tmpUpcomingVolunteerDates = [[NSMutableArray alloc] init];
                 
@@ -189,9 +189,16 @@ static NSString *const DanaPeopleID = @"1240047";
                             //[tmpUpcomingVolunteerDates addObjectsFromArray:planData];
                             for (id item in planDataIDs)
                             {
-                                tmpURLString = [NSString stringWithFormat:@"https://www.planningcenteronline.com/plans/%@.xml", [item valueForKeyPath:@"text"]];
-                                tmpDictionary = [self dictionaryForXMLURLString:tmpURLString];
-                                [tmpUpcomingVolunteerDates addObject:tmpDictionary];
+                                dispatch_queue_t downloadQueue3 = dispatch_queue_create("downloader", NULL);
+                                dispatch_async(downloadQueue3, ^{
+                                    tmpURLString = [NSString stringWithFormat:@"https://www.planningcenteronline.com/plans/%@.xml", [item valueForKeyPath:@"text"]];
+                                    tmpDictionary = [self dictionaryForXMLURLString:tmpURLString];
+                                    [tmpUpcomingVolunteerDates addObject:tmpDictionary];
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        [self.tableView reloadData];
+                                    });
+                                });
+                                dispatch_release(downloadQueue3);
                             }
                             
                         }
@@ -203,6 +210,7 @@ static NSString *const DanaPeopleID = @"1240047";
                 });
             }
         });
+        dispatch_release(downloadQueue2);
     }
 }
 
