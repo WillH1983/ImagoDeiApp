@@ -16,6 +16,7 @@ static NSString *const CONSUMER_KEY = @"VmHJumSJqVS80j5TejhH";
 static NSString *const CONSUMER_SECRECT = @"NkutqYLfideVKX2nqHRV9UIIGYe8rA4qVtu29hu1";
 static NSString *const PCOServiceIDsPath = @"id";
 static NSString *const PCOServiceTypes = @"organization.service-types.service-type";
+static NSString *const DanaPeopleID = @"1240047";
 
 
 @interface PlanningCenterViewController ()
@@ -123,6 +124,16 @@ static NSString *const PCOServiceTypes = @"organization.service-types.service-ty
     self.tableView.allowsSelection = NO;
 }
 
+- (NSDictionary *)dictionaryForXMLURLString:(NSString *)urlString
+{
+    NSMutableURLRequest *xmlURLRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+    [self.authentication authorizeRequest:xmlURLRequest];
+    NSHTTPURLResponse *response;
+    NSData *xmlData = [NSURLConnection sendSynchronousRequest:xmlURLRequest returningResponse:&response error:nil];
+    NSDictionary *dictionary = [XMLReader dictionaryForXMLData:xmlData error:nil];
+    return dictionary;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -137,44 +148,52 @@ static NSString *const PCOServiceTypes = @"organization.service-types.service-ty
         
         dispatch_queue_t downloadQueue2 = dispatch_queue_create("downloader", NULL);
         dispatch_async(downloadQueue2, ^{
-            NSHTTPURLResponse *response;
-            NSData *xmlData = [NSURLConnection sendSynchronousRequest:xmlURLRequest returningResponse:&response error:nil];
+            NSDictionary *xmlData = [self dictionaryForXMLURLString:@"https://www.planningcenteronline.com/organization.xml"];
             
             if (xmlData)
             {
-                id tmpServiceTypes = [[XMLReader dictionaryForXMLData:xmlData error:nil] valueForKeyPath:PCOServiceTypes];
+                id tmpServiceTypes = [xmlData valueForKeyPath:PCOServiceTypes];
                 if ([tmpServiceTypes isKindOfClass:[NSArray class]])
                 {
                     self.serviceTypes = tmpServiceTypes;
                 }
                 NSArray *serviceTypeIDs = [self.serviceTypes valueForKeyPath:PCOServiceIDsPath];
                 NSDictionary *dictionaryForServiceTypeIDs = nil;
-                NSData *planningData = nil;
                 NSDictionary *planningDictionary = nil;
                 NSString *planDate = nil;
+                NSString *tmpURLString = nil;
+                NSDictionary *tmpDictionary = nil;
+                
                 NSMutableArray *tmpUpcomingVolunteerDates = [[NSMutableArray alloc] init];
                 
                 for (int i = 0; i < [serviceTypeIDs count]; i++)
                 {
                     dictionaryForServiceTypeIDs = [serviceTypeIDs objectAtIndex:i];
-                    NSString *urlString = [NSString stringWithFormat:@"https://www.planningcenteronline.com/service_types/%@/plans.xml", [dictionaryForServiceTypeIDs valueForKeyPath:@"text"]];
-                    NSLog(@"%@", serviceTypeIDs);
-                    [xmlURLRequest setURL:[NSURL URLWithString:urlString]];
-                    [self.authentication authorizeRequest:xmlURLRequest];
-                    NSHTTPURLResponse *response;
-                    planningData = [NSURLConnection sendSynchronousRequest:xmlURLRequest returningResponse:&response error:nil];
-                    planningDictionary = [XMLReader dictionaryForXMLData:planningData error:nil];
+                    NSString *urlString = [NSString stringWithFormat:@"https://www.planningcenteronline.com/service_types/%@/plans.xml?all=true", [dictionaryForServiceTypeIDs valueForKeyPath:@"text"]];
+                    planningDictionary = [self dictionaryForXMLURLString:urlString];
                     planDate = [planningDictionary valueForKeyPath:@"plans.plan.dates.text"];
                     if (planDate) 
                     {
-                        id planData = [planningDictionary valueForKeyPath:@"plans.plan"];
-                        if ([planData isKindOfClass:[NSDictionary class]])
+                        id planDataIDs = [planningDictionary valueForKeyPath:@"plans.plan.id"];
+                        
+                        if ([planDataIDs isKindOfClass:[NSDictionary class]])
                         {
-                            [tmpUpcomingVolunteerDates addObject:planData];
+                            //[tmpUpcomingVolunteerDates addObject:planData];
+                            tmpURLString = [NSString stringWithFormat:@"https://www.planningcenteronline.com/plans/%@.xml", [planDataIDs valueForKeyPath:@"text"]];
+                            tmpDictionary = [self dictionaryForXMLURLString:tmpURLString];
+                            [tmpUpcomingVolunteerDates addObject:tmpDictionary];
+                            
                         }
-                        else if ([planData isKindOfClass:[NSArray class]])
+                        else if ([planDataIDs isKindOfClass:[NSArray class]])
                         {
-                            [tmpUpcomingVolunteerDates addObjectsFromArray:planData];
+                            //[tmpUpcomingVolunteerDates addObjectsFromArray:planData];
+                            for (id item in planDataIDs)
+                            {
+                                tmpURLString = [NSString stringWithFormat:@"https://www.planningcenteronline.com/plans/%@.xml", [item valueForKeyPath:@"text"]];
+                                tmpDictionary = [self dictionaryForXMLURLString:tmpURLString];
+                                [tmpUpcomingVolunteerDates addObject:tmpDictionary];
+                            }
+                            
                         }
                     }
                 }
@@ -221,22 +240,32 @@ static NSString *const PCOServiceTypes = @"organization.service-types.service-ty
     
     //Pull the main and detail text label out of the corresponding dictionary
     NSString *mainTextLabel = nil;
-    NSString *mainTextLabelPlanID = [dictionaryForCell valueForKeyPath:@"service-type-id.text"];
     
-    NSString *planID = nil;
-    for (id items in self.serviceTypes)
+    id planPersonData = [dictionaryForCell valueForKeyPath:@"plan.plan-people.plan-person"];
+    
+    NSString *personID = nil;
+    for (id items in planPersonData)
     {
         if ([items isKindOfClass:[NSDictionary class]])
         {
-            planID = [items valueForKeyPath:@"id.text"];
-            if ([mainTextLabelPlanID isEqualToString:planID])
+            personID = [items valueForKeyPath:@"person-id.text"];
+            if ([DanaPeopleID isEqualToString:personID])
             {
-                mainTextLabel = [items valueForKeyPath:@"name.text"];
+                mainTextLabel = [items valueForKeyPath:@"position.text"];
             }
         }
     }
     
-    NSString *detailTextLabel = [dictionaryForCell valueForKeyPath:[self keyForDetailCellLabelText]];
+    NSArray *serviceTimes = [dictionaryForCell valueForKeyPath:@"plan.service-times.service-time.starts-at.text"];
+    
+    NSString *detailTextLabel = nil;
+    
+    if ([[serviceTimes objectAtIndex:0] isKindOfClass:[NSString class]])
+    {
+        detailTextLabel = [serviceTimes objectAtIndex:0];
+    }
+    
+    
     
     //Check if the main text label is equal to NSNULL, if it is replace the text
     if ([mainTextLabel isEqual:[NSNull null]]) mainTextLabel = @"Imago Dei Church";
