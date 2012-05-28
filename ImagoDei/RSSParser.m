@@ -54,6 +54,7 @@
         [self.rssParser setShouldResolveExternalEntities:NO];
         [self.rssParser parse];
     });
+    dispatch_release(downloadQueue2);
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
