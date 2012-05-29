@@ -171,7 +171,7 @@ static NSString *const DanaPeopleID = @"1240047";
                     dictionaryForServiceTypeIDs = [serviceTypeIDs objectAtIndex:i];
                     NSString *urlString = [NSString stringWithFormat:@"https://www.planningcenteronline.com/service_types/%@/plans.xml?all=true", [dictionaryForServiceTypeIDs valueForKeyPath:@"text"]];
                     planningDictionary = [self dictionaryForXMLURLString:urlString];
-                    planDate = [planningDictionary valueForKeyPath:@"plans.plan.dates.text"];
+                    if (planningDictionary) planDate = [planningDictionary valueForKeyPath:@"plans.plan.dates.text"];
                     if (planDate) 
                     {
                         id planDataIDs = [planningDictionary valueForKeyPath:@"plans.plan.id"];
@@ -181,7 +181,7 @@ static NSString *const DanaPeopleID = @"1240047";
                             //[tmpUpcomingVolunteerDates addObject:planData];
                             tmpURLString = [NSString stringWithFormat:@"https://www.planningcenteronline.com/plans/%@.xml", [planDataIDs valueForKeyPath:@"text"]];
                             tmpDictionary = [self dictionaryForXMLURLString:tmpURLString];
-                            [tmpUpcomingVolunteerDates addObject:tmpDictionary];
+                            if (tmpDictionary) [tmpUpcomingVolunteerDates addObject:tmpDictionary];
                             
                         }
                         else if ([planDataIDs isKindOfClass:[NSArray class]])
@@ -191,7 +191,7 @@ static NSString *const DanaPeopleID = @"1240047";
                             {
                                     tmpURLString = [NSString stringWithFormat:@"https://www.planningcenteronline.com/plans/%@.xml", [item valueForKeyPath:@"text"]];
                                     tmpDictionary = [self dictionaryForXMLURLString:tmpURLString];
-                                    [tmpUpcomingVolunteerDates addObject:tmpDictionary];
+                                    if (tmpDictionary) [tmpUpcomingVolunteerDates addObject:tmpDictionary];
                             }
                         }
                     }
