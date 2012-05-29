@@ -189,23 +189,52 @@ static NSString *const DanaPeopleID = @"1240047";
                             //[tmpUpcomingVolunteerDates addObjectsFromArray:planData];
                             for (id item in planDataIDs)
                             {
-                                dispatch_queue_t downloadQueue3 = dispatch_queue_create("downloader", NULL);
-                                dispatch_async(downloadQueue3, ^{
                                     tmpURLString = [NSString stringWithFormat:@"https://www.planningcenteronline.com/plans/%@.xml", [item valueForKeyPath:@"text"]];
                                     tmpDictionary = [self dictionaryForXMLURLString:tmpURLString];
                                     [tmpUpcomingVolunteerDates addObject:tmpDictionary];
-                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                        [self.tableView reloadData];
-                                    });
-                                });
-                                dispatch_release(downloadQueue3);
                             }
-                            
                         }
                     }
                 }
+                NSArray *tmpArray = [tmpUpcomingVolunteerDates sortedArrayUsingComparator: ^(id obj1, id obj2) {
+                    NSDate *obj1Date = nil;
+                    NSDate *obj2Date = nil;
+                    if ([obj1 isKindOfClass:[NSDictionary class]] & [obj2 isKindOfClass:[NSDictionary class]])
+                    {
+                        //Get a properly formatted date to compare properly
+                        NSArray *obj1ServiceTimes = [obj1 valueForKeyPath:@"plan.service-times.service-time.starts-at.text"];
+                        NSString *obj1DateString = [[NSString alloc] initWithString:[obj1ServiceTimes objectAtIndex:0]];
+                        NSRange obj1Range = [obj1DateString rangeOfString:@"T"];
+                        if (obj1Range.location != NSNotFound) obj1DateString = [obj1DateString substringToIndex:obj1Range.location];
+                        NSDateFormatter *obj1DateFormatter = [[NSDateFormatter alloc] init];
+                        [obj1DateFormatter setDateFormat:@"yyyy-MM-dd"];
+                        obj1Date = [obj1DateFormatter dateFromString:obj1DateString];
+                        
+                        //Get a properly formatted date to compare properly
+                        NSArray *obj2ServiceTimes = [obj2 valueForKeyPath:@"plan.service-times.service-time.starts-at.text"];
+                        NSString *obj2DateString = [[NSString alloc] initWithString:[obj2ServiceTimes objectAtIndex:0]];
+                        NSRange obj2Range = [obj2DateString rangeOfString:@"T"];
+                        if (obj2Range.location != NSNotFound) obj2DateString = [obj2DateString substringToIndex:obj1Range.location];
+                        NSDateFormatter *obj2DateFormatter = [[NSDateFormatter alloc] init];
+                        [obj2DateFormatter setDateFormat:@"yyyy-MM-dd"];
+                        obj2Date = [obj2DateFormatter dateFromString:obj2DateString];
+                        
+                    }
+                    if ([obj1Date compare:obj2Date] == NSOrderedSame)
+                    {
+                        return (NSComparisonResult)NSOrderedSame;
+                    }
+                    else if ([obj1Date compare:obj2Date] == NSOrderedAscending)
+                    {
+                        return (NSComparisonResult)NSOrderedDescending;
+                    }
+                    else
+                    {
+                        return (NSComparisonResult)NSOrderedAscending;
+                    }
+                }];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    self.arrayOfTableData = tmpUpcomingVolunteerDates;
+                    self.arrayOfTableData = tmpArray;
                     [self.activityIndicator stopAnimating];
                 });
             }
@@ -247,7 +276,7 @@ static NSString *const DanaPeopleID = @"1240047";
     NSDictionary *dictionaryForCell = [self.arrayOfTableData objectAtIndex:[indexPath row]];
     
     //Pull the main and detail text label out of the corresponding dictionary
-    NSString *mainTextLabel = nil;
+    NSString *detailTextLabel = nil;
     
     id planPersonData = [dictionaryForCell valueForKeyPath:@"plan.plan-people.plan-person"];
     
@@ -259,18 +288,29 @@ static NSString *const DanaPeopleID = @"1240047";
             personID = [items valueForKeyPath:@"person-id.text"];
             if ([DanaPeopleID isEqualToString:personID])
             {
-                mainTextLabel = [items valueForKeyPath:@"position.text"];
+                detailTextLabel = [NSString stringWithFormat:@"%@ - %@", [items valueForKeyPath:@"category-name.text"], [items valueForKeyPath:@"position.text"]];
             }
         }
     }
     
     NSArray *serviceTimes = [dictionaryForCell valueForKeyPath:@"plan.service-times.service-time.starts-at.text"];
-    
-    NSString *detailTextLabel = nil;
+    //2012-02-12T08:30:00-06:00
+    NSString *mainTextLabel = nil;
     
     if ([[serviceTimes objectAtIndex:0] isKindOfClass:[NSString class]])
     {
-        detailTextLabel = [serviceTimes objectAtIndex:0];
+        mainTextLabel = [serviceTimes objectAtIndex:0];
+        NSRange tmpRange = [mainTextLabel rangeOfString:@"T"];
+        if (tmpRange.location != NSNotFound)
+        {
+            mainTextLabel = [mainTextLabel substringToIndex:tmpRange.location];
+        }
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        NSDate *date2 = [dateFormatter dateFromString:mainTextLabel];
+        [dateFormatter setDateStyle:NSDateFormatterFullStyle];
+        mainTextLabel = [dateFormatter stringFromDate:date2];
     }
     
     
