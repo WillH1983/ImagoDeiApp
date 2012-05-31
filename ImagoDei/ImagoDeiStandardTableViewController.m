@@ -44,6 +44,12 @@
     });
 }
 
+- (NSArray *)arrayOfTableData
+{
+    if (!_arrayOfTableData) _arrayOfTableData = [[NSArray alloc] init];
+    return _arrayOfTableData;
+}
+
 - (id)initWithModel:(NSURL *)model
 {
     //Call the super classes initialization
@@ -151,14 +157,14 @@
     return [self.arrayOfTableData count];
 }
 
-- (NSString *)keyForMainCellLabelText
+- (NSString *)mainCellTextLabelForSelectedCellDictionary:(NSDictionary *)cellDictionary
 {
-    return CONTENT_TITLE;
+    return [cellDictionary valueForKeyPath:CONTENT_TITLE];
 }
 
-- (NSString *)keyForDetailCellLabelText
+- (NSString *)detailCellTextLabelForSelectedCellDictionary:(NSDictionary *)cellDictionary
 {
-    return CONTENT_DESCRIPTION;
+    return [cellDictionary valueForKeyPath:CONTENT_DESCRIPTION];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -184,8 +190,8 @@
     NSDictionary *dictionaryForCell = [self.arrayOfTableData objectAtIndex:[indexPath row]];
     
     //Pull the main and detail text label out of the corresponding dictionary
-    NSString *mainTextLabel = [dictionaryForCell valueForKeyPath:[self keyForMainCellLabelText]];
-    NSString *detailTextLabel = [dictionaryForCell valueForKeyPath:[self keyForDetailCellLabelText]];
+    NSString *mainTextLabel = [self mainCellTextLabelForSelectedCellDictionary:dictionaryForCell];
+    NSString *detailTextLabel = [self detailCellTextLabelForSelectedCellDictionary:dictionaryForCell];
     
     //Check if the main text label is equal to NSNULL, if it is replace the text
     if ([mainTextLabel isEqual:[NSNull null]]) mainTextLabel = @"Imago Dei Church";

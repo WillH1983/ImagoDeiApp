@@ -21,13 +21,10 @@ static NSString *const DanaPeopleID = @"1240047";
 
 @interface PlanningCenterViewController ()
 @property (nonatomic, strong)GTMOAuthAuthentication *authentication;
-@property (nonatomic, strong)NSArray *serviceTypes;
-
 @end
 
 @implementation PlanningCenterViewController
 @synthesize authentication = _authentication;
-@synthesize serviceTypes = _serviceTypes;
 
 - (void)signOut {
     
@@ -134,199 +131,58 @@ static NSString *const DanaPeopleID = @"1240047";
     return dictionary;
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)downloadPlanningCenterData
 {
-    [super viewWillAppear:animated];
-    [self.activityIndicator stopAnimating];
-    
     if ([self.authentication canAuthorize]) 
     {
         self.navigationItem.leftBarButtonItem.title = @"Log Out";
         [self.activityIndicator startAnimating];
-        NSMutableURLRequest *xmlURLRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString: @"https://www.planningcenteronline.com/organization.xml"]];
-        [self.authentication authorizeRequest:xmlURLRequest];
-        
-        dispatch_queue_t downloadQueue2 = dispatch_queue_create("downloader", NULL);
-        dispatch_async(downloadQueue2, ^{
-            NSDictionary *xmlData = [self dictionaryForXMLURLString:@"https://www.planningcenteronline.com/organization.xml"];
-            
-            if (xmlData)
+        __block NSArray *tmpArray = [[NSArray alloc] init];
+        dispatch_queue_t downloadQueue = dispatch_queue_create("downloader", NULL);
+        dispatch_async(downloadQueue, ^{
+            NSString *futurePlansURL = [[NSString alloc] initWithString:@"https://www.planningcenteronline.com/me/future_plans.xml"];
+            NSDictionary *futurePlansDictionary = [self dictionaryForXMLURLString:futurePlansURL];
+            if (futurePlansDictionary)
             {
-                id tmpServiceTypes = [xmlData valueForKeyPath:PCOServiceTypes];
-                if ([tmpServiceTypes isKindOfClass:[NSArray class]])
+                id futurePlans = [futurePlansDictionary valueForKeyPath:@"plans.plan"];
+                if ([futurePlans isKindOfClass:[NSDictionary class]])
                 {
-                    self.serviceTypes = tmpServiceTypes;
+                    tmpArray = [tmpArray arrayByAddingObject:futurePlans];
                 }
-                NSArray *serviceTypeIDs = [self.serviceTypes valueForKeyPath:PCOServiceIDsPath];
-                NSDictionary *dictionaryForServiceTypeIDs = nil;
-                NSDictionary *planningDictionary = nil;
-                NSString *planDate = nil;
-                __block NSString *tmpURLString = nil;
-                __block NSDictionary *tmpDictionary = nil;
-                
-                NSMutableArray *tmpUpcomingVolunteerDates = [[NSMutableArray alloc] init];
-                
-                for (int i = 0; i < [serviceTypeIDs count]; i++)
+                else if ([futurePlans isKindOfClass:[NSArray class]]) 
                 {
-                    dictionaryForServiceTypeIDs = [serviceTypeIDs objectAtIndex:i];
-                    NSString *urlString = [NSString stringWithFormat:@"https://www.planningcenteronline.com/service_types/%@/plans.xml?all=true", [dictionaryForServiceTypeIDs valueForKeyPath:@"text"]];
-                    planningDictionary = [self dictionaryForXMLURLString:urlString];
-                    if (planningDictionary) planDate = [planningDictionary valueForKeyPath:@"plans.plan.dates.text"];
-                    if (planDate) 
-                    {
-                        id planDataIDs = [planningDictionary valueForKeyPath:@"plans.plan.id"];
-                        
-                        if ([planDataIDs isKindOfClass:[NSDictionary class]])
-                        {
-                            //[tmpUpcomingVolunteerDates addObject:planData];
-                            tmpURLString = [NSString stringWithFormat:@"https://www.planningcenteronline.com/plans/%@.xml", [planDataIDs valueForKeyPath:@"text"]];
-                            tmpDictionary = [self dictionaryForXMLURLString:tmpURLString];
-                            if (tmpDictionary) [tmpUpcomingVolunteerDates addObject:tmpDictionary];
-                            
-                        }
-                        else if ([planDataIDs isKindOfClass:[NSArray class]])
-                        {
-                            //[tmpUpcomingVolunteerDates addObjectsFromArray:planData];
-                            for (id item in planDataIDs)
-                            {
-                                    tmpURLString = [NSString stringWithFormat:@"https://www.planningcenteronline.com/plans/%@.xml", [item valueForKeyPath:@"text"]];
-                                    tmpDictionary = [self dictionaryForXMLURLString:tmpURLString];
-                                    if (tmpDictionary) [tmpUpcomingVolunteerDates addObject:tmpDictionary];
-                            }
-                        }
-                    }
+                    tmpArray = [tmpArray arrayByAddingObjectsFromArray:futurePlans];
                 }
-                NSArray *tmpArray = [tmpUpcomingVolunteerDates sortedArrayUsingComparator: ^(id obj1, id obj2) {
-                    NSDate *obj1Date = nil;
-                    NSDate *obj2Date = nil;
-                    if ([obj1 isKindOfClass:[NSDictionary class]] & [obj2 isKindOfClass:[NSDictionary class]])
-                    {
-                        //Get a properly formatted date to compare properly
-                        NSArray *obj1ServiceTimes = [obj1 valueForKeyPath:@"plan.service-times.service-time.starts-at.text"];
-                        NSString *obj1DateString = [[NSString alloc] initWithString:[obj1ServiceTimes objectAtIndex:0]];
-                        NSRange obj1Range = [obj1DateString rangeOfString:@"T"];
-                        if (obj1Range.location != NSNotFound) obj1DateString = [obj1DateString substringToIndex:obj1Range.location];
-                        NSDateFormatter *obj1DateFormatter = [[NSDateFormatter alloc] init];
-                        [obj1DateFormatter setDateFormat:@"yyyy-MM-dd"];
-                        obj1Date = [obj1DateFormatter dateFromString:obj1DateString];
-                        
-                        //Get a properly formatted date to compare properly
-                        NSArray *obj2ServiceTimes = [obj2 valueForKeyPath:@"plan.service-times.service-time.starts-at.text"];
-                        NSString *obj2DateString = [[NSString alloc] initWithString:[obj2ServiceTimes objectAtIndex:0]];
-                        NSRange obj2Range = [obj2DateString rangeOfString:@"T"];
-                        if (obj2Range.location != NSNotFound) obj2DateString = [obj2DateString substringToIndex:obj1Range.location];
-                        NSDateFormatter *obj2DateFormatter = [[NSDateFormatter alloc] init];
-                        [obj2DateFormatter setDateFormat:@"yyyy-MM-dd"];
-                        obj2Date = [obj2DateFormatter dateFromString:obj2DateString];
-                        
-                    }
-                    if ([obj1Date compare:obj2Date] == NSOrderedSame)
-                    {
-                        return (NSComparisonResult)NSOrderedSame;
-                    }
-                    else if ([obj1Date compare:obj2Date] == NSOrderedAscending)
-                    {
-                        return (NSComparisonResult)NSOrderedDescending;
-                    }
-                    else
-                    {
-                        return (NSComparisonResult)NSOrderedAscending;
-                    }
-                }];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    self.arrayOfTableData = tmpArray;
-                    [self.activityIndicator stopAnimating];
-                });
             }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.arrayOfTableData = tmpArray;
+                [self.activityIndicator stopAnimating];
+                [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0.0];
+            });
         });
-        dispatch_release(downloadQueue2);
-    }
+        dispatch_release(downloadQueue);
+    } 
 }
 
-- (NSString *)keyForMainCellLabelText
+- (void)viewWillAppear:(BOOL)animated
 {
-    return @"name.text";
+    [super viewWillAppear:animated];
+    [self.activityIndicator stopAnimating];
+    [self downloadPlanningCenterData];
+    
 }
 
-- (NSString *)keyForDetailCellLabelText
+- (NSString *)mainCellTextLabelForSelectedCellDictionary:(NSDictionary *)cellDictionary
 {
-    return @"dates.text";
+    return [cellDictionary valueForKeyPath:@"dates.text"];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (NSString *)detailCellTextLabelForSelectedCellDictionary:(NSDictionary *)cellDictionary
 {
-    //Set the cell identifier to the same as the prototype cell in the story board
-    static NSString *CellIdentifier = @"Main Page Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    NSString *category = [cellDictionary valueForKeyPath:@"my-plan-people.my-plan-person.category-name.text"];
+    NSString *position = [cellDictionary valueForKeyPath:@"my-plan-people.my-plan-person.position.text"];
     
-    
-    //If there is no reusable cell of this type, create a new one
-    if (!cell)
-    {
-        //Set the atributes of the main page cell
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.backgroundColor = [UIColor clearColor];
-        cell.textLabel.textColor = [UIColor colorWithRed:0.29803 green:0.1529 blue:0.0039 alpha:1];
-        cell.detailTextLabel.textColor = [UIColor colorWithRed:0.2666 green:0.2666 blue:0.2666 alpha:1];
-    }
-    
-    //Retrieve the corresponding dictionary to the index row requested
-    NSDictionary *dictionaryForCell = [self.arrayOfTableData objectAtIndex:[indexPath row]];
-    
-    //Pull the main and detail text label out of the corresponding dictionary
-    NSString *detailTextLabel = nil;
-    
-    id planPersonData = [dictionaryForCell valueForKeyPath:@"plan.plan-people.plan-person"];
-    
-    NSString *personID = nil;
-    for (id items in planPersonData)
-    {
-        if ([items isKindOfClass:[NSDictionary class]])
-        {
-            personID = [items valueForKeyPath:@"person-id.text"];
-            if ([DanaPeopleID isEqualToString:personID])
-            {
-                detailTextLabel = [NSString stringWithFormat:@"%@ - %@", [items valueForKeyPath:@"category-name.text"], [items valueForKeyPath:@"position.text"]];
-            }
-        }
-    }
-    
-    NSArray *serviceTimes = [dictionaryForCell valueForKeyPath:@"plan.service-times.service-time.starts-at.text"];
-    //2012-02-12T08:30:00-06:00
-    NSString *mainTextLabel = nil;
-    
-    if ([[serviceTimes objectAtIndex:0] isKindOfClass:[NSString class]])
-    {
-        mainTextLabel = [serviceTimes objectAtIndex:0];
-        NSRange tmpRange = [mainTextLabel rangeOfString:@"T"];
-        if (tmpRange.location != NSNotFound)
-        {
-            mainTextLabel = [mainTextLabel substringToIndex:tmpRange.location];
-        }
-        
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        NSDate *date2 = [dateFormatter dateFromString:mainTextLabel];
-        [dateFormatter setDateStyle:NSDateFormatterFullStyle];
-        mainTextLabel = [dateFormatter stringFromDate:date2];
-    }
-    
-    
-    
-    //Check if the main text label is equal to NSNULL, if it is replace the text
-    if ([mainTextLabel isEqual:[NSNull null]]) mainTextLabel = @"Imago Dei Church";
-    
-    //Set the cell text label's based upon the table contents array location
-    cell.textLabel.text = mainTextLabel;
-    cell.detailTextLabel.text = detailTextLabel;
-    
-    //Make sure that the imageview is set to nil when the cell is reused
-    //this makes sure that the old image does not show up
-    cell.imageView.image = nil;
-    
-    return cell;
+    return [[NSString alloc] initWithFormat:@"%@ - %@", category, position];
 }
 
 - (void)viewController:(GTMOAuthViewControllerTouch *)viewController
@@ -338,7 +194,7 @@ static NSString *const DanaPeopleID = @"1240047";
     } else {
         self.navigationItem.leftBarButtonItem.title = @"Log Out";
         self.authentication = auth;
-        [self.activityIndicator stopAnimating];
+        [self downloadPlanningCenterData];
     }
 }
 - (IBAction)logInOutButtonPressed:(id)sender 
@@ -377,7 +233,7 @@ static NSString *const DanaPeopleID = @"1240047";
 - (void)refresh {
     // This is just a demo. Override this method with your custom reload action.
     // Don't forget to call stopLoading at the end.
-    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:2.0];
+    [self downloadPlanningCenterData];
 }
 
 @end
