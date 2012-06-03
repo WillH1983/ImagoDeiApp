@@ -9,6 +9,7 @@
 #import "PlanningCenterViewController.h"
 #import "GTMOAuthAuthentication.h"
 #import "GTMOAuthViewControllerTouch.h"
+#import <QuartzCore/QuartzCore.h>
 
 static NSString *const kPCOKeychainItemName = @"Imago Dei: Planning Center";
 static NSString *const kPCOServiceName = @"Planning Center";
@@ -18,6 +19,7 @@ static NSString *const PCOServiceIDsPath = @"id";
 static NSString *const PCOServiceTypes = @"organization.service-types.service-type";
 static NSString *const DanaPeopleID = @"1240047";
 
+#define DEGREES_TO_RADIANS(angle) (angle / 180.0 * M_PI)
 
 @interface PlanningCenterViewController ()
 @property (nonatomic, strong)GTMOAuthAuthentication *authentication;
@@ -223,6 +225,7 @@ static NSString *const DanaPeopleID = @"1240047";
     UIButton *declineButton = nil;
     UILabel *cellText = nil;
     UILabel *cellSubtitle = nil;
+    UIImageView *arrow = nil;
     
     //If there is no reusable cell of this type, create a new one
     if (!cell)
@@ -231,10 +234,11 @@ static NSString *const DanaPeopleID = @"1240047";
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
         
-        button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        button.frame = CGRectMake(cell.contentView.bounds.size.width - 50, 2, 40, 40);
+        button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(cell.contentView.bounds.size.width - 70, 2, 65, 40);
         [button addTarget:self action:@selector(cellButtonPushed:) forControlEvents:UIControlEventTouchUpInside];
         button.tag = 1;
+        
         [cell.contentView addSubview:button];
         
         acceptButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -261,6 +265,11 @@ static NSString *const DanaPeopleID = @"1240047";
         cellSubtitle.tag = 5;
         [cell.contentView addSubview:cellSubtitle];
         
+        arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow-sideways.png"]];
+        arrow.frame = CGRectMake(cell.contentView.bounds.size.width - 45, 12, 40, 20);
+        arrow.tag = 6;
+        [cell.contentView addSubview:arrow];
+        
         cell.backgroundColor = [UIColor clearColor];
     }
     else 
@@ -270,6 +279,7 @@ static NSString *const DanaPeopleID = @"1240047";
         declineButton = (UIButton *)[cell.contentView viewWithTag:3];
         cellText = (UILabel *)[cell.contentView viewWithTag:4];
         cellSubtitle = (UILabel *)[cell.contentView viewWithTag:5];
+        arrow = (UIImageView *)[cell.contentView viewWithTag:6];
     }
     
     //Retrieve the corresponding dictionary to the index row requested
@@ -279,21 +289,87 @@ static NSString *const DanaPeopleID = @"1240047";
     
     if ([isEditing isEqualToString:@"YES"])
     {
-        acceptButton.frame = CGRectMake(5, 44, 99, 54);
-        [acceptButton setImage:[UIImage imageNamed:@"btn_accept"] forState:UIControlStateNormal];
+        acceptButton.frame = CGRectMake(5, 50, 99, 45);
+        UIImage *greenAcceptButtonImage = [UIImage imageNamed:@"greenButton.png"];
+        UIImage *stretchableGreenAcceptButton = [greenAcceptButtonImage stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+        [acceptButton setBackgroundImage:stretchableGreenAcceptButton forState:UIControlStateNormal];
         
-        declineButton.frame = CGRectMake(110, 44, 99, 54);
-        [declineButton setImage:[UIImage imageNamed:@"btn_decline"] forState:UIControlStateNormal];
+        UIImage *darkGreenAcceptButtonImage = [UIImage imageNamed:@"greenButtonActivated.png"];
+        UIImage *stretchabledarkGreenAcceptButton = [darkGreenAcceptButtonImage stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+        [acceptButton setBackgroundImage:stretchabledarkGreenAcceptButton forState:UIControlStateHighlighted];
+        [acceptButton setTitle:@"Accept" forState:UIControlStateNormal];
+        
+        declineButton.frame = CGRectMake(110, 50, 99, 45);
+        UIImage *redDeclineButtonImage = [UIImage imageNamed:@"redButton.png"];
+        UIImage *stretchableRedDeclineButton = [redDeclineButtonImage stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+        [declineButton setBackgroundImage:stretchableRedDeclineButton forState:UIControlStateNormal];
+        
+        UIImage *darkRedDeclineButtonImage = [UIImage imageNamed:@"redButtonActivated.png"];
+        UIImage *stretchabledarkRedDeclineButton = [darkRedDeclineButtonImage stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+        [declineButton setBackgroundImage:stretchabledarkRedDeclineButton forState:UIControlStateHighlighted];
+        [declineButton setTitle:@"Decline" forState:UIControlStateNormal];
+        
+        // Setup the animation
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0];
+        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+        [UIView setAnimationBeginsFromCurrentState:YES];
+        
+        [arrow layer].transform = CATransform3DMakeRotation(M_PI/2, 0, 0, 1);
+        // Commit the changes
+        [UIView commitAnimations];
     }
     else 
     {
         acceptButton.frame = CGRectZero;
         declineButton.frame = CGRectZero;
+        
+        // Setup the animation
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0];
+        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+        [UIView setAnimationBeginsFromCurrentState:YES];
+        
+        [arrow layer].transform = CATransform3DMakeRotation(M_PI * 2, 0, 0, 1);
+        // Commit the changes
+        [UIView commitAnimations];
     }
     
     NSString *status = [dictionaryForCell valueForKeyPath:@"my-plan-people.my-plan-person.status.text"];
     
-    [button setTitle:status forState:UIControlStateNormal];
+    if ([status isEqualToString:@"C"])
+    {
+        UIImage *greenButtonImage = [UIImage imageNamed:@"greenButton.png"];
+        UIImage *stretchableGreenButton = [greenButtonImage stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+        [button setBackgroundImage:stretchableGreenButton forState:UIControlStateNormal];
+        
+        UIImage *darkGreenButtonImage = [UIImage imageNamed:@"greenButtonActivated.png"];
+        UIImage *stretchabledarkGreenButton = [darkGreenButtonImage stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+        [button setBackgroundImage:stretchabledarkGreenButton forState:UIControlStateHighlighted];
+        [button setTitle:@"A     " forState:UIControlStateNormal];
+    }
+    else if ([status isEqualToString:@"U"])
+    {
+        UIImage *yellowButtonImage = [UIImage imageNamed:@"yellowButton.png"];
+        UIImage *stretchableYellowButton = [yellowButtonImage stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+        [button setBackgroundImage:stretchableYellowButton forState:UIControlStateNormal];
+        
+        UIImage *darkYellowButtonImage = [UIImage imageNamed:@"yellowButtonActivated.png"];
+        UIImage *stretchabledarkYellowButton = [darkYellowButtonImage stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+        [button setBackgroundImage:stretchabledarkYellowButton forState:UIControlStateHighlighted];
+        [button setTitle:@"U     " forState:UIControlStateNormal];
+    }
+    else {
+        UIImage *redButtonImage = [UIImage imageNamed:@"redButton.png"];
+        UIImage *stretchableRedButton = [redButtonImage stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+        [button setBackgroundImage:stretchableRedButton forState:UIControlStateNormal];
+        
+        UIImage *darkRedButtonImage = [UIImage imageNamed:@"redButtonActivated.png"];
+        UIImage *stretchabledarkRedButton = [darkRedButtonImage stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+        [button setBackgroundImage:stretchabledarkRedButton forState:UIControlStateHighlighted];
+        [button setTitle:@"D     " forState:UIControlStateNormal];
+    }
+    
     
     //Pull the main and detail text label out of the corresponding dictionary
     NSString *mainTextLabel = [self mainCellTextLabelForSelectedCellDictionary:dictionaryForCell];

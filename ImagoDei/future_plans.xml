@@ -35,7 +35,7 @@
       <my-plan-person>
         <excluded-times>10115411,10115413</excluded-times>
         <person-name>Will Hindenburg</person-name>
-        <status>U</status>
+        <status>C</status>
         <category-name>Genesis 8:30 AM</category-name>
         <category-id type="integer">508204</category-id>
         <person-photo-thumbnail>/photos/thumbnail/missing.png</person-photo-thumbnail>
@@ -86,7 +86,7 @@
       <my-plan-person>
         <excluded-times>10115411,10115413</excluded-times>
         <person-name>Will Hindenburg</person-name>
-        <status>U</status>
+        <status>D</status>
         <category-name>Genesis 8:30 AM</category-name>
         <category-id type="integer">508204</category-id>
         <person-photo-thumbnail>/photos/thumbnail/missing.png</person-photo-thumbnail>
