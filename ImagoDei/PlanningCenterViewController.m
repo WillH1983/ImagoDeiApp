@@ -123,10 +123,13 @@ static NSString *const DanaPeopleID = @"1240047";
 
 - (NSDictionary *)dictionaryForXMLURLString:(NSString *)urlString
 {
-    NSMutableURLRequest *xmlURLRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+    /*NSMutableURLRequest *xmlURLRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
     [self.authentication authorizeRequest:xmlURLRequest];
     NSHTTPURLResponse *response;
     NSData *xmlData = [NSURLConnection sendSynchronousRequest:xmlURLRequest returningResponse:&response error:nil];
+    NSDictionary *dictionary = [XMLReader dictionaryForXMLData:xmlData error:nil];*/
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"future_plans" ofType:@"xml"];
+    NSData *xmlData = [[NSData alloc] initWithContentsOfFile:filePath];
     NSDictionary *dictionary = [XMLReader dictionaryForXMLData:xmlData error:nil];
     return dictionary;
 }
@@ -183,6 +186,145 @@ static NSString *const DanaPeopleID = @"1240047";
     NSString *position = [cellDictionary valueForKeyPath:@"my-plan-people.my-plan-person.position.text"];
     
     return [[NSString alloc] initWithFormat:@"%@ - %@", category, position];
+}
+
+- (void)cellButtonPushed:(id)sender
+{
+    UIView *cellView = [sender superview];
+    UITableViewCell *cell = (UITableViewCell *)[cellView superview];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    id object = [self.arrayOfTableData objectAtIndex:indexPath.row];
+    if ([object isKindOfClass:[NSMutableDictionary class]])
+    {
+        NSMutableDictionary *dictionary = object;
+        NSString *isEditing = [dictionary valueForKeyPath:@"isEditing"];
+        if ((isEditing == nil) || ([isEditing isEqualToString:@"NO"]))
+        {
+            [dictionary setObject:@"YES" forKey:@"isEditing"];
+            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
+        else if ([isEditing isEqualToString:@"YES"])
+        {
+            [dictionary setObject:@"NO" forKey:@"isEditing"];
+            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
+        
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //Set the cell identifier to the same as the prototype cell in the story board
+    static NSString *CellIdentifier = @"Planning Center Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    UIButton *button = nil;
+    UIButton *acceptButton = nil;
+    UIButton *declineButton = nil;
+    UILabel *cellText = nil;
+    UILabel *cellSubtitle = nil;
+    
+    //If there is no reusable cell of this type, create a new one
+    if (!cell)
+    {
+        //Set the atributes of the main page cell
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        
+        button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        button.frame = CGRectMake(cell.contentView.bounds.size.width - 50, 2, 40, 40);
+        [button addTarget:self action:@selector(cellButtonPushed:) forControlEvents:UIControlEventTouchUpInside];
+        button.tag = 1;
+        [cell.contentView addSubview:button];
+        
+        acceptButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        acceptButton.tag = 2;
+        [cell.contentView addSubview:acceptButton];
+        
+        declineButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        declineButton.tag = 3;
+        [cell.contentView addSubview:declineButton];
+        
+        cellText = [[UILabel alloc] init];
+        cellText.frame = CGRectMake(10, 0, 225, 21);
+        cellText.backgroundColor = [UIColor clearColor];
+        cellText.font = [UIFont boldSystemFontOfSize:18.0];
+        cellText.textColor = [UIColor colorWithRed:0.29803 green:0.1529 blue:0.0039 alpha:1];
+        cellText.tag = 4;
+        [cell.contentView addSubview:cellText];
+        
+        cellSubtitle = [[UILabel alloc] init];
+        cellSubtitle.frame = CGRectMake(10, 20, 225, 21);
+        cellSubtitle.backgroundColor = [UIColor clearColor];
+        cellSubtitle.font = [UIFont systemFontOfSize:14.0];
+        cellSubtitle.textColor = [UIColor colorWithRed:0.2666 green:0.2666 blue:0.2666 alpha:1];
+        cellSubtitle.tag = 5;
+        [cell.contentView addSubview:cellSubtitle];
+        
+        cell.backgroundColor = [UIColor clearColor];
+    }
+    else 
+    {
+        button = (UIButton *)[cell.contentView viewWithTag:1];
+        acceptButton = (UIButton *)[cell.contentView viewWithTag:2];
+        declineButton = (UIButton *)[cell.contentView viewWithTag:3];
+        cellText = (UILabel *)[cell.contentView viewWithTag:4];
+        cellSubtitle = (UILabel *)[cell.contentView viewWithTag:5];
+    }
+    
+    //Retrieve the corresponding dictionary to the index row requested
+    NSDictionary *dictionaryForCell = [self.arrayOfTableData objectAtIndex:[indexPath row]];
+    
+    NSString *isEditing = [dictionaryForCell valueForKeyPath:@"isEditing"];
+    
+    if ([isEditing isEqualToString:@"YES"])
+    {
+        acceptButton.frame = CGRectMake(5, 44, 99, 54);
+        [acceptButton setImage:[UIImage imageNamed:@"btn_accept"] forState:UIControlStateNormal];
+        
+        declineButton.frame = CGRectMake(110, 44, 99, 54);
+        [declineButton setImage:[UIImage imageNamed:@"btn_decline"] forState:UIControlStateNormal];
+    }
+    else 
+    {
+        acceptButton.frame = CGRectZero;
+        declineButton.frame = CGRectZero;
+    }
+    
+    NSString *status = [dictionaryForCell valueForKeyPath:@"my-plan-people.my-plan-person.status.text"];
+    
+    [button setTitle:status forState:UIControlStateNormal];
+    
+    //Pull the main and detail text label out of the corresponding dictionary
+    NSString *mainTextLabel = [self mainCellTextLabelForSelectedCellDictionary:dictionaryForCell];
+    NSString *detailTextLabel = [self detailCellTextLabelForSelectedCellDictionary:dictionaryForCell];
+    
+    //Check if the main text label is equal to NSNULL, if it is replace the text
+    if ([mainTextLabel isEqual:[NSNull null]]) mainTextLabel = @"Imago Dei Church";
+    
+    //Set the cell text label's based upon the table contents array location
+    cellText.text = mainTextLabel;
+    cellSubtitle.text = detailTextLabel;
+    
+    //Make sure that the imageview is set to nil when the cell is reused
+    //this makes sure that the old image does not show up
+    cell.imageView.image = nil;
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    id object = [self.arrayOfTableData objectAtIndex:indexPath.row];
+    if ([object isKindOfClass:[NSMutableDictionary class]]){
+        NSMutableDictionary *dictionary = object;
+        NSString * tmpString = [dictionary valueForKeyPath:@"isEditing"];
+        if ([tmpString isEqualToString:@"YES"]) 
+        {
+            return 105;
+        }
+    }
+    return 44;
 }
 
 - (void)viewController:(GTMOAuthViewControllerTouch *)viewController

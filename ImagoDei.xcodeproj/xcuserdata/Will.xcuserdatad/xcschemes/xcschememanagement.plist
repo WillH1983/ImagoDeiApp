@@ -9,9 +9,19 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>ImagoDeiLogicTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>BE56D5B1157AB68C0027A519</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>BEDF1E55154791C4009FCA21</key>
 		<dict>
 			<key>primary</key>
