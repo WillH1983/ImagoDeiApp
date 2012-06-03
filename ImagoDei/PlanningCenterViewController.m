@@ -10,6 +10,7 @@
 #import "GTMOAuthAuthentication.h"
 #import "GTMOAuthViewControllerTouch.h"
 #import <QuartzCore/QuartzCore.h>
+#import "WebViewController.h"
 
 static NSString *const kPCOKeychainItemName = @"Imago Dei: Planning Center";
 static NSString *const kPCOServiceName = @"Planning Center";
@@ -125,14 +126,14 @@ static NSString *const DanaPeopleID = @"1240047";
 
 - (NSDictionary *)dictionaryForXMLURLString:(NSString *)urlString
 {
-    /*NSMutableURLRequest *xmlURLRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+    NSMutableURLRequest *xmlURLRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
     [self.authentication authorizeRequest:xmlURLRequest];
     NSHTTPURLResponse *response;
     NSData *xmlData = [NSURLConnection sendSynchronousRequest:xmlURLRequest returningResponse:&response error:nil];
-    NSDictionary *dictionary = [XMLReader dictionaryForXMLData:xmlData error:nil];*/
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"future_plans" ofType:@"xml"];
-    NSData *xmlData = [[NSData alloc] initWithContentsOfFile:filePath];
     NSDictionary *dictionary = [XMLReader dictionaryForXMLData:xmlData error:nil];
+    /*NSString *filePath = [[NSBundle mainBundle] pathForResource:@"future_plans" ofType:@"xml"];
+    NSData *xmlData = [[NSData alloc] initWithContentsOfFile:filePath];
+    NSDictionary *dictionary = [XMLReader dictionaryForXMLData:xmlData error:nil];*/
     return dictionary;
 }
 
@@ -214,6 +215,43 @@ static NSString *const DanaPeopleID = @"1240047";
     }
 }
 
+- (void)acceptButtonPressed:(id)sender
+{
+    UIView *cellView = [sender superview];
+    UITableViewCell *cell = (UITableViewCell *)[cellView superview];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    id object = [self.arrayOfTableData objectAtIndex:indexPath.row];
+    if ([object isKindOfClass:[NSDictionary class]])
+    {
+        NSDictionary *tmpDictionary = object;
+        NSString *acceptURL = [NSString stringWithFormat:@"https://www.planningcenteronline.com/planning_center/accept/%@", [tmpDictionary valueForKeyPath:@"my-plan-people.my-plan-person.access-code.text"]];
+        [self performSegueWithIdentifier:@"AcceptDecline" sender:acceptURL];
+    }
+}
+
+- (void)declineButtonPressed:(id)sender
+{
+    UIView *cellView = [sender superview];
+    UITableViewCell *cell = (UITableViewCell *)[cellView superview];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    id object = [self.arrayOfTableData objectAtIndex:indexPath.row];
+    if ([object isKindOfClass:[NSDictionary class]])
+    {
+        NSDictionary *tmpDictionary = object;
+        NSString *declineURL = [NSString stringWithFormat:@"https://www.planningcenteronline.com/planning_center/decline/%@", [tmpDictionary valueForKeyPath:@"my-plan-people.my-plan-person.access-code.text"]];
+        [self performSegueWithIdentifier:@"AcceptDecline" sender:declineURL];
+    }
+        
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"AcceptDecline"])
+    {
+        [segue.destinationViewController setUrlToLoad:[NSURL URLWithString:sender]];
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //Set the cell identifier to the same as the prototype cell in the story board
@@ -242,10 +280,12 @@ static NSString *const DanaPeopleID = @"1240047";
         [cell.contentView addSubview:button];
         
         acceptButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [acceptButton addTarget:self action:@selector(acceptButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         acceptButton.tag = 2;
         [cell.contentView addSubview:acceptButton];
         
         declineButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [declineButton addTarget:self action:@selector(declineButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         declineButton.tag = 3;
         [cell.contentView addSubview:declineButton];
         

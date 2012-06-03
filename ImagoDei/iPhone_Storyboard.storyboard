@@ -100,6 +100,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="BTS-Sc-wzZ" kind="push" identifier="AcceptDecline" id="8sg-Z4-NwM"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="977" y="1093"/>
@@ -231,7 +234,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1580" y="1059"/>
+            <point key="canvasLocation" x="1580" y="1093"/>
         </scene>
         <!--Image View Controller-->
         <scene sceneID="H0F-nv-bSU">
@@ -305,4 +308,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="8sg-Z4-NwM"/>
+    </inferredMetricsTieBreakers>
 </document>
