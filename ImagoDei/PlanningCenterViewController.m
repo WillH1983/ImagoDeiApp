@@ -160,8 +160,30 @@ static NSString *const DanaPeopleID = @"1240047";
                     tmpArray = [tmpArray arrayByAddingObjectsFromArray:futurePlans];
                 }
             }
+            
+            NSMutableArray *mutableArray = [tmpArray mutableCopy];
+            for (int x = 0; x < [mutableArray count]; x++)
+            {
+                id items = [mutableArray objectAtIndex:x];
+                id planPerson = [items valueForKeyPath:@"my-plan-people.my-plan-person"];
+                if ([planPerson isKindOfClass:[NSArray class]])
+                {
+                    if ([items isKindOfClass:[NSMutableDictionary class]])
+                    {
+                        [mutableArray removeObjectAtIndex:x];
+                        NSMutableDictionary *myPlanPerson = nil;
+                        for (int i = 0; i < [planPerson count]; i++)
+                        {
+                            myPlanPerson = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[planPerson objectAtIndex:i], @"my-plan-person", nil];
+                            NSMutableDictionary *tmpItems = [items mutableCopy];
+                            [tmpItems setObject:myPlanPerson forKey:@"my-plan-people"];
+                            [mutableArray insertObject:tmpItems atIndex:(x + i)];
+                        }
+                    }
+                }
+            }
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.arrayOfTableData = tmpArray;
+                self.arrayOfTableData = mutableArray;
                 [self.activityIndicator stopAnimating];
                 [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0.0];
             });

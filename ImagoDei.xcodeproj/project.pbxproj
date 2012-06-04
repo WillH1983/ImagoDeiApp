@@ -85,6 +85,7 @@
 		BED7881B1559F008003CDEA1 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED7881A1559F007003CDEA1 /* Icon-72@2x.png */; };
 		BED7881D1559F00C003CDEA1 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = BED7881C1559F00C003CDEA1 /* Icon-72.png */; };
 		BED87DE41562D6BD00141114 /* ImagoDeiStandardTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BED87DE31562D6BD00141114 /* ImagoDeiStandardTableViewController.m */; };
+		BEDAF47B157C6D0400606339 /* future_plans2.xml in Resources */ = {isa = PBXBuildFile; fileRef = BEDAF47A157C6D0400606339 /* future_plans2.xml */; };
 		BEDF1E5B154791C4009FCA21 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDF1E5A154791C4009FCA21 /* UIKit.framework */; };
 		BEDF1E5D154791C4009FCA21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDF1E5C154791C4009FCA21 /* Foundation.framework */; };
 		BEDF1E5F154791C4009FCA21 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDF1E5E154791C4009FCA21 /* CoreGraphics.framework */; };
@@ -201,6 +202,7 @@
 		BED7881C1559F00C003CDEA1 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		BED87DE21562D6BD00141114 /* ImagoDeiStandardTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagoDeiStandardTableViewController.h; sourceTree = "<group>"; };
 		BED87DE31562D6BD00141114 /* ImagoDeiStandardTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagoDeiStandardTableViewController.m; sourceTree = "<group>"; };
+		BEDAF47A157C6D0400606339 /* future_plans2.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = future_plans2.xml; sourceTree = "<group>"; };
 		BEDF1E56154791C4009FCA21 /* ImagoDei.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImagoDei.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEDF1E5A154791C4009FCA21 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BEDF1E5C154791C4009FCA21 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -439,6 +441,7 @@
 				BE6295481547A8AA00CE719E /* RSSParser.h */,
 				BE6295491547A8AA00CE719E /* RSSParser.m */,
 				BE56D5C8157AE15D0027A519 /* future_plans.xml */,
+				BEDAF47A157C6D0400606339 /* future_plans2.xml */,
 				BEDF1E951547955C009FCA21 /* ImageViewController.h */,
 				BE2F9B09156C9D5D008C434A /* WebViewController.h */,
 				BE2F9B07156C9D54008C434A /* WebViewController.m */,
@@ -685,6 +688,7 @@
 				BE56D5E1157B12790027A519 /* greenButtonActivated@2x.png in Resources */,
 				BE56D5E2157B12790027A519 /* greenButton@2x.png in Resources */,
 				BE56D5E4157B270D0027A519 /* arrow-sideways.png in Resources */,
+				BEDAF47B157C6D0400606339 /* future_plans2.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -890,6 +894,7 @@
 				BE56D5C3157AB68C0027A519 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BEDF1E50154791C4009FCA21 /* Build configuration list for PBXProject "ImagoDei" */ = {
 			isa = XCConfigurationList;
