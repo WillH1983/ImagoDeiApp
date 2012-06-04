@@ -159,7 +159,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //Set the cell identifier to the same as the prototype cell in the story board
-    static NSString *CellIdentifier = @"Main Page Cell";
+    static NSString *CellIdentifier = @"Facebook Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     UITextView *textView = nil;
     UIButton *commentsButton = nil;
@@ -169,7 +169,9 @@
     if (!cell)
     {
         //Set the atributes of the main page cell
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.backgroundColor = [UIColor clearColor];
+        
         textView = [[UITextView alloc] initWithFrame:CGRectZero];
         textView.font = [UIFont systemFontOfSize:FACEBOOK_FONT_SIZE];
         textView.scrollEnabled = NO;
@@ -190,6 +192,7 @@
         [buttonImage addTarget:self action:@selector(postImageButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         buttonImage.tag = 3;
         [cell.contentView addSubview:buttonImage];
+
     }
     else 
     {
