@@ -351,23 +351,25 @@ static NSString *const DanaPeopleID = @"1240047";
     
     if ([isEditing isEqualToString:@"YES"])
     {
+        UIEdgeInsets AcceptDeclineEdge = UIEdgeInsetsMake(12, 12, 12, 12);
+        
         acceptButton.frame = CGRectMake(5, 50, 99, 45);
         UIImage *greenAcceptButtonImage = [UIImage imageNamed:@"greenButton.png"];
-        UIImage *stretchableGreenAcceptButton = [greenAcceptButtonImage stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+        UIImage *stretchableGreenAcceptButton = [greenAcceptButtonImage resizableImageWithCapInsets:AcceptDeclineEdge];
         [acceptButton setBackgroundImage:stretchableGreenAcceptButton forState:UIControlStateNormal];
         
         UIImage *darkGreenAcceptButtonImage = [UIImage imageNamed:@"greenButtonActivated.png"];
-        UIImage *stretchabledarkGreenAcceptButton = [darkGreenAcceptButtonImage stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+        UIImage *stretchabledarkGreenAcceptButton = [darkGreenAcceptButtonImage resizableImageWithCapInsets:AcceptDeclineEdge];
         [acceptButton setBackgroundImage:stretchabledarkGreenAcceptButton forState:UIControlStateHighlighted];
         [acceptButton setTitle:@"Accept" forState:UIControlStateNormal];
         
         declineButton.frame = CGRectMake(110, 50, 99, 45);
         UIImage *redDeclineButtonImage = [UIImage imageNamed:@"redButton.png"];
-        UIImage *stretchableRedDeclineButton = [redDeclineButtonImage stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+        UIImage *stretchableRedDeclineButton = [redDeclineButtonImage resizableImageWithCapInsets:AcceptDeclineEdge];
         [declineButton setBackgroundImage:stretchableRedDeclineButton forState:UIControlStateNormal];
         
         UIImage *darkRedDeclineButtonImage = [UIImage imageNamed:@"redButtonActivated.png"];
-        UIImage *stretchabledarkRedDeclineButton = [darkRedDeclineButtonImage stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+        UIImage *stretchabledarkRedDeclineButton = [darkRedDeclineButtonImage resizableImageWithCapInsets:AcceptDeclineEdge];
         [declineButton setBackgroundImage:stretchabledarkRedDeclineButton forState:UIControlStateHighlighted];
         [declineButton setTitle:@"Decline" forState:UIControlStateNormal];
         
@@ -398,36 +400,36 @@ static NSString *const DanaPeopleID = @"1240047";
     }
     
     NSString *status = [dictionaryForCell valueForKeyPath:@"my-plan-people.my-plan-person.status.text"];
-    
+     UIEdgeInsets smallButtonEdge = UIEdgeInsetsMake(12, 12, 12, 12);
     if ([status isEqualToString:@"C"])
     {
         UIImage *greenButtonImage = [UIImage imageNamed:@"greenButton.png"];
-        UIImage *stretchableGreenButton = [greenButtonImage stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+        UIImage *stretchableGreenButton = [greenButtonImage resizableImageWithCapInsets:smallButtonEdge];
         [button setBackgroundImage:stretchableGreenButton forState:UIControlStateNormal];
         
         UIImage *darkGreenButtonImage = [UIImage imageNamed:@"greenButtonActivated.png"];
-        UIImage *stretchabledarkGreenButton = [darkGreenButtonImage stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+        UIImage *stretchabledarkGreenButton = [darkGreenButtonImage resizableImageWithCapInsets:smallButtonEdge];
         [button setBackgroundImage:stretchabledarkGreenButton forState:UIControlStateHighlighted];
         [button setTitle:@"A     " forState:UIControlStateNormal];
     }
     else if ([status isEqualToString:@"U"])
     {
         UIImage *yellowButtonImage = [UIImage imageNamed:@"yellowButton.png"];
-        UIImage *stretchableYellowButton = [yellowButtonImage stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+        UIImage *stretchableYellowButton = [yellowButtonImage resizableImageWithCapInsets:smallButtonEdge];
         [button setBackgroundImage:stretchableYellowButton forState:UIControlStateNormal];
         
         UIImage *darkYellowButtonImage = [UIImage imageNamed:@"yellowButtonActivated.png"];
-        UIImage *stretchabledarkYellowButton = [darkYellowButtonImage stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+        UIImage *stretchabledarkYellowButton = [darkYellowButtonImage resizableImageWithCapInsets:smallButtonEdge];
         [button setBackgroundImage:stretchabledarkYellowButton forState:UIControlStateHighlighted];
         [button setTitle:@"U     " forState:UIControlStateNormal];
     }
     else {
         UIImage *redButtonImage = [UIImage imageNamed:@"redButton.png"];
-        UIImage *stretchableRedButton = [redButtonImage stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+        UIImage *stretchableRedButton = [redButtonImage resizableImageWithCapInsets:smallButtonEdge];
         [button setBackgroundImage:stretchableRedButton forState:UIControlStateNormal];
         
         UIImage *darkRedButtonImage = [UIImage imageNamed:@"redButtonActivated.png"];
-        UIImage *stretchabledarkRedButton = [darkRedButtonImage stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+        UIImage *stretchabledarkRedButton = [darkRedButtonImage resizableImageWithCapInsets:smallButtonEdge];
         [button setBackgroundImage:stretchabledarkRedButton forState:UIControlStateHighlighted];
         [button setTitle:@"D     " forState:UIControlStateNormal];
     }
@@ -462,7 +464,7 @@ static NSString *const DanaPeopleID = @"1240047";
             return 105;
         }
     }
-    return 44;
+    return 48;
 }
 
 - (void)viewController:(GTMOAuthViewControllerTouch *)viewController

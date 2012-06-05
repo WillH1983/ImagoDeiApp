@@ -34,6 +34,7 @@
 #define FACEBOOK_COMMENTS_BUTTON_HEIGHT 20.0
 #define FACEBOOK_PHOTO_WIDTH 300.0
 #define FACEBOOK_PHOTO_HEIGHT 200.0
+#define FACEBOOK_TEXTVIEW_POSITION_FROM_TOP 50
 
 - (NSMutableDictionary *)photoDictionary
 {
@@ -123,7 +124,7 @@
     
     //Begin the facebook request, the data that comes back form this method will be used
     //to populate the UITableView
-    [self.facebook requestWithGraphPath:@"ImagoDeiChurch/posts" andDelegate:self];
+    [self.facebook requestWithGraphPath:@"imagodeichurch/feed" andDelegate:self];
 }
 
 #pragma mark - Table view data source
@@ -164,12 +165,13 @@
     UITextView *textView = nil;
     UIButton *commentsButton = nil;
     UIButton *buttonImage = nil;
+    UIImageView *profileImageView = nil;
     
     //If there is no reusable cell of this type, create a new one
     if (!cell)
     {
         //Set the atributes of the main page cell
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.backgroundColor = [UIColor clearColor];
         
         textView = [[UITextView alloc] initWithFrame:CGRectZero];
@@ -192,6 +194,10 @@
         [buttonImage addTarget:self action:@selector(postImageButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         buttonImage.tag = 3;
         [cell.contentView addSubview:buttonImage];
+        
+        profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 40, 40)];
+        profileImageView.tag = 4;
+        [cell.contentView addSubview:profileImageView];
 
     }
     else 
@@ -199,11 +205,13 @@
         textView = (UITextView *)[cell.contentView viewWithTag:1];
         commentsButton = (UIButton *)[cell.contentView viewWithTag:2];
         buttonImage = (UIButton *)[cell.contentView viewWithTag:3];
+        profileImageView = (UIImageView *)[cell.contentView viewWithTag:4];
     }
     
     commentsButton.frame = CGRectZero;
     buttonImage.frame = CGRectZero;
     [buttonImage setBackgroundImage:nil forState:UIControlStateNormal];
+    profileImageView.image = [UIImage imageWithCIImage:[CIImage emptyImage]];
     
     //Retrieve the corresponding dictionary to the index row requested
     NSDictionary *dictionaryForCell = [self.arrayOfTableData objectAtIndex:[indexPath row]];
@@ -224,27 +232,26 @@
     CGSize maxSize = CGSizeMake(320 - FACEBOOK_FONT_SIZE, CGFLOAT_MAX);
     CGSize size = [mainTextLabel sizeWithFont:[UIFont systemFontOfSize:FACEBOOK_FONT_SIZE]  constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];
     size.height += FACEBOOK_TEXTVIEW_TOP_MARGIN;
-    textView.frame = CGRectMake(0, 0, 320, size.height);
-    
+    textView.frame = CGRectMake(0, FACEBOOK_TEXTVIEW_POSITION_FROM_TOP, 320, size.height);
     NSNumber *count = [dictionaryForCell valueForKeyPath:@"comments.count"];
     if ([typeOfPost isEqualToString:@"status"])
     {
         buttonImage.frame = CGRectZero;
         if ([count intValue] > 0)
         {
-            commentsButton.frame = CGRectMake(310 - FACEBOOK_COMMENTS_BUTTON_WIDTH, size.height + FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS, FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_COMMENTS_BUTTON_HEIGHT);
+            commentsButton.frame = CGRectMake(310 - FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_TEXTVIEW_POSITION_FROM_TOP + size.height + FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS, FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_COMMENTS_BUTTON_HEIGHT);
             NSString *commentsString = [[NSString alloc] initWithFormat:@"%@ Comments", count];
             [commentsButton setTitle:commentsString forState:UIControlStateNormal];
         }
     }
     else if ([typeOfPost isEqualToString:@"photo"])
     {
-        buttonImage.frame = CGRectMake(10, size.height + FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS, FACEBOOK_PHOTO_WIDTH, FACEBOOK_PHOTO_HEIGHT);
+        buttonImage.frame = CGRectMake(10, FACEBOOK_TEXTVIEW_POSITION_FROM_TOP + size.height + FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS, FACEBOOK_PHOTO_WIDTH, FACEBOOK_PHOTO_HEIGHT);
         [buttonImage setImage:[UIImage imageWithCIImage:[CIImage emptyImage]] forState:UIControlStateNormal];
         
         if ([count intValue] > 0)
         {
-            commentsButton.frame = CGRectMake(310 - FACEBOOK_COMMENTS_BUTTON_WIDTH, size.height + (FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS * 2) + FACEBOOK_PHOTO_HEIGHT, FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_COMMENTS_BUTTON_HEIGHT);
+            commentsButton.frame = CGRectMake(310 - FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_TEXTVIEW_POSITION_FROM_TOP + size.height + (FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS * 2) + FACEBOOK_PHOTO_HEIGHT, FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_COMMENTS_BUTTON_HEIGHT);
             NSString *commentsString = [[NSString alloc] initWithFormat:@"%@ Comments", count];
             [commentsButton setTitle:commentsString forState:UIControlStateNormal];
         }
@@ -258,20 +265,20 @@
 - (void)tableView:(UITableView *)tableview willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *tmpDictionary = [self.arrayOfTableData objectAtIndex:[indexPath row]];
-    NSString *type = [tmpDictionary valueForKeyPath:@"type"];
+    NSString *pictureID = [tmpDictionary valueForKeyPath:@"object_id"];
+    NSString *profileFromId = [tmpDictionary valueForKeyPath:@"from.id"];
 
-    if (![type isEqualToString:@"photo"]) return;
+    //if (![type isEqualToString:@"photo"]) return;
     
-    NSData *picture = [self.photoDictionary objectForKey:indexPath];
-    
+    NSData *picture = [self.photoDictionary objectForKey:pictureID];
+    NSData *profilePicture = [self.photoDictionary objectForKey:profileFromId];
     if (picture)
     {
         UIButton *buttonImage = (UIButton *)[cell.contentView viewWithTag:3];
         [buttonImage setBackgroundImage:[UIImage imageWithData:picture] forState:UIControlStateNormal];
-        return;
     }
     
-    NSString *pictureID = [tmpDictionary valueForKeyPath:@"object_id"];
+    NSString *urlStringForProfilePicture = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture", profileFromId];
     NSString *urlStringForPicture = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture", pictureID];
     
     dispatch_queue_t downloadQueue = dispatch_queue_create("Profile Image Downloader", NULL);
@@ -279,14 +286,22 @@
         NSLog(@"Picture Downloaded");
         NSURL *url = [[NSURL alloc] initWithString:urlStringForPicture];
         NSData *picture = [NSData dataWithContentsOfURL:url];
-        [self.photoDictionary setObject:picture forKey:indexPath];
+        if (picture) [self.photoDictionary setObject:picture forKey:pictureID];
         UIImage *image = [UIImage imageWithData:picture];
+        
+        
+        NSURL *profileUrl = [[NSURL alloc] initWithString:urlStringForProfilePicture];
+        UIImage *profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:profileUrl]];
+        if (profileImage) [self.photoDictionary setObject:profileImage forKey:profileFromId];
         dispatch_async(dispatch_get_main_queue(), ^{
             NSArray *tmpArray = [self.tableView indexPathsForVisibleRows];
             if ([tmpArray containsObject:indexPath])
             {
                 UIButton *buttonImage = (UIButton *)[cell.contentView viewWithTag:3];
                 [buttonImage setBackgroundImage:image forState:UIControlStateNormal];
+                
+                UIImageView *profileImageView = (UIImageView *)[cell.contentView viewWithTag:4];
+                [profileImageView setImage:profileImage];
             }
         });
     });
@@ -331,7 +346,7 @@
             size.height += FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS + FACEBOOK_COMMENTS_BUTTON_HEIGHT;
         }
     }
-    return size.height + FACEBOOK_TEXTVIEW_TOP_MARGIN;
+    return size.height + FACEBOOK_TEXTVIEW_TOP_MARGIN + FACEBOOK_TEXTVIEW_POSITION_FROM_TOP;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -413,6 +428,7 @@
                                    @"Facebook Dialogs", @"name",
                                    @"Reference Documentation", @"caption",
                                    @"Using Dialogs to interact with users.", @"description",
+                                   @"TheBlimpInc", @"to",
                                    nil];
     
     [self.facebook dialog:@"feed" andParams:params andDelegate:self];
@@ -541,7 +557,7 @@
 - (void)refresh {
     //This method will request the full comments array from the delegate and
     //the facebook class will call request:request didLoad:result when complete
-    [self.facebook requestWithGraphPath:@"ImagoDeiChurch/posts" andDelegate:self];
+    [self.facebook requestWithGraphPath:@"ImagoDeiChurch/feed" andDelegate:self];
 }
 
 - (void) presentWebView:(NSNotification *) notification
