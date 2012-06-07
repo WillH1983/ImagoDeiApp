@@ -12,6 +12,6 @@
 @property (nonatomic, strong) NSURL *urlToLoad;
 @property (nonatomic, strong) NSString *titleForWebView;
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
-@property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
+@property (strong, nonatomic) UINavigationBar *navigationBar;
 
 @end

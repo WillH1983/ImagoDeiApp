@@ -307,16 +307,6 @@ static NSString *const DanaPeopleID = @"1240047";
         
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"AcceptDecline"])
-    {
-        NSMutableURLRequest *mutableURLRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:sender]];
-        //[self.authentication authorizeRequest:mutableURLRequest];
-        [segue.destinationViewController setUrlRequestToLoad:mutableURLRequest];
-    }
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //Set the cell identifier to the same as the prototype cell in the story board
