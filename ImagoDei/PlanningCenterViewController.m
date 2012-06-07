@@ -177,7 +177,7 @@ static NSString *const DanaPeopleID = @"1240047";
                             myPlanPerson = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[planPerson objectAtIndex:i], @"my-plan-person", nil];
                             NSMutableDictionary *tmpItems = [items mutableCopy];
                             [tmpItems setObject:myPlanPerson forKey:@"my-plan-people"];
-                            [mutableArray insertObject:tmpItems atIndex:(x + i)];
+                            [mutableArray insertObject:tmpItems atIndex:x];
                         }
                     }
                 }
@@ -223,16 +223,21 @@ static NSString *const DanaPeopleID = @"1240047";
     {
         NSMutableDictionary *dictionary = object;
         NSString *isEditing = [dictionary valueForKeyPath:@"isEditing"];
+        NSString *isCellLoading = [dictionary valueForKeyPath:@"isCellLoading"];
         if ((isEditing == nil) || ([isEditing isEqualToString:@"NO"]))
         {
             [dictionary setObject:@"YES" forKey:@"isEditing"];
-            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }
         else if ([isEditing isEqualToString:@"YES"])
         {
             [dictionary setObject:@"NO" forKey:@"isEditing"];
-            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }
+        
+        if ([isCellLoading isEqualToString:@"YES"])
+        {
+            [dictionary setObject:@"NO" forKey:@"isCellLoading"];
+        }
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
     }
 }
@@ -243,11 +248,34 @@ static NSString *const DanaPeopleID = @"1240047";
     UITableViewCell *cell = (UITableViewCell *)[cellView superview];
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     id object = [self.arrayOfTableData objectAtIndex:indexPath.row];
-    if ([object isKindOfClass:[NSDictionary class]])
+    if ([object isKindOfClass:[NSMutableDictionary class]])
     {
-        NSDictionary *tmpDictionary = object;
-        NSString *acceptURL = [NSString stringWithFormat:@"https://www.planningcenteronline.com/planning_center/accept/%@", [tmpDictionary valueForKeyPath:@"my-plan-people.my-plan-person.access-code.text"]];
-        [self performSegueWithIdentifier:@"AcceptDecline" sender:acceptURL];
+        NSMutableDictionary *tmpDictionary = object;
+        NSString *isCellLoading = [tmpDictionary valueForKeyPath:@"isCellLoading"];
+        
+        if ((isCellLoading == nil) || ([isCellLoading isEqualToString:@"NO"]))
+        {
+            [tmpDictionary setObject:@"YES" forKey:@"isCellLoading"];
+            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationRight];
+            NSString *acceptURL = [NSString stringWithFormat:@"https://www.planningcenteronline.com/planning_center/accept/%@", [tmpDictionary valueForKeyPath:@"my-plan-people.my-plan-person.access-code.text"]];
+            NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:acceptURL]];
+            dispatch_queue_t downloadQueue = dispatch_queue_create("downloader", NULL);
+            dispatch_async(downloadQueue, ^{
+                NSHTTPURLResponse *response;
+                [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:nil];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [tmpDictionary setObject:@"NO" forKey:@"isCellLoading"];
+                    dispatch_queue_t downloadQueue2 = dispatch_queue_create("downloader", NULL);
+                    dispatch_async(downloadQueue2, ^{
+                        [self downloadPlanningCenterData];
+                    });
+                    dispatch_release(downloadQueue2);
+                });
+            });
+            dispatch_release(downloadQueue);
+        }
+        
+        //[self performSegueWithIdentifier:@"AcceptDecline" sender:acceptURL];
     }
 }
 
@@ -257,11 +285,24 @@ static NSString *const DanaPeopleID = @"1240047";
     UITableViewCell *cell = (UITableViewCell *)[cellView superview];
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     id object = [self.arrayOfTableData objectAtIndex:indexPath.row];
-    if ([object isKindOfClass:[NSDictionary class]])
+    if ([object isKindOfClass:[NSMutableDictionary class]])
     {
-        NSDictionary *tmpDictionary = object;
-        NSString *declineURL = [NSString stringWithFormat:@"https://www.planningcenteronline.com/planning_center/decline/%@", [tmpDictionary valueForKeyPath:@"my-plan-people.my-plan-person.access-code.text"]];
-        [self performSegueWithIdentifier:@"AcceptDecline" sender:declineURL];
+        NSMutableDictionary *tmpDictionary = object;
+        NSString *isCellLoading = [tmpDictionary valueForKeyPath:@"isCellLoading"];
+        
+        if ((isCellLoading == nil) || ([isCellLoading isEqualToString:@"NO"]))
+        {
+            [tmpDictionary setObject:@"YES" forKey:@"isCellLoading"];
+            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationRight];
+            NSString *declineURL = [NSString stringWithFormat:@"https://www.planningcenteronline.com/planning_center/decline/%@", [tmpDictionary valueForKeyPath:@"my-plan-people.my-plan-person.access-code.text"]];
+            WebViewController *wvc = [[WebViewController alloc] init];
+            [wvc setUrlToLoad:[NSURL URLWithString:declineURL]];
+            [self presentViewController:wvc animated:YES completion:^{
+                [tmpDictionary setObject:@"NO" forKey:@"isCellLoading"];
+            }];
+        }
+        
+        //[self performSegueWithIdentifier:@"AcceptDecline" sender:acceptURL];
     }
         
 }
@@ -270,7 +311,9 @@ static NSString *const DanaPeopleID = @"1240047";
 {
     if ([segue.identifier isEqualToString:@"AcceptDecline"])
     {
-        [segue.destinationViewController setUrlToLoad:[NSURL URLWithString:sender]];
+        NSMutableURLRequest *mutableURLRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:sender]];
+        //[self.authentication authorizeRequest:mutableURLRequest];
+        [segue.destinationViewController setUrlRequestToLoad:mutableURLRequest];
     }
 }
 
@@ -286,6 +329,7 @@ static NSString *const DanaPeopleID = @"1240047";
     UILabel *cellText = nil;
     UILabel *cellSubtitle = nil;
     UIImageView *arrow = nil;
+    UIActivityIndicatorView *activityIndicator = nil;
     
     //If there is no reusable cell of this type, create a new one
     if (!cell)
@@ -332,6 +376,12 @@ static NSString *const DanaPeopleID = @"1240047";
         arrow.tag = 6;
         [cell.contentView addSubview:arrow];
         
+        activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        activityIndicator.hidesWhenStopped = YES;
+        
+        activityIndicator.tag = 7;
+        [cell.contentView addSubview:activityIndicator];
+        
         cell.backgroundColor = [UIColor clearColor];
     }
     else 
@@ -342,14 +392,16 @@ static NSString *const DanaPeopleID = @"1240047";
         cellText = (UILabel *)[cell.contentView viewWithTag:4];
         cellSubtitle = (UILabel *)[cell.contentView viewWithTag:5];
         arrow = (UIImageView *)[cell.contentView viewWithTag:6];
+        activityIndicator = (UIActivityIndicatorView *)[cell.contentView viewWithTag:7];
     }
     
     //Retrieve the corresponding dictionary to the index row requested
     NSDictionary *dictionaryForCell = [self.arrayOfTableData objectAtIndex:[indexPath row]];
     
     NSString *isEditing = [dictionaryForCell valueForKeyPath:@"isEditing"];
+    NSString *isCellLoading = [dictionaryForCell valueForKeyPath:@"isCellLoading"];
     
-    if ([isEditing isEqualToString:@"YES"])
+    if ([isEditing isEqualToString:@"YES"] & (![isCellLoading isEqualToString:@"YES"]))
     {
         UIEdgeInsets AcceptDeclineEdge = UIEdgeInsetsMake(12, 12, 12, 12);
         
@@ -373,6 +425,9 @@ static NSString *const DanaPeopleID = @"1240047";
         [declineButton setBackgroundImage:stretchabledarkRedDeclineButton forState:UIControlStateHighlighted];
         [declineButton setTitle:@"Decline" forState:UIControlStateNormal];
         
+        activityIndicator.frame = CGRectZero;
+        [activityIndicator stopAnimating];
+        
         // Setup the animation
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0];
@@ -383,10 +438,30 @@ static NSString *const DanaPeopleID = @"1240047";
         // Commit the changes
         [UIView commitAnimations];
     }
-    else 
+    else if ([isCellLoading isEqualToString:@"YES"])
     {
         acceptButton.frame = CGRectZero;
         declineButton.frame = CGRectZero;
+        
+        activityIndicator.frame = CGRectMake(50, 50, 25, 25);
+        [activityIndicator startAnimating];
+        
+        // Setup the animation
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0];
+        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+        [UIView setAnimationBeginsFromCurrentState:YES];
+        
+        [arrow layer].transform = CATransform3DMakeRotation(M_PI/2, 0, 0, 1);
+        // Commit the changes
+        [UIView commitAnimations];
+    }
+    else
+    {
+        acceptButton.frame = CGRectZero;
+        declineButton.frame = CGRectZero;
+        activityIndicator.frame = CGRectZero;
+        [activityIndicator stopAnimating];
         
         // Setup the animation
         [UIView beginAnimations:nil context:NULL];

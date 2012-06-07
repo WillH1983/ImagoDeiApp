@@ -31,7 +31,7 @@
     self.programmedWebView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.programmedWebView];
     self.programmedWebView.delegate = self;
-
+    self.programmedWebView.scalesPageToFit = YES;
     return self;
 }
 
@@ -60,26 +60,37 @@
     return YES;
 }
 
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSURL *url = request.URL;
+    NSString *tmpString = [url absoluteString];
+    if ([tmpString isEqualToString:@"https://www.planningcenteronline.com/login"]) 
+    {
+        [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+        return NO;
+    }
+    else return YES;
+}
+
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
     self.title = @"Loading...";
     [self.activityIndicator startAnimating];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
     self.navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
-    
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     self.navigationItem.rightBarButtonItem = nil;
     self.navigationBar.topItem.rightBarButtonItem = nil;
-    self.title = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-    
+    NSString *title = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    self.navigationBar.topItem.title = title;
+    self.title = title;
     if (!self.title)
     {
         self.title = [self.programmedWebView stringByEvaluatingJavaScriptFromString:@"document.title"];
     }
-    
 }
 - (IBAction)donePressed:(id)sender 
 {
