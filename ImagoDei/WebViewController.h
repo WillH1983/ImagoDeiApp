@@ -14,4 +14,6 @@
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (strong, nonatomic) UINavigationBar *navigationBar;
 
+- (id)initWithToolbar:(BOOL)yesOrNo;
+
 @end

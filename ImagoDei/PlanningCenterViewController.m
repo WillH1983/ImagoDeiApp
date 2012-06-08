@@ -295,7 +295,7 @@ static NSString *const DanaPeopleID = @"1240047";
             [tmpDictionary setObject:@"YES" forKey:@"isCellLoading"];
             [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationRight];
             NSString *declineURL = [NSString stringWithFormat:@"https://www.planningcenteronline.com/planning_center/decline/%@", [tmpDictionary valueForKeyPath:@"my-plan-people.my-plan-person.access-code.text"]];
-            WebViewController *wvc = [[WebViewController alloc] init];
+            WebViewController *wvc = [[WebViewController alloc] initWithToolbar:YES];
             [wvc setUrlToLoad:[NSURL URLWithString:declineURL]];
             [self presentViewController:wvc animated:YES completion:^{
                 [tmpDictionary setObject:@"NO" forKey:@"isCellLoading"];

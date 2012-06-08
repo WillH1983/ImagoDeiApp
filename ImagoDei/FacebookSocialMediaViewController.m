@@ -226,6 +226,15 @@
         mainTextLabel = [dictionaryForCell valueForKeyPath:[self keyForDetailCellLabelText]];
     }
     
+    if ([typeOfPost isEqualToString:@"link"])
+    {
+        NSString *linkURL = [dictionaryForCell valueForKeyPath:@"link"];
+        if ([linkURL isKindOfClass:[NSString class]])
+        {
+            mainTextLabel = [mainTextLabel stringByAppendingString:@" "];
+            mainTextLabel = [mainTextLabel stringByAppendingString:linkURL];
+        }
+    }
     //Set the cell text label's based upon the table contents array location
     textView.text = mainTextLabel;
     
@@ -234,7 +243,7 @@
     size.height += FACEBOOK_TEXTVIEW_TOP_MARGIN;
     textView.frame = CGRectMake(0, FACEBOOK_TEXTVIEW_POSITION_FROM_TOP, 320, size.height);
     NSNumber *count = [dictionaryForCell valueForKeyPath:@"comments.count"];
-    if ([typeOfPost isEqualToString:@"status"])
+    if ([typeOfPost isEqualToString:@"status"] || [typeOfPost isEqualToString:@"link"])
     {
         buttonImage.frame = CGRectZero;
         if ([count intValue] > 0)
@@ -256,7 +265,6 @@
             [commentsButton setTitle:commentsString forState:UIControlStateNormal];
         }
     }
-
     return cell;
 }
 
@@ -325,18 +333,29 @@
     //Pull the main and detail text label out of the corresponding dictionary
     NSString *mainTextLabel = [dictionaryForCell valueForKey:[self keyForMainCellLabelText]];
     
+    NSString *typeOfPost = [dictionaryForCell valueForKeyPath:@"type"];
+    
     if (mainTextLabel == nil)
     {
         mainTextLabel = [dictionaryForCell valueForKeyPath:[self keyForDetailCellLabelText]];
+    }
+    
+    if ([typeOfPost isEqualToString:@"link"])
+    {
+        NSString *linkURL = [dictionaryForCell valueForKeyPath:@"link"];
+        if ([linkURL isKindOfClass:[NSString class]])
+        {
+            mainTextLabel = [mainTextLabel stringByAppendingString:@" "];
+            mainTextLabel = [mainTextLabel stringByAppendingString:linkURL];
+        }
     }
     
     CGSize maxSize = CGSizeMake(320 - FACEBOOK_FONT_SIZE, CGFLOAT_MAX);
     CGSize size = [mainTextLabel sizeWithFont:[UIFont systemFontOfSize:FACEBOOK_FONT_SIZE]  constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];
     
     NSNumber *count = [dictionaryForCell valueForKeyPath:@"comments.count"];
-    NSString *typeOfPost = [dictionaryForCell valueForKeyPath:@"type"];
     
-    if ([typeOfPost isEqualToString:@"status"])
+    if ([typeOfPost isEqualToString:@"status"] || [typeOfPost isEqualToString:@"link"])
     {
         size.height += FACEBOOK_TEXTVIEW_TOP_MARGIN;
         
