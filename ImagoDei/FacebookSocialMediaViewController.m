@@ -202,6 +202,7 @@
         
         postedByLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 5, 250, 20)];
         postedByLabel.backgroundColor = [UIColor clearColor];
+        postedByLabel.font = [UIFont boldSystemFontOfSize:FACEBOOK_FONT_SIZE];
         postedByLabel.tag = 5;
         [cell.contentView addSubview:postedByLabel];
     }
