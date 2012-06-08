@@ -166,6 +166,7 @@
     UIButton *commentsButton = nil;
     UIButton *buttonImage = nil;
     UIImageView *profileImageView = nil;
+    UILabel *postedByLabel = nil;
     
     //If there is no reusable cell of this type, create a new one
     if (!cell)
@@ -198,7 +199,11 @@
         profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 40, 40)];
         profileImageView.tag = 4;
         [cell.contentView addSubview:profileImageView];
-
+        
+        postedByLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 5, 250, 20)];
+        postedByLabel.backgroundColor = [UIColor clearColor];
+        postedByLabel.tag = 5;
+        [cell.contentView addSubview:postedByLabel];
     }
     else 
     {
@@ -206,6 +211,7 @@
         commentsButton = (UIButton *)[cell.contentView viewWithTag:2];
         buttonImage = (UIButton *)[cell.contentView viewWithTag:3];
         profileImageView = (UIImageView *)[cell.contentView viewWithTag:4];
+        postedByLabel = (UILabel *)[cell.contentView viewWithTag:5];
     }
     
     commentsButton.frame = CGRectZero;
@@ -228,13 +234,21 @@
     
     if ([typeOfPost isEqualToString:@"link"])
     {
-        NSString *linkURL = [dictionaryForCell valueForKeyPath:@"link"];
-        if ([linkURL isKindOfClass:[NSString class]])
+        NSRange range = [mainTextLabel rangeOfString:@"http"];
+        if (range.location == NSNotFound)
         {
-            mainTextLabel = [mainTextLabel stringByAppendingString:@" "];
-            mainTextLabel = [mainTextLabel stringByAppendingString:linkURL];
+            NSString *linkURL = [dictionaryForCell valueForKeyPath:@"link"];
+            if ([linkURL isKindOfClass:[NSString class]])
+            {
+                mainTextLabel = [mainTextLabel stringByAppendingString:@" "];
+                mainTextLabel = [mainTextLabel stringByAppendingString:linkURL];
+            }
         }
     }
+    
+    id fromName = [dictionaryForCell valueForKeyPath:@"from.name"];
+    if ([fromName isKindOfClass:[NSString class]]) postedByLabel.text = fromName;
+    
     //Set the cell text label's based upon the table contents array location
     textView.text = mainTextLabel;
     
@@ -342,11 +356,15 @@
     
     if ([typeOfPost isEqualToString:@"link"])
     {
-        NSString *linkURL = [dictionaryForCell valueForKeyPath:@"link"];
-        if ([linkURL isKindOfClass:[NSString class]])
+        NSRange range = [mainTextLabel rangeOfString:@"http"];
+        if (range.location == NSNotFound)
         {
-            mainTextLabel = [mainTextLabel stringByAppendingString:@" "];
-            mainTextLabel = [mainTextLabel stringByAppendingString:linkURL];
+            NSString *linkURL = [dictionaryForCell valueForKeyPath:@"link"];
+            if ([linkURL isKindOfClass:[NSString class]])
+            {
+                mainTextLabel = [mainTextLabel stringByAppendingString:@" "];
+                mainTextLabel = [mainTextLabel stringByAppendingString:linkURL];
+            }
         }
     }
     
