@@ -136,7 +136,7 @@
 
 - (NSString *)keyForDetailCellLabelText
 {
-    return FACEBOOK_CONTENT_DESCRIPTION;
+    return @"";
 }
 
 - (void)commentsButtonPushed:(id)sender
