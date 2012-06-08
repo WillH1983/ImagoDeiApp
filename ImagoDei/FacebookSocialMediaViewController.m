@@ -270,38 +270,47 @@
 
     //if (![type isEqualToString:@"photo"]) return;
     
-    NSData *picture = [self.photoDictionary objectForKey:pictureID];
-    NSData *profilePicture = [self.photoDictionary objectForKey:profileFromId];
-    if (picture)
-    {
-        UIButton *buttonImage = (UIButton *)[cell.contentView viewWithTag:3];
-        [buttonImage setBackgroundImage:[UIImage imageWithData:picture] forState:UIControlStateNormal];
-    }
+    __block NSData *picture = [self.photoDictionary objectForKey:pictureID];
+    __block NSData *profilePictureData = [self.photoDictionary objectForKey:profileFromId];
     
     NSString *urlStringForProfilePicture = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture", profileFromId];
     NSString *urlStringForPicture = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture", pictureID];
     
     dispatch_queue_t downloadQueue = dispatch_queue_create("Profile Image Downloader", NULL);
     dispatch_async(downloadQueue, ^{
-        NSLog(@"Picture Downloaded");
-        NSURL *url = [[NSURL alloc] initWithString:urlStringForPicture];
-        NSData *picture = [NSData dataWithContentsOfURL:url];
-        if (picture) [self.photoDictionary setObject:picture forKey:pictureID];
-        UIImage *image = [UIImage imageWithData:picture];
+
+        if (!picture)
+        {
+            if (pictureID)
+            {
+                NSURL *url = [[NSURL alloc] initWithString:urlStringForPicture];
+                picture = [NSData dataWithContentsOfURL:url];
+                if (picture) [self.photoDictionary setObject:picture forKey:pictureID];
+                NSLog(@"Picture");
+            }
+        }
+    
+        if (!profilePictureData)
+        {
+            if (profileFromId)
+            {
+                NSURL *profileUrl = [[NSURL alloc] initWithString:urlStringForProfilePicture];
+                profilePictureData = [NSData dataWithContentsOfURL:profileUrl];
+                if (profilePictureData) [self.photoDictionary setObject:profilePictureData forKey:profileFromId];
+                NSLog(@"Profile Picture");
+            }
+        }
         
-        
-        NSURL *profileUrl = [[NSURL alloc] initWithString:urlStringForProfilePicture];
-        UIImage *profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:profileUrl]];
-        if (profileImage) [self.photoDictionary setObject:profileImage forKey:profileFromId];
         dispatch_async(dispatch_get_main_queue(), ^{
             NSArray *tmpArray = [self.tableView indexPathsForVisibleRows];
             if ([tmpArray containsObject:indexPath])
             {
                 UIButton *buttonImage = (UIButton *)[cell.contentView viewWithTag:3];
+                UIImage *image = [UIImage imageWithData:picture];
                 [buttonImage setBackgroundImage:image forState:UIControlStateNormal];
                 
                 UIImageView *profileImageView = (UIImageView *)[cell.contentView viewWithTag:4];
-                [profileImageView setImage:profileImage];
+                [profileImageView setImage:[UIImage imageWithData:profilePictureData]];
             }
         });
     });
