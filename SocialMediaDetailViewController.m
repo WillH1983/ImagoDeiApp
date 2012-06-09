@@ -70,10 +70,6 @@
     [super viewDidLoad];
     
     [self.tableView setAllowsSelection:NO];
-    self.navigationItem.title = @"Facebook Feed";
-    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [spinner startAnimating];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
     
     [self.socialMediaDelegate SocialMediaDetailViewController:self dictionaryForFacebookGraphAPIString:[self.shortCommentsDictionaryModel objectForKey:@"id"]];
     // Do any additional setup after loading the view from its nib.
@@ -292,7 +288,7 @@
             NSLog(@"Loading Web Data");
             UIImage *profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:urlForProfilePicture]];
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.navigationItem.rightBarButtonItem = nil;
+                self.navigationItem.rightBarButtonItem = self.oldBarButtonItem;
                 self.profilePictureImageView.image = profileImage;
             });
         });
