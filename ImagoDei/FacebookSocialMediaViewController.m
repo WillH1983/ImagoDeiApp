@@ -261,24 +261,17 @@
     if ([typeOfPost isEqualToString:@"status"] || [typeOfPost isEqualToString:@"link"])
     {
         buttonImage.frame = CGRectZero;
-        if ([count intValue] > 0)
-        {
-            commentsButton.frame = CGRectMake(310 - FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_TEXTVIEW_POSITION_FROM_TOP + size.height + FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS, FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_COMMENTS_BUTTON_HEIGHT);
-            NSString *commentsString = [[NSString alloc] initWithFormat:@"%@ Comments", count];
-            [commentsButton setTitle:commentsString forState:UIControlStateNormal];
-        }
+        commentsButton.frame = CGRectMake(310 - FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_TEXTVIEW_POSITION_FROM_TOP + size.height + FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS, FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_COMMENTS_BUTTON_HEIGHT);
+        NSString *commentsString = [[NSString alloc] initWithFormat:@"%@ Comments", count];
+        [commentsButton setTitle:commentsString forState:UIControlStateNormal];
     }
     else if ([typeOfPost isEqualToString:@"photo"])
     {
         buttonImage.frame = CGRectMake(10, FACEBOOK_TEXTVIEW_POSITION_FROM_TOP + size.height + FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS, FACEBOOK_PHOTO_WIDTH, FACEBOOK_PHOTO_HEIGHT);
         [buttonImage setImage:[UIImage imageWithCIImage:[CIImage emptyImage]] forState:UIControlStateNormal];
-        
-        if ([count intValue] > 0)
-        {
-            commentsButton.frame = CGRectMake(310 - FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_TEXTVIEW_POSITION_FROM_TOP + size.height + (FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS * 2) + FACEBOOK_PHOTO_HEIGHT, FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_COMMENTS_BUTTON_HEIGHT);
-            NSString *commentsString = [[NSString alloc] initWithFormat:@"%@ Comments", count];
-            [commentsButton setTitle:commentsString forState:UIControlStateNormal];
-        }
+        commentsButton.frame = CGRectMake(310 - FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_TEXTVIEW_POSITION_FROM_TOP + size.height + (FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS * 2) + FACEBOOK_PHOTO_HEIGHT, FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_COMMENTS_BUTTON_HEIGHT);
+        NSString *commentsString = [[NSString alloc] initWithFormat:@"%@ Comments", count];
+        [commentsButton setTitle:commentsString forState:UIControlStateNormal];
     }
     return cell;
 }
@@ -377,21 +370,13 @@
     if ([typeOfPost isEqualToString:@"status"] || [typeOfPost isEqualToString:@"link"])
     {
         size.height += FACEBOOK_TEXTVIEW_TOP_MARGIN;
-        
-        if ([count intValue] > 0)
-        {
-            size.height += FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS + FACEBOOK_COMMENTS_BUTTON_HEIGHT;
-        }
+        size.height += FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS + FACEBOOK_COMMENTS_BUTTON_HEIGHT;
     }
     else if ([typeOfPost isEqualToString:@"photo"])
     {
         size.height += FACEBOOK_TEXTVIEW_TOP_MARGIN;
         size.height += FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS + FACEBOOK_PHOTO_HEIGHT;
-        
-        if ([count intValue] > 0)
-        {
-            size.height += FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS + FACEBOOK_COMMENTS_BUTTON_HEIGHT;
-        }
+        size.height += FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS + FACEBOOK_COMMENTS_BUTTON_HEIGHT;
     }
     return size.height + FACEBOOK_TEXTVIEW_TOP_MARGIN + FACEBOOK_TEXTVIEW_POSITION_FROM_TOP;
 }
