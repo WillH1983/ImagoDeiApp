@@ -26,6 +26,7 @@
 
 #define FACEBOOK_CONTENT_TITLE @"message"
 #define FACEBOOK_CONTENT_DESCRIPTION @"from.name"
+#define FACEBOOK_FEED_TO_REQUEST @"imagodeichurch/feed"
 #define FACEBOOK_FONT_SIZE 16.0
 #define FACEBOOK_TEXTVIEW_TOP_MARGIN 12.0
 #define FACEBOOK_COMMENTS_BUTTON_FONT_SIZE 10.0
@@ -124,7 +125,7 @@
     
     //Begin the facebook request, the data that comes back form this method will be used
     //to populate the UITableView
-    [self.facebook requestWithGraphPath:@"imagodeichurch/feed" andDelegate:self];
+    [self.facebook requestWithGraphPath:FACEBOOK_FEED_TO_REQUEST andDelegate:self];
 }
 
 #pragma mark - Table view data source
@@ -365,8 +366,6 @@
     CGSize maxSize = CGSizeMake(320 - FACEBOOK_FONT_SIZE, CGFLOAT_MAX);
     CGSize size = [mainTextLabel sizeWithFont:[UIFont systemFontOfSize:FACEBOOK_FONT_SIZE]  constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];
     
-    NSNumber *count = [dictionaryForCell valueForKeyPath:@"comments.count"];
-    
     if ([typeOfPost isEqualToString:@"status"] || [typeOfPost isEqualToString:@"link"])
     {
         size.height += FACEBOOK_TEXTVIEW_TOP_MARGIN;
@@ -553,7 +552,7 @@
     
     //This method will request the full comments array from the delegate and
     //the facebook class will call request:request didLoad:result when complete
-    [self.facebook requestWithGraphPath:@"ImagoDeiChurch/posts" andDelegate:self];
+    [self.facebook requestWithGraphPath:FACEBOOK_FEED_TO_REQUEST andDelegate:self];
 }
 
 - (void)fbDidNotLogin:(BOOL)cancelled
@@ -594,7 +593,7 @@
 - (void)refresh {
     //This method will request the full comments array from the delegate and
     //the facebook class will call request:request didLoad:result when complete
-    [self.facebook requestWithGraphPath:@"ImagoDeiChurch/feed" andDelegate:self];
+    [self.facebook requestWithGraphPath:FACEBOOK_FEED_TO_REQUEST andDelegate:self];
 }
 
 - (void) presentWebView:(NSNotification *) notification
