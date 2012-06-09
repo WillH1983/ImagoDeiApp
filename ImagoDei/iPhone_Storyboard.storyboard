@@ -174,7 +174,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="XDO-SJ-bgM">
-                        <barButtonItem key="rightBarButtonItem" title="Comment" id="g5a-1y-pmF"/>
+                        <barButtonItem key="rightBarButtonItem" title="Comment" id="g5a-1y-pmF">
+                            <connections>
+                                <action selector="commentButtonPressed:" destination="3pi-2Q-ePR" id="PbY-OE-1ZA"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
             </objects>
@@ -302,6 +306,7 @@
         <class className="SocialMediaDetailViewController" superclassName="ImagoDeiStandardTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SocialMediaDetailViewController.h"/>
             <relationships>
+                <relationship kind="outlet" name="commentsTableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="profilePictureImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
             </relationships>

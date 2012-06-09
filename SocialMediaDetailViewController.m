@@ -304,12 +304,16 @@
 
 - (void)request:(FBRequest *)request didLoad:(id)result
 {
-    if ([result isKindOfClass:[NSDictionary class]])
+    if ([request.httpMethod isEqualToString:@"GET"])
     {
-        self.fullCommentsDictionaryModel = result;
-        [self loadSocialMediaView];
+        if ([result isKindOfClass:[NSDictionary class]])
+        {
+            NSLog(@"%@", result);
+            self.fullCommentsDictionaryModel = result;
+            [self loadSocialMediaView];
+        }
+        [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
     }
-    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
 }
 
 - (void)requestLoading:(FBRequest *)request
@@ -345,6 +349,12 @@
     //This method will request the full comments array from the delegate and
     //the facebook class will call request:request didLoad:result when complete
     [self.socialMediaDelegate SocialMediaDetailViewController:self dictionaryForFacebookGraphAPIString:[self.shortCommentsDictionaryModel objectForKey:@"id"]];
+}
+
+- (IBAction)commentButtonPressed:(id)sender 
+{
+    NSString *graphAPIString = [NSString stringWithFormat:@"%@/comments", [self.fullCommentsDictionaryModel valueForKeyPath:@"id"]];
+    [self.socialMediaDelegate SocialMediaDetailViewController:self postDataForFacebookGraphAPIString:graphAPIString withParameters:[[NSMutableDictionary alloc] initWithObjectsAndKeys:@"TestingTesting", @"message", nil]];
 }
 
 

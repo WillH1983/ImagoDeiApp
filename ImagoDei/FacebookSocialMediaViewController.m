@@ -68,7 +68,7 @@
         //If it is not valid, reauthorize the app for single sign on
         if (![self.facebook isSessionValid]) 
         {
-            [self.facebook authorize:nil];
+            [self.facebook authorize:[[NSArray alloc] initWithObjects:@"publish_stream", nil]];
         }
     }
 }
@@ -436,6 +436,11 @@
     //When the SocialMediaDetailViewController needs further information from
     //the facebook class, this method is called
     [self.facebook requestWithGraphPath:facebookGraphAPIString andDelegate:sender];
+}
+
+- (void)SocialMediaDetailViewController:(SocialMediaDetailViewController *)sender postDataForFacebookGraphAPIString:(NSString *)facebookGraphAPIString withParameters:(NSMutableDictionary *)params
+{
+    [self.facebook requestWithGraphPath:facebookGraphAPIString andParams:params andHttpMethod:@"POST" andDelegate:sender];
 }
 
 #pragma mark - Facebook Initialization Method
