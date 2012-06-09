@@ -21,6 +21,7 @@
 		BE04B972156479FD003FD971 /* whoweare-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE04B96D156479FD003FD971 /* whoweare-icon@2x.png */; };
 		BE04B97415647C12003FD971 /* imago-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE04B97315647C12003FD971 /* imago-logo@2x.png */; };
 		BE04B97615647D0E003FD971 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE04B97515647D0E003FD971 /* background@2x.png */; };
+		BE074DF41583F276003E4881 /* ImagoDeiTextEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE074DF31583F276003E4881 /* ImagoDeiTextEntryViewController.m */; };
 		BE1C3FB4154B7F7100775B14 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1C3FB3154B7F7100775B14 /* AVFoundation.framework */; };
 		BE1C3FBD154B9C6000775B14 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1C3FBC154B9C6000775B14 /* CoreMedia.framework */; };
 		BE1C3FBF154BA71400775B14 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1C3FBE154BA71400775B14 /* MediaPlayer.framework */; };
@@ -129,6 +130,8 @@
 		BE04B96D156479FD003FD971 /* whoweare-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whoweare-icon@2x.png"; sourceTree = "<group>"; };
 		BE04B97315647C12003FD971 /* imago-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "imago-logo@2x.png"; sourceTree = "<group>"; };
 		BE04B97515647D0E003FD971 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
+		BE074DF21583F276003E4881 /* ImagoDeiTextEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagoDeiTextEntryViewController.h; sourceTree = "<group>"; };
+		BE074DF31583F276003E4881 /* ImagoDeiTextEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagoDeiTextEntryViewController.m; sourceTree = "<group>"; };
 		BE1C3FB3154B7F7100775B14 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		BE1C3FBC154B9C6000775B14 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		BE1C3FBE154BA71400775B14 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -431,6 +434,8 @@
 				BEDF1EBB1547961C009FCA21 /* SocialMediaDetailViewController.h */,
 				BEDF1EBC1547961C009FCA21 /* SocialMediaDetailViewController.m */,
 				BEE22935155E175D00504B5D /* iPhone_Storyboard.storyboard */,
+				BE074DF21583F276003E4881 /* ImagoDeiTextEntryViewController.h */,
+				BE074DF31583F276003E4881 /* ImagoDeiTextEntryViewController.m */,
 				BEE22938155E2C6A00504B5D /* PlanningCenterViewController.h */,
 				BEE22939155E2C6A00504B5D /* PlanningCenterViewController.m */,
 				BEDF1EAC154795FB009FCA21 /* MainPageViewController.h */,
@@ -742,6 +747,7 @@
 				BEE7931C156FE55000F2EC23 /* GTMOAuthViewControllerTouch.m in Sources */,
 				BEE79320156FE57E00F2EC23 /* GTMHTTPFetcher.m in Sources */,
 				BED65F4D157180E600C55083 /* XMLReader.m in Sources */,
+				BE074DF41583F276003E4881 /* ImagoDeiTextEntryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

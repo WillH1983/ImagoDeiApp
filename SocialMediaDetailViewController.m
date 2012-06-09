@@ -353,8 +353,9 @@
 
 - (IBAction)commentButtonPressed:(id)sender 
 {
-    NSString *graphAPIString = [NSString stringWithFormat:@"%@/comments", [self.fullCommentsDictionaryModel valueForKeyPath:@"id"]];
-    [self.socialMediaDelegate SocialMediaDetailViewController:self postDataForFacebookGraphAPIString:graphAPIString withParameters:[[NSMutableDictionary alloc] initWithObjectsAndKeys:@"TestingTesting", @"message", nil]];
+    //NSString *graphAPIString = [NSString stringWithFormat:@"%@/comments", [self.fullCommentsDictionaryModel valueForKeyPath:@"id"]];
+    //[self.socialMediaDelegate SocialMediaDetailViewController:self postDataForFacebookGraphAPIString:graphAPIString withParameters:[[NSMutableDictionary alloc] initWithObjectsAndKeys:@"TestingTesting", @"message", nil]];
+    [self performSegueWithIdentifier:@"comment" sender:self];
 }
 
 
