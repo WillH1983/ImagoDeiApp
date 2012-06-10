@@ -27,6 +27,7 @@
 		BE1C3FBF154BA71400775B14 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1C3FBE154BA71400775B14 /* MediaPlayer.framework */; };
 		BE2F9B08156C9D54008C434A /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2F9B07156C9D54008C434A /* WebViewController.m */; };
 		BE2F9B18156CA0AF008C434A /* MyApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2F9B16156CA0AF008C434A /* MyApplication.m */; };
+		BE4996F115845EBF005A5BDF /* FacebookButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE4996F015845EBF005A5BDF /* FacebookButton@2x.png */; };
 		BE54BC141560A12200F85DD9 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = BE54BC131560A12200F85DD9 /* arrow.png */; };
 		BE54BC191560A18500F85DD9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE54BC181560A18500F85DD9 /* QuartzCore.framework */; };
 		BE54BC231560A4B500F85DD9 /* PullRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE54BC221560A4B500F85DD9 /* PullRefreshTableViewController.m */; };
@@ -139,6 +140,7 @@
 		BE2F9B09156C9D5D008C434A /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		BE2F9B16156CA0AF008C434A /* MyApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyApplication.m; sourceTree = "<group>"; };
 		BE2F9B17156CA0AF008C434A /* MyApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyApplication.h; sourceTree = "<group>"; };
+		BE4996F015845EBF005A5BDF /* FacebookButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FacebookButton@2x.png"; sourceTree = "<group>"; };
 		BE54BC131560A12200F85DD9 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		BE54BC181560A18500F85DD9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BE54BC211560A4B400F85DD9 /* PullRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullRefreshTableViewController.h; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 		BE56D5CA157B12610027A519 /* Button Images */ = {
 			isa = PBXGroup;
 			children = (
+				BE4996F015845EBF005A5BDF /* FacebookButton@2x.png */,
 				BE56D5CB157B12790027A519 /* greenButton.png */,
 				BE56D5CC157B12790027A519 /* greenButtonActivated.png */,
 				BE56D5CD157B12790027A519 /* redButton.png */,
@@ -445,8 +448,6 @@
 				BEF4A438154DCA080015E00D /* ImagoDeiMediaController.xib */,
 				BE6295481547A8AA00CE719E /* RSSParser.h */,
 				BE6295491547A8AA00CE719E /* RSSParser.m */,
-				BE56D5C8157AE15D0027A519 /* future_plans.xml */,
-				BEDAF47A157C6D0400606339 /* future_plans2.xml */,
 				BEDF1E951547955C009FCA21 /* ImageViewController.h */,
 				BE2F9B09156C9D5D008C434A /* WebViewController.h */,
 				BE2F9B07156C9D54008C434A /* WebViewController.m */,
@@ -482,6 +483,8 @@
 		BEDF1E61154791C4009FCA21 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BE56D5C8157AE15D0027A519 /* future_plans.xml */,
+				BEDAF47A157C6D0400606339 /* future_plans2.xml */,
 				BEDF1EAB154795FB009FCA21 /* main.m */,
 				BED0A5A91548DAC4007094A5 /* MainTabiPhone.rss */,
 				BEDF1EA1154795CE009FCA21 /* JSONImagoDei.txt */,
@@ -694,6 +697,7 @@
 				BE56D5E2157B12790027A519 /* greenButton@2x.png in Resources */,
 				BE56D5E4157B270D0027A519 /* arrow-sideways.png in Resources */,
 				BEDAF47B157C6D0400606339 /* future_plans2.xml in Resources */,
+				BE4996F115845EBF005A5BDF /* FacebookButton@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

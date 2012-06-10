@@ -29,9 +29,9 @@
 #define FACEBOOK_FEED_TO_REQUEST @"imagodeichurch/feed"
 #define FACEBOOK_FONT_SIZE 16.0
 #define FACEBOOK_TEXTVIEW_TOP_MARGIN 12.0
-#define FACEBOOK_COMMENTS_BUTTON_FONT_SIZE 10.0
+#define FACEBOOK_COMMENTS_BUTTON_FONT_SIZE 14.0
 #define FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS 8.0
-#define FACEBOOK_COMMENTS_BUTTON_WIDTH 80.0
+#define FACEBOOK_COMMENTS_BUTTON_WIDTH 300.0
 #define FACEBOOK_COMMENTS_BUTTON_HEIGHT 20.0
 #define FACEBOOK_PHOTO_WIDTH 300.0
 #define FACEBOOK_PHOTO_HEIGHT 200.0
@@ -158,6 +158,11 @@
     [self performSegueWithIdentifier:@"photo" sender:[dictionaryData valueForKeyPath:@"object_id"]];
 }
 
+- (void)mainCommentsButtonPushed:(id)sender
+{
+    [self performSegueWithIdentifier:@"textInput" sender:self];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //Set the cell identifier to the same as the prototype cell in the story board
@@ -168,6 +173,7 @@
     UIButton *buttonImage = nil;
     UIImageView *profileImageView = nil;
     UILabel *postedByLabel = nil;
+    UIButton *mainCommentButton = nil;
     
     //If there is no reusable cell of this type, create a new one
     if (!cell)
@@ -185,11 +191,13 @@
         textView.backgroundColor = [UIColor clearColor];
         [cell.contentView addSubview:textView];
         
-        commentsButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        commentsButton = [UIButton buttonWithType:UIButtonTypeCustom];
         commentsButton.backgroundColor = [UIColor clearColor];
         commentsButton.titleLabel.font = [UIFont systemFontOfSize:FACEBOOK_COMMENTS_BUTTON_FONT_SIZE];
         commentsButton.tag = 2;
         [commentsButton addTarget:self action:@selector(commentsButtonPushed:) forControlEvents:UIControlEventTouchUpInside];
+        commentsButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        commentsButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5);
         [cell.contentView addSubview:commentsButton];
         
         buttonImage = [[UIButton alloc] initWithFrame:CGRectZero];
@@ -206,6 +214,14 @@
         postedByLabel.font = [UIFont boldSystemFontOfSize:FACEBOOK_FONT_SIZE];
         postedByLabel.tag = 5;
         [cell.contentView addSubview:postedByLabel];
+        
+        mainCommentButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        mainCommentButton.backgroundColor = [UIColor clearColor];
+        mainCommentButton.titleLabel.font = [UIFont systemFontOfSize:FACEBOOK_COMMENTS_BUTTON_FONT_SIZE];
+        mainCommentButton.tag = 6;
+        [mainCommentButton addTarget:self action:@selector(mainCommentsButtonPushed:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.contentView addSubview:mainCommentButton];
+        
     }
     else 
     {
@@ -214,6 +230,7 @@
         buttonImage = (UIButton *)[cell.contentView viewWithTag:3];
         profileImageView = (UIImageView *)[cell.contentView viewWithTag:4];
         postedByLabel = (UILabel *)[cell.contentView viewWithTag:5];
+        mainCommentButton = (UIButton *)[cell.contentView viewWithTag:6];
     }
     
     commentsButton.frame = CGRectZero;
@@ -254,17 +271,27 @@
     //Set the cell text label's based upon the table contents array location
     textView.text = mainTextLabel;
     
+    UIEdgeInsets commentsButtonImageEdge = UIEdgeInsetsMake(12, 12, 12, 12);
+    
     CGSize maxSize = CGSizeMake(320 - FACEBOOK_FONT_SIZE, CGFLOAT_MAX);
     CGSize size = [mainTextLabel sizeWithFont:[UIFont systemFontOfSize:FACEBOOK_FONT_SIZE]  constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];
     size.height += FACEBOOK_TEXTVIEW_TOP_MARGIN;
     textView.frame = CGRectMake(0, FACEBOOK_TEXTVIEW_POSITION_FROM_TOP, 320, size.height);
     NSNumber *count = [dictionaryForCell valueForKeyPath:@"comments.count"];
+    UIImage *commentsButtonImage = [UIImage imageNamed:@"FacebookButton.png"];
+    UIImage *stretchableCommentsButtonImage = [commentsButtonImage resizableImageWithCapInsets:commentsButtonImageEdge];
+    
     if ([typeOfPost isEqualToString:@"status"] || [typeOfPost isEqualToString:@"link"])
     {
         buttonImage.frame = CGRectZero;
         commentsButton.frame = CGRectMake(310 - FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_TEXTVIEW_POSITION_FROM_TOP + size.height + FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS, FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_COMMENTS_BUTTON_HEIGHT);
         NSString *commentsString = [[NSString alloc] initWithFormat:@"%@ Comments", count];
         [commentsButton setTitle:commentsString forState:UIControlStateNormal];
+        [commentsButton setBackgroundImage:stretchableCommentsButtonImage forState:UIControlStateNormal];
+        
+        mainCommentButton.frame = CGRectMake(15, commentsButton.frame.origin.y, 70, FACEBOOK_COMMENTS_BUTTON_HEIGHT);
+        [mainCommentButton setTitle:@"Comment" forState:UIControlStateNormal];
+        [mainCommentButton setTitleColor:[UIColor blueColor] forState:UIControlStateHighlighted];
     }
     else if ([typeOfPost isEqualToString:@"photo"])
     {
@@ -273,6 +300,10 @@
         commentsButton.frame = CGRectMake(310 - FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_TEXTVIEW_POSITION_FROM_TOP + size.height + (FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS * 2) + FACEBOOK_PHOTO_HEIGHT, FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_COMMENTS_BUTTON_HEIGHT);
         NSString *commentsString = [[NSString alloc] initWithFormat:@"%@ Comments", count];
         [commentsButton setTitle:commentsString forState:UIControlStateNormal];
+        [commentsButton setBackgroundImage:stretchableCommentsButtonImage forState:UIControlStateNormal];
+        
+        mainCommentButton.frame = CGRectMake(15, commentsButton.frame.origin.y, 70, FACEBOOK_COMMENTS_BUTTON_HEIGHT);
+        [mainCommentButton setTitle:@"Comment" forState:UIControlStateNormal];
     }
     return cell;
 }
