@@ -160,12 +160,19 @@
 
 - (void)mainCommentsButtonPushed:(id)sender
 {
-    [self performSegueWithIdentifier:@"textInput" sender:self];
+    UIView *contentView = [sender superview];
+    UITableViewCell *cell = (UITableViewCell *)[contentView superview];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NSDictionary *dictionaryData = [self.arrayOfTableData objectAtIndex:indexPath.row];
+    [self performSegueWithIdentifier:@"textInput" sender:dictionaryData];
 }
 
-- (void)textView:(UITextView *)sender didFinishWithString:(NSString *)string
+- (void)textView:(UITextView *)sender didFinishWithString:(NSString *)string withDictionaryForComment:(NSDictionary *)dictionary;
 {
-
+    NSString *graphAPIString = [NSString stringWithFormat:@"%@/comments", [dictionary valueForKeyPath:@"id"]];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:string, @"message", nil];
+    
+    [self.facebook requestWithGraphPath:graphAPIString andParams:params andHttpMethod:@"POST" andDelegate:self];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -448,6 +455,7 @@
     else if ([segue.identifier isEqualToString:@"textInput"])
     {
         [segue.destinationViewController setTextEntryDelegate:self];
+        [segue.destinationViewController setDictionaryForComment:sender];
     }
 }
 
@@ -499,12 +507,8 @@
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                    FACEBOOK_APP_ID, @"app_id",
-                                   @"http://developers.facebook.com/docs/reference/dialogs/", @"link",
-                                   @"http://fbrell.com/f8.jpg", @"picture",
-                                   @"Facebook Dialogs", @"name",
-                                   @"Reference Documentation", @"caption",
-                                   @"Using Dialogs to interact with users.", @"description",
-                                   @"TheBlimpInc", @"to",
+                                   @"Post to Imago Dei's Wall", @"description",
+                                   @"imagodeichurch", @"to",
                                    nil];
     
     [self.facebook dialog:@"feed" andParams:params andDelegate:self];
@@ -517,6 +521,11 @@
     //When a facebook request starts, save the request
     //so the delegate can be set to nill when the view disappears
     self.facebookRequest = request;
+    
+    [self.activityIndicator startAnimating];
+    
+    //Set the right navigation bar button item to the activity indicator
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
 }
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error
@@ -537,37 +546,44 @@
     //will not be required if the view disappears, set the request to nil
     self.facebookRequest = nil;
     
-    //Verify the result from the facebook class is actually a dictionary
-    if ([result isKindOfClass:[NSDictionary class]])
+    if ([request.httpMethod isEqualToString:@"GET"])
     {
-        
-        NSMutableArray *array = [result mutableArrayValueForKey:@"data"];
-        NSDictionary *dictionaryForCell = nil;
-        
-        //Create an array of dictionaries, with each have an id, message, postedby, and comments key
-        for (int i = 0; i < [array count]; i++) 
+        //Verify the result from the facebook class is actually a dictionary
+        if ([result isKindOfClass:[NSDictionary class]])
         {
-            //Retrieve the corresponding dictionary to the index row requested
-            dictionaryForCell = [array objectAtIndex:i];
-            NSString *tmpString = [dictionaryForCell objectForKey:FACEBOOK_CONTENT_TITLE];
-            if (tmpString == nil)
+            
+            NSMutableArray *array = [result mutableArrayValueForKey:@"data"];
+            NSDictionary *dictionaryForCell = nil;
+            
+            //Create an array of dictionaries, with each have an id, message, postedby, and comments key
+            for (int i = 0; i < [array count]; i++) 
             {
-                NSLog(@"%@", dictionaryForCell);
+                //Retrieve the corresponding dictionary to the index row requested
+                dictionaryForCell = [array objectAtIndex:i];
+                NSString *tmpString = [dictionaryForCell objectForKey:FACEBOOK_CONTENT_TITLE];
+                if (tmpString == nil)
+                {
+                    
+                }
             }
+            //Set the property equal to the new comments array, which will then trigger a table reload
+            self.arrayOfTableData = array;
         }
-        //Set the property equal to the new comments array, which will then trigger a table reload
-        self.arrayOfTableData = array;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //Since the request has been recieved, and parsed, stop the Activity Indicator
+            [self.activityIndicator stopAnimating];
+            
+            //If an oldbutton was removed from the right bar button spot, put it back
+            self.navigationItem.rightBarButtonItem = self.oldBarButtonItem;
+            
+            [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
+        });
+    }
+    else {
+        [self.facebook requestWithGraphPath:FACEBOOK_FEED_TO_REQUEST andDelegate:self];
     }
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        //Since the request has been recieved, and parsed, stop the Activity Indicator
-        [self.activityIndicator stopAnimating];
-        
-        //If an oldbutton was removed from the right bar button spot, put it back
-        self.navigationItem.rightBarButtonItem = self.oldBarButtonItem;
-        
-        [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
-    });
 }
 
 

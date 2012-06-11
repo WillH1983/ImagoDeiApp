@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @protocol ImagoDeiTextEntryDelegate <NSObject>
-- (void)textView:(UITextView *)sender didFinishWithString:(NSString *)string;
+- (void)textView:(UITextView *)sender didFinishWithString:(NSString *)string withDictionaryForComment:(NSDictionary *)dictionary;
 @end
 
 @interface ImagoDeiTextEntryViewController : UIViewController
 @property (nonatomic, weak) id <ImagoDeiTextEntryDelegate> textEntryDelegate;
+@property (nonatomic, strong) NSDictionary *dictionaryForComment;
 @end

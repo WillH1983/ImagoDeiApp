@@ -18,6 +18,7 @@
 @synthesize textView;
 @synthesize postButton;
 @synthesize textEntryDelegate = _textEntryDelegate;
+@synthesize dictionaryForComment = _dictionaryForComment;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -79,9 +80,9 @@
 
 - (IBAction)postButtonPushed:(id)sender 
 {
-    if ([self.textEntryDelegate respondsToSelector:@selector(textView:didFinishWithString:)])
+    if ([self.textEntryDelegate respondsToSelector:@selector(textView:didFinishWithString:withDictionaryForComment:)])
     {
-        [self.textEntryDelegate textView:self.textView didFinishWithString:self.textView.text];
+        [self.textEntryDelegate textView:self.textView didFinishWithString:self.textView.text withDictionaryForComment:self.dictionaryForComment];
     }
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
