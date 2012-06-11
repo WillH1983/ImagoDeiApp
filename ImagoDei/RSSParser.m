@@ -125,9 +125,12 @@
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
     NSLog(@"all done!");
     NSLog(@"stories array has %d items", [self.stories count]);
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.rssParserDelegate RSSParser:self RSSParsingCompleteWithArray:self.stories];
-    });
+    if ([self.rssParserDelegate respondsToSelector:@selector(RSSParser:RSSParsingCompleteWithArray:)])
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.rssParserDelegate RSSParser:self RSSParsingCompleteWithArray:self.stories];
+        });
+    }
     
     
 }

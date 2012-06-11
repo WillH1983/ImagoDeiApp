@@ -163,6 +163,11 @@
     [self performSegueWithIdentifier:@"textInput" sender:self];
 }
 
+- (void)textView:(UITextView *)sender didFinishWithString:(NSString *)string
+{
+    NSLog(@"%@", string);
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //Set the cell identifier to the same as the prototype cell in the story board
@@ -439,6 +444,10 @@
         {
             [segue.destinationViewController setFacebookPhotoObjectID:sender];
         }
+    }
+    else if ([segue.identifier isEqualToString:@"textInput"])
+    {
+        [segue.destinationViewController setTextEntryDelegate:self];
     }
 }
 

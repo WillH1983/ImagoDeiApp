@@ -11,8 +11,9 @@
 #import "SocialMediaDetailViewController.h"
 #import "PullRefreshTableViewController.h"
 #import "ImagoDeiStandardTableViewController.h"
+#import "ImagoDeiTextEntryViewController.h"
 
-@interface FacebookSocialMediaViewController : ImagoDeiStandardTableViewController <FBSessionDelegate,FBRequestDelegate, FBDialogDelegate, SocialMediaDetailViewControllerDelegate>
+@interface FacebookSocialMediaViewController : ImagoDeiStandardTableViewController <FBSessionDelegate,FBRequestDelegate, FBDialogDelegate, SocialMediaDetailViewControllerDelegate, ImagoDeiTextEntryDelegate>
 
 @property (nonatomic, strong) Facebook *facebook;
 

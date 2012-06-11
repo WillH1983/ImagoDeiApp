@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ImagoDeiTextEntryViewController : UIViewController
+@protocol ImagoDeiTextEntryDelegate <NSObject>
+- (void)textView:(UITextView *)sender didFinishWithString:(NSString *)string;
+@end
 
+@interface ImagoDeiTextEntryViewController : UIViewController
+@property (nonatomic, weak) id <ImagoDeiTextEntryDelegate> textEntryDelegate;
 @end

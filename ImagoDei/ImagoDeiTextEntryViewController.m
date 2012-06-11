@@ -12,12 +12,12 @@
 @interface ImagoDeiTextEntryViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *postButton;
-
 @end
 
 @implementation ImagoDeiTextEntryViewController
 @synthesize textView;
 @synthesize postButton;
+@synthesize textEntryDelegate = _textEntryDelegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -74,6 +74,15 @@
 
 - (IBAction)cancelButtonPressed:(id)sender 
 {
+    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)postButtonPushed:(id)sender 
+{
+    if ([self.textEntryDelegate respondsToSelector:@selector(textView:didFinishWithString:)])
+    {
+        [self.textEntryDelegate textView:self.textView didFinishWithString:self.textView.text];
+    }
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 

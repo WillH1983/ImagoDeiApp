@@ -342,6 +342,10 @@
     {
         [segue.destinationViewController setUrlToLoad:sender];
     }
+    else if ([segue.identifier isEqualToString:@"comment"])
+    {
+        [segue.destinationViewController setTextEntryDelegate:self];
+    }
 }
 
 - (void)refresh 
@@ -356,6 +360,11 @@
     //NSString *graphAPIString = [NSString stringWithFormat:@"%@/comments", [self.fullCommentsDictionaryModel valueForKeyPath:@"id"]];
     //[self.socialMediaDelegate SocialMediaDetailViewController:self postDataForFacebookGraphAPIString:graphAPIString withParameters:[[NSMutableDictionary alloc] initWithObjectsAndKeys:@"TestingTesting", @"message", nil]];
     [self performSegueWithIdentifier:@"comment" sender:self];
+}
+
+- (void)textView:(UITextView *)sender didFinishWithString:(NSString *)string
+{
+    NSLog(@"%@", string);
 }
 
 
