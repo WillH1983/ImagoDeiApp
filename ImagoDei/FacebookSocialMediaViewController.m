@@ -165,7 +165,7 @@
 
 - (void)textView:(UITextView *)sender didFinishWithString:(NSString *)string
 {
-    NSLog(@"%@", string);
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

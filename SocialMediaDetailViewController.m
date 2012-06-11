@@ -308,11 +308,18 @@
     {
         if ([result isKindOfClass:[NSDictionary class]])
         {
-            NSLog(@"%@", result);
             self.fullCommentsDictionaryModel = result;
             [self loadSocialMediaView];
         }
         [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
+        //Since the RSS file has been loaded, stop animating the activity indicator
+        [self.activityIndicator stopAnimating];
+        
+        //If there is a right bar button item, put it back
+        self.navigationItem.rightBarButtonItem = self.oldBarButtonItem;
+    }
+    else {
+        [self.socialMediaDelegate SocialMediaDetailViewController:self dictionaryForFacebookGraphAPIString:[self.shortCommentsDictionaryModel objectForKey:@"id"]];
     }
 }
 
@@ -321,6 +328,11 @@
     //When a facebook request starts, save the request
     //so the delegate can be set to nill when the view disappears
     self.facebookRequest = request;
+    
+    [self.activityIndicator startAnimating];
+    
+    //Set the right navigation bar button item to the activity indicator
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
 }
 
 - (void) presentWebView:(NSNotification *) notification
@@ -357,14 +369,13 @@
 
 - (IBAction)commentButtonPressed:(id)sender 
 {
-    //NSString *graphAPIString = [NSString stringWithFormat:@"%@/comments", [self.fullCommentsDictionaryModel valueForKeyPath:@"id"]];
-    //[self.socialMediaDelegate SocialMediaDetailViewController:self postDataForFacebookGraphAPIString:graphAPIString withParameters:[[NSMutableDictionary alloc] initWithObjectsAndKeys:@"TestingTesting", @"message", nil]];
     [self performSegueWithIdentifier:@"comment" sender:self];
 }
 
 - (void)textView:(UITextView *)sender didFinishWithString:(NSString *)string
 {
-    NSLog(@"%@", string);
+    NSString *graphAPIString = [NSString stringWithFormat:@"%@/comments", [self.fullCommentsDictionaryModel valueForKeyPath:@"id"]];
+    [self.socialMediaDelegate SocialMediaDetailViewController:self postDataForFacebookGraphAPIString:graphAPIString withParameters:[[NSMutableDictionary alloc] initWithObjectsAndKeys:string, @"message", nil]];
 }
 
 
