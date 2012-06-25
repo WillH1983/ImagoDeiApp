@@ -28,6 +28,7 @@
 		BE2F9B08156C9D54008C434A /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2F9B07156C9D54008C434A /* WebViewController.m */; };
 		BE2F9B18156CA0AF008C434A /* MyApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2F9B16156CA0AF008C434A /* MyApplication.m */; };
 		BE4996F115845EBF005A5BDF /* FacebookButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE4996F015845EBF005A5BDF /* FacebookButton@2x.png */; };
+		BE4E2900159803190000F0F2 /* libUAirship-1.2.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4E28FF159803190000F0F2 /* libUAirship-1.2.2.a */; };
 		BE54BC141560A12200F85DD9 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = BE54BC131560A12200F85DD9 /* arrow.png */; };
 		BE54BC191560A18500F85DD9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE54BC181560A18500F85DD9 /* QuartzCore.framework */; };
 		BE54BC231560A4B500F85DD9 /* PullRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE54BC221560A4B500F85DD9 /* PullRefreshTableViewController.m */; };
@@ -52,6 +53,14 @@
 		BE56D5E1157B12790027A519 /* greenButtonActivated@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE56D5D5157B12790027A519 /* greenButtonActivated@2x.png */; };
 		BE56D5E2157B12790027A519 /* greenButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE56D5D6157B12790027A519 /* greenButton@2x.png */; };
 		BE56D5E4157B270D0027A519 /* arrow-sideways.png in Resources */ = {isa = PBXBuildFile; fileRef = BE56D5E3157B270D0027A519 /* arrow-sideways.png */; };
+		BE61166A1596DA9200768DD7 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE6116691596DA9200768DD7 /* AirshipConfig.plist */; };
+		BE61166C1596DAF600768DD7 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE61166B1596DAF600768DD7 /* CFNetwork.framework */; };
+		BE61166E1596DB0600768DD7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE61166D1596DB0600768DD7 /* MobileCoreServices.framework */; };
+		BE6116701596DB1E00768DD7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE61166F1596DB1E00768DD7 /* libz.dylib */; };
+		BE6116721596DB2900768DD7 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE6116711596DB2900768DD7 /* libsqlite3.dylib */; };
+		BE6116741596DB3700768DD7 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE6116731596DB3700768DD7 /* CoreTelephony.framework */; };
+		BE6116761596DB4000768DD7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE6116751596DB4000768DD7 /* StoreKit.framework */; };
+		BE6116781596DB4B00768DD7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE6116771596DB4B00768DD7 /* CoreLocation.framework */; };
 		BE62954A1547A8AA00CE719E /* RSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6295491547A8AA00CE719E /* RSSParser.m */; };
 		BE892259156E04D8004E79DF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE892258156E04D8004E79DF /* Security.framework */; };
 		BE89225B156E04E0004E79DF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89225A156E04E0004E79DF /* SystemConfiguration.framework */; };
@@ -141,6 +150,7 @@
 		BE2F9B16156CA0AF008C434A /* MyApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyApplication.m; sourceTree = "<group>"; };
 		BE2F9B17156CA0AF008C434A /* MyApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyApplication.h; sourceTree = "<group>"; };
 		BE4996F015845EBF005A5BDF /* FacebookButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FacebookButton@2x.png"; sourceTree = "<group>"; };
+		BE4E28FF159803190000F0F2 /* libUAirship-1.2.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libUAirship-1.2.2.a"; path = "../../Airship/libUAirship-1.2.2.a"; sourceTree = "<group>"; };
 		BE54BC131560A12200F85DD9 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		BE54BC181560A18500F85DD9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BE54BC211560A4B400F85DD9 /* PullRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullRefreshTableViewController.h; sourceTree = "<group>"; };
@@ -168,6 +178,14 @@
 		BE56D5D5157B12790027A519 /* greenButtonActivated@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "greenButtonActivated@2x.png"; sourceTree = "<group>"; };
 		BE56D5D6157B12790027A519 /* greenButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "greenButton@2x.png"; sourceTree = "<group>"; };
 		BE56D5E3157B270D0027A519 /* arrow-sideways.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-sideways.png"; sourceTree = "<group>"; };
+		BE6116691596DA9200768DD7 /* AirshipConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = AirshipConfig.plist; sourceTree = "<group>"; };
+		BE61166B1596DAF600768DD7 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		BE61166D1596DB0600768DD7 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		BE61166F1596DB1E00768DD7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		BE6116711596DB2900768DD7 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		BE6116731596DB3700768DD7 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		BE6116751596DB4000768DD7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		BE6116771596DB4B00768DD7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		BE6295481547A8AA00CE719E /* RSSParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSParser.h; sourceTree = "<group>"; };
 		BE6295491547A8AA00CE719E /* RSSParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSParser.m; sourceTree = "<group>"; };
 		BE892258156E04D8004E79DF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -278,6 +296,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE4E2900159803190000F0F2 /* libUAirship-1.2.2.a in Frameworks */,
+				BE6116781596DB4B00768DD7 /* CoreLocation.framework in Frameworks */,
+				BE6116761596DB4000768DD7 /* StoreKit.framework in Frameworks */,
+				BE6116741596DB3700768DD7 /* CoreTelephony.framework in Frameworks */,
+				BE6116721596DB2900768DD7 /* libsqlite3.dylib in Frameworks */,
+				BE6116701596DB1E00768DD7 /* libz.dylib in Frameworks */,
+				BE61166E1596DB0600768DD7 /* MobileCoreServices.framework in Frameworks */,
+				BE61166C1596DAF600768DD7 /* CFNetwork.framework in Frameworks */,
 				BE89225B156E04E0004E79DF /* SystemConfiguration.framework in Frameworks */,
 				BE892259156E04D8004E79DF /* Security.framework in Frameworks */,
 				BE54BC191560A18500F85DD9 /* QuartzCore.framework in Frameworks */,
@@ -390,8 +416,6 @@
 		BEDF1E4B154791C4009FCA21 = {
 			isa = PBXGroup;
 			children = (
-				BE89225A156E04E0004E79DF /* SystemConfiguration.framework */,
-				BE892258156E04D8004E79DF /* Security.framework */,
 				BED788091559EF9B003CDEA1 /* iTunesArtwork */,
 				BED7880B1559EF9B003CDEA1 /* iTunesArtwork@2x */,
 				BED7881C1559F00C003CDEA1 /* Icon-72.png */,
@@ -417,6 +441,15 @@
 		BEDF1E59154791C4009FCA21 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE6116771596DB4B00768DD7 /* CoreLocation.framework */,
+				BE6116751596DB4000768DD7 /* StoreKit.framework */,
+				BE6116731596DB3700768DD7 /* CoreTelephony.framework */,
+				BE6116711596DB2900768DD7 /* libsqlite3.dylib */,
+				BE61166F1596DB1E00768DD7 /* libz.dylib */,
+				BE61166D1596DB0600768DD7 /* MobileCoreServices.framework */,
+				BE61166B1596DAF600768DD7 /* CFNetwork.framework */,
+				BE89225A156E04E0004E79DF /* SystemConfiguration.framework */,
+				BE892258156E04D8004E79DF /* Security.framework */,
 				BE54BC181560A18500F85DD9 /* QuartzCore.framework */,
 				BED23D0F155A0C8B00DB2D00 /* CoreImage.framework */,
 				BE1C3FBE154BA71400775B14 /* MediaPlayer.framework */,
@@ -483,6 +516,7 @@
 		BEDF1E61154791C4009FCA21 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BE4E28FF159803190000F0F2 /* libUAirship-1.2.2.a */,
 				BE56D5C8157AE15D0027A519 /* future_plans.xml */,
 				BEDAF47A157C6D0400606339 /* future_plans2.xml */,
 				BEDF1EAB154795FB009FCA21 /* main.m */,
@@ -543,6 +577,7 @@
 		BEDF1EDC1547977F009FCA21 /* Build Settings */ = {
 			isa = PBXGroup;
 			children = (
+				BE6116691596DA9200768DD7 /* AirshipConfig.plist */,
 				BEDF1E68154791C4009FCA21 /* ImagoDei-Prefix.pch */,
 				BEDF1E62154791C4009FCA21 /* ImagoDei-Info.plist */,
 				BEDF1E63154791C4009FCA21 /* InfoPlist.strings */,
@@ -698,6 +733,7 @@
 				BE56D5E4157B270D0027A519 /* arrow-sideways.png in Resources */,
 				BEDAF47B157C6D0400606339 /* future_plans2.xml in Resources */,
 				BE4996F115845EBF005A5BDF /* FacebookButton@2x.png in Resources */,
+				BE61166A1596DA9200768DD7 /* AirshipConfig.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -810,7 +846,7 @@
 		BEDF1E6C154791C4009FCA21 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -827,7 +863,9 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "../Airship/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -836,7 +874,7 @@
 		BEDF1E6D154791C4009FCA21 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -846,8 +884,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "../Airship/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -863,11 +903,13 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ImagoDei/ImagoDei-Prefix.pch";
+				HEADER_SEARCH_PATHS = "../Airship/**";
 				INFOPLIST_FILE = "ImagoDei/ImagoDei-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/ImagoDei\"",
+					"\"$(SRCROOT)/../Airship\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -883,11 +925,13 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ImagoDei/ImagoDei-Prefix.pch";
+				HEADER_SEARCH_PATHS = "../Airship/**";
 				INFOPLIST_FILE = "ImagoDei/ImagoDei-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/ImagoDei\"",
+					"\"$(SRCROOT)/../Airship\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
