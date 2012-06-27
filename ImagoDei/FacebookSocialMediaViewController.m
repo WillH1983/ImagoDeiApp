@@ -293,19 +293,8 @@
     UIImage *commentsButtonImage = [UIImage imageNamed:@"FacebookButton.png"];
     UIImage *stretchableCommentsButtonImage = [commentsButtonImage resizableImageWithCapInsets:commentsButtonImageEdge];
     
-    if ([typeOfPost isEqualToString:@"status"] || [typeOfPost isEqualToString:@"link"])
-    {
-        buttonImage.frame = CGRectZero;
-        commentsButton.frame = CGRectMake(310 - FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_TEXTVIEW_POSITION_FROM_TOP + size.height + FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS, FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_COMMENTS_BUTTON_HEIGHT);
-        NSString *commentsString = [[NSString alloc] initWithFormat:@"%@ Comments", count];
-        [commentsButton setTitle:commentsString forState:UIControlStateNormal];
-        [commentsButton setBackgroundImage:stretchableCommentsButtonImage forState:UIControlStateNormal];
-        
-        mainCommentButton.frame = CGRectMake(15, commentsButton.frame.origin.y, 70, FACEBOOK_COMMENTS_BUTTON_HEIGHT);
-        [mainCommentButton setTitle:@"Comment" forState:UIControlStateNormal];
-        [mainCommentButton setTitleColor:[UIColor blueColor] forState:UIControlStateHighlighted];
-    }
-    else if ([typeOfPost isEqualToString:@"photo"])
+    
+    if ([typeOfPost isEqualToString:@"photo"])
     {
         buttonImage.frame = CGRectMake(10, FACEBOOK_TEXTVIEW_POSITION_FROM_TOP + size.height + FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS, FACEBOOK_PHOTO_WIDTH, FACEBOOK_PHOTO_HEIGHT);
         [buttonImage setImage:[UIImage imageWithCIImage:[CIImage emptyImage]] forState:UIControlStateNormal];
@@ -316,6 +305,18 @@
         
         mainCommentButton.frame = CGRectMake(15, commentsButton.frame.origin.y, 70, FACEBOOK_COMMENTS_BUTTON_HEIGHT);
         [mainCommentButton setTitle:@"Comment" forState:UIControlStateNormal];
+    }
+    else
+    {
+        buttonImage.frame = CGRectZero;
+        commentsButton.frame = CGRectMake(310 - FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_TEXTVIEW_POSITION_FROM_TOP + size.height + FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS, FACEBOOK_COMMENTS_BUTTON_WIDTH, FACEBOOK_COMMENTS_BUTTON_HEIGHT);
+        NSString *commentsString = [[NSString alloc] initWithFormat:@"%@ Comments", count];
+        [commentsButton setTitle:commentsString forState:UIControlStateNormal];
+        [commentsButton setBackgroundImage:stretchableCommentsButtonImage forState:UIControlStateNormal];
+        
+        mainCommentButton.frame = CGRectMake(15, commentsButton.frame.origin.y, 70, FACEBOOK_COMMENTS_BUTTON_HEIGHT);
+        [mainCommentButton setTitle:@"Comment" forState:UIControlStateNormal];
+        [mainCommentButton setTitleColor:[UIColor blueColor] forState:UIControlStateHighlighted];
     }
     return cell;
 }
@@ -409,15 +410,16 @@
     CGSize maxSize = CGSizeMake(320 - FACEBOOK_FONT_SIZE, CGFLOAT_MAX);
     CGSize size = [mainTextLabel sizeWithFont:[UIFont systemFontOfSize:FACEBOOK_FONT_SIZE]  constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];
     
-    if ([typeOfPost isEqualToString:@"status"] || [typeOfPost isEqualToString:@"link"])
-    {
-        size.height += FACEBOOK_TEXTVIEW_TOP_MARGIN;
-        size.height += FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS + FACEBOOK_COMMENTS_BUTTON_HEIGHT;
-    }
-    else if ([typeOfPost isEqualToString:@"photo"])
+    
+    if ([typeOfPost isEqualToString:@"photo"])
     {
         size.height += FACEBOOK_TEXTVIEW_TOP_MARGIN;
         size.height += FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS + FACEBOOK_PHOTO_HEIGHT;
+        size.height += FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS + FACEBOOK_COMMENTS_BUTTON_HEIGHT;
+    }
+    else
+    {
+        size.height += FACEBOOK_TEXTVIEW_TOP_MARGIN;
         size.height += FACEBOOK_MARGIN_BETWEEN_COMMENTS_BUTTONS + FACEBOOK_COMMENTS_BUTTON_HEIGHT;
     }
     return size.height + FACEBOOK_TEXTVIEW_TOP_MARGIN + FACEBOOK_TEXTVIEW_POSITION_FROM_TOP;
