@@ -6,11 +6,12 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "PlanningCenterViewController.h"
 #import "GTMOAuthAuthentication.h"
 #import "GTMOAuthViewControllerTouch.h"
-#import <QuartzCore/QuartzCore.h>
 #import "WebViewController.h"
+#import "ImagoDeiDataFetcher.h"
 
 static NSString *const kPCOKeychainItemName = @"Imago Dei: Planning Center";
 static NSString *const kPCOServiceName = @"Planning Center";
@@ -146,50 +147,16 @@ static NSString *const DanaPeopleID = @"1240047";
         __block NSArray *tmpArray = [[NSArray alloc] init];
         dispatch_queue_t downloadQueue = dispatch_queue_create("downloader", NULL);
         dispatch_async(downloadQueue, ^{
-            NSString *futurePlansURL = [[NSString alloc] initWithString:@"https://www.planningcenteronline.com/me/future_plans.xml"];
-            NSDictionary *futurePlansDictionary = [self dictionaryForXMLURLString:futurePlansURL];
-            if (futurePlansDictionary)
-            {
-                id futurePlans = [futurePlansDictionary valueForKeyPath:@"plans.plan"];
-                if ([futurePlans isKindOfClass:[NSDictionary class]])
-                {
-                    tmpArray = [tmpArray arrayByAddingObject:futurePlans];
-                }
-                else if ([futurePlans isKindOfClass:[NSArray class]]) 
-                {
-                    tmpArray = [tmpArray arrayByAddingObjectsFromArray:futurePlans];
-                }
-            }
-            
-            NSMutableArray *mutableArray = [tmpArray mutableCopy];
-            for (int x = 0; x < [mutableArray count]; x++)
-            {
-                id items = [mutableArray objectAtIndex:x];
-                id planPerson = [items valueForKeyPath:@"my-plan-people.my-plan-person"];
-                if ([planPerson isKindOfClass:[NSArray class]])
-                {
-                    if ([items isKindOfClass:[NSMutableDictionary class]])
-                    {
-                        [mutableArray removeObjectAtIndex:x];
-                        NSMutableDictionary *myPlanPerson = nil;
-                        for (int i = 0; i < [planPerson count]; i++)
-                        {
-                            myPlanPerson = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[planPerson objectAtIndex:i], @"my-plan-person", nil];
-                            NSMutableDictionary *tmpItems = [items mutableCopy];
-                            [tmpItems setObject:myPlanPerson forKey:@"my-plan-people"];
-                            [mutableArray insertObject:tmpItems atIndex:x];
-                        }
-                    }
-                }
-            }
+            tmpArray = [ImagoDeiDataFetcher ArrayForPlanningCenterDataWithAuthenticationData:self.authentication];
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.arrayOfTableData = mutableArray;
+                self.arrayOfTableData = tmpArray;
                 [self.activityIndicator stopAnimating];
                 [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0.0];
             });
-        });
-        dispatch_release(downloadQueue);
-    } 
+    });
+    dispatch_release(downloadQueue);
+    }
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated

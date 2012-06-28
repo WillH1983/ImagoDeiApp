@@ -127,7 +127,8 @@
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
-    NSLog(@"%@", error);
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ImagoDei" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+    [alertView show];
 }
 
 @end

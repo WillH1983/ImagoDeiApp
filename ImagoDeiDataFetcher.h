@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GTMOAuthAuthentication.h"
 
 @interface ImagoDeiDataFetcher : NSObject
 
@@ -16,8 +17,7 @@
 #define CONTENT_UNIQUE_ID @"id"
 #define CONTENT_URL_LINK @"link"
 
-+ (NSArray *)tableOfContents;
-+ (NSArray *)arrayForSelectedContent:(NSDictionary *)selection;
-+ (NSDictionary *)DictionaryForImagoDeiLayout;
++ (NSDictionary *)DictionaryForMainPageTab;
++ (NSArray *)ArrayForPlanningCenterDataWithAuthenticationData:(GTMOAuthAuthentication *)auth;
 
 @end

@@ -109,8 +109,6 @@
 		BEDF1EAF154795FB009FCA21 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDF1EAB154795FB009FCA21 /* main.m */; };
 		BEDF1EB0154795FB009FCA21 /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDF1EAD154795FB009FCA21 /* MainPageViewController.m */; };
 		BEDF1EC91547961C009FCA21 /* SocialMediaDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDF1EBC1547961C009FCA21 /* SocialMediaDetailViewController.m */; };
-		BEDF1ECE1547961C009FCA21 /* twitter_newbird_blue small.png in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1EC11547961C009FCA21 /* twitter_newbird_blue small.png */; };
-		BEDF1ECF1547961C009FCA21 /* twitter_newbird_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = BEDF1EC21547961C009FCA21 /* twitter_newbird_blue.png */; };
 		BEDF1ED51547963F009FCA21 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDF1ED41547963F009FCA21 /* Twitter.framework */; };
 		BEE22936155E175D00504B5D /* iPhone_Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEE22935155E175D00504B5D /* iPhone_Storyboard.storyboard */; };
 		BEE2293A155E2C6A00504B5D /* PlanningCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE22939155E2C6A00504B5D /* PlanningCenterViewController.m */; };
@@ -246,8 +244,6 @@
 		BEDF1EAD154795FB009FCA21 /* MainPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainPageViewController.m; path = ../MainPageViewController.m; sourceTree = "<group>"; };
 		BEDF1EBB1547961C009FCA21 /* SocialMediaDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SocialMediaDetailViewController.h; path = ../SocialMediaDetailViewController.h; sourceTree = "<group>"; };
 		BEDF1EBC1547961C009FCA21 /* SocialMediaDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SocialMediaDetailViewController.m; path = ../SocialMediaDetailViewController.m; sourceTree = "<group>"; };
-		BEDF1EC11547961C009FCA21 /* twitter_newbird_blue small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter_newbird_blue small.png"; path = "../twitter_newbird_blue small.png"; sourceTree = "<group>"; };
-		BEDF1EC21547961C009FCA21 /* twitter_newbird_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = twitter_newbird_blue.png; path = ../twitter_newbird_blue.png; sourceTree = "<group>"; };
 		BEDF1ED41547963F009FCA21 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		BEE22935155E175D00504B5D /* iPhone_Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone_Storyboard.storyboard; sourceTree = "<group>"; };
 		BEE22938155E2C6A00504B5D /* PlanningCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanningCenterViewController.h; sourceTree = "<group>"; };
@@ -402,6 +398,22 @@
 			name = "Button Images";
 			sourceTree = "<group>";
 		};
+		BEA8313E159BE35A00EB63CD /* GTM Files */ = {
+			isa = PBXGroup;
+			children = (
+				BEE79313156FE54000F2EC23 /* GTMOAuthAuthentication.h */,
+				BEE79314156FE54000F2EC23 /* GTMOAuthAuthentication.m */,
+				BEE79315156FE54000F2EC23 /* GTMOAuthSignIn.h */,
+				BEE79316156FE54000F2EC23 /* GTMOAuthSignIn.m */,
+				BEE79319156FE55000F2EC23 /* GTMOAuthViewControllerTouch.h */,
+				BEE7931A156FE55000F2EC23 /* GTMOAuthViewControllerTouch.m */,
+				BEE7931B156FE55000F2EC23 /* GTMOAuthViewTouch.xib */,
+				BEE7931E156FE57E00F2EC23 /* GTMHTTPFetcher.h */,
+				BEE7931F156FE57E00F2EC23 /* GTMHTTPFetcher.m */,
+			);
+			name = "GTM Files";
+			sourceTree = "<group>";
+		};
 		BED788011559EF88003CDEA1 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
@@ -467,9 +479,9 @@
 		BEDF1E60154791C4009FCA21 /* ImagoDei */ = {
 			isa = PBXGroup;
 			children = (
+				BEE22935155E175D00504B5D /* iPhone_Storyboard.storyboard */,
 				BEDF1EBB1547961C009FCA21 /* SocialMediaDetailViewController.h */,
 				BEDF1EBC1547961C009FCA21 /* SocialMediaDetailViewController.m */,
-				BEE22935155E175D00504B5D /* iPhone_Storyboard.storyboard */,
 				BE074DF21583F276003E4881 /* ImagoDeiTextEntryViewController.h */,
 				BE074DF31583F276003E4881 /* ImagoDeiTextEntryViewController.m */,
 				BEE22938155E2C6A00504B5D /* PlanningCenterViewController.h */,
@@ -485,25 +497,14 @@
 				BE2F9B09156C9D5D008C434A /* WebViewController.h */,
 				BE2F9B07156C9D54008C434A /* WebViewController.m */,
 				BEDF1E961547955C009FCA21 /* ImageViewController.m */,
-				BE54BC211560A4B400F85DD9 /* PullRefreshTableViewController.h */,
 				BEB2928B15698EA2008086A3 /* FacebookSocialMediaViewController.h */,
 				BEB2928A15698EA2008086A3 /* FacebookSocialMediaViewController.m */,
-				BEE79313156FE54000F2EC23 /* GTMOAuthAuthentication.h */,
-				BEE79314156FE54000F2EC23 /* GTMOAuthAuthentication.m */,
-				BEE79315156FE54000F2EC23 /* GTMOAuthSignIn.h */,
-				BEE79316156FE54000F2EC23 /* GTMOAuthSignIn.m */,
-				BEE79319156FE55000F2EC23 /* GTMOAuthViewControllerTouch.h */,
-				BEE7931A156FE55000F2EC23 /* GTMOAuthViewControllerTouch.m */,
-				BEE7931B156FE55000F2EC23 /* GTMOAuthViewTouch.xib */,
-				BEE7931E156FE57E00F2EC23 /* GTMHTTPFetcher.h */,
-				BEE7931F156FE57E00F2EC23 /* GTMHTTPFetcher.m */,
+				BE54BC211560A4B400F85DD9 /* PullRefreshTableViewController.h */,
 				BE54BC221560A4B500F85DD9 /* PullRefreshTableViewController.m */,
 				BED87DE21562D6BD00141114 /* ImagoDeiStandardTableViewController.h */,
 				BED87DE31562D6BD00141114 /* ImagoDeiStandardTableViewController.m */,
 				BED65F4B157180E600C55083 /* XMLReader.h */,
 				BED65F4C157180E600C55083 /* XMLReader.m */,
-				BE2F9B16156CA0AF008C434A /* MyApplication.m */,
-				BE2F9B17156CA0AF008C434A /* MyApplication.h */,
 				BEDF1E9D154795BD009FCA21 /* ImagoDeiDataFetcher.h */,
 				BEDF1E9E154795BD009FCA21 /* ImagoDeiDataFetcher.m */,
 				BEDF1E9A15479598009FCA21 /* ImagoDeiAppDelegate.h */,
@@ -516,12 +517,15 @@
 		BEDF1E61154791C4009FCA21 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BE2F9B16156CA0AF008C434A /* MyApplication.m */,
+				BE2F9B17156CA0AF008C434A /* MyApplication.h */,
 				BE4E28FF159803190000F0F2 /* libUAirship-1.2.2.a */,
 				BE56D5C8157AE15D0027A519 /* future_plans.xml */,
 				BEDAF47A157C6D0400606339 /* future_plans2.xml */,
 				BEDF1EAB154795FB009FCA21 /* main.m */,
 				BED0A5A91548DAC4007094A5 /* MainTabiPhone.rss */,
 				BEDF1EA1154795CE009FCA21 /* JSONImagoDei.txt */,
+				BEA8313E159BE35A00EB63CD /* GTM Files */,
 				BEDF1EDC1547977F009FCA21 /* Build Settings */,
 				BEDF1EDB1547971D009FCA21 /* Images */,
 				BEDF1EDA154796B1009FCA21 /* Facebook */,
@@ -567,8 +571,6 @@
 				BE04B97515647D0E003FD971 /* background@2x.png */,
 				BED787EA1559EF78003CDEA1 /* background.png */,
 				BED787F01559EF78003CDEA1 /* imago-logo.png */,
-				BEDF1EC21547961C009FCA21 /* twitter_newbird_blue.png */,
-				BEDF1EC11547961C009FCA21 /* twitter_newbird_blue small.png */,
 				BEDF1E7D15479537009FCA21 /* f_logo.png */,
 			);
 			name = Images;
@@ -666,8 +668,6 @@
 				BEDF1E65154791C4009FCA21 /* InfoPlist.strings in Resources */,
 				BEDF1E8715479537009FCA21 /* f_logo.png in Resources */,
 				BEDF1EA3154795CE009FCA21 /* JSONImagoDei.txt in Resources */,
-				BEDF1ECE1547961C009FCA21 /* twitter_newbird_blue small.png in Resources */,
-				BEDF1ECF1547961C009FCA21 /* twitter_newbird_blue.png in Resources */,
 				BED0A5AA1548DAC4007094A5 /* MainTabiPhone.rss in Resources */,
 				BEF4A43A154DCA080015E00D /* ImagoDeiMediaController.xib in Resources */,
 				BED787F11559EF78003CDEA1 /* Imago-App-comp.jpg in Resources */,
