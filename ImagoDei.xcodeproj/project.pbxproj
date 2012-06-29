@@ -75,7 +75,6 @@
 		BED23D2D155A13BD00DB2D00 /* whoweare-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BED23D28155A13BD00DB2D00 /* whoweare-icon.png */; };
 		BED23D2E155A13BD00DB2D00 /* connect-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BED23D29155A13BD00DB2D00 /* connect-icon.png */; };
 		BED65F4D157180E600C55083 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = BED65F4C157180E600C55083 /* XMLReader.m */; };
-		BED787F11559EF78003CDEA1 /* Imago-App-comp.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BED787E11559EF78003CDEA1 /* Imago-App-comp.jpg */; };
 		BED787F21559EF78003CDEA1 /* home-inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = BED787E21559EF78003CDEA1 /* home-inactive.png */; };
 		BED787F31559EF78003CDEA1 /* home-active.png in Resources */ = {isa = PBXBuildFile; fileRef = BED787E31559EF78003CDEA1 /* home-active.png */; };
 		BED787F41559EF78003CDEA1 /* fb-logo-active.png in Resources */ = {isa = PBXBuildFile; fileRef = BED787E41559EF78003CDEA1 /* fb-logo-active.png */; };
@@ -201,7 +200,6 @@
 		BED23D29155A13BD00DB2D00 /* connect-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "connect-icon.png"; sourceTree = "<group>"; };
 		BED65F4B157180E600C55083 /* XMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLReader.h; sourceTree = "<group>"; };
 		BED65F4C157180E600C55083 /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
-		BED787E11559EF78003CDEA1 /* Imago-App-comp.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Imago-App-comp.jpg"; sourceTree = "<group>"; };
 		BED787E21559EF78003CDEA1 /* home-inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-inactive.png"; sourceTree = "<group>"; };
 		BED787E31559EF78003CDEA1 /* home-active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-active.png"; sourceTree = "<group>"; };
 		BED787E41559EF78003CDEA1 /* fb-logo-active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb-logo-active.png"; sourceTree = "<group>"; };
@@ -562,7 +560,6 @@
 				BE04B97815647F28003FD971 /* Main Page Icons */,
 				BE04B97715647E2D003FD971 /* Tabbar Images */,
 				BED788011559EF88003CDEA1 /* Icons */,
-				BED787E11559EF78003CDEA1 /* Imago-App-comp.jpg */,
 				BE56D5E3157B270D0027A519 /* arrow-sideways.png */,
 				BE56D5A9157AA7CE0027A519 /* btn_decline.png */,
 				BE56D5AA157AA7CE0027A519 /* btn_accept.png */,
@@ -670,7 +667,6 @@
 				BEDF1EA3154795CE009FCA21 /* JSONImagoDei.txt in Resources */,
 				BED0A5AA1548DAC4007094A5 /* MainTabiPhone.rss in Resources */,
 				BEF4A43A154DCA080015E00D /* ImagoDeiMediaController.xib in Resources */,
-				BED787F11559EF78003CDEA1 /* Imago-App-comp.jpg in Resources */,
 				BED787F21559EF78003CDEA1 /* home-inactive.png in Resources */,
 				BED787F31559EF78003CDEA1 /* home-active.png in Resources */,
 				BED787F41559EF78003CDEA1 /* fb-logo-active.png in Resources */,
