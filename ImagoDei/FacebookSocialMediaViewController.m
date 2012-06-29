@@ -538,6 +538,8 @@
         self.arrayOfTableData = nil;
         [self.tableView reloadData];
         [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ImagoDei - Facebook" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+        [alertView show];
     });
     
 }

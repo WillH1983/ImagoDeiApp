@@ -19,8 +19,8 @@
 
 - (id)initWithModel:(NSURL *)model;
 
-#define CONTENT_TITLE @"title"
-#define CONTENT_DESCRIPTION @"description"
+#define CONTENT_TITLE2 @"title.text"
+#define CONTENT_DESCRIPTION2 @"pubDate.text"
 #define CONTENT_SMALL_PHOTO_URL @"smallphotourl"
 #define CONTENT_UNIQUE_ID @"id"
 #define CONTENT_URL_LINK @"link"

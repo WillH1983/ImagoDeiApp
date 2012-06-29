@@ -30,6 +30,11 @@
     //Setup the "home" tabbar item with the correct image and name
     [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"home-active.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"home-inactive"]];
     self.tabBarItem.title = @"Home";
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
     
     //For now create a filepath string with the MainTabiPhone file that is bundled
     //with the application
@@ -44,7 +49,7 @@
     NSString *primaryTextLabel = [[NSString alloc] init];
     
     //Get the title for the Cell to be displayed
-    primaryTextLabel = [[self.arrayOfTableData objectAtIndex:[indexPath row]] valueForKey:CONTENT_TITLE];
+    primaryTextLabel = [[self.arrayOfTableData objectAtIndex:[indexPath row]] valueForKeyPath:CONTENT_TITLE2];
     
     //Determine if an image should be displayed, and display it based upon the name
     if ([primaryTextLabel isEqualToString:@"NEWS"])

@@ -125,19 +125,6 @@ static NSString *const DanaPeopleID = @"1240047";
     self.tableView.allowsSelection = NO;
 }
 
-- (NSDictionary *)dictionaryForXMLURLString:(NSString *)urlString
-{
-    NSMutableURLRequest *xmlURLRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
-    [self.authentication authorizeRequest:xmlURLRequest];
-    NSHTTPURLResponse *response;
-    NSData *xmlData = [NSURLConnection sendSynchronousRequest:xmlURLRequest returningResponse:&response error:nil];
-    NSDictionary *dictionary = [XMLReader dictionaryForXMLData:xmlData error:nil];
-    /*NSString *filePath = [[NSBundle mainBundle] pathForResource:@"future_plans" ofType:@"xml"];
-    NSData *xmlData = [[NSData alloc] initWithContentsOfFile:filePath];
-    NSDictionary *dictionary = [XMLReader dictionaryForXMLData:xmlData error:nil];*/
-    return dictionary;
-}
-
 - (void)downloadPlanningCenterData
 {
     if ([self.authentication canAuthorize]) 

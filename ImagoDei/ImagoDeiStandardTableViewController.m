@@ -9,6 +9,7 @@
 #import "ImagoDeiStandardTableViewController.h"
 #import "ImagoDeiMediaController.h"
 #import "WebViewController.h"
+#import "XMLReader.h"
 
 @interface ImagoDeiStandardTableViewController ()
 @end
@@ -18,22 +19,6 @@
 @synthesize urlForTableData = _urlForTableData;
 @synthesize arrayOfTableData = _arrayOfTableData;
 @synthesize oldBarButtonItem = _oldBarButtonItem;
-
-
-- (void)setUrlForTableData:(NSURL *)urlForTableData
-{
-    //If the URL is not a link to an RSS file do not load the data
-    //if (![[urlForTableData pathExtension] isEqualToString:@"rss"]) return;
-    
-    if (!_urlForTableData)
-    {
-        //initialize RSSParser class, send the RSS URL to the class,
-        //and set the parser delegate to self
-        RSSParser *parser = [[RSSParser alloc] init];
-        [parser XMLFileToParseAtURL:urlForTableData withDelegate:self];
-    }
-    _urlForTableData = urlForTableData;
-}
 
 - (void)setArrayOfTableData:(NSArray *)arrayOfTableData
 {
@@ -97,6 +82,38 @@
 {
     //Call the super classes view will appear method
     [super viewWillAppear:animated];
+    if (self.urlForTableData)
+    {
+        dispatch_queue_t downloadQueue = dispatch_queue_create("downloader", NULL);
+        dispatch_async(downloadQueue, ^{
+            NSData *xmlData = nil;
+            if ([self.urlForTableData isFileURL])
+            {
+                xmlData = [NSData dataWithContentsOfURL:self.urlForTableData];
+            }
+            else 
+            {
+                NSMutableURLRequest *xmlURLRequest = [[NSMutableURLRequest alloc] initWithURL:self.urlForTableData];
+                NSHTTPURLResponse *response;
+                NSError *error = [[NSError alloc] init];
+                xmlData = [NSURLConnection sendSynchronousRequest:xmlURLRequest returningResponse:&response error:&error];
+                if (!xmlData)
+                {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ImagoDei" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+                        [alertView show];
+                    });
+                }
+            }
+            NSDictionary *tmpDictionary = [XMLReader dictionaryForXMLData:xmlData error:nil];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                id tmp = [tmpDictionary valueForKeyPath:@"rss.channel.item"];
+                if ([tmp isKindOfClass:[NSArray class]]) self.arrayOfTableData = tmp;
+                [self.activityIndicator stopAnimating];
+                self.navigationItem.rightBarButtonItem = self.oldBarButtonItem;
+            });
+        });
+    }
     
     //Set the Imago Dei logo to the title view of the navigation controler
     //With the content mode set to AspectFit
@@ -159,12 +176,18 @@
 
 - (NSString *)mainCellTextLabelForSelectedCellDictionary:(NSDictionary *)cellDictionary
 {
-    return [cellDictionary valueForKeyPath:CONTENT_TITLE];
+    return [cellDictionary valueForKeyPath:CONTENT_TITLE2];
 }
 
 - (NSString *)detailCellTextLabelForSelectedCellDictionary:(NSDictionary *)cellDictionary
 {
-    return [cellDictionary valueForKeyPath:CONTENT_DESCRIPTION];
+    NSString *tmpString = [cellDictionary valueForKeyPath:CONTENT_DESCRIPTION2];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"EEE, dd MM yyyy h:mm:ss z"];
+    NSDate *date2 = [dateFormatter dateFromString:tmpString];
+    [dateFormatter setDateStyle:NSDateFormatterFullStyle];
+    tmpString = [dateFormatter stringFromDate:date2];
+    return tmpString;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -212,10 +235,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //Pull the URL from the selected tablecell, which is from the parsed RSS file with the key "link"
-    NSURL *url = [[NSURL alloc] initWithString:[[self.arrayOfTableData objectAtIndex:indexPath.row] valueForKey:@"link"]];
+    NSURL *url = [[NSURL alloc] initWithString:[[self.arrayOfTableData objectAtIndex:indexPath.row] valueForKeyPath:@"link.text"]];
     
     //Get the title for the next view from the selected tablecell, which is composed from the RSS file
-    NSString *title = [[self.arrayOfTableData objectAtIndex:indexPath.row] valueForKey:@"title"];
+    NSString *title = [[self.arrayOfTableData objectAtIndex:indexPath.row] valueForKeyPath:@"title.text"];
     //Only perform actions on url if it is a valid URL
     if (url)
     {
