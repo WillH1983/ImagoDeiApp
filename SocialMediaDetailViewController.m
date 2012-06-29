@@ -329,7 +329,7 @@
     //so the delegate can be set to nill when the view disappears
     self.facebookRequest = request;
     
-    [self.activityIndicator startAnimating];
+     [self.activityIndicator startAnimating];
     
     //Set the right navigation bar button item to the activity indicator
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
