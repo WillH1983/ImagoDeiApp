@@ -10,6 +10,7 @@
 #import "ImagoDeiMediaController.h"
 #import "WebViewController.h"
 #import "XMLReader.h"
+#import "ImagoDeiDataFetcher.h"
 
 @interface ImagoDeiStandardTableViewController ()
 @end
@@ -84,28 +85,20 @@
     [super viewWillAppear:animated];
     if (self.urlForTableData)
     {
+        __block NSDictionary *tmpDictionary = nil;
         dispatch_queue_t downloadQueue = dispatch_queue_create("downloader", NULL);
         dispatch_async(downloadQueue, ^{
             NSData *xmlData = nil;
             if ([self.urlForTableData isFileURL])
             {
                 xmlData = [NSData dataWithContentsOfURL:self.urlForTableData];
+                tmpDictionary = [XMLReader dictionaryForXMLData:xmlData error:nil];
             }
             else 
             {
-                NSMutableURLRequest *xmlURLRequest = [[NSMutableURLRequest alloc] initWithURL:self.urlForTableData];
-                NSHTTPURLResponse *response;
-                NSError *error = [[NSError alloc] init];
-                xmlData = [NSURLConnection sendSynchronousRequest:xmlURLRequest returningResponse:&response error:&error];
-                if (!xmlData)
-                {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ImagoDei" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
-                        [alertView show];
-                    });
-                }
+                NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:self.urlForTableData];
+                tmpDictionary = [ImagoDeiDataFetcher DictionaryOfXMLDataForURL:urlRequest];
             }
-            NSDictionary *tmpDictionary = [XMLReader dictionaryForXMLData:xmlData error:nil];
             dispatch_async(dispatch_get_main_queue(), ^{
                 id tmp = [tmpDictionary valueForKeyPath:@"rss.channel.item"];
                 if ([tmp isKindOfClass:[NSArray class]]) self.arrayOfTableData = tmp;

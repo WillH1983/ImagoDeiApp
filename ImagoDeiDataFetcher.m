@@ -22,28 +22,7 @@
     NSString *futurePlansURL = [[NSString alloc] initWithString:@"https://www.planningcenteronline.com/me/future_plans.xml"];
     NSMutableURLRequest *xmlURLRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:futurePlansURL]];
     [auth authorizeRequest:xmlURLRequest];
-    NSError *error = [[NSError alloc] init];
-    NSHTTPURLResponse *response;
-    NSData *xmlData = [NSURLConnection sendSynchronousRequest:xmlURLRequest returningResponse:&response error:&error];
-    NSDictionary *futurePlansDictionary;
-    if (!xmlData)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ImagoDei" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
-            [alertView show];
-        });
-    }
-    else
-    {
-        futurePlansDictionary = [XMLReader dictionaryForXMLData:xmlData error:nil];
-        if (!futurePlansDictionary)
-        {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ImagoDei" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
-                [alertView show];
-            });
-        }
-    }
+    NSDictionary *futurePlansDictionary = [self DictionaryOfXMLDataForURL:xmlURLRequest];
     if (futurePlansDictionary)
     {
         id futurePlans = [futurePlansDictionary valueForKeyPath:@"plans.plan"];
@@ -81,5 +60,31 @@
     return mutableArray;
 }
 
++ (NSDictionary *)DictionaryOfXMLDataForURL:(NSMutableURLRequest *)url
+{
+    NSError *error = [[NSError alloc] init];
+    NSHTTPURLResponse *response;
+    NSData *xmlData = [NSURLConnection sendSynchronousRequest:url returningResponse:&response error:&error];
+    NSDictionary *xmlDictionary = nil;
+    if (!xmlData)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ImagoDei" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+            [alertView show];
+        });
+    }
+    else
+    {
+        xmlDictionary = [XMLReader dictionaryForXMLData:xmlData error:nil];
+        if (!xmlDictionary)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ImagoDei" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+                [alertView show];
+            });
+        }
+    }
+    return xmlDictionary;
+}
 
 @end

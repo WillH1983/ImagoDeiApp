@@ -19,5 +19,6 @@
 
 + (NSDictionary *)DictionaryForMainPageTab;
 + (NSArray *)ArrayForPlanningCenterDataWithAuthenticationData:(GTMOAuthAuthentication *)auth;
++ (NSDictionary *)DictionaryOfXMLDataForURL:(NSMutableURLRequest *)url;
 
 @end

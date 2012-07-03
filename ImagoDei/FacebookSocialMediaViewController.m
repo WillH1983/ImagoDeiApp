@@ -538,7 +538,13 @@
         self.arrayOfTableData = nil;
         [self.tableView reloadData];
         [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ImagoDei - Facebook" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+        NSDictionary *errorDictionary = [error userInfo];
+        NSString *errorMessage = [errorDictionary valueForKeyPath:@"error.message"];
+        NSNumber *errorCode = [errorDictionary valueForKeyPath:@"error.code"];
+        NSString *tmpString = nil;
+        if ([errorCode intValue] == 104) tmpString = @"Please Log In to continue";
+        else tmpString = errorMessage;
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ImagoDei - Facebook" message:tmpString delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
         [alertView show];
     });
     
