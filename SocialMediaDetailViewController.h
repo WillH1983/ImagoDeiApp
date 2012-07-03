@@ -20,7 +20,7 @@
 @end
 
 @interface SocialMediaDetailViewController : ImagoDeiStandardTableViewController <FBRequestDelegate, ImagoDeiTextEntryDelegate>
-@property  (weak, nonatomic) IBOutlet UIImageView *profilePictureImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *profilePictureImageView;
 @property (nonatomic, strong) NSDictionary *shortCommentsDictionaryModel;
 @property (nonatomic, strong) NSDictionary *fullCommentsDictionaryModel;
 @property (nonatomic, weak) id <SocialMediaDetailViewControllerDelegate> socialMediaDelegate;
