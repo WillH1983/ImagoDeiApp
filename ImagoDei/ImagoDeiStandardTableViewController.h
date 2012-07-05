@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "PullRefreshTableViewController.h"
-#import "RSSParser.h"
 
-@interface ImagoDeiStandardTableViewController : PullRefreshTableViewController <UITableViewDataSource, UITableViewDelegate, RSSParserDelegate>
+@interface ImagoDeiStandardTableViewController : PullRefreshTableViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) NSURL *urlForTableData;
 @property (strong, nonatomic) NSArray *arrayOfTableData;

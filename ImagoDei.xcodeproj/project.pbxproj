@@ -61,7 +61,6 @@
 		BE6116741596DB3700768DD7 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE6116731596DB3700768DD7 /* CoreTelephony.framework */; };
 		BE6116761596DB4000768DD7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE6116751596DB4000768DD7 /* StoreKit.framework */; };
 		BE6116781596DB4B00768DD7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE6116771596DB4B00768DD7 /* CoreLocation.framework */; };
-		BE62954A1547A8AA00CE719E /* RSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6295491547A8AA00CE719E /* RSSParser.m */; };
 		BE892259156E04D8004E79DF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE892258156E04D8004E79DF /* Security.framework */; };
 		BE89225B156E04E0004E79DF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89225A156E04E0004E79DF /* SystemConfiguration.framework */; };
 		BE9056AC15604D4300D79563 /* news-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9056AB15604D4300D79563 /* news-icon.png */; };
@@ -183,8 +182,6 @@
 		BE6116731596DB3700768DD7 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		BE6116751596DB4000768DD7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		BE6116771596DB4B00768DD7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		BE6295481547A8AA00CE719E /* RSSParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSParser.h; sourceTree = "<group>"; };
-		BE6295491547A8AA00CE719E /* RSSParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSParser.m; sourceTree = "<group>"; };
 		BE892258156E04D8004E79DF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BE89225A156E04E0004E79DF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BE9056AB15604D4300D79563 /* news-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news-icon.png"; sourceTree = "<group>"; };
@@ -489,8 +486,6 @@
 				BEF4A436154DCA080015E00D /* ImagoDeiMediaController.h */,
 				BEF4A437154DCA080015E00D /* ImagoDeiMediaController.m */,
 				BEF4A438154DCA080015E00D /* ImagoDeiMediaController.xib */,
-				BE6295481547A8AA00CE719E /* RSSParser.h */,
-				BE6295491547A8AA00CE719E /* RSSParser.m */,
 				BEDF1E951547955C009FCA21 /* ImageViewController.h */,
 				BE2F9B09156C9D5D008C434A /* WebViewController.h */,
 				BE2F9B07156C9D54008C434A /* WebViewController.m */,
@@ -770,7 +765,6 @@
 				BEDF1EAF154795FB009FCA21 /* main.m in Sources */,
 				BEDF1EB0154795FB009FCA21 /* MainPageViewController.m in Sources */,
 				BEDF1EC91547961C009FCA21 /* SocialMediaDetailViewController.m in Sources */,
-				BE62954A1547A8AA00CE719E /* RSSParser.m in Sources */,
 				BEF4A439154DCA080015E00D /* ImagoDeiMediaController.m in Sources */,
 				BEE2293A155E2C6A00504B5D /* PlanningCenterViewController.m in Sources */,
 				BE54BC231560A4B500F85DD9 /* PullRefreshTableViewController.m in Sources */,

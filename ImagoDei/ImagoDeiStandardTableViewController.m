@@ -139,22 +139,6 @@
     self.tableView.tableFooterView = view;
 }
 
-- (void)RSSParser:(RSSParser *)sender RSSParsingCompleteWithArray:(NSArray *)RSSArray
-{
-    //This method is called when the RSSParsing class has downloaded, and completed
-    //parsing of the provided RSS URL
-    self.arrayOfTableData = RSSArray;
-    
-    //Since the RSS file has been loaded, stop animating the activity indicator
-    [self.activityIndicator stopAnimating];
-    
-    //If there is a right bar button item, put it back
-    self.navigationItem.rightBarButtonItem = self.oldBarButtonItem;
-    
-    //If the RSS was reloaded using the pull to refresh, close the refresh view
-    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;// (interfaceOrientation == UIInterfaceOrientationPortrait);
