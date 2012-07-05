@@ -56,6 +56,12 @@
     //start it animating
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 	self.activityIndicator.hidesWhenStopped = YES;
+    
+    //Save the previous rightBarButtonItem so it can be put back on once the View is done loading
+    self.oldBarButtonItem = self.navigationItem.rightBarButtonItem;
+    
+    //Set the right navigation bar button item to the activity indicator
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -78,11 +84,7 @@
     if (self.urlForTableData)
     {
         [self.activityIndicator startAnimating];
-        //Save the previous rightBarButtonItem so it can be put back on once the View is done loading
-        self.oldBarButtonItem = self.navigationItem.rightBarButtonItem;
         
-        //Set the right navigation bar button item to the activity indicator
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
         __block NSDictionary *tmpDictionary = nil;
         dispatch_queue_t downloadQueue = dispatch_queue_create("downloader", NULL);
         dispatch_async(downloadQueue, ^{
