@@ -56,12 +56,6 @@
     //start it animating
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 	self.activityIndicator.hidesWhenStopped = YES;
-    [self.activityIndicator startAnimating];
-    //Save the previous rightBarButtonItem so it can be put back on once the View is done loading
-    self.oldBarButtonItem = self.navigationItem.rightBarButtonItem;
-    
-    //Set the right navigation bar button item to the activity indicator
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -79,12 +73,16 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)downloadData
 {
-    //Call the super classes view will appear method
-    [super viewWillAppear:animated];
     if (self.urlForTableData)
     {
+        [self.activityIndicator startAnimating];
+        //Save the previous rightBarButtonItem so it can be put back on once the View is done loading
+        self.oldBarButtonItem = self.navigationItem.rightBarButtonItem;
+        
+        //Set the right navigation bar button item to the activity indicator
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
         __block NSDictionary *tmpDictionary = nil;
         dispatch_queue_t downloadQueue = dispatch_queue_create("downloader", NULL);
         dispatch_async(downloadQueue, ^{
@@ -104,9 +102,18 @@
                 if ([tmp isKindOfClass:[NSArray class]]) self.arrayOfTableData = tmp;
                 [self.activityIndicator stopAnimating];
                 self.navigationItem.rightBarButtonItem = self.oldBarButtonItem;
+                [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
             });
         });
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    //Call the super classes view will appear method
+    [super viewWillAppear:animated];
+    
+    [self downloadData];
     
     //Set the Imago Dei logo to the title view of the navigation controler
     //With the content mode set to AspectFit
@@ -169,6 +176,7 @@
 
 - (NSString *)mainCellTextLabelForSelectedCellDictionary:(NSDictionary *)cellDictionary
 {
+    NSLog(@"%@", cellDictionary);
     return [cellDictionary valueForKeyPath:CONTENT_TITLE2];
 }
 
@@ -262,9 +270,7 @@
 }
 
 - (void)refresh {
-    //This method will re-request the data from the provided url
-    RSSParser *parser = [[RSSParser alloc] init];
-    [parser XMLFileToParseAtURL:self.urlForTableData withDelegate:self];
+    [self downloadData];
 }
 
 @end
