@@ -176,7 +176,6 @@
 
 - (NSString *)mainCellTextLabelForSelectedCellDictionary:(NSDictionary *)cellDictionary
 {
-    NSLog(@"%@", cellDictionary);
     return [cellDictionary valueForKeyPath:CONTENT_TITLE2];
 }
 
@@ -211,11 +210,17 @@
     }
     
     //Retrieve the corresponding dictionary to the index row requested
-    NSDictionary *dictionaryForCell = [self.arrayOfTableData objectAtIndex:[indexPath row]];
+    id dictionaryForCell = [self.arrayOfTableData objectAtIndex:[indexPath row]];
+    NSString *mainTextLabel = nil;
+    NSString *detailTextLabel = nil;
     
-    //Pull the main and detail text label out of the corresponding dictionary
-    NSString *mainTextLabel = [self mainCellTextLabelForSelectedCellDictionary:dictionaryForCell];
-    NSString *detailTextLabel = [self detailCellTextLabelForSelectedCellDictionary:dictionaryForCell];
+    if ([dictionaryForCell isKindOfClass:[NSDictionary class]])
+    {
+        //Pull the main and detail text label out of the corresponding dictionary
+        mainTextLabel = [self mainCellTextLabelForSelectedCellDictionary:dictionaryForCell];
+        detailTextLabel = [self detailCellTextLabelForSelectedCellDictionary:dictionaryForCell];
+    }
+    
     
     //Check if the main text label is equal to NSNULL, if it is replace the text
     if ([mainTextLabel isEqual:[NSNull null]]) mainTextLabel = @"Imago Dei Church";
@@ -269,7 +274,8 @@
     }
 }
 
-- (void)refresh {
+- (void)refresh 
+{
     [self downloadData];
 }
 
