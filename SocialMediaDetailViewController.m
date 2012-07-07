@@ -43,6 +43,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        //Set a notification up to call the function presentWebView when a URL is clicked
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(presentWebView:) 
                                                      name:@"urlSelected"
@@ -58,6 +59,7 @@
     
     if (self)
     {
+        //Set a notification up to call the function presentWebView when a URL is clicked
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(presentWebView:) 
                                                      name:@"urlSelected"
@@ -69,10 +71,12 @@
 {
     [super viewDidLoad];
     
+    //Do not allow the cells in the tableview to be selected
     [self.tableView setAllowsSelection:NO];
     
+    //Pull the full comments dictionary from the delegate to use as our Model
     [self.socialMediaDelegate SocialMediaDetailViewController:self dictionaryForFacebookGraphAPIString:[self.shortCommentsDictionaryModel objectForKey:@"id"]];
-    // Do any additional setup after loading the view from its nib.
+    
 }
 
 - (void)viewDidUnload
@@ -82,20 +86,6 @@
     [self setButtonImage:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
-    self.tableView.tableFooterView = view;
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    [self.tableView reloadData];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -128,6 +118,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //This function is used to configure a cell and display the proper information
+    //for the table row.  The output of this function is a cell that displays one comment
+    //from one facebook person, and the name of that person
+    
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell;
     
@@ -135,24 +129,36 @@
     //If there is no reusable cell of this type, create a new one
     if (!cell)
     {
+        //Initialize a UITableViewCell of type Subtitle
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        
+        //Set the selection style of the cell to be gray
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        
+        //Set the cell to be in word wrap mode to allow for long strings
         cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
         cell.textLabel.numberOfLines = 0;
+        
+        //Set the font of the label to be a known size and font type
         cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:17.0];
+        
+        //Set the default imageView to be the facebook logo
         cell.imageView.image = [UIImage imageNamed:@"f_logo.png"];
+        
+        //Set the cell background color to be clear so the background image
+        //can be seen
         cell.backgroundColor = [UIColor clearColor];
     }
     
+    //Set the cell main text label, and detail text label to be the standard color
     cell.textLabel.textColor = [UIColor colorWithRed:0.29803 green:0.1529 blue:0.0039 alpha:1];
     cell.detailTextLabel.textColor = [UIColor colorWithRed:0.2666 green:0.2666 blue:0.2666 alpha:1];
     
-
+    //Retrieve the corresponding dictionary for the cell, retrieve the main and detail text
+    //label, and set the cell labels
     NSDictionary *dictionaryForCell = [self.commentsArray objectAtIndex:[indexPath row]];
     NSString *mainTextLabel = [dictionaryForCell valueForKeyPath:@"message"];
     NSString *detailTextLabel = [dictionaryForCell valueForKeyPath:@"from.name"];
-    //NSArray *test = [dictionaryForCell valueForKeyPath:@"comments.data"];
-    
     cell.textLabel.text = mainTextLabel;
     cell.detailTextLabel.text = detailTextLabel;
     
@@ -162,15 +168,27 @@
 
 - (void)tableView:(UITableView *)tableview willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //This function is used to download the facebook person profile image and display
+    //it in the table row cell
+    
+    //Create a download que to download the facebook profile image
     dispatch_queue_t downloadQueue = dispatch_queue_create("Profile Image Downloader", NULL);
     dispatch_async(downloadQueue, ^{
+        //Retreive the NSDictionary corresponding to the table row
         NSDictionary *tmpDictionary = [self.commentsArray objectAtIndex:[indexPath row]];
+        
+        //Create a URL based upon the facebook graph API
         NSString *profileFromId = [tmpDictionary valueForKeyPath:@"from.id"];
         NSString *urlString = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture", profileFromId];
         NSURL *url = [[NSURL alloc] initWithString:urlString];
+        
+        //Create an image based upon the downloaded NSData from the Facebook graph URL
+        //created above
         UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
         NSLog(@"Loading Web Data");
         dispatch_async(dispatch_get_main_queue(), ^{
+            //Verify the index path the image was downloaded for is still visible
+            //in the tableview.  If it is still visible set the cell imageView
             NSArray *tmpArray = [self.tableView indexPathsForVisibleRows];
             if ([tmpArray containsObject:indexPath]) [cell.imageView setImage:image];
         });
@@ -197,15 +215,19 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    //This function witll create a UITextView, put the UITextView inside a UITableViewCell and return
+    //The cell as the header view
     
     //Pull the main and detail text label out of the corresponding dictionary
     NSString *mainTextLabel = [self.fullCommentsDictionaryModel valueForKeyPath:@"message"];
     
+    //Determine the max height required for the UITextView with the comments string
     CGSize maxSize = CGSizeMake(320 - FACEBOOK_DETAIL_FONT_SIZE, CGFLOAT_MAX);
     CGSize size = [mainTextLabel sizeWithFont:[UIFont systemFontOfSize:FACEBOOK_DETAIL_FONT_SIZE]  constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];
     size.height += FACEBOOK_DETAIL_FONT_SIZE; 
     
-    
+    //Setup the UITextView for the standard font, no scrolling, not editable,
+    //detects URLs, clearcolor, and a frame height to match the size of the string
     UITextView *textView = [[UITextView alloc] initWithFrame:CGRectZero];
     textView.font = [UIFont systemFontOfSize:FACEBOOK_DETAIL_FONT_SIZE];
     textView.scrollEnabled = NO;
@@ -215,10 +237,9 @@
     textView.backgroundColor = [UIColor clearColor];
     textView.frame = CGRectMake(0, 0, 320, size.height);
     
+    //Create a UITableViewCell with the same height as the textview
     UITableViewCell *cell = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, 320, size.height)];
     [cell.contentView addSubview:textView];
-    
-    
     
     //Set the cell text label's based upon the table contents array location
     textView.text = mainTextLabel;
@@ -229,6 +250,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    //This function will determine the size required for the header based
+    //upon the size of the text string
+    
     //Pull the main and detail text label out of the corresponding dictionary
     NSString *mainTextLabel = [self.fullCommentsDictionaryModel valueForKeyPath:@"message"];
     
@@ -242,12 +266,15 @@
 
 - (void)loadSocialMediaView
 {
-    self.textView.text = [self.fullCommentsDictionaryModel objectForKey:@"message"];
-    self.commentsArray = [self.fullCommentsDictionaryModel valueForKeyPath:@"comments.data"];
+    id commentData = [self.fullCommentsDictionaryModel objectForKey:@"message"];
+    if ([commentData isKindOfClass:[NSString class]]) self.textView.text = commentData;
+    
+    id commentsArray = [self.fullCommentsDictionaryModel valueForKeyPath:@"comments.data"];
+    if ([commentsArray isKindOfClass:[NSArray class]]) self.commentsArray = commentsArray;
     
     NSString *urlStringForPostPicture = [self.fullCommentsDictionaryModel valueForKey:@"picture"];
     
-    if (urlStringForPostPicture)
+    if ([urlStringForPostPicture isKindOfClass:[NSString class]])
     {
         dispatch_queue_t downloadQueue = dispatch_queue_create("Post Imageview", NULL);
         dispatch_async(downloadQueue, ^{
