@@ -21,7 +21,6 @@
 		BE04B972156479FD003FD971 /* whoweare-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE04B96D156479FD003FD971 /* whoweare-icon@2x.png */; };
 		BE04B97415647C12003FD971 /* imago-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE04B97315647C12003FD971 /* imago-logo@2x.png */; };
 		BE04B97615647D0E003FD971 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE04B97515647D0E003FD971 /* background@2x.png */; };
-		BE060B3215AD11EC0062CE6C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BE060B3115AD11EC0062CE6C /* README.md */; };
 		BE074DF41583F276003E4881 /* ImagoDeiTextEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE074DF31583F276003E4881 /* ImagoDeiTextEntryViewController.m */; };
 		BE1C3FB4154B7F7100775B14 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1C3FB3154B7F7100775B14 /* AVFoundation.framework */; };
 		BE1C3FBD154B9C6000775B14 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1C3FBC154B9C6000775B14 /* CoreMedia.framework */; };
@@ -65,6 +64,7 @@
 		BE892259156E04D8004E79DF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE892258156E04D8004E79DF /* Security.framework */; };
 		BE89225B156E04E0004E79DF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89225A156E04E0004E79DF /* SystemConfiguration.framework */; };
 		BE9056AC15604D4300D79563 /* news-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9056AB15604D4300D79563 /* news-icon.png */; };
+		BE9F747415AD14C30013D3D9 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BE9F747315AD14C30013D3D9 /* README.md */; };
 		BEB2928C15698EA2008086A3 /* FacebookSocialMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB2928A15698EA2008086A3 /* FacebookSocialMediaViewController.m */; };
 		BED0A5AA1548DAC4007094A5 /* MainTabiPhone.rss in Resources */ = {isa = PBXBuildFile; fileRef = BED0A5A91548DAC4007094A5 /* MainTabiPhone.rss */; };
 		BED1D7D81564498200FB8E5B /* tabbar-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED1D7D71564498200FB8E5B /* tabbar-bg@2x.png */; };
@@ -137,7 +137,6 @@
 		BE04B96D156479FD003FD971 /* whoweare-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whoweare-icon@2x.png"; sourceTree = "<group>"; };
 		BE04B97315647C12003FD971 /* imago-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "imago-logo@2x.png"; sourceTree = "<group>"; };
 		BE04B97515647D0E003FD971 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
-		BE060B3115AD11EC0062CE6C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ImagoDei/README.md; sourceTree = "<group>"; };
 		BE074DF21583F276003E4881 /* ImagoDeiTextEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagoDeiTextEntryViewController.h; sourceTree = "<group>"; };
 		BE074DF31583F276003E4881 /* ImagoDeiTextEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagoDeiTextEntryViewController.m; sourceTree = "<group>"; };
 		BE1C3FB3154B7F7100775B14 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -187,6 +186,7 @@
 		BE892258156E04D8004E79DF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BE89225A156E04E0004E79DF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BE9056AB15604D4300D79563 /* news-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news-icon.png"; sourceTree = "<group>"; };
+		BE9F747315AD14C30013D3D9 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		BEB2928A15698EA2008086A3 /* FacebookSocialMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookSocialMediaViewController.m; sourceTree = "<group>"; };
 		BEB2928B15698EA2008086A3 /* FacebookSocialMediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookSocialMediaViewController.h; sourceTree = "<group>"; };
 		BED0A5A91548DAC4007094A5 /* MainTabiPhone.rss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MainTabiPhone.rss; sourceTree = "<group>"; };
@@ -425,7 +425,7 @@
 		BEDF1E4B154791C4009FCA21 = {
 			isa = PBXGroup;
 			children = (
-				BE060B3115AD11EC0062CE6C /* README.md */,
+				BE9F747315AD14C30013D3D9 /* README.md */,
 				BED788091559EF9B003CDEA1 /* iTunesArtwork */,
 				BED7880B1559EF9B003CDEA1 /* iTunesArtwork@2x */,
 				BED7881C1559F00C003CDEA1 /* Icon-72.png */,
@@ -728,7 +728,7 @@
 				BEDAF47B157C6D0400606339 /* future_plans2.xml in Resources */,
 				BE4996F115845EBF005A5BDF /* FacebookButton@2x.png in Resources */,
 				BE61166A1596DA9200768DD7 /* AirshipConfig.plist in Resources */,
-				BE060B3215AD11EC0062CE6C /* README.md in Resources */,
+				BE9F747415AD14C30013D3D9 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
