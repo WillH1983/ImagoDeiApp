@@ -21,6 +21,7 @@
 		BE04B972156479FD003FD971 /* whoweare-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE04B96D156479FD003FD971 /* whoweare-icon@2x.png */; };
 		BE04B97415647C12003FD971 /* imago-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE04B97315647C12003FD971 /* imago-logo@2x.png */; };
 		BE04B97615647D0E003FD971 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE04B97515647D0E003FD971 /* background@2x.png */; };
+		BE060B3215AD11EC0062CE6C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BE060B3115AD11EC0062CE6C /* README.md */; };
 		BE074DF41583F276003E4881 /* ImagoDeiTextEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE074DF31583F276003E4881 /* ImagoDeiTextEntryViewController.m */; };
 		BE1C3FB4154B7F7100775B14 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1C3FB3154B7F7100775B14 /* AVFoundation.framework */; };
 		BE1C3FBD154B9C6000775B14 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1C3FBC154B9C6000775B14 /* CoreMedia.framework */; };
@@ -136,6 +137,7 @@
 		BE04B96D156479FD003FD971 /* whoweare-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whoweare-icon@2x.png"; sourceTree = "<group>"; };
 		BE04B97315647C12003FD971 /* imago-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "imago-logo@2x.png"; sourceTree = "<group>"; };
 		BE04B97515647D0E003FD971 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
+		BE060B3115AD11EC0062CE6C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		BE074DF21583F276003E4881 /* ImagoDeiTextEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagoDeiTextEntryViewController.h; sourceTree = "<group>"; };
 		BE074DF31583F276003E4881 /* ImagoDeiTextEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagoDeiTextEntryViewController.m; sourceTree = "<group>"; };
 		BE1C3FB3154B7F7100775B14 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -502,6 +504,7 @@
 				BEDF1E9E154795BD009FCA21 /* ImagoDeiDataFetcher.m */,
 				BEDF1E9A15479598009FCA21 /* ImagoDeiAppDelegate.h */,
 				BEDF1E9B15479598009FCA21 /* ImagoDeiAppDelegate.m */,
+				BE060B3115AD11EC0062CE6C /* README.md */,
 				BEDF1E61154791C4009FCA21 /* Supporting Files */,
 			);
 			path = ImagoDei;
@@ -725,6 +728,7 @@
 				BEDAF47B157C6D0400606339 /* future_plans2.xml in Resources */,
 				BE4996F115845EBF005A5BDF /* FacebookButton@2x.png in Resources */,
 				BE61166A1596DA9200768DD7 /* AirshipConfig.plist in Resources */,
+				BE060B3215AD11EC0062CE6C /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
