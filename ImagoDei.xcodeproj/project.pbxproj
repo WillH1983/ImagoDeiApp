@@ -137,7 +137,7 @@
 		BE04B96D156479FD003FD971 /* whoweare-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whoweare-icon@2x.png"; sourceTree = "<group>"; };
 		BE04B97315647C12003FD971 /* imago-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "imago-logo@2x.png"; sourceTree = "<group>"; };
 		BE04B97515647D0E003FD971 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
-		BE060B3115AD11EC0062CE6C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		BE060B3115AD11EC0062CE6C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ImagoDei/README.md; sourceTree = "<group>"; };
 		BE074DF21583F276003E4881 /* ImagoDeiTextEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagoDeiTextEntryViewController.h; sourceTree = "<group>"; };
 		BE074DF31583F276003E4881 /* ImagoDeiTextEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagoDeiTextEntryViewController.m; sourceTree = "<group>"; };
 		BE1C3FB3154B7F7100775B14 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -425,6 +425,7 @@
 		BEDF1E4B154791C4009FCA21 = {
 			isa = PBXGroup;
 			children = (
+				BE060B3115AD11EC0062CE6C /* README.md */,
 				BED788091559EF9B003CDEA1 /* iTunesArtwork */,
 				BED7880B1559EF9B003CDEA1 /* iTunesArtwork@2x */,
 				BED7881C1559F00C003CDEA1 /* Icon-72.png */,
@@ -504,7 +505,6 @@
 				BEDF1E9E154795BD009FCA21 /* ImagoDeiDataFetcher.m */,
 				BEDF1E9A15479598009FCA21 /* ImagoDeiAppDelegate.h */,
 				BEDF1E9B15479598009FCA21 /* ImagoDeiAppDelegate.m */,
-				BE060B3115AD11EC0062CE6C /* README.md */,
 				BEDF1E61154791C4009FCA21 /* Supporting Files */,
 			);
 			path = ImagoDei;
