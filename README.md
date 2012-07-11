@@ -12,7 +12,7 @@
 
 #Planning Center Online Screen Shots
 [![planningcentertab](http://willhindenburg.files.wordpress.com/2012/07/planningcentertab-small.png)](http://willhindenburg.files.wordpress.com/2012/07/planningcentertab.png)
-[![planningcentertabexpanded](http://willhindenburg.files.wordpress.com/2012/07/planningcentertab-expanded-small)](http://willhindenburg.files.wordpress.com/2012/07/planningcentertab-expanded)
+[![planningcentertabexpanded](http://willhindenburg.files.wordpress.com/2012/07/planningcentertab-expanded-small.png)](http://willhindenburg.files.wordpress.com/2012/07/planningcentertab-expanded.png)
 [![planningcentertabloading](http://willhindenburg.files.wordpress.com/2012/07/planningcentertab-loading-small.png)](http://willhindenburg.files.wordpress.com/2012/07/planningcentertab-loading.png)
 [![planningcentertabafterloading](http://willhindenburg.files.wordpress.com/2012/07/planningcentertab-afterloading-small.png)](http://willhindenburg.files.wordpress.com/2012/07/planningcentertab-afterloading.png)
 
