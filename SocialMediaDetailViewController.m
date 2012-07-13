@@ -39,6 +39,7 @@
     [self.tableView reloadData];
 }
 
+#pragma mark - ViewController Initialization Methods
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -66,6 +67,8 @@
                                                    object:nil];
     }
 }
+
+#pragma mark - View Lifecycle
 
 - (void)viewDidLoad
 {
@@ -102,6 +105,8 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark - Table view data source
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
@@ -113,8 +118,6 @@
     // Return the number of rows in the section.
     return [self.commentsArray count];
 }
-
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -169,7 +172,7 @@
 - (void)tableView:(UITableView *)tableview willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //This function is used to download the facebook person profile image and display
-    //it in the table row cell
+    //it in the table row cell image area
     
     //Create a download que to download the facebook profile image
     dispatch_queue_t downloadQueue = dispatch_queue_create("Profile Image Downloader", NULL);
@@ -198,6 +201,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //This function calculates a approprate height based up on length of the text that will
+    //be displayed in the cell
+    
     NSDictionary *tmpDictionary = [self.commentsArray objectAtIndex:[indexPath row]];
     NSString *text = [tmpDictionary valueForKeyPath:@"message"];
     
@@ -227,7 +233,7 @@
     size.height += FACEBOOK_DETAIL_FONT_SIZE; 
     
     //Setup the UITextView for the standard font, no scrolling, not editable,
-    //detects URLs, clearcolor, and a frame height to match the size of the string
+    //detects URLs, sets the background to a clearcolor, and a frame height to match the size of the string
     UITextView *textView = [[UITextView alloc] initWithFrame:CGRectZero];
     textView.font = [UIFont systemFontOfSize:FACEBOOK_DETAIL_FONT_SIZE];
     textView.scrollEnabled = NO;
@@ -264,70 +270,7 @@
     return size.height + FACEBOOK_DETAIL_FONT_SIZE;
 }
 
-- (void)loadSocialMediaView
-{
-    id commentData = [self.fullCommentsDictionaryModel objectForKey:@"message"];
-    if ([commentData isKindOfClass:[NSString class]]) self.textView.text = commentData;
-    
-    id commentsArray = [self.fullCommentsDictionaryModel valueForKeyPath:@"comments.data"];
-    if ([commentsArray isKindOfClass:[NSArray class]]) self.commentsArray = commentsArray;
-    
-    NSString *urlStringForPostPicture = [self.fullCommentsDictionaryModel valueForKey:@"picture"];
-    
-    if ([urlStringForPostPicture isKindOfClass:[NSString class]])
-    {
-        dispatch_queue_t downloadQueue = dispatch_queue_create("Post Imageview", NULL);
-        dispatch_async(downloadQueue, ^{
-            NSURL *url = [[NSURL alloc] initWithString:urlStringForPostPicture];
-            self.postImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                //self.buttonImage = [[UIButton alloc] initWithFrame:CGRectMake(83, 124, 94, 76)];
-                //[self.buttonImage addTarget:self action:@selector(postImageButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-                //[self.buttonImage setImage:self.postImage forState:UIControlStateNormal];
-                //[self.view addSubview:self.buttonImage];
-            });
-        });
-        dispatch_release(downloadQueue);
-    }
-    else 
-    {
-        CGRect textViewCurrentFrame = self.textView.frame;
-        
-        if ([self.commentsArray count] == 0)
-        {
-            self.textView.frame = CGRectMake(textViewCurrentFrame.origin.x, textViewCurrentFrame.origin.y, textViewCurrentFrame.size.width, 350);
-        }
-        else 
-        {
-            self.textView.frame = CGRectMake(textViewCurrentFrame.origin.x, textViewCurrentFrame.origin.y, textViewCurrentFrame.size.width, 188);
-        }
-        
-    }
-    
-    NSString *profileId = [self.fullCommentsDictionaryModel valueForKeyPath:@"from.id"];
-    NSString *urlStringForProfile = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture", profileId];
-    
-    if (urlStringForProfile)
-    {
-        dispatch_queue_t downloadQueue2 = dispatch_queue_create("Post Imageview", NULL);
-        dispatch_async(downloadQueue2, ^{
-            NSURL *urlForProfilePicture = [[NSURL alloc] initWithString:urlStringForProfile];
-            NSLog(@"Loading Web Data");
-            UIImage *profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:urlForProfilePicture]];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.navigationItem.rightBarButtonItem = self.oldBarButtonItem;
-                self.profilePictureImageView.image = profileImage;
-            });
-        });
-        dispatch_release(downloadQueue2);
-    }
-}
-- (void)postImageButtonPressed:(id)sender 
-{
-    NSDictionary *imageViewModel = [self.fullCommentsDictionaryModel valueForKeyPath:@"object_id"];
-    if (imageViewModel == nil) return;
-    [self performSegueWithIdentifier:@"Photo" sender:self];
-}
+#pragma mark - Facebook Request Delegate Methods
 
 - (void)request:(FBRequest *)request didLoad:(id)result
 {
@@ -362,31 +305,41 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
 }
 
-- (void) presentWebView:(NSNotification *) notification
+#pragma mark - NSNotification Methods
+- (void)presentWebView:(NSNotification *) notification
 {
-    
+    //A notification is sent when a URL is selected in a UITextView. When
+    //it is recieved segue to the web view controller
     if ([[notification name] isEqualToString:@"urlSelected"])
     {
         [self performSegueWithIdentifier:@"Web" sender:[notification object]];
     }
 }
 
+#pragma mark - Segue Methods
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    //If a photo segue is required, send the photo object ID so the image
+    //can be downloaded
     if ([segue.identifier isEqualToString:@"Photo"])
     {
         [segue.destinationViewController setFacebookPhotoObjectID:[self.fullCommentsDictionaryModel valueForKeyPath:@"object_id"]];
     }
+    //If a web segue is required, send the URL to the new controller so the
+    //Website can be loaded
     else if ([segue.identifier isEqualToString:@"Web"] & [sender isKindOfClass:[NSURL class]])
     {
         [segue.destinationViewController setUrlToLoad:sender];
     }
+    //If the comment button is pushed the comment view controller will be
+    //presented, and the delegate will be set to this controller
     else if ([segue.identifier isEqualToString:@"comment"])
     {
         [segue.destinationViewController setTextEntryDelegate:self];
     }
 }
 
+#pragma mark - Helper Methods
 - (void)refresh 
 {
     //This method will request the full comments array from the delegate and
@@ -394,13 +347,74 @@
     [self.socialMediaDelegate SocialMediaDetailViewController:self dictionaryForFacebookGraphAPIString:[self.shortCommentsDictionaryModel objectForKey:@"id"]];
 }
 
+- (void)loadSocialMediaView
+{
+    //This function is called after the full comments dictionary has been downloaded
+    //from the facebook server.  The purpose of this function is to load the original
+    //postData in the textView, and to set the comments to the model of the controlller
+    //"commentsArray".  When commentsArray gets set the tableview reloads
+    
+    //Pull the original postData from the fullCommentsDictionaryModel that was retrieved
+    //from SocialMediaDetailViewControllerDelegate, then use introspection to verify the 
+    //postData is a String
+    id postData = [self.fullCommentsDictionaryModel objectForKey:@"message"];
+    if ([postData isKindOfClass:[NSString class]]) self.textView.text = postData;
+    NSLog(@"%@", postData);
+    
+    //Pull all of the comments from the fullCommentsDictionaryModel and use introspection
+    //to verify the commentsArray is actually an array or if the commentsArray is nil
+    //We still want to set the comments array to nil so the table will be reloaded
+    id commentsArray = [self.fullCommentsDictionaryModel valueForKeyPath:@"comments.data"];
+    if ([commentsArray isKindOfClass:[NSArray class]] || (!commentsArray)) self.commentsArray = commentsArray;
+    
+    //retrieve the profile ID from the controller model, and create a facebook graphi API URL
+    NSString *profileId = [self.fullCommentsDictionaryModel valueForKeyPath:@"from.id"];
+    NSString *urlStringForProfile = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture", profileId];
+    
+    //Verify the urlStringForProfile is not nil
+    if (urlStringForProfile)
+    {
+        //Create a downloadQueue, create a NSURL, and create a UIImage based upon downloaded
+        //NSData object
+        dispatch_queue_t downloadQueue2 = dispatch_queue_create("Post Imageview", NULL);
+        dispatch_async(downloadQueue2, ^{
+            NSURL *urlForProfilePicture = [[NSURL alloc] initWithString:urlStringForProfile];
+            NSLog(@"Loading Web Data");
+            UIImage *profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:urlForProfilePicture]];
+            //Once the UIImage is ready, stop the Activity indicator by putting the
+            //oldBarButtonItem back, and set the profileImage view to the downloaded Image
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.navigationItem.rightBarButtonItem = self.oldBarButtonItem;
+                self.profilePictureImageView.image = profileImage;
+            });
+        });
+        dispatch_release(downloadQueue2);
+    }
+}
+
+#pragma mark - Button methods
+
 - (IBAction)commentButtonPressed:(id)sender 
 {
+    //When the comment button is pushed the approprate segue will be performed
     [self performSegueWithIdentifier:@"comment" sender:self];
 }
 
+- (void)postImageButtonPressed:(id)sender 
+{
+    NSDictionary *imageViewModel = [self.fullCommentsDictionaryModel valueForKeyPath:@"object_id"];
+    if (imageViewModel == nil) return;
+    [self performSegueWithIdentifier:@"Photo" sender:self];
+}
+
+#pragma mark - ImagoDeiTextEntryDelegate Method
+
 - (void)textView:(UITextView *)sender didFinishWithString:(NSString *)string withDictionaryForComment:(NSDictionary *)dictionary
 {
+    //This function is called when the Comment View controller has data entered
+    //and the view is closing.  The purpose of this function is to retireve the data
+    //and post it to facebook using the graph API
+    
     NSString *graphAPIString = [NSString stringWithFormat:@"%@/comments", [self.fullCommentsDictionaryModel valueForKeyPath:@"id"]];
     [self.socialMediaDelegate SocialMediaDetailViewController:self postDataForFacebookGraphAPIString:graphAPIString withParameters:[[NSMutableDictionary alloc] initWithObjectsAndKeys:string, @"message", nil]];
 }
