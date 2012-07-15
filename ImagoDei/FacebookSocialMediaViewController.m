@@ -561,19 +561,7 @@
         {
             
             NSMutableArray *array = [result mutableArrayValueForKey:@"data"];
-            NSDictionary *dictionaryForCell = nil;
-            
-            //Create an array of dictionaries, with each have an id, message, postedby, and comments key
-            for (int i = 0; i < [array count]; i++) 
-            {
-                //Retrieve the corresponding dictionary to the index row requested
-                dictionaryForCell = [array objectAtIndex:i];
-                NSString *tmpString = [dictionaryForCell objectForKey:FACEBOOK_CONTENT_TITLE];
-                if (tmpString == nil)
-                {
-                    
-                }
-            }
+
             //Set the property equal to the new comments array, which will then trigger a table reload
             self.arrayOfTableData = array;
         }
