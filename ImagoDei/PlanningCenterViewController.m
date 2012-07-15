@@ -149,7 +149,11 @@ static NSString *const DanaPeopleID = @"1240047";
                 }
             }
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.tabBarItem.badgeValue = [[NSString alloc] initWithFormat:@"%d", unconfirmedCount];
+                if (unconfirmedCount > 0)
+                {
+                    self.tabBarItem.badgeValue = [[NSString alloc] initWithFormat:@"%d", unconfirmedCount];
+                }
+                else self.tabBarItem.badgeValue = nil;
                 [[UIApplication sharedApplication] setApplicationIconBadgeNumber:unconfirmedCount];
                 self.arrayOfTableData = tmpArray;
                 [self.activityIndicator stopAnimating];
