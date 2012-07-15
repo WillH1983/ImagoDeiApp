@@ -157,6 +157,12 @@ static NSString *const DanaPeopleID = @"1240047";
     });
     dispatch_release(downloadQueue);
     }
+    else
+    {
+        [self.activityIndicator stopAnimating];
+        self.arrayOfTableData = nil;
+        [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0.0];
+    }
     
 }
 
