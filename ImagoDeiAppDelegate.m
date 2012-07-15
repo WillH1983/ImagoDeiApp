@@ -16,9 +16,10 @@
 @implementation ImagoDeiAppDelegate
 
 @synthesize window = _window;
-@synthesize facebook;
+@synthesize facebook = _facebook;
 @synthesize tabBarController = _tabBarController;
 @synthesize audioSession = audioSession;
+@synthesize locationManager = _locationManager;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -46,6 +47,14 @@
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+    locationManager.purpose = @"Imago Dei Application will automatically load Planning Center data when approaching the church";
+    locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+    CLRegion *imagoDeiRegion = [[CLRegion alloc] initCircularRegionWithCenter:CLLocationCoordinate2DMake(40.715493, -89.596866) radius:804.0 identifier:@"Imago Dei Church"];
+    
+    [locationManager startMonitoringForRegion:imagoDeiRegion desiredAccuracy:50.0];
+    
     return YES;
 }
 
@@ -58,6 +67,15 @@
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
 
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ImagoDei" message:notification.alertBody delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+    [alertView show];
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 1];
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
 }
 
 // Pre iOS 4.2 support
@@ -129,6 +147,29 @@
 {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ImagoDei" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
     [alertView show];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
+{
+    NSLog(@"Did Enter Imago Dei Region");
+    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+    
+    localNotification.alertBody = @"Planning Center Data Loaded";
+    localNotification.alertAction = @"View";
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
+    localNotification.fireDate = [[NSDate alloc] initWithTimeIntervalSinceNow:60.0];
+    /*localNotification.applicationIconBadgeNumber = 1;
+     
+     NSDictionary *infoDict = [NSDictionary dictionaryWithObjectsAndKeys:@"Object 1", @"Key 1", @"Object 2", @"Key 2", nil];
+     localNotification.userInfo = infoDict;*/
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    //[localNotification release];
+}
+
+- (void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region withError:(NSError *)error
+{
+    NSLog(@"%@", error);
 }
 
 @end

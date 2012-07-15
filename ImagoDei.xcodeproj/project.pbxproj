@@ -148,6 +148,7 @@
 		BE2F9B17156CA0AF008C434A /* MyApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyApplication.h; sourceTree = "<group>"; };
 		BE4996F015845EBF005A5BDF /* FacebookButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FacebookButton@2x.png"; sourceTree = "<group>"; };
 		BE4E28FF159803190000F0F2 /* libUAirship-1.2.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libUAirship-1.2.2.a"; path = "../../Airship/libUAirship-1.2.2.a"; sourceTree = "<group>"; };
+		BE53E32C15B26A4600F6705F /* ImagoDei.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ImagoDei.gpx; sourceTree = "<group>"; };
 		BE54BC131560A12200F85DD9 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		BE54BC181560A18500F85DD9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BE54BC211560A4B400F85DD9 /* PullRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullRefreshTableViewController.h; sourceTree = "<group>"; };
@@ -185,6 +186,7 @@
 		BE6116771596DB4B00768DD7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		BE892258156E04D8004E79DF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BE89225A156E04E0004E79DF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		BE8A672B15B25D6100665D41 /* Untitled.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Untitled.gpx; sourceTree = "<group>"; };
 		BE9056AB15604D4300D79563 /* news-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news-icon.png"; sourceTree = "<group>"; };
 		BE9F747315AD14C30013D3D9 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		BEB2928A15698EA2008086A3 /* FacebookSocialMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookSocialMediaViewController.m; sourceTree = "<group>"; };
@@ -425,6 +427,8 @@
 		BEDF1E4B154791C4009FCA21 = {
 			isa = PBXGroup;
 			children = (
+				BE53E32C15B26A4600F6705F /* ImagoDei.gpx */,
+				BE8A672B15B25D6100665D41 /* Untitled.gpx */,
 				BE9F747315AD14C30013D3D9 /* README.md */,
 				BED788091559EF9B003CDEA1 /* iTunesArtwork */,
 				BED7880B1559EF9B003CDEA1 /* iTunesArtwork@2x */,
