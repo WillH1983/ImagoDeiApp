@@ -12,4 +12,6 @@
 
 @interface PlanningCenterViewController : ImagoDeiStandardTableViewController
 
+- (BOOL)downloadPlanningCenterData;
+
 @end

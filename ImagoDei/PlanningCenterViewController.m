@@ -126,8 +126,9 @@ static NSString *const DanaPeopleID = @"1240047";
     [self downloadPlanningCenterData];
 }
 
-- (void)downloadPlanningCenterData
+- (BOOL)downloadPlanningCenterData
 {
+    BOOL returnData = NO;
     if ([self.authentication canAuthorize]) 
     {
         self.navigationItem.leftBarButtonItem.title = @"Log Out";
@@ -154,15 +155,19 @@ static NSString *const DanaPeopleID = @"1240047";
                 [self.activityIndicator stopAnimating];
                 [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0.0];
             });
-    });
-    dispatch_release(downloadQueue);
+        });
+        dispatch_release(downloadQueue);
+        returnData = YES;
     }
     else
     {
         [self.activityIndicator stopAnimating];
         self.arrayOfTableData = nil;
         [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0.0];
+        returnData = NO;
     }
+    
+    return returnData;
     
 }
 
