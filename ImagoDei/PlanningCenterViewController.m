@@ -123,6 +123,7 @@ static NSString *const DanaPeopleID = @"1240047";
     [self setAuthentication:auth];
     
     self.tableView.allowsSelection = NO;
+    [self downloadPlanningCenterData];
 }
 
 - (void)downloadPlanningCenterData
@@ -135,13 +136,32 @@ static NSString *const DanaPeopleID = @"1240047";
         dispatch_queue_t downloadQueue = dispatch_queue_create("downloader", NULL);
         dispatch_async(downloadQueue, ^{
             tmpArray = [ImagoDeiDataFetcher ArrayForPlanningCenterDataWithAuthenticationData:self.authentication];
+            int unconfirmedCount = 0;
+            NSString *status = nil;
+            for (id items in tmpArray)
+            {
+                if ([items isKindOfClass:[NSDictionary class]]) 
+                {
+                    status = [items valueForKeyPath:@"my-plan-people.my-plan-person.status.text"];
+                    if ([status isEqualToString:@"U"]) unconfirmedCount++;
+                    status = nil;
+                }
+            }
             dispatch_async(dispatch_get_main_queue(), ^{
+                self.tabBarItem.badgeValue = [[NSString alloc] initWithFormat:@"%d", unconfirmedCount];
+                [[UIApplication sharedApplication] setApplicationIconBadgeNumber:unconfirmedCount];
                 self.arrayOfTableData = tmpArray;
                 [self.activityIndicator stopAnimating];
                 [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0.0];
             });
     });
     dispatch_release(downloadQueue);
+    }
+    else
+    {
+        [self.activityIndicator stopAnimating];
+        self.arrayOfTableData = nil;
+        [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0.0];
     }
     
 }
@@ -150,8 +170,6 @@ static NSString *const DanaPeopleID = @"1240047";
 {
     [super viewWillAppear:animated];
     [self.activityIndicator stopAnimating];
-    [self downloadPlanningCenterData];
-    
 }
 
 - (NSString *)mainCellTextLabelForSelectedCellDictionary:(NSDictionary *)cellDictionary
