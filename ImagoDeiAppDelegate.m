@@ -46,6 +46,15 @@
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
+    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+    localNotification.fireDate = [[NSDate alloc] initWithTimeIntervalSinceNow:60.0];
+    localNotification.timeZone = [NSTimeZone defaultTimeZone];
+    localNotification.alertBody = @"Local Notification";
+    localNotification.alertAction = @"View Details";
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
+    localNotification.repeatInterval = NSHourCalendarUnit;
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    
     return YES;
 }
 
@@ -54,9 +63,9 @@
     
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ImagoDei" message:[userInfo valueForKeyPath:@"aps.alert"] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
     [alertView show];
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 1];
+    /*[[UIApplication sharedApplication] setApplicationIconBadgeNumber: 1];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];*/
 
 }
 
