@@ -47,12 +47,12 @@
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
     UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-    localNotification.fireDate = [[NSDate alloc] initWithTimeIntervalSinceNow:60.0];
+    localNotification.fireDate = [[NSDate alloc] initWithTimeIntervalSinceNow:604800];
     localNotification.timeZone = [NSTimeZone defaultTimeZone];
-    localNotification.alertBody = @"Local Notification";
-    localNotification.alertAction = @"View Details";
+    localNotification.alertBody = @"Don't Forget to check Planning Center";
+    localNotification.alertAction = @"Load PCO Data";
     localNotification.soundName = UILocalNotificationDefaultSoundName;
-    localNotification.repeatInterval = NSHourCalendarUnit;
+    localNotification.repeatInterval = NSWeekCalendarUnit;
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     
     return YES;
