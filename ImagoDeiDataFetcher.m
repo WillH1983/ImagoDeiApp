@@ -19,7 +19,7 @@
 + (NSArray *)ArrayForPlanningCenterDataWithAuthenticationData:(GTMOAuthAuthentication *)auth;
 {
     NSArray *tmpArray = [[NSArray alloc] init];
-    NSString *futurePlansURL = [[NSString alloc] initWithString:@"https://www.planningcenteronline.com/me/future_plans.xml"];
+    NSString *futurePlansURL = @"https://www.planningcenteronline.com/me/future_plans.xml";
     NSMutableURLRequest *xmlURLRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:futurePlansURL]];
     [auth authorizeRequest:xmlURLRequest];
     NSDictionary *futurePlansDictionary = [self DictionaryOfXMLDataForURL:xmlURLRequest];

@@ -113,6 +113,7 @@
                 [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
             });
         });
+        dispatch_release(downloadQueue);
     }
 }
 
