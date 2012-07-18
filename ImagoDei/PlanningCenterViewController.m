@@ -165,6 +165,8 @@ static NSString *const DanaPeopleID = @"1240047";
     {
         [self.activityIndicator stopAnimating];
         self.arrayOfTableData = nil;
+        self.tabBarItem.badgeValue = nil;
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
         [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0.0];
     }
     
