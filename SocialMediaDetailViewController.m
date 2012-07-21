@@ -39,35 +39,6 @@
     [self.tableView reloadData];
 }
 
-#pragma mark - ViewController Initialization Methods
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        //Set a notification up to call the function presentWebView when a URL is clicked
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(presentWebView:) 
-                                                     name:@"urlSelected"
-                                                   object:nil];
-
-    }
-    return self;
-}
-
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    
-    if (self)
-    {
-        //Set a notification up to call the function presentWebView when a URL is clicked
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(presentWebView:) 
-                                                     name:@"urlSelected"
-                                                   object:nil];
-    }
-}
-
 #pragma mark - View Lifecycle
 
 - (void)viewDidLoad
@@ -80,6 +51,25 @@
     //Pull the full comments dictionary from the delegate to use as our Model
     [self.socialMediaDelegate SocialMediaDetailViewController:self dictionaryForFacebookGraphAPIString:[self.shortCommentsDictionaryModel objectForKey:@"id"]];
     
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(presentWebView:) 
+                                                 name:@"urlSelected"
+                                               object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"urlSelected" 
+                                                  object:nil];
 }
 
 - (void)viewDidUnload

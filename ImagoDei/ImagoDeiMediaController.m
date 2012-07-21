@@ -17,31 +17,40 @@
 @synthesize modelURL;
 @synthesize moviePlayer = _moviePlayer;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(playMovie:) 
-                                                     name:MPMediaPlaybackIsPreparedToPlayDidChangeNotification
-                                                   object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(didFinishMovie:) 
-                                                     name:MPMoviePlayerPlaybackDidFinishNotification
-                                                   object:nil];
-
-    }
-    return self;
-    //MPMoviePlayerPlaybackDidFinishNotification
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.view addSubview:self.moviePlayer.view];
     self.moviePlayer.contentURL = self.modelURL;
     [self.moviePlayer prepareToPlay];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(playMovie:) 
+                                                 name:MPMediaPlaybackIsPreparedToPlayDidChangeNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didFinishMovie:) 
+                                                 name:MPMoviePlayerPlaybackDidFinishNotification
+                                               object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:MPMediaPlaybackIsPreparedToPlayDidChangeNotification 
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:MPMoviePlayerPlaybackDidFinishNotification
+                                                  object:nil];
 }
 
 - (void)viewDidLoad
@@ -59,13 +68,6 @@
     self = [self init];
     self.modelURL = url;
     return self;
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

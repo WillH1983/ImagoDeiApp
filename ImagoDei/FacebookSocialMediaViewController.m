@@ -84,10 +84,6 @@
     
     self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(presentWebView:) 
-                                                 name:@"urlSelected"
-                                               object:nil];
     self.tableView.allowsSelection = NO;
 }
 
@@ -107,10 +103,25 @@
     [super viewDidDisappear:animated];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+    [super viewWillDisappear:animated];
+    
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"urlSelected" object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(presentWebView:) 
+                                                 name:@"urlSelected"
+                                               object:nil];
+    
     if ([self.arrayOfTableData count] > 0) return;
+    
     //Init the facebook session
     [self facebookInit];
     

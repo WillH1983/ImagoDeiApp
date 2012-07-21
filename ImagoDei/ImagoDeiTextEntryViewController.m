@@ -20,23 +20,6 @@
 @synthesize textEntryDelegate = _textEntryDelegate;
 @synthesize dictionaryForComment = _dictionaryForComment;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChanged:) name:UITextViewTextDidChangeNotification object:nil];
-}
-
 - (void)textChanged:(NSNotification *) notification
 {
     id object = [notification object];
@@ -47,6 +30,25 @@
         else self.postButton.enabled = NO;
     }
     
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(textChanged:) 
+                                                 name:UITextViewTextDidChangeNotification 
+                                               object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UITextViewTextDidChangeNotification
+                                                  object:nil];
 }
 
 - (void)viewDidUnload
