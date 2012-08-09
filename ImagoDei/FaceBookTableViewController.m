@@ -579,8 +579,8 @@
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                    FACEBOOK_APP_ID, @"app_id",
-                                   @"Post to Tech Powered Math's Wall", @"description",
-                                   @"techpoweredmath", @"to",
+                                   @"Post to Imago Dei Church's Wall", @"description",
+                                   @"imagodeichurch", @"to",
                                    nil];
     
     [self.facebook dialog:@"feed" andParams:params andDelegate:self];
@@ -619,7 +619,8 @@
         NSString *tmpString = nil;
         if ([errorCode intValue] == 104) tmpString = @"Please Log In to continue";
         else tmpString = errorMessage;
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ImagoDei - Facebook" message:tmpString delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+        ImagoDeiAppDelegate *appDelegate = (ImagoDeiAppDelegate *)[[UIApplication sharedApplication] delegate];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[[NSString alloc] initWithFormat:@"%@ - Facebook", appDelegate.appConfiguration.appName] message:tmpString delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
         [alertView show];
     });
     

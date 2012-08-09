@@ -83,7 +83,8 @@
             if (!xmlData)
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ImagoDei" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+                    ImagoDeiAppDelegate *appDelegate = (ImagoDeiAppDelegate *)[[UIApplication sharedApplication] delegate];
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:appDelegate.appConfiguration.appName message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
                     [alertView show];
                 });
             }
@@ -94,7 +95,8 @@
                 if (!xmlDictionary)
                 {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ImagoDei" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+                        ImagoDeiAppDelegate *appDelegate = (ImagoDeiAppDelegate *)[[UIApplication sharedApplication] delegate];
+                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:appDelegate.appConfiguration.appName message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
                         [alertView show];
                     });
                 }

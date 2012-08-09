@@ -12,7 +12,6 @@
 #import "WebViewController.h"
 #import "FaceBookTableViewController.h"
 #import "UAirship.h"
-#import "NSMutableDictionary+appConfiguration.h"
 
 @implementation ImagoDeiAppDelegate
 
@@ -33,7 +32,7 @@
     self.appConfiguration = [[NSMutableDictionary alloc] init];
     self.appConfiguration.RSSlink = [[NSURL alloc] initWithString:@"http://www.techpoweredmath.com/feed"];
     self.appConfiguration.defaultLocalPathImageForTableViewCell = @"TPM_Default_Cell_Image";
-    self.appConfiguration.appName = @"Tech Powered Math";
+    self.appConfiguration.appName = @"Imago Dei Church";
     
     //Init Airship launch options
     NSMutableDictionary *takeOffOptions = [[NSMutableDictionary alloc] init];

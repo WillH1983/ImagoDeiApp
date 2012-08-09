@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import "FBConnect.h"
+#import "NSMutableDictionary+appConfiguration.h"
 
 #define FACEBOOK_APP_ID @"207547516014316"
 
