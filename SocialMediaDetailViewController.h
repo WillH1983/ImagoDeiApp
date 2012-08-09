@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "FBRequest.h"
-#import "ImagoDeiStandardTableViewController.h"
 #import "ImagoDeiTextEntryViewController.h"
 
 @class SocialMediaDetailViewController;
@@ -19,11 +18,13 @@
 
 @end
 
-@interface SocialMediaDetailViewController : ImagoDeiStandardTableViewController <FBRequestDelegate, ImagoDeiTextEntryDelegate>
+@interface SocialMediaDetailViewController : UITableViewController <FBRequestDelegate, ImagoDeiTextEntryDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *profilePictureImageView;
 @property (nonatomic, strong) NSDictionary *shortCommentsDictionaryModel;
 @property (nonatomic, strong) NSDictionary *fullCommentsDictionaryModel;
 @property (nonatomic, weak) id <SocialMediaDetailViewControllerDelegate> socialMediaDelegate;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) UIBarButtonItem *oldBarButtonItem;
 
 @end

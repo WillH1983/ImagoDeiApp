@@ -22,6 +22,7 @@
 @property (nonatomic, retain) Facebook *facebook;
 @property (nonatomic, retain) AVAudioSession *audioSession;
 @property (nonatomic, strong) UITabBarController *tabBarController;
+@property (strong, nonatomic) NSMutableDictionary *appConfiguration;
 
 - (BOOL)openURL:(NSURL *)url;
 

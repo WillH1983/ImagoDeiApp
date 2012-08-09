@@ -45,6 +45,7 @@
     else
     {
         self.programmedWebView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+        self.programmedWebView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
     }
     
     self.programmedWebView.delegate = self;
@@ -57,13 +58,15 @@
 {
     [super viewWillAppear:animated];
     
-    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(donePressed:)];
     self.navigationBar.topItem.leftBarButtonItem = button;
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:self.urlToLoad];
     self.webView.scalesPageToFit = YES;
     [self.webView loadRequest:urlRequest];
     [self.programmedWebView loadRequest:urlRequest];
+    self.title = @"Loading...";
+    self.navigationBar.topItem.title = @"Loading...";
 }
 
 - (void)viewDidUnload
@@ -93,29 +96,38 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-    self.title = @"Loading...";
-    self.navigationBar.topItem.title = @"Loading...";
+    
     [self.activityIndicator startAnimating];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     self.navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    self.navigationItem.rightBarButtonItem = nil;
-    self.navigationBar.topItem.rightBarButtonItem = nil;
-    NSString *title = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-    self.navigationBar.topItem.title = title;
-    self.title = title;
-    if (!self.title)
+    if (!webView.isLoading)
     {
-        self.title = [self.programmedWebView stringByEvaluatingJavaScriptFromString:@"document.title"];
-        self.navigationBar.topItem.title = [self.programmedWebView stringByEvaluatingJavaScriptFromString:@"document.title"];
+        self.navigationItem.rightBarButtonItem = nil;
+        self.navigationBar.topItem.rightBarButtonItem = nil;
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        NSString *title = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+        self.navigationBar.topItem.title = title;
+        self.title = title;
+        if (!self.title)
+        {
+            self.title = [self.programmedWebView stringByEvaluatingJavaScriptFromString:@"document.title"];
+            self.navigationBar.topItem.title = [self.programmedWebView stringByEvaluatingJavaScriptFromString:@"document.title"];
+        }
     }
 }
 - (IBAction)donePressed:(id)sender 
 {
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self.webView.scrollView sizeToFit];
+    [self.programmedWebView.scrollView sizeToFit];
 }
 
 @end

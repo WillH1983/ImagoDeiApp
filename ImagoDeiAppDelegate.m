@@ -10,8 +10,9 @@
 #import "ImagoDeiDataFetcher.h"
 #import "MainPageViewController.h"
 #import "WebViewController.h"
-#import "FacebookSocialMediaViewController.h"
+#import "FaceBookTableViewController.h"
 #import "UAirship.h"
+#import "NSMutableDictionary+appConfiguration.h"
 
 @implementation ImagoDeiAppDelegate
 
@@ -19,6 +20,7 @@
 @synthesize facebook;
 @synthesize tabBarController = _tabBarController;
 @synthesize audioSession = audioSession;
+@synthesize appConfiguration = _appConfiguration;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -27,6 +29,11 @@
     [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
     
     application.statusBarStyle = UIStatusBarStyleBlackOpaque;
+    
+    self.appConfiguration = [[NSMutableDictionary alloc] init];
+    self.appConfiguration.RSSlink = [[NSURL alloc] initWithString:@"http://www.techpoweredmath.com/feed"];
+    self.appConfiguration.defaultLocalPathImageForTableViewCell = @"TPM_Default_Cell_Image";
+    self.appConfiguration.appName = @"Tech Powered Math";
     
     //Init Airship launch options
     NSMutableDictionary *takeOffOptions = [[NSMutableDictionary alloc] init];

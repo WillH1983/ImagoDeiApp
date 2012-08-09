@@ -22,6 +22,11 @@
 		BE04B97415647C12003FD971 /* imago-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE04B97315647C12003FD971 /* imago-logo@2x.png */; };
 		BE04B97615647D0E003FD971 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE04B97515647D0E003FD971 /* background@2x.png */; };
 		BE074DF41583F276003E4881 /* ImagoDeiTextEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE074DF31583F276003E4881 /* ImagoDeiTextEntryViewController.m */; };
+		BE1BE61D15D35A4900807D3A /* UITextView+Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1BE61815D35A4900807D3A /* UITextView+Facebook.m */; };
+		BE1BE61E15D35A4900807D3A /* NSMutableDictionary+appConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1BE61A15D35A4900807D3A /* NSMutableDictionary+appConfiguration.m */; };
+		BE1BE61F15D35A4900807D3A /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1BE61C15D35A4900807D3A /* NSString+HTML.m */; };
+		BE1BE62315D35A8D00807D3A /* FaceBookTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1BE62215D35A8D00807D3A /* FaceBookTableViewController.m */; };
+		BE1BE62615D35AC100807D3A /* RSSTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1BE62515D35AC100807D3A /* RSSTableView.m */; };
 		BE1C3FB4154B7F7100775B14 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1C3FB3154B7F7100775B14 /* AVFoundation.framework */; };
 		BE1C3FBD154B9C6000775B14 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1C3FBC154B9C6000775B14 /* CoreMedia.framework */; };
 		BE1C3FBF154BA71400775B14 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1C3FBE154BA71400775B14 /* MediaPlayer.framework */; };
@@ -65,7 +70,6 @@
 		BE89225B156E04E0004E79DF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89225A156E04E0004E79DF /* SystemConfiguration.framework */; };
 		BE9056AC15604D4300D79563 /* news-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9056AB15604D4300D79563 /* news-icon.png */; };
 		BE9F747415AD14C30013D3D9 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BE9F747315AD14C30013D3D9 /* README.md */; };
-		BEB2928C15698EA2008086A3 /* FacebookSocialMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB2928A15698EA2008086A3 /* FacebookSocialMediaViewController.m */; };
 		BED0A5AA1548DAC4007094A5 /* MainTabiPhone.rss in Resources */ = {isa = PBXBuildFile; fileRef = BED0A5A91548DAC4007094A5 /* MainTabiPhone.rss */; };
 		BED1D7D81564498200FB8E5B /* tabbar-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED1D7D71564498200FB8E5B /* tabbar-bg@2x.png */; };
 		BED1D7DA1564498D00FB8E5B /* tabbar-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BED1D7D91564498D00FB8E5B /* tabbar-bg.png */; };
@@ -120,6 +124,8 @@
 		BEED317F15743529008F63AE /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BEED317E15743529008F63AE /* FBDialog.bundle */; };
 		BEF4A439154DCA080015E00D /* ImagoDeiMediaController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF4A437154DCA080015E00D /* ImagoDeiMediaController.m */; };
 		BEF4A43A154DCA080015E00D /* ImagoDeiMediaController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF4A438154DCA080015E00D /* ImagoDeiMediaController.xib */; };
+		BEF86DEA15D361290082EF05 /* ImagoDeiFacebookTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF86DE915D361290082EF05 /* ImagoDeiFacebookTableViewController.m */; };
+		BEF86DEE15D365930082EF05 /* ImagoDeiSocialMediaDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF86DED15D365930082EF05 /* ImagoDeiSocialMediaDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -139,6 +145,16 @@
 		BE04B97515647D0E003FD971 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
 		BE074DF21583F276003E4881 /* ImagoDeiTextEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagoDeiTextEntryViewController.h; sourceTree = "<group>"; };
 		BE074DF31583F276003E4881 /* ImagoDeiTextEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagoDeiTextEntryViewController.m; sourceTree = "<group>"; };
+		BE1BE61715D35A4900807D3A /* UITextView+Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Facebook.h"; sourceTree = "<group>"; };
+		BE1BE61815D35A4900807D3A /* UITextView+Facebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Facebook.m"; sourceTree = "<group>"; };
+		BE1BE61915D35A4900807D3A /* NSMutableDictionary+appConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+appConfiguration.h"; sourceTree = "<group>"; };
+		BE1BE61A15D35A4900807D3A /* NSMutableDictionary+appConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+appConfiguration.m"; sourceTree = "<group>"; };
+		BE1BE61B15D35A4900807D3A /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
+		BE1BE61C15D35A4900807D3A /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
+		BE1BE62115D35A8D00807D3A /* FaceBookTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceBookTableViewController.h; sourceTree = "<group>"; };
+		BE1BE62215D35A8D00807D3A /* FaceBookTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceBookTableViewController.m; sourceTree = "<group>"; };
+		BE1BE62415D35AC100807D3A /* RSSTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSTableView.h; sourceTree = "<group>"; };
+		BE1BE62515D35AC100807D3A /* RSSTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSTableView.m; sourceTree = "<group>"; };
 		BE1C3FB3154B7F7100775B14 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		BE1C3FBC154B9C6000775B14 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		BE1C3FBE154BA71400775B14 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -187,8 +203,6 @@
 		BE89225A156E04E0004E79DF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BE9056AB15604D4300D79563 /* news-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news-icon.png"; sourceTree = "<group>"; };
 		BE9F747315AD14C30013D3D9 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		BEB2928A15698EA2008086A3 /* FacebookSocialMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookSocialMediaViewController.m; sourceTree = "<group>"; };
-		BEB2928B15698EA2008086A3 /* FacebookSocialMediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookSocialMediaViewController.h; sourceTree = "<group>"; };
 		BED0A5A91548DAC4007094A5 /* MainTabiPhone.rss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MainTabiPhone.rss; sourceTree = "<group>"; };
 		BED1D7D71564498200FB8E5B /* tabbar-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-bg@2x.png"; sourceTree = "<group>"; };
 		BED1D7D91564498D00FB8E5B /* tabbar-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-bg.png"; sourceTree = "<group>"; };
@@ -272,6 +286,10 @@
 		BEF4A436154DCA080015E00D /* ImagoDeiMediaController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagoDeiMediaController.h; sourceTree = "<group>"; };
 		BEF4A437154DCA080015E00D /* ImagoDeiMediaController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagoDeiMediaController.m; sourceTree = "<group>"; };
 		BEF4A438154DCA080015E00D /* ImagoDeiMediaController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagoDeiMediaController.xib; sourceTree = "<group>"; };
+		BEF86DE815D361290082EF05 /* ImagoDeiFacebookTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagoDeiFacebookTableViewController.h; sourceTree = "<group>"; };
+		BEF86DE915D361290082EF05 /* ImagoDeiFacebookTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagoDeiFacebookTableViewController.m; sourceTree = "<group>"; };
+		BEF86DEC15D365930082EF05 /* ImagoDeiSocialMediaDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagoDeiSocialMediaDetailViewController.h; sourceTree = "<group>"; };
+		BEF86DED15D365930082EF05 /* ImagoDeiSocialMediaDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagoDeiSocialMediaDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -353,6 +371,40 @@
 				BED23D28155A13BD00DB2D00 /* whoweare-icon.png */,
 			);
 			name = "Main Page Icons";
+			sourceTree = "<group>";
+		};
+		BE1BE61415D35A1700807D3A /* Base Classes */ = {
+			isa = PBXGroup;
+			children = (
+				BEDF1EBB1547961C009FCA21 /* SocialMediaDetailViewController.h */,
+				BEDF1EBC1547961C009FCA21 /* SocialMediaDetailViewController.m */,
+				BE074DF21583F276003E4881 /* ImagoDeiTextEntryViewController.h */,
+				BE074DF31583F276003E4881 /* ImagoDeiTextEntryViewController.m */,
+				BEDF1E951547955C009FCA21 /* ImageViewController.h */,
+				BEDF1E961547955C009FCA21 /* ImageViewController.m */,
+				BE1BE62415D35AC100807D3A /* RSSTableView.h */,
+				BE1BE62515D35AC100807D3A /* RSSTableView.m */,
+				BE2F9B09156C9D5D008C434A /* WebViewController.h */,
+				BE2F9B07156C9D54008C434A /* WebViewController.m */,
+				BED65F4B157180E600C55083 /* XMLReader.h */,
+				BED65F4C157180E600C55083 /* XMLReader.m */,
+				BE1BE62115D35A8D00807D3A /* FaceBookTableViewController.h */,
+				BE1BE62215D35A8D00807D3A /* FaceBookTableViewController.m */,
+			);
+			name = "Base Classes";
+			sourceTree = "<group>";
+		};
+		BE1BE61615D35A3000807D3A /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				BE1BE61715D35A4900807D3A /* UITextView+Facebook.h */,
+				BE1BE61815D35A4900807D3A /* UITextView+Facebook.m */,
+				BE1BE61915D35A4900807D3A /* NSMutableDictionary+appConfiguration.h */,
+				BE1BE61A15D35A4900807D3A /* NSMutableDictionary+appConfiguration.m */,
+				BE1BE61B15D35A4900807D3A /* NSString+HTML.h */,
+				BE1BE61C15D35A4900807D3A /* NSString+HTML.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		BE56D5B7157AB68C0027A519 /* ImagoDeiLogicTests */ = {
@@ -478,29 +530,21 @@
 			isa = PBXGroup;
 			children = (
 				BEE22935155E175D00504B5D /* iPhone_Storyboard.storyboard */,
-				BEDF1EBB1547961C009FCA21 /* SocialMediaDetailViewController.h */,
-				BEDF1EBC1547961C009FCA21 /* SocialMediaDetailViewController.m */,
-				BE074DF21583F276003E4881 /* ImagoDeiTextEntryViewController.h */,
-				BE074DF31583F276003E4881 /* ImagoDeiTextEntryViewController.m */,
+				BEF86DEC15D365930082EF05 /* ImagoDeiSocialMediaDetailViewController.h */,
+				BEF86DED15D365930082EF05 /* ImagoDeiSocialMediaDetailViewController.m */,
 				BEE22938155E2C6A00504B5D /* PlanningCenterViewController.h */,
 				BEE22939155E2C6A00504B5D /* PlanningCenterViewController.m */,
 				BEDF1EAC154795FB009FCA21 /* MainPageViewController.h */,
 				BEDF1EAD154795FB009FCA21 /* MainPageViewController.m */,
 				BEF4A436154DCA080015E00D /* ImagoDeiMediaController.h */,
 				BEF4A437154DCA080015E00D /* ImagoDeiMediaController.m */,
+				BEF86DE815D361290082EF05 /* ImagoDeiFacebookTableViewController.h */,
+				BEF86DE915D361290082EF05 /* ImagoDeiFacebookTableViewController.m */,
 				BEF4A438154DCA080015E00D /* ImagoDeiMediaController.xib */,
-				BEDF1E951547955C009FCA21 /* ImageViewController.h */,
-				BE2F9B09156C9D5D008C434A /* WebViewController.h */,
-				BE2F9B07156C9D54008C434A /* WebViewController.m */,
-				BEDF1E961547955C009FCA21 /* ImageViewController.m */,
-				BEB2928B15698EA2008086A3 /* FacebookSocialMediaViewController.h */,
-				BEB2928A15698EA2008086A3 /* FacebookSocialMediaViewController.m */,
 				BE54BC211560A4B400F85DD9 /* PullRefreshTableViewController.h */,
 				BE54BC221560A4B500F85DD9 /* PullRefreshTableViewController.m */,
 				BED87DE21562D6BD00141114 /* ImagoDeiStandardTableViewController.h */,
 				BED87DE31562D6BD00141114 /* ImagoDeiStandardTableViewController.m */,
-				BED65F4B157180E600C55083 /* XMLReader.h */,
-				BED65F4C157180E600C55083 /* XMLReader.m */,
 				BEDF1E9D154795BD009FCA21 /* ImagoDeiDataFetcher.h */,
 				BEDF1E9E154795BD009FCA21 /* ImagoDeiDataFetcher.m */,
 				BEDF1E9A15479598009FCA21 /* ImagoDeiAppDelegate.h */,
@@ -513,6 +557,8 @@
 		BEDF1E61154791C4009FCA21 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BE1BE61615D35A3000807D3A /* Categories */,
+				BE1BE61415D35A1700807D3A /* Base Classes */,
 				BE2F9B16156CA0AF008C434A /* MyApplication.m */,
 				BE2F9B17156CA0AF008C434A /* MyApplication.h */,
 				BE4E28FF159803190000F0F2 /* libUAirship-1.2.2.a */,
@@ -773,7 +819,6 @@
 				BEE2293A155E2C6A00504B5D /* PlanningCenterViewController.m in Sources */,
 				BE54BC231560A4B500F85DD9 /* PullRefreshTableViewController.m in Sources */,
 				BED87DE41562D6BD00141114 /* ImagoDeiStandardTableViewController.m in Sources */,
-				BEB2928C15698EA2008086A3 /* FacebookSocialMediaViewController.m in Sources */,
 				BE2F9B08156C9D54008C434A /* WebViewController.m in Sources */,
 				BE2F9B18156CA0AF008C434A /* MyApplication.m in Sources */,
 				BEE79317156FE54000F2EC23 /* GTMOAuthAuthentication.m in Sources */,
@@ -782,6 +827,13 @@
 				BEE79320156FE57E00F2EC23 /* GTMHTTPFetcher.m in Sources */,
 				BED65F4D157180E600C55083 /* XMLReader.m in Sources */,
 				BE074DF41583F276003E4881 /* ImagoDeiTextEntryViewController.m in Sources */,
+				BE1BE61D15D35A4900807D3A /* UITextView+Facebook.m in Sources */,
+				BE1BE61E15D35A4900807D3A /* NSMutableDictionary+appConfiguration.m in Sources */,
+				BE1BE61F15D35A4900807D3A /* NSString+HTML.m in Sources */,
+				BE1BE62315D35A8D00807D3A /* FaceBookTableViewController.m in Sources */,
+				BE1BE62615D35AC100807D3A /* RSSTableView.m in Sources */,
+				BEF86DEA15D361290082EF05 /* ImagoDeiFacebookTableViewController.m in Sources */,
+				BEF86DEE15D365930082EF05 /* ImagoDeiSocialMediaDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

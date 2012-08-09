@@ -9,6 +9,7 @@
 #import "SocialMediaDetailViewController.h"
 #import "ImageViewController.h"
 #import "WebViewController.h"
+#import "UITextView+Facebook.h"
 
 @interface SocialMediaDetailViewController ()
 @property (nonatomic, strong) NSArray *commentsArray;
@@ -27,6 +28,8 @@
 @synthesize fullCommentsDictionaryModel = _fullCommentsDictionaryModel;
 @synthesize postImage = _postImage;
 @synthesize facebookRequest = _facebookRequest;
+@synthesize activityIndicator = _activityIndicator;
+@synthesize oldBarButtonItem = _oldBarButtonItem;
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 200.0f
@@ -48,6 +51,11 @@
     //Do not allow the cells in the tableview to be selected
     [self.tableView setAllowsSelection:NO];
     
+    //initialize the activity indicator, set it to the center top of the view, and
+    //start it animating
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	self.activityIndicator.hidesWhenStopped = YES;
+    
     //Pull the full comments dictionary from the delegate to use as our Model
     [self.socialMediaDelegate SocialMediaDetailViewController:self dictionaryForFacebookGraphAPIString:[self.shortCommentsDictionaryModel objectForKey:@"id"]];
     
@@ -61,6 +69,8 @@
                                              selector:@selector(presentWebView:) 
                                                  name:@"urlSelected"
                                                object:nil];
+    
+    [self.tableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -115,45 +125,33 @@
     //for the table row.  The output of this function is a cell that displays one comment
     //from one facebook person, and the name of that person
     
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell;
+    static NSString *CellIdentifier = @"CommentCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
+    UIImageView *profileImageView = nil;
+    UILabel *name = nil;
+    UITextView *comment = nil;
     
     //If there is no reusable cell of this type, create a new one
     if (!cell)
     {
         //Initialize a UITableViewCell of type Subtitle
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        
-        //Set the selection style of the cell to be gray
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
-        
-        //Set the cell to be in word wrap mode to allow for long strings
-        cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
-        cell.textLabel.numberOfLines = 0;
-        
-        //Set the font of the label to be a known size and font type
-        cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:17.0];
-        
-        //Set the default imageView to be the facebook logo
-        cell.imageView.image = [UIImage imageNamed:@"f_logo.png"];
-        
-        //Set the cell background color to be clear so the background image
-        //can be seen
-        cell.backgroundColor = [UIColor clearColor];
     }
+    profileImageView = (UIImageView *)[cell.contentView viewWithTag:3];
+    name = (UILabel *)[cell.contentView viewWithTag:1];
+    comment = (UITextView *)[cell.contentView viewWithTag:2];
     
-    //Set the cell main text label, and detail text label to be the standard color
-    cell.textLabel.textColor = [UIColor colorWithRed:0.29803 green:0.1529 blue:0.0039 alpha:1];
-    cell.detailTextLabel.textColor = [UIColor colorWithRed:0.2666 green:0.2666 blue:0.2666 alpha:1];
+    profileImageView.image = nil;
     
     //Retrieve the corresponding dictionary for the cell, retrieve the main and detail text
     //label, and set the cell labels
     NSDictionary *dictionaryForCell = [self.commentsArray objectAtIndex:[indexPath row]];
     NSString *mainTextLabel = [dictionaryForCell valueForKeyPath:@"message"];
     NSString *detailTextLabel = [dictionaryForCell valueForKeyPath:@"from.name"];
-    cell.textLabel.text = mainTextLabel;
-    cell.detailTextLabel.text = detailTextLabel;
+    comment.text = mainTextLabel;
+    [comment resizeTextViewForWidth:self.tableView.frame.size.width - comment.frame.origin.x - 30];
+    name.text = detailTextLabel;
     
     return cell;
     
@@ -183,7 +181,8 @@
             //Verify the index path the image was downloaded for is still visible
             //in the tableview.  If it is still visible set the cell imageView
             NSArray *tmpArray = [self.tableView indexPathsForVisibleRows];
-            if ([tmpArray containsObject:indexPath]) [cell.imageView setImage:image];
+            UIImageView *profileImageView = (UIImageView *)[cell.contentView viewWithTag:3];
+            if ([tmpArray containsObject:indexPath]) [profileImageView setImage:image];
         });
     });
     dispatch_release(downloadQueue);
@@ -193,20 +192,22 @@
 {
     //This function calculates a approprate height based up on length of the text that will
     //be displayed in the cell
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell"];
     
-    NSDictionary *tmpDictionary = [self.commentsArray objectAtIndex:[indexPath row]];
-    NSString *text = [tmpDictionary valueForKeyPath:@"message"];
+    if (cell)
+    {
+        NSDictionary *tmpDictionary = [self.commentsArray objectAtIndex:[indexPath row]];
+        NSString *dictionaryText = [tmpDictionary valueForKeyPath:@"message"];
+        
+        //Set the cell text label's based upon the table contents array location
+        UITextView *textView = (UITextView *)[cell.contentView viewWithTag:2];
+        textView.text = dictionaryText;
+        [textView resizeTextViewForWidth:self.tableView.frame.size.width - textView.frame.origin.x - 30];
+        CGFloat height = textView.frame.origin.y + textView.frame.size.height;
+        return height;
+    }
+    else return 44;
     
-    // Get the text so we can measure it
-    // Get a CGSize for the width and, effectively, unlimited height
-    CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
-    // Get the size of the text given the CGSize we just made as a constraint
-    CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
-    // Get the height of our measurement, with a minimum of 44 (standard cell size)
-    CGFloat height = MAX(size.height, 44.0f);
-    // return the height, with a bit of extra padding in
-    return height + (CELL_CONTENT_MARGIN * 2);
-
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -215,31 +216,53 @@
     //The cell as the header view
     
     //Pull the main and detail text label out of the corresponding dictionary
-    NSString *mainTextLabel = [self.fullCommentsDictionaryModel valueForKeyPath:@"message"];
     
-    //Determine the max height required for the UITextView with the comments string
-    CGSize maxSize = CGSizeMake(320 - FACEBOOK_DETAIL_FONT_SIZE, CGFLOAT_MAX);
-    CGSize size = [mainTextLabel sizeWithFont:[UIFont systemFontOfSize:FACEBOOK_DETAIL_FONT_SIZE]  constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];
-    size.height += FACEBOOK_DETAIL_FONT_SIZE; 
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentHeaderCell"];
+    if (cell)
+    {
+        UILabel *name = (UILabel *)[cell.contentView viewWithTag:1];
+        UITextView *comment = (UITextView *)[cell.contentView viewWithTag:2];
+        
+        NSString *typeOfPost = [self.fullCommentsDictionaryModel valueForKeyPath:@"type"];
+        NSString *commentString = [self.fullCommentsDictionaryModel valueForKeyPath:@"message"];
+        
+        if ([typeOfPost isEqualToString:@"link"])
+        {
+            NSRange range = [commentString rangeOfString:@"http"];
+            if (range.location == NSNotFound)
+            {
+                NSString *linkURL = [self.fullCommentsDictionaryModel valueForKeyPath:@"link"];
+                if ([linkURL isKindOfClass:[NSString class]])
+                {
+                    commentString = [commentString stringByAppendingString:@" "];
+                    commentString = [commentString stringByAppendingString:linkURL];
+                }
+            }
+        }
+        
+        name.text = [self.fullCommentsDictionaryModel valueForKeyPath:@"from.name"];
+        comment.text = commentString;
+        [comment resizeTextViewForWidth:self.tableView.frame.size.width - comment.frame.origin.x - 10];
+        dispatch_queue_t downloadQueue = dispatch_queue_create("Profile Image Downloader", NULL);
+        dispatch_async(downloadQueue, ^{
     
-    //Setup the UITextView for the standard font, no scrolling, not editable,
-    //detects URLs, sets the background to a clearcolor, and a frame height to match the size of the string
-    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectZero];
-    textView.font = [UIFont systemFontOfSize:FACEBOOK_DETAIL_FONT_SIZE];
-    textView.scrollEnabled = NO;
-    textView.editable = NO;
-    textView.tag = 1;
-    textView.dataDetectorTypes = UIDataDetectorTypeLink;
-    textView.backgroundColor = [UIColor clearColor];
-    textView.frame = CGRectMake(0, 0, 320, size.height);
-    
-    //Create a UITableViewCell with the same height as the textview
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, 320, size.height)];
-    [cell.contentView addSubview:textView];
-    
-    //Set the cell text label's based upon the table contents array location
-    textView.text = mainTextLabel;
-    cell.backgroundColor = [UIColor clearColor];
+            //Create a URL based upon the facebook graph API
+            NSString *profileFromId = [self.fullCommentsDictionaryModel valueForKeyPath:@"from.id"];
+            NSString *urlString = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture", profileFromId];
+            NSURL *url = [[NSURL alloc] initWithString:urlString];
+            
+            //Create an image based upon the downloaded NSData from the Facebook graph URL
+            //created above
+            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+            NSLog(@"Loading Web Data");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //Verify the index path the image was downloaded for is still visible
+                //in the tableview.  If it is still visible set the cell imageView
+                UIImageView *profileImageView = (UIImageView *)[cell.contentView viewWithTag:3];
+                [profileImageView setImage:image];
+            });
+        });
+    }
     
     return cell;
 }
@@ -250,14 +273,34 @@
     //upon the size of the text string
     
     //Pull the main and detail text label out of the corresponding dictionary
-    NSString *mainTextLabel = [self.fullCommentsDictionaryModel valueForKeyPath:@"message"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentHeaderCell"];
     
-    CGSize maxSize = CGSizeMake(320 - FACEBOOK_DETAIL_FONT_SIZE, CGFLOAT_MAX);
-    CGSize size = [mainTextLabel sizeWithFont:[UIFont systemFontOfSize:FACEBOOK_DETAIL_FONT_SIZE]  constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];
-    
-    tableView.tableHeaderView.backgroundColor = [UIColor redColor];
-    
-    return size.height + FACEBOOK_DETAIL_FONT_SIZE;
+    if (cell)
+    {
+        NSString *typeOfPost = [self.fullCommentsDictionaryModel valueForKeyPath:@"type"];
+        NSString *commentString = [self.fullCommentsDictionaryModel valueForKeyPath:@"message"];
+        
+        if ([typeOfPost isEqualToString:@"link"])
+        {
+            NSRange range = [commentString rangeOfString:@"http"];
+            if (range.location == NSNotFound)
+            {
+                NSString *linkURL = [self.fullCommentsDictionaryModel valueForKeyPath:@"link"];
+                if ([linkURL isKindOfClass:[NSString class]])
+                {
+                    commentString = [commentString stringByAppendingString:@" "];
+                    commentString = [commentString stringByAppendingString:linkURL];
+                }
+            }
+        }
+        
+        UITextView *comment = (UITextView *)[cell.contentView viewWithTag:2];
+        comment.text = commentString;
+        [comment resizeTextViewForWidth:self.tableView.frame.size.width - comment.frame.origin.x - 10];
+        CGFloat height = comment.frame.origin.y + comment.frame.size.height;
+        return height;
+    }
+    else return 44;
 }
 
 #pragma mark - Facebook Request Delegate Methods
@@ -271,10 +314,10 @@
             self.fullCommentsDictionaryModel = result;
             [self loadSocialMediaView];
         }
-        [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
+        //[self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
         //Since the RSS file has been loaded, stop animating the activity indicator
         [self.activityIndicator stopAnimating];
-        
+
         //If there is a right bar button item, put it back
         self.navigationItem.rightBarButtonItem = self.oldBarButtonItem;
     }
@@ -289,8 +332,9 @@
     //so the delegate can be set to nill when the view disappears
     self.facebookRequest = request;
     
-     [self.activityIndicator startAnimating];
+    [self.activityIndicator startAnimating];
     
+    self.oldBarButtonItem = self.navigationItem.rightBarButtonItem;
     //Set the right navigation bar button item to the activity indicator
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
 }
@@ -349,7 +393,6 @@
     //postData is a String
     id postData = [self.fullCommentsDictionaryModel objectForKey:@"message"];
     if ([postData isKindOfClass:[NSString class]]) self.textView.text = postData;
-    NSLog(@"%@", postData);
     
     //Pull all of the comments from the fullCommentsDictionaryModel and use introspection
     //to verify the commentsArray is actually an array or if the commentsArray is nil
