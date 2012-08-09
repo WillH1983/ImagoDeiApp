@@ -21,7 +21,7 @@
 
 #define FACEBOOK_CONTENT_TITLE @"message"
 #define FACEBOOK_CONTENT_DESCRIPTION @"from.name"
-#define FACEBOOK_FEED_TO_REQUEST @"techpoweredmath/feed"
+#define FACEBOOK_FEED_TO_REQUEST @"imagodeichurch/feed"
 #define FACEBOOK_FONT_SIZE 16.0
 #define FACEBOOK_TEXTVIEW_TOP_MARGIN 12.0
 #define FACEBOOK_COMMENTS_BUTTON_FONT_SIZE 14.0
