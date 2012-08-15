@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ImagoDeiStandardTableViewController.h"
+#import "RSSTableView.h"
 
-@interface MainPageViewController : ImagoDeiStandardTableViewController
+@interface MainPageViewController : RSSTableView
 
 @end

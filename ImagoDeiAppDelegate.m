@@ -30,9 +30,11 @@
     application.statusBarStyle = UIStatusBarStyleBlackOpaque;
     
     self.appConfiguration = [[NSMutableDictionary alloc] init];
-    self.appConfiguration.RSSlink = [[NSURL alloc] initWithString:@"http://www.techpoweredmath.com/feed"];
+    self.appConfiguration.RSSlink = [[NSURL alloc] initWithString:@"http://www.imagodeichurch.org/MainTabiPhone.rss"];
     self.appConfiguration.defaultLocalPathImageForTableViewCell = @"TPM_Default_Cell_Image";
     self.appConfiguration.appName = @"Imago Dei Church";
+    self.appConfiguration.facebookID = FACEBOOK_APP_ID;
+    self.appConfiguration.facebookFeedToRequest = @"imagodeichurch";
     
     //Init Airship launch options
     NSMutableDictionary *takeOffOptions = [[NSMutableDictionary alloc] init];

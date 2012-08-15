@@ -17,51 +17,11 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="pFU-Su-04Y" kind="relationship" relationship="rootViewController" id="nix-rP-heG"/>
+                        <segue destination="7fy-Jc-aaa" kind="relationship" relationship="rootViewController" id="dFL-JS-GWU"/>
                     </connections>
                 </navigationController>
             </objects>
             <point key="canvasLocation" x="493" y="-145"/>
-        </scene>
-        <!--Main Page View Controller-->
-        <scene sceneID="qfL-Xl-J5s">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cBx-fO-DcD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="pFU-Su-04Y" customClass="MainPageViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" id="Cjh-MM-zx4">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Main Page Cell" textLabel="18w-TB-2Tg" rowHeight="50" style="IBUITableViewCellStyleDefault" id="dEt-ea-2ja">
-                                <rect key="frame" x="0.0" y="22" width="320" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="49"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="18w-TB-2Tg">
-                                            <rect key="frame" x="10" y="0.0" width="280" height="49"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="pFU-Su-04Y" id="4MI-1Z-wlm"/>
-                            <outlet property="delegate" destination="pFU-Su-04Y" id="Y4F-ZF-ppp"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="aUh-jT-MGo"/>
-                </tableViewController>
-            </objects>
-            <point key="canvasLocation" x="977" y="-145"/>
         </scene>
         <!--Navigation Controller - Planning Center-->
         <scene sceneID="20R-Zt-yVd">
@@ -358,11 +318,11 @@
                                 </view>
                                 <color key="backgroundColor" white="1" alpha="0.20000000000000001" colorSpace="calibratedWhite"/>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="CommentCell" rowHeight="65" id="d7g-r1-a76">
-                                <rect key="frame" x="0.0" y="150" width="320" height="66"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="CommentCell" rowHeight="110" id="d7g-r1-a76">
+                                <rect key="frame" x="0.0" y="150" width="320" height="111"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="10" y="0.0" width="300" height="64"/>
+                                    <rect key="frame" x="10" y="0.0" width="300" height="109"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" id="lhD-KO-M2c">
@@ -385,6 +345,28 @@
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                         </textView>
+                                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qRI-RP-0t2">
+                                            <rect key="frame" x="67" y="52" width="44" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <state key="normal" title="Unlike">
+                                                <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="selected">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="highlighted">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="5" contentMode="left" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="cAL-z9-XIJ">
+                                            <rect key="frame" x="119" y="60" width="172" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -489,6 +471,56 @@
             </objects>
             <point key="canvasLocation" x="1580" y="1093"/>
         </scene>
+        <!--Main Page View Controller-->
+        <scene sceneID="c9u-vb-wFC">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qOd-hq-vyy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="7fy-Jc-aaa" customClass="MainPageViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9Wg-Wx-nTa">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="PVG-0W-YWh">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="BaseRSSTableCell" textLabel="18w-TB-2Tg" rowHeight="50" style="IBUITableViewCellStyleDefault" id="dEt-ea-2ja">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="49"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="18w-TB-2Tg">
+                                                    <rect key="frame" x="10" y="0.0" width="280" height="49"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="7fy-Jc-aaa" id="gMi-lr-8rz"/>
+                                    <outlet property="delegate" destination="7fy-Jc-aaa" id="GPD-uY-hWo"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="L1S-NC-gqB"/>
+                    <connections>
+                        <outlet property="tableView" destination="PVG-0W-YWh" id="35t-aP-FbO"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1014" y="-145"/>
+        </scene>
         <!--Image View Controller-->
         <scene sceneID="H0F-nv-bSU">
             <objects>
@@ -588,7 +620,7 @@
                 <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
             </relationships>
         </class>
-        <class className="MainPageViewController" superclassName="ImagoDeiStandardTableViewController">
+        <class className="MainPageViewController" superclassName="RSSTableView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MainPageViewController.h"/>
         </class>
         <class className="PlanningCenterViewController" superclassName="ImagoDeiStandardTableViewController">
@@ -596,6 +628,12 @@
         </class>
         <class className="PullRefreshTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PullRefreshTableViewController.h"/>
+        </class>
+        <class className="RSSTableView" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RSSTableView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
         </class>
         <class className="SocialMediaDetailViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SocialMediaDetailViewController.h"/>
