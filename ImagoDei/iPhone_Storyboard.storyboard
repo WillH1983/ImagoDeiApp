@@ -416,7 +416,7 @@
                             <navigationBar contentMode="scaleToFill" id="D2b-YL-xGu">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.74901960779999999" green="0.73333333329999995" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.85098039215686272" green="0.83529411764705885" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
                                     <navigationItem title="Comment" id="x0K-x0-A66">
                                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="ofO-Fg-2JC">
@@ -480,24 +480,26 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="PVG-0W-YWh">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="54" sectionHeaderHeight="22" sectionFooterHeight="22" id="PVG-0W-YWh">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="BaseRSSTableCell" textLabel="18w-TB-2Tg" rowHeight="50" style="IBUITableViewCellStyleDefault" id="dEt-ea-2ja">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="50"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="BaseRSSTableCell" textLabel="18w-TB-2Tg" rowHeight="54" style="IBUITableViewCellStyleDefault" id="dEt-ea-2ja">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="54"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="49"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="53"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="18w-TB-2Tg">
-                                                    <rect key="frame" x="10" y="0.0" width="280" height="49"/>
+                                                    <rect key="frame" x="10" y="0.0" width="280" height="53"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.49803921568627452" green="0.44705882352941173" blue="0.30980392156862746" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <size key="shadowOffset" width="1" height="0.0"/>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -543,7 +545,7 @@
                             <navigationBar contentMode="scaleToFill" id="m54-0s-h59">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.74901960779999999" green="0.73333333329999995" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.85098039215686272" green="0.83529411764705885" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
                                     <navigationItem title="Photo" id="3TA-sJ-gdr">
                                         <barButtonItem key="leftBarButtonItem" title="Done" id="qyz-J2-wKM">

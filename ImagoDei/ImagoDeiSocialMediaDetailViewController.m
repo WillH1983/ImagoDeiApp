@@ -49,7 +49,7 @@
     self.tableView.backgroundView = backgroundImageView;
     
     //Set the navigation bar color to the standard color
-    UIColor *standardColor = [UIColor colorWithRed:.7529 green:0.7372 blue:0.7019 alpha:1.0];
+    UIColor *standardColor = [UIColor colorWithRed:0.8509 green:0.8352 blue:0.7725 alpha:1.0];
     [[[self navigationController] navigationBar] setTintColor:standardColor];
     
     //Create a small footerview so the UITableView lines do not show up
