@@ -31,7 +31,6 @@
 		BE4E2900159803190000F0F2 /* libUAirship-1.2.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4E28FF159803190000F0F2 /* libUAirship-1.2.2.a */; };
 		BE54BC141560A12200F85DD9 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = BE54BC131560A12200F85DD9 /* arrow.png */; };
 		BE54BC191560A18500F85DD9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE54BC181560A18500F85DD9 /* QuartzCore.framework */; };
-		BE54BC231560A4B500F85DD9 /* PullRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE54BC221560A4B500F85DD9 /* PullRefreshTableViewController.m */; };
 		BE56D5AB157AA7CE0027A519 /* btn_decline.png in Resources */ = {isa = PBXBuildFile; fileRef = BE56D5A9157AA7CE0027A519 /* btn_decline.png */; };
 		BE56D5AC157AA7CE0027A519 /* btn_accept.png in Resources */ = {isa = PBXBuildFile; fileRef = BE56D5AA157AA7CE0027A519 /* btn_accept.png */; };
 		BE56D5B4157AB68C0027A519 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE56D5B3157AB68C0027A519 /* SenTestingKit.framework */; };
@@ -112,6 +111,8 @@
 		BEF4A43A154DCA080015E00D /* ImagoDeiMediaController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF4A438154DCA080015E00D /* ImagoDeiMediaController.xib */; };
 		BEF86DEA15D361290082EF05 /* ImagoDeiFacebookTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF86DE915D361290082EF05 /* ImagoDeiFacebookTableViewController.m */; };
 		BEF86DEE15D365930082EF05 /* ImagoDeiSocialMediaDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF86DED15D365930082EF05 /* ImagoDeiSocialMediaDetailViewController.m */; };
+		BEFC8B8D15F595A7009ABD31 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFC8B8C15F595A7009ABD31 /* FacebookSDK.framework */; };
+		BEFC8B8F15F595C0009ABD31 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BEFC8B8E15F595C0009ABD31 /* FacebookSDKResources.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,8 +165,6 @@
 		BE4E28FF159803190000F0F2 /* libUAirship-1.2.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libUAirship-1.2.2.a"; path = "../../Airship/libUAirship-1.2.2.a"; sourceTree = "<group>"; };
 		BE54BC131560A12200F85DD9 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		BE54BC181560A18500F85DD9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		BE54BC211560A4B400F85DD9 /* PullRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullRefreshTableViewController.h; sourceTree = "<group>"; };
-		BE54BC221560A4B500F85DD9 /* PullRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullRefreshTableViewController.m; sourceTree = "<group>"; };
 		BE56D5A9157AA7CE0027A519 /* btn_decline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_decline.png; sourceTree = "<group>"; };
 		BE56D5AA157AA7CE0027A519 /* btn_accept.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_accept.png; sourceTree = "<group>"; };
 		BE56D5B2157AB68C0027A519 /* ImagoDeiLogicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImagoDeiLogicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -263,6 +262,8 @@
 		BEF86DE915D361290082EF05 /* ImagoDeiFacebookTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagoDeiFacebookTableViewController.m; sourceTree = "<group>"; };
 		BEF86DEC15D365930082EF05 /* ImagoDeiSocialMediaDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagoDeiSocialMediaDetailViewController.h; sourceTree = "<group>"; };
 		BEF86DED15D365930082EF05 /* ImagoDeiSocialMediaDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagoDeiSocialMediaDetailViewController.m; sourceTree = "<group>"; };
+		BEFC8B8C15F595A7009ABD31 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = "../facebook-ios-sdk/build/FacebookSDK.framework"; sourceTree = "<group>"; };
+		BEFC8B8E15F595C0009ABD31 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = "../facebook-ios-sdk/build/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,6 +302,7 @@
 				BEDF1E5B154791C4009FCA21 /* UIKit.framework in Frameworks */,
 				BEDF1E5D154791C4009FCA21 /* Foundation.framework in Frameworks */,
 				BEDF1E5F154791C4009FCA21 /* CoreGraphics.framework in Frameworks */,
+				BEFC8B8D15F595A7009ABD31 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,6 +455,8 @@
 		BEDF1E59154791C4009FCA21 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BEFC8B8E15F595C0009ABD31 /* FacebookSDKResources.bundle */,
+				BEFC8B8C15F595A7009ABD31 /* FacebookSDK.framework */,
 				BE00EAE915DB54BE00FFEA5C /* Accounts.framework */,
 				BE6116771596DB4B00768DD7 /* CoreLocation.framework */,
 				BE6116751596DB4000768DD7 /* StoreKit.framework */,
@@ -492,8 +496,6 @@
 				BEF86DE815D361290082EF05 /* ImagoDeiFacebookTableViewController.h */,
 				BEF86DE915D361290082EF05 /* ImagoDeiFacebookTableViewController.m */,
 				BEF4A438154DCA080015E00D /* ImagoDeiMediaController.xib */,
-				BE54BC211560A4B400F85DD9 /* PullRefreshTableViewController.h */,
-				BE54BC221560A4B500F85DD9 /* PullRefreshTableViewController.m */,
 				BED87DE21562D6BD00141114 /* ImagoDeiStandardTableViewController.h */,
 				BED87DE31562D6BD00141114 /* ImagoDeiStandardTableViewController.m */,
 				BEDF1E9D154795BD009FCA21 /* ImagoDeiDataFetcher.h */,
@@ -716,6 +718,7 @@
 				BE4996F115845EBF005A5BDF /* FacebookButton@2x.png in Resources */,
 				BE61166A1596DA9200768DD7 /* AirshipConfig.plist in Resources */,
 				BE9F747415AD14C30013D3D9 /* README.md in Resources */,
+				BEFC8B8F15F595C0009ABD31 /* FacebookSDKResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -756,7 +759,6 @@
 				BEDF1EB0154795FB009FCA21 /* MainPageViewController.m in Sources */,
 				BEF4A439154DCA080015E00D /* ImagoDeiMediaController.m in Sources */,
 				BEE2293A155E2C6A00504B5D /* PlanningCenterViewController.m in Sources */,
-				BE54BC231560A4B500F85DD9 /* PullRefreshTableViewController.m in Sources */,
 				BED87DE41562D6BD00141114 /* ImagoDeiStandardTableViewController.m in Sources */,
 				BE2F9B18156CA0AF008C434A /* MyApplication.m in Sources */,
 				BEE79317156FE54000F2EC23 /* GTMOAuthAuthentication.m in Sources */,
@@ -888,6 +890,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../facebook-ios-sdk/build\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ImagoDei/ImagoDei-Prefix.pch";
@@ -916,6 +920,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../facebook-ios-sdk/build\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ImagoDei/ImagoDei-Prefix.pch";

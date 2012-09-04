@@ -16,14 +16,15 @@
 @implementation ImagoDeiAppDelegate
 
 @synthesize window = _window;
-@synthesize facebook;
+@synthesize facebookSession = _facebookSession;
 @synthesize tabBarController = _tabBarController;
 @synthesize audioSession = audioSession;
 @synthesize appConfiguration = _appConfiguration;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    facebook = [[Facebook alloc] initWithAppId:FACEBOOK_APP_ID andDelegate:nil];
+    facebookSession = [[FBSession alloc] init];
+    [FBSession setDefaultAppID:FACEBOOK_APP_ID];
     audioSession = [AVAudioSession sharedInstance];
     [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
     
@@ -34,7 +35,7 @@
     self.appConfiguration.defaultLocalPathImageForTableViewCell = @"TPM_Default_Cell_Image";
     self.appConfiguration.appName = @"Imago Dei Church";
     self.appConfiguration.facebookID = FACEBOOK_APP_ID;
-    self.appConfiguration.facebookFeedToRequest = @"imagodeichurch";
+    self.appConfiguration.facebookFeedToRequest = @"TheBlimpIncTest";
     
     //Init Airship launch options
     NSMutableDictionary *takeOffOptions = [[NSMutableDictionary alloc] init];
@@ -69,7 +70,7 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ImagoDei" message:[userInfo valueForKeyPath:@"aps.alert"] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:self.appConfiguration.appName message:[userInfo valueForKeyPath:@"aps.alert"] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
     [alertView show];
     /*[[UIApplication sharedApplication] setApplicationIconBadgeNumber: 1];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
@@ -77,15 +78,10 @@
 
 }
 
-// Pre iOS 4.2 support
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    return [facebook handleOpenURL:url]; 
-}
-
 // For iOS 4.2+ support
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [facebook handleOpenURL:url]; 
+    return [FBSession.activeSession handleOpenURL:url]; 
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -126,6 +122,9 @@
      See also applicationDidEnterBackground:.
      */
     [UAirship land];
+    
+    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [FBSession.activeSession close];
 }
 
 -(BOOL)openURL:(NSURL *)url
@@ -144,7 +143,7 @@
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ImagoDei" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:self.appConfiguration.appName message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
     [alertView show];
 }
 

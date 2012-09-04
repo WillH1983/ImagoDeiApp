@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="2gK-9x-ivY">
     <dependencies>
+        <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
@@ -273,7 +274,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Post" id="lAo-UT-IPZ">
                             <connections>
-                                <action selector="postToWall:" destination="r4a-hm-qfw" id="BG6-yn-dXJ"/>
+                                <segue destination="R4C-HV-hcv" kind="modal" identifier="PostToPage" id="6M4-1j-HFP"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -281,7 +282,7 @@
                         <segue destination="3pi-2Q-ePR" kind="push" identifier="detailView" id="ab3-cG-6Sb"/>
                         <segue destination="SUf-jH-6MA" kind="modal" identifier="Photo" id="ukI-ct-f8Y"/>
                         <segue destination="BTS-Sc-wzZ" kind="push" identifier="Web" id="C28-Oz-Im4"/>
-                        <segue destination="R4C-HV-hcv" kind="modal" identifier="textInput" id="hih-Da-VWH"/>
+                        <segue destination="R4C-HV-hcv" kind="modal" identifier="CommentOnPost" id="hih-Da-VWH"/>
                     </connections>
                 </tableViewController>
             </objects>
@@ -410,11 +411,11 @@
             </objects>
             <point key="canvasLocation" x="1575" y="480"/>
         </scene>
-        <!--Imago Dei Text Entry View Controller-->
+        <!--Text Entry View Controller-->
         <scene sceneID="A9S-5K-x0g">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VbK-T4-eCx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="R4C-HV-hcv" customClass="ImagoDeiTextEntryViewController" sceneMemberID="viewController">
+                <viewController id="R4C-HV-hcv" customClass="TextEntryViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SHy-Cy-VDG">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -435,13 +436,13 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="0.85098039215686272" green="0.83529411764705885" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
-                                    <navigationItem title="Comment" id="x0K-x0-A66">
+                                    <navigationItem id="x0K-x0-A66">
                                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="ofO-Fg-2JC">
                                             <connections>
                                                 <action selector="cancelButtonPressed:" destination="R4C-HV-hcv" id="lKb-yL-am3"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Post" id="cm8-y6-0rp">
+                                        <barButtonItem key="rightBarButtonItem" title="Submit" id="cm8-y6-0rp">
                                             <connections>
                                                 <action selector="postButtonPushed:" destination="R4C-HV-hcv" id="Rn2-3H-PIT"/>
                                             </connections>
@@ -453,8 +454,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="postButton" destination="cm8-y6-0rp" id="vz4-kg-Ipq"/>
-                        <outlet property="textView" destination="LhZ-l7-vNz" id="tgD-Tf-oXJ"/>
+                        <outlet property="navigationBar" destination="D2b-YL-xGu" id="2Vb-dq-iBT"/>
+                        <outlet property="submitButton" destination="cm8-y6-0rp" id="OdV-e7-UhN"/>
+                        <outlet property="textView" destination="LhZ-l7-vNz" id="VIy-UI-1yR"/>
                     </connections>
                 </viewController>
             </objects>
@@ -612,8 +614,11 @@
         <image name="background.png" width="320" height="366"/>
     </resources>
     <classes>
-        <class className="FaceBookTableViewController" superclassName="UITableViewController">
+        <class className="FaceBookTableViewController" superclassName="PullRefreshTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FaceBookTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="logInOutButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
         <class className="ImageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ImageViewController.h"/>
@@ -632,13 +637,6 @@
         <class className="ImagoDeiStandardTableViewController" superclassName="PullRefreshTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ImagoDeiStandardTableViewController.h"/>
         </class>
-        <class className="ImagoDeiTextEntryViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ImagoDeiTextEntryViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="postButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
-            </relationships>
-        </class>
         <class className="MainPageViewController" superclassName="RSSTableView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MainPageViewController.h"/>
         </class>
@@ -654,10 +652,18 @@
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
-        <class className="SocialMediaDetailViewController" superclassName="UITableViewController">
+        <class className="SocialMediaDetailViewController" superclassName="PullRefreshTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SocialMediaDetailViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="profilePictureImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="TextEntryViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TextEntryViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="navigationBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="submitButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
             </relationships>
         </class>
@@ -674,7 +680,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Qs6-PL-B3d"/>
-        <segue reference="pQc-Rc-c2b"/>
+        <segue reference="hih-Da-VWH"/>
+        <segue reference="C28-Oz-Im4"/>
     </inferredMetricsTieBreakers>
 </document>
