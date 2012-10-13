@@ -25,6 +25,7 @@ static NSString *const DanaPeopleID = @"1240047";
 
 @interface PlanningCenterViewController ()
 @property (nonatomic, strong)GTMOAuthAuthentication *authentication;
+- (void)cellButtonPushed:(id)sender;
 @end
 
 @implementation PlanningCenterViewController
@@ -122,7 +123,7 @@ static NSString *const DanaPeopleID = @"1240047";
     // save the authentication object, which holds the auth tokens
     [self setAuthentication:auth];
     
-    self.tableView.allowsSelection = NO;
+    self.tableView.allowsSelection = YES;
     [self downloadPlanningCenterData];
 }
 
@@ -193,8 +194,17 @@ static NSString *const DanaPeopleID = @"1240047";
 
 - (void)cellButtonPushed:(id)sender
 {
-    UIView *cellView = [sender superview];
-    UITableViewCell *cell = (UITableViewCell *)[cellView superview];
+    UITableViewCell *cell = nil;
+    if ([sender isKindOfClass:[UIButton class]])
+    {
+        UIView *cellView = [sender superview];
+        cell = (UITableViewCell *)[cellView superview];
+    }
+    else
+    {
+        cell = sender;
+    }
+    
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     id object = [self.arrayOfTableData objectAtIndex:indexPath.row];
     if ([object isKindOfClass:[NSMutableDictionary class]])
@@ -508,6 +518,11 @@ static NSString *const DanaPeopleID = @"1240047";
         }
     }
     return 48;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self cellButtonPushed:[tableView cellForRowAtIndexPath:indexPath]];
 }
 
 - (void)viewController:(GTMOAuthViewControllerTouch *)viewController
