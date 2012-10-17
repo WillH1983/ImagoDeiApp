@@ -38,6 +38,15 @@
     self.appConfiguration.facebookFeedToRequest = @"theblimpinctest";
     self.appConfiguration.facebookCommentButtonImageTitle = @"fb-comment-bg";
     
+    //Create the standard text UIColor object
+    UIColor *color = [UIColor colorWithRed:0.34901961 green:0.24313725 blue:0.14509804 alpha:1.0];
+    
+    NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
+    [attributes setValue:color forKey:UITextAttributeTextColor];
+    [attributes setValue:[NSValue valueWithUIOffset:UIOffsetMake(0.0, 0.0)] forKey:UITextAttributeTextShadowOffset];
+    [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:attributes forState:UIControlStateNormal];
+    [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:attributes forState:UIControlStateHighlighted];
+    
     //Init Airship launch options
     NSMutableDictionary *takeOffOptions = [[NSMutableDictionary alloc] init];
     [takeOffOptions setValue:launchOptions forKey:UAirshipTakeOffOptionsLaunchOptionsKey];

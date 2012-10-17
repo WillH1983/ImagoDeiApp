@@ -25,20 +25,6 @@
 
 - (void)viewDidLoad
 {
-    //Create the standard text UIColor object
-    UIColor *color = [UIColor colorWithRed:0.34901961 green:0.24313725 blue:0.14509804 alpha:1.0];
-    
-    NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
-    [attributes setValue:color forKey:UITextAttributeTextColor];
-    [attributes setValue:[NSValue valueWithUIOffset:UIOffsetMake(0.0, 0.0)] forKey:UITextAttributeTextShadowOffset];
-    
-    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:attributes forState:UIControlStateNormal];
-    
-    [self.navigationItem.leftBarButtonItem setTitleTextAttributes:attributes forState:UIControlStateNormal];
-    [self.navigationItem.leftBarButtonItem setTitleTextAttributes:attributes forState:UIControlStateSelected];
-    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:attributes forState:UIControlStateNormal];
-    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:attributes forState:UIControlStateSelected];
-    
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
