@@ -285,9 +285,10 @@ static NSString *const DanaPeopleID = @"1240047";
             NSString *declineURL = [NSString stringWithFormat:@"https://www.planningcenteronline.com/planning_center/decline/%@", [tmpDictionary valueForKeyPath:@"my-plan-people.my-plan-person.access-code.text"]];
             WebViewController *wvc = [[WebViewController alloc] initWithToolbar:YES];
             [wvc setUrlToLoad:[NSURL URLWithString:declineURL]];
-            [self presentViewController:wvc animated:YES completion:^{
-                [tmpDictionary setObject:@"NO" forKey:@"isCellLoading"];
+            [wvc setCompletionBlock:(WebViewCompletionBlock)^{
+                [self downloadPlanningCenterData];
             }];
+            [self presentViewController:wvc animated:YES completion:nil];
         }
         
         //[self performSegueWithIdentifier:@"AcceptDecline" sender:acceptURL];
@@ -317,7 +318,7 @@ static NSString *const DanaPeopleID = @"1240047";
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
         
         button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(cell.contentView.bounds.size.width - 70, 2, 65, 40);
+        button.frame = CGRectMake(cell.contentView.bounds.size.width - 50, 2, 40, 40);
         [button addTarget:self action:@selector(cellButtonPushed:) forControlEvents:UIControlEventTouchUpInside];
         button.tag = 1;
         
@@ -349,11 +350,6 @@ static NSString *const DanaPeopleID = @"1240047";
         cellSubtitle.tag = 5;
         [cell.contentView addSubview:cellSubtitle];
         
-        arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow-sideways.png"]];
-        arrow.frame = CGRectMake(cell.contentView.bounds.size.width - 45, 12, 40, 20);
-        arrow.tag = 6;
-        [cell.contentView addSubview:arrow];
-        
         activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
         activityIndicator.hidesWhenStopped = YES;
         
@@ -369,7 +365,6 @@ static NSString *const DanaPeopleID = @"1240047";
         declineButton = (UIButton *)[cell.contentView viewWithTag:3];
         cellText = (UILabel *)[cell.contentView viewWithTag:4];
         cellSubtitle = (UILabel *)[cell.contentView viewWithTag:5];
-        arrow = (UIImageView *)[cell.contentView viewWithTag:6];
         activityIndicator = (UIActivityIndicatorView *)[cell.contentView viewWithTag:7];
     }
     
@@ -381,27 +376,19 @@ static NSString *const DanaPeopleID = @"1240047";
     
     if ([isEditing isEqualToString:@"YES"] & (![isCellLoading isEqualToString:@"YES"]))
     {
-        UIEdgeInsets AcceptDeclineEdge = UIEdgeInsetsMake(12, 12, 12, 12);
-        
         acceptButton.frame = CGRectMake(5, 50, 99, 45);
-        UIImage *greenAcceptButtonImage = [UIImage imageNamed:@"greenButton.png"];
-        UIImage *stretchableGreenAcceptButton = [greenAcceptButtonImage resizableImageWithCapInsets:AcceptDeclineEdge];
-        [acceptButton setBackgroundImage:stretchableGreenAcceptButton forState:UIControlStateNormal];
+        UIImage *greenAcceptButtonImage = [UIImage imageNamed:@"accept"];
+        [acceptButton setBackgroundImage:greenAcceptButtonImage forState:UIControlStateNormal];
         
-        UIImage *darkGreenAcceptButtonImage = [UIImage imageNamed:@"greenButtonActivated.png"];
-        UIImage *stretchabledarkGreenAcceptButton = [darkGreenAcceptButtonImage resizableImageWithCapInsets:AcceptDeclineEdge];
-        [acceptButton setBackgroundImage:stretchabledarkGreenAcceptButton forState:UIControlStateHighlighted];
-        [acceptButton setTitle:@"Accept" forState:UIControlStateNormal];
+        UIImage *darkGreenAcceptButtonImage = [UIImage imageNamed:@"accept-active"];
+        [acceptButton setBackgroundImage:darkGreenAcceptButtonImage forState:UIControlStateHighlighted];
         
         declineButton.frame = CGRectMake(110, 50, 99, 45);
-        UIImage *redDeclineButtonImage = [UIImage imageNamed:@"redButton.png"];
-        UIImage *stretchableRedDeclineButton = [redDeclineButtonImage resizableImageWithCapInsets:AcceptDeclineEdge];
-        [declineButton setBackgroundImage:stretchableRedDeclineButton forState:UIControlStateNormal];
+        UIImage *redDeclineButtonImage = [UIImage imageNamed:@"decline"];
+        [declineButton setBackgroundImage:redDeclineButtonImage forState:UIControlStateNormal];
         
-        UIImage *darkRedDeclineButtonImage = [UIImage imageNamed:@"redButtonActivated.png"];
-        UIImage *stretchabledarkRedDeclineButton = [darkRedDeclineButtonImage resizableImageWithCapInsets:AcceptDeclineEdge];
-        [declineButton setBackgroundImage:stretchabledarkRedDeclineButton forState:UIControlStateHighlighted];
-        [declineButton setTitle:@"Decline" forState:UIControlStateNormal];
+        UIImage *darkRedDeclineButtonImage = [UIImage imageNamed:@"decline-active"];
+        [declineButton setBackgroundImage:darkRedDeclineButtonImage forState:UIControlStateHighlighted];
         
         activityIndicator.frame = CGRectZero;
         [activityIndicator stopAnimating];
@@ -453,38 +440,19 @@ static NSString *const DanaPeopleID = @"1240047";
     }
     
     NSString *status = [dictionaryForCell valueForKeyPath:@"my-plan-people.my-plan-person.status.text"];
-     UIEdgeInsets smallButtonEdge = UIEdgeInsetsMake(12, 12, 12, 12);
     if ([status isEqualToString:@"C"])
     {
-        UIImage *greenButtonImage = [UIImage imageNamed:@"greenButton.png"];
-        UIImage *stretchableGreenButton = [greenButtonImage resizableImageWithCapInsets:smallButtonEdge];
-        [button setBackgroundImage:stretchableGreenButton forState:UIControlStateNormal];
-        
-        UIImage *darkGreenButtonImage = [UIImage imageNamed:@"greenButtonActivated.png"];
-        UIImage *stretchabledarkGreenButton = [darkGreenButtonImage resizableImageWithCapInsets:smallButtonEdge];
-        [button setBackgroundImage:stretchabledarkGreenButton forState:UIControlStateHighlighted];
-        [button setTitle:@"A     " forState:UIControlStateNormal];
+        UIImage *greenButtonImage = [UIImage imageNamed:@"pco-accepted"];
+        [button setBackgroundImage:greenButtonImage forState:UIControlStateNormal];
     }
     else if ([status isEqualToString:@"U"])
     {
-        UIImage *yellowButtonImage = [UIImage imageNamed:@"yellowButton.png"];
-        UIImage *stretchableYellowButton = [yellowButtonImage resizableImageWithCapInsets:smallButtonEdge];
-        [button setBackgroundImage:stretchableYellowButton forState:UIControlStateNormal];
-        
-        UIImage *darkYellowButtonImage = [UIImage imageNamed:@"yellowButtonActivated.png"];
-        UIImage *stretchabledarkYellowButton = [darkYellowButtonImage resizableImageWithCapInsets:smallButtonEdge];
-        [button setBackgroundImage:stretchabledarkYellowButton forState:UIControlStateHighlighted];
-        [button setTitle:@"U     " forState:UIControlStateNormal];
+        UIImage *yellowButtonImage = [UIImage imageNamed:@"pco-unconfirmed"];
+        [button setBackgroundImage:yellowButtonImage forState:UIControlStateNormal];
     }
     else {
-        UIImage *redButtonImage = [UIImage imageNamed:@"redButton.png"];
-        UIImage *stretchableRedButton = [redButtonImage resizableImageWithCapInsets:smallButtonEdge];
-        [button setBackgroundImage:stretchableRedButton forState:UIControlStateNormal];
-        
-        UIImage *darkRedButtonImage = [UIImage imageNamed:@"redButtonActivated.png"];
-        UIImage *stretchabledarkRedButton = [darkRedButtonImage resizableImageWithCapInsets:smallButtonEdge];
-        [button setBackgroundImage:stretchabledarkRedButton forState:UIControlStateHighlighted];
-        [button setTitle:@"D     " forState:UIControlStateNormal];
+        UIImage *redButtonImage = [UIImage imageNamed:@"pco-declined"];
+        [button setBackgroundImage:redButtonImage forState:UIControlStateNormal];
     }
     
     
