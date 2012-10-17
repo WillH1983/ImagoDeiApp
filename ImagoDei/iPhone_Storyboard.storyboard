@@ -92,11 +92,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="defaultFacebookCell" rowHeight="128" id="8UL-7g-Ky5">
-                                <rect key="frame" x="0.0" y="22" width="320" height="128"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="defaultFacebookCell" rowHeight="138" id="8UL-7g-Ky5">
+                                <rect key="frame" x="0.0" y="22" width="320" height="138"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="127"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="137"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" id="8r2-Td-egn">
@@ -125,20 +125,6 @@
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                         </textView>
-                                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8V4-Iv-Elk">
-                                            <rect key="frame" x="9" y="99" width="300" height="20"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                            <rect key="contentStretch" x="1" y="1" width="1" height="1"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                            <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="5" maxY="0.0"/>
-                                            <state key="normal" title="Comments" backgroundImage="FacebookButton@2x.png">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="highlighted">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                        </button>
                                         <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="R4D-NS-Qb9">
                                             <rect key="frame" x="64" y="90" width="81" height="37"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -152,7 +138,7 @@
                                             </state>
                                         </button>
                                         <button opaque="NO" tag="7" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="4np-Qt-83Q">
-                                            <rect key="frame" x="-14" y="90" width="74" height="37"/>
+                                            <rect key="frame" x="9" y="90" width="50" height="37"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -169,11 +155,11 @@
                                 </view>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="photoFacebookCell" rowHeight="303" id="Ewa-TM-buB">
-                                <rect key="frame" x="0.0" y="150" width="320" height="303"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="photoFacebookCell" rowHeight="314" id="Ewa-TM-buB">
+                                <rect key="frame" x="0.0" y="160" width="320" height="314"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="302"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="313"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" id="rv3-bc-G62">
@@ -201,20 +187,6 @@
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                         </textView>
-                                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RVB-cr-59j">
-                                            <rect key="frame" x="9" y="274" width="300" height="20"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                            <rect key="contentStretch" x="1" y="1" width="1" height="1"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                            <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="5" maxY="0.0"/>
-                                            <state key="normal" title="Comments" backgroundImage="FacebookButton@2x.png">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="highlighted">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                        </button>
                                         <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="a2f-6i-4LX">
                                             <rect key="frame" x="44" y="100" width="230" height="157"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -229,7 +201,7 @@
                                             </state>
                                         </button>
                                         <button opaque="NO" tag="7" contentMode="scaleToFill" highlighted="YES" selected="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9Ca-Gv-2eg">
-                                            <rect key="frame" x="-14" y="266" width="74" height="37"/>
+                                            <rect key="frame" x="9" y="265" width="50" height="37"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -620,9 +592,6 @@
             <point key="canvasLocation" x="2162" y="480"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="FacebookButton@2x.png" width="94" height="37"/>
-    </resources>
     <classes>
         <class className="FaceBookTableViewController" superclassName="PullRefreshTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FaceBookTableViewController.h"/>
@@ -653,6 +622,9 @@
         </class>
         <class className="PlanningCenterViewController" superclassName="ImagoDeiStandardTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PlanningCenterViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="logInOutButtonPressed:"/>
+            </relationships>
         </class>
         <class className="PullRefreshTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PullRefreshTableViewController.h"/>
@@ -692,7 +664,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="7GF-ES-rdE"/>
-        <segue reference="pQc-Rc-c2b"/>
+        <segue reference="zrS-vi-vSZ"/>
+        <segue reference="C28-Oz-Im4"/>
     </inferredMetricsTieBreakers>
 </document>

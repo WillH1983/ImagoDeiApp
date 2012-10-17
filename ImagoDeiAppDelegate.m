@@ -35,7 +35,8 @@
     self.appConfiguration.defaultLocalPathImageForTableViewCell = @"TPM_Default_Cell_Image";
     self.appConfiguration.appName = @"Imago Dei Church";
     self.appConfiguration.facebookID = FACEBOOK_APP_ID;
-    self.appConfiguration.facebookFeedToRequest = @"imagodeichurch";
+    self.appConfiguration.facebookFeedToRequest = @"theblimpinctest";
+    self.appConfiguration.facebookCommentButtonImageTitle = @"fb-comment-bg";
     
     //Init Airship launch options
     NSMutableDictionary *takeOffOptions = [[NSMutableDictionary alloc] init];

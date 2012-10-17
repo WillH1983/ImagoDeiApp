@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BE00EAE815DB532B00FFEA5C /* libtheBlimpBaseClasses.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE00EADD15DB511F00FFEA5C /* libtheBlimpBaseClasses.a */; };
 		BE00EAEA15DB54BE00FFEA5C /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE00EAE915DB54BE00FFEA5C /* Accounts.framework */; };
+		BE040D7E162C990A001864E8 /* fb-comment-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BE040D7D162C990A001864E8 /* fb-comment-bg.png */; };
 		BE04B961156478B4003FD971 /* home-inactive@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE04B95A156478B3003FD971 /* home-inactive@2x.png */; };
 		BE04B962156478B4003FD971 /* home-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE04B95B156478B3003FD971 /* home-active@2x.png */; };
 		BE04B963156478B4003FD971 /* fb-logo-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE04B95C156478B3003FD971 /* fb-logo-active@2x.png */; };
@@ -143,6 +144,7 @@
 /* Begin PBXFileReference section */
 		BE00EAD415DB511F00FFEA5C /* theBlimpBaseClasses.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = theBlimpBaseClasses.xcodeproj; path = ../theBlimpBaseClasses/theBlimpBaseClasses.xcodeproj; sourceTree = "<group>"; };
 		BE00EAE915DB54BE00FFEA5C /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		BE040D7D162C990A001864E8 /* fb-comment-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb-comment-bg.png"; sourceTree = "<group>"; };
 		BE04B95A156478B3003FD971 /* home-inactive@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-inactive@2x.png"; sourceTree = "<group>"; };
 		BE04B95B156478B3003FD971 /* home-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-active@2x.png"; sourceTree = "<group>"; };
 		BE04B95C156478B3003FD971 /* fb-logo-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb-logo-active@2x.png"; sourceTree = "<group>"; };
@@ -396,6 +398,7 @@
 				BE56D5D4157B12790027A519 /* redButton@2x.png */,
 				BE56D5D5157B12790027A519 /* greenButtonActivated@2x.png */,
 				BE56D5D6157B12790027A519 /* greenButton@2x.png */,
+				BE040D7D162C990A001864E8 /* fb-comment-bg.png */,
 			);
 			name = "Button Images";
 			sourceTree = "<group>";
@@ -723,6 +726,7 @@
 				BE9F747415AD14C30013D3D9 /* README.md in Resources */,
 				BEFC8B8F15F595C0009ABD31 /* FacebookSDKResources.bundle in Resources */,
 				BE35044D161A9D7400BF75B1 /* Default-568h@2x.png in Resources */,
+				BE040D7E162C990A001864E8 /* fb-comment-bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
