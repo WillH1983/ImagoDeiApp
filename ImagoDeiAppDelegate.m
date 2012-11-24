@@ -35,7 +35,7 @@
     self.appConfiguration.defaultLocalPathImageForTableViewCell = @"TPM_Default_Cell_Image";
     self.appConfiguration.appName = @"Imago Dei Church";
     self.appConfiguration.facebookID = FACEBOOK_APP_ID;
-    self.appConfiguration.facebookFeedToRequest = @"theblimpinctest";
+    self.appConfiguration.facebookFeedToRequest = @"imagodeichurch";
     self.appConfiguration.facebookCommentButtonImageTitle = @"fb-comment-bg";
     
     //Create the standard text UIColor object
@@ -46,6 +46,8 @@
     [attributes setValue:[NSValue valueWithUIOffset:UIOffsetMake(0.0, 0.0)] forKey:UITextAttributeTextShadowOffset];
     [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:attributes forState:UIControlStateNormal];
     [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:attributes forState:UIControlStateHighlighted];
+    [[UIActivityIndicatorView appearanceWhenContainedIn:[UINavigationBar class], nil] setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+    
     
     //Init Airship launch options
     NSMutableDictionary *takeOffOptions = [[NSMutableDictionary alloc] init];
