@@ -53,6 +53,7 @@
 		BE89225B156E04E0004E79DF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89225A156E04E0004E79DF /* SystemConfiguration.framework */; };
 		BE9056AC15604D4300D79563 /* news-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9056AB15604D4300D79563 /* news-icon.png */; };
 		BE9F747415AD14C30013D3D9 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BE9F747315AD14C30013D3D9 /* README.md */; };
+		BEA272AD16719F7500A85575 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = BEA272AC16719F7400A85575 /* style.css */; };
 		BED1D7D81564498200FB8E5B /* tabbar-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED1D7D71564498200FB8E5B /* tabbar-bg@2x.png */; };
 		BED1D7DA1564498D00FB8E5B /* tabbar-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BED1D7D91564498D00FB8E5B /* tabbar-bg.png */; };
 		BED23D10155A0C8B00DB2D00 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED23D0F155A0C8B00DB2D00 /* CoreImage.framework */; };
@@ -189,6 +190,7 @@
 		BE89225A156E04E0004E79DF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BE9056AB15604D4300D79563 /* news-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news-icon.png"; sourceTree = "<group>"; };
 		BE9F747315AD14C30013D3D9 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		BEA272AC16719F7400A85575 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
 		BED1D7D71564498200FB8E5B /* tabbar-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-bg@2x.png"; sourceTree = "<group>"; };
 		BED1D7D91564498D00FB8E5B /* tabbar-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-bg.png"; sourceTree = "<group>"; };
 		BED23D0F155A0C8B00DB2D00 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
@@ -502,6 +504,7 @@
 				BEDF1E9E154795BD009FCA21 /* ImagoDeiDataFetcher.m */,
 				BEDF1E9A15479598009FCA21 /* ImagoDeiAppDelegate.h */,
 				BEDF1E9B15479598009FCA21 /* ImagoDeiAppDelegate.m */,
+				BEA272AC16719F7400A85575 /* style.css */,
 				BEDF1E61154791C4009FCA21 /* Supporting Files */,
 			);
 			path = ImagoDei;
@@ -719,6 +722,7 @@
 				BEE68A1A162E41EA00BC05EC /* pco-declined@2x.png in Resources */,
 				BEE68A1B162E41EA00BC05EC /* pco-unconfirmed.png in Resources */,
 				BEE68A1C162E41EA00BC05EC /* pco-unconfirmed@2x.png in Resources */,
+				BEA272AD16719F7500A85575 /* style.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

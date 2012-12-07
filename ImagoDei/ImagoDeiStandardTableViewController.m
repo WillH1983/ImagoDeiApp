@@ -108,6 +108,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 id tmp = [tmpDictionary valueForKeyPath:@"rss.channel.item"];
                 if ([tmp isKindOfClass:[NSArray class]]) self.arrayOfTableData = tmp;
+                else if ([tmp isKindOfClass:[NSDictionary class]]) self.arrayOfTableData = [NSArray arrayWithObject:tmp];
                 [self.activityIndicator stopAnimating];
                 self.navigationItem.rightBarButtonItem = self.oldBarButtonItem;
                 [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
@@ -260,8 +261,13 @@
         //Catch all is to load a webview with the contents of the URL
         else 
         {
+            NSLog(@"%@", [self.arrayOfTableData objectAtIndex:indexPath.row]);
+            NSDictionary *cellDictionary = [self.arrayOfTableData objectAtIndex:indexPath.row];
+            NSString *content = [cellDictionary valueForKeyPath:@"content:encoded.text"];
             WebViewController *wvc = [[WebViewController alloc] init];
             [wvc setUrlToLoad:url];
+            [wvc setHtmlString:content];
+            [wvc setHtmlTitle:[cellDictionary valueForKeyPath:@"title.text"]];
             [[self navigationController] pushViewController:wvc animated:YES];
         }
     }

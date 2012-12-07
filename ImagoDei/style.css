@@ -1,0 +1,28 @@
+
+
+body {
+    background-color: rgb(204,202,190);
+	font-family: helvetica, sans-serif;
+	font-size: 2.75em;
+	line-height: 1.5em;
+    margin: 15px auto;
+	width: 90%;
+}
+
+p, h1, h2, h3, h4, ul, ol { 
+    color: rgb(89,62,37);
+}
+
+h1 {
+	line-height: 1em;
+}
+
+a {
+	color: rgb(167,67,36);
+	text-decoration: underline;
+}
+
+img {
+	float: right;
+	margin-left: 5px;
+}
