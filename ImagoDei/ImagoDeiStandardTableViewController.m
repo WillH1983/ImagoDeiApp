@@ -235,7 +235,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //Pull the URL from the selected tablecell, which is from the parsed RSS file with the key "link"
-    NSURL *url = [[NSURL alloc] initWithString:[[self.arrayOfTableData objectAtIndex:indexPath.row] valueForKeyPath:@"link.text"]];
+    NSString *urlString = [[self.arrayOfTableData objectAtIndex:indexPath.row] valueForKeyPath:@"link.text"];
+    NSURL *url = nil;
+    if(urlString) url = [[NSURL alloc] initWithString:urlString];
     
     //Get the title for the next view from the selected tablecell, which is composed from the RSS file
     NSString *title = [[self.arrayOfTableData objectAtIndex:indexPath.row] valueForKeyPath:@"title.text"];

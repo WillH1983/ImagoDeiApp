@@ -112,7 +112,7 @@
     {
         //If the URL is for an RSS file, initialize a mainpageviewcontroller with the URL
         //and set the title
-        if ([[url pathExtension] isEqualToString:@"rss"]|| [[url lastPathComponent] isEqualToString:@"feed"])
+        if ([[url pathExtension] isEqualToString:@"rss"] || [[url lastPathComponent] isEqualToString:@"feed"] || [[url lastPathComponent] isEqualToString:@"rss"])
         {
             ImagoDeiStandardTableViewController *idstvc = [[ImagoDeiStandardTableViewController alloc] initWithModel:url];
             idstvc.title = title;

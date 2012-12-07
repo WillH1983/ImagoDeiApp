@@ -26,3 +26,7 @@ img {
 	float: right;
 	margin-left: 5px;
 }
+
+.location {
+	font-weight: bold;
+}
