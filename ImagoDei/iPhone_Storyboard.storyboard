@@ -394,6 +394,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="BTS-Sc-wzZ" id="mld-ko-2U2"/>
                                 </connections>
@@ -623,6 +624,9 @@
         </class>
         <class className="PlanningCenterViewController" superclassName="ImagoDeiStandardTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PlanningCenterViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="logInOutButtonPressed:"/>
+            </relationships>
         </class>
         <class className="PullRefreshTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PullRefreshTableViewController.h"/>
@@ -636,6 +640,7 @@
         <class className="SocialMediaDetailViewController" superclassName="PullRefreshTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SocialMediaDetailViewController.h"/>
             <relationships>
+                <relationship kind="action" name="commentButtonPressed:"/>
                 <relationship kind="outlet" name="profilePictureImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
             </relationships>
@@ -643,6 +648,9 @@
         <class className="TextEntryViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TextEntryViewController.h"/>
             <relationships>
+                <relationship kind="action" name="cancelButtonPressed:"/>
+                <relationship kind="action" name="postButtonPushed:"/>
+                <relationship kind="action" name="takePicture:"/>
                 <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="navigationBar" candidateClass="UINavigationBar"/>
                 <relationship kind="outlet" name="submitButton" candidateClass="UIBarButtonItem"/>
@@ -652,6 +660,7 @@
         <class className="WebViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/WebViewController.h"/>
             <relationships>
+                <relationship kind="action" name="donePressed:"/>
                 <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
             </relationships>
         </class>
