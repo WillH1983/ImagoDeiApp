@@ -37,6 +37,7 @@
     self.appConfiguration.facebookID = FACEBOOK_APP_ID;
     self.appConfiguration.facebookFeedToRequest = @"imagodeichurch";
     self.appConfiguration.facebookCommentButtonImageTitle = @"fb-comment-bg";
+    self.appConfiguration.appNavigationBarLogoName = @"imago-logo";
     
     //Create the standard text UIColor object
     UIColor *color = [UIColor colorWithRed:0.34901961 green:0.24313725 blue:0.14509804 alpha:1.0];

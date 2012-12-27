@@ -25,6 +25,14 @@ a {
 img {
 	float: right;
 	margin-left: 5px;
+    max-width: 100%; 
+    height: auto;
+}
+
+img.floatRightClear { 
+    float: right; 
+    clear: right; 
+    margin: 4px; 
 }
 
 .location {
